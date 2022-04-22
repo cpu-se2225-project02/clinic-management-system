@@ -5,10 +5,9 @@ import './Sidebars.css'
 export default function Sidebars() {
   return (
     <>
-      <Container fluid>
-        <Col xs={1}>
-          <Row >
-            <Image  className='border border-dark mt-1' fluid src='https://res.cloudinary.com/dmro06tbx/image/upload/v1650564665/techniche_tihcko.png'/>
+        <Col className='sidebar-col p-0'>
+          <Row>
+            <Image  className='border border-dark mt-1 clinic-img' fluid src='https://res.cloudinary.com/dmro06tbx/image/upload/v1650564665/techniche_tihcko.png'/>
           </Row>
           <Row>
             <div className=' border border-dark clinic-name'>
@@ -41,7 +40,6 @@ export default function Sidebars() {
             </Button>
           </Row>
         </Col>
-      </Container>
     </>
   )
 }
