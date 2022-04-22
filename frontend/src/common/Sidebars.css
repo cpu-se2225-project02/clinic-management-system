@@ -1,11 +1,12 @@
 .sidebar-btns {
   text-align: left !important;
-  margin-top: 2px !important;
+  margin-top: 5px !important;
   background-color: white !important;
   color: black !important;
   border-radius: 0px !important;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px !important;
+  width: 90% !important;
 }
 
 .sidebar-btns:hover {
@@ -14,8 +15,17 @@
 
 .clinic-name {
   margin-top: 1px !important;
-  background-color: #d3def0; 
+  background-color: #d3def0;
   margin-bottom: 5px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: 15px;
+  width: 90% !important;
+}
+
+.clinic-img {
+  width: 90% !important;
+}
+
+.sidebar-col {
+  max-width: fit-content !important;
 }
