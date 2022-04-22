@@ -1,5 +1,8 @@
 .patient-list-box {
   display: inline-block !important;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin-top: 4px !important;
 }
 
 .sidebar-box {
@@ -13,4 +16,18 @@
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px !important;
+  padding: 10px !important;
+}
+
+.search {
+  border-radius: 30px !important;
+}
+
+.patient-total-label {
+  padding-left: 40px !important;
+  padding-top: 8px !important;
+}
+
+.list {
+  padding-left: 40px !important;
 }
