@@ -1,11 +1,11 @@
-import React from 'react';
-import './App.css';
-import PatientList from './patient/PatientList';
+import React from "react";
+import "./App.css";
+import PatientRecord from "./patient/PatientRecord";
 
 function App() {
   return (
     <>
-      <PatientList/>
+      <PatientRecord />
     </>
   );
 }
