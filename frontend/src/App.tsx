@@ -1,14 +1,12 @@
 import React from 'react';
 import './App.css';
-import Header from './common/Header';
-import Sidebars from './common/Sidebars';
+import PatientList from './patient/PatientList';
 
 
 function App() {
   return (
     <>
-      <Header/>
-      <Sidebars/>
+      <PatientList/>
     </>
   );
 }
