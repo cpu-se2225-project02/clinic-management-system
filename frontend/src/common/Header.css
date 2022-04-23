@@ -1,0 +1,25 @@
+.banner-text {
+  font-family: Georgia;
+  font-weight: 700;
+  font-size: 24px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #033076;
+  color: white;
+  display: inline-block;
+}
+
+.doctor-btn {
+  background-color: #d3def0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.profile-icon {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex !important;
+  justify-content: right !important;
+}
+
+
