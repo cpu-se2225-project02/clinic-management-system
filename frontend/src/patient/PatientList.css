@@ -29,5 +29,10 @@
 }
 
 .list {
-  padding-left: 40px !important;
+  text-align: left !important;
+}
+
+.patient-btns {
+  background-color: #d3def0;
+  color: black;
 }
