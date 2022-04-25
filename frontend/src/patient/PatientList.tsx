@@ -5,8 +5,12 @@ import Sidebars from "../common/Sidebars";
 import { useState } from "react";
 import "./PatientList.css";
 import { BiSearchAlt2 } from "react-icons/bi";
+import PatientForm from "./PatientForm";
+
+function DimBackground() {}
 
 export default function PatientList() {
+  const [PostButton, setPostButton] = useState(false);
   const [totalPatients, setTotalPatients] = useState(0);
 
   return (
@@ -27,7 +31,7 @@ export default function PatientList() {
               </Col>
             </Row>
             <Row>
-              <Col xs={7} className="patient-total-label">
+              <Col xs={5} className="patient-total-label">
                 Total of {totalPatients} patient(s)
               </Col>
               <Col xs={3}>
@@ -54,6 +58,15 @@ export default function PatientList() {
                     <Dropdown.Item>Z-A</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
+              </Col>
+              <Col xs={2}>
+                <Button
+                  className="add-patient-btn btn-sm float-start"
+                  onClick={() => setPostButton(true)}
+                >
+                  Add Patient
+                </Button>
+                {PostButton && <PatientForm postButton={setPostButton} />}
               </Col>
             </Row>
             <Row>
