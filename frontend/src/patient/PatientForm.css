@@ -30,8 +30,8 @@
 
 .popup {
   position: fixed;
-  top: 50%;
-  height: 60vh;
+  top: 20%;
+  height: 70vh;
   z-index: 1;
   overflow-y: auto;
 }
@@ -43,5 +43,12 @@
   align-items: center;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    rgb(160, 180, 244) !important;
+    #d3def0 !important;
+}
+
+.close-btn {
+  color: rgb(0, 0, 0) !important;
+  position: absolute;
+  top: 0px;
+  right: 3px;
 }
