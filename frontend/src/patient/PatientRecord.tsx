@@ -3,7 +3,7 @@ import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
 import Header from "../common/Header";
 import Sidebars from "../common/Sidebars";
 import { useState } from "react";
-import "./PatientList.css";
+import "./PatientRecord.css";
 
 export default function PatientRecord() {
   const [patientName, setPatientName] = useState("");

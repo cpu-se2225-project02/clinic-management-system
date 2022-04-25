@@ -27,7 +27,7 @@ export default function PatientList() {
               </Col>
             </Row>
             <Row>
-              <Col xs={7} className="patient-total-label">
+              <Col xs={5} className="patient-total-label">
                 Total of {totalPatients} patient(s)
               </Col>
               <Col xs={3}>
@@ -54,6 +54,11 @@ export default function PatientList() {
                     <Dropdown.Item>Z-A</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
+              </Col>
+              <Col xs={2}>
+                <Button className="add-patient-btn btn-sm float-start">
+                  Add Patient
+                </Button>
               </Col>
             </Row>
             <Row>
