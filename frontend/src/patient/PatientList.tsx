@@ -9,7 +9,7 @@ import { BiSearchAlt2 } from "react-icons/bi";
 export default function PatientList() {
   const [totalPatients, setTotalPatients] = useState(0);
 
-  return (
+  return ( 
     <>
       <Container fluid>
         <Row>
