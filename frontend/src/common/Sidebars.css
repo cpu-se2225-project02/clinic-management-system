@@ -2,11 +2,16 @@
   text-align: left !important;
   margin-top: 5px !important;
   background-color: white !important;
-  color: black !important;
+  color: #033076 !important;
   border-radius: 0px !important;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px !important;
+  font-weight: bold;
   width: 90% !important;
+}
+
+.sidebar-link {
+  text-decoration: none;
 }
 
 .sidebar-btns:hover {

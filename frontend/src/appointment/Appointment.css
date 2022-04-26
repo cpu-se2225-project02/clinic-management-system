@@ -1,0 +1,23 @@
+.appointment-box {
+    display: inline-block !important;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin-top: 4px !important;
+  }
+
+  .h5 {
+    background-color: #033076;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px !important;
+    padding: 10px !important;
+  }
+
+.appointment-toggle-btn {
+   float: right;
+   margin-right: 25px;
+}
+
+.appointment-icon {
+    margin-right: 0.5rem;
+  }
