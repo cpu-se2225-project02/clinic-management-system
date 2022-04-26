@@ -7,8 +7,6 @@ import "./PatientList.css";
 import { BiSearchAlt2 } from "react-icons/bi";
 import PatientForm from "./PatientForm";
 
-function DimBackground() {}
-
 export default function PatientList() {
   const [PostButton, setPostButton] = useState(false);
   const [totalPatients, setTotalPatients] = useState(0);
