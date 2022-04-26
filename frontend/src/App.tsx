@@ -8,6 +8,7 @@ import React from "react";
 import "./App.css";
 import PatientRecord from "./patient/PatientRecord";
 import PatientList from "./patient/PatientList";
+import LoginPage from "./login/LoginPage";
 
 
 function App() {
@@ -15,9 +16,9 @@ function App() {
     <>
 
        {/* <FinancePage/> */}
+       <LoginPage />
 
-
-      <PatientList />
+      {/* <PatientList /> */}
 
     </>
   );
