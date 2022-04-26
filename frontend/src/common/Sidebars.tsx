@@ -7,9 +7,13 @@ export default function Sidebars() {
   return (
     <>
       <Container fluid>
-        <Col xs={1}>
-          <Row >
-            <Image  className='border border-dark mt-1' fluid src='https://res.cloudinary.com/dmro06tbx/image/upload/v1650564665/techniche_tihcko.png'/>
+        <Col className="sidebar-col p-0">
+          <Row>
+            <Image
+              className="border border-dark mt-1 clinic-img"
+              fluid
+              src="https://res.cloudinary.com/dmro06tbx/image/upload/v1650564665/techniche_tihcko.png"
+            />
           </Row>
 
           <Row>
@@ -18,48 +22,50 @@ export default function Sidebars() {
             </div>
           </Row>
 
+          <Link to="/" className='sidebar-link'>
           <Row>
             <Button active className='sidebar-btns' variant='secondary'>
-              <Link to="/" className='nav-link'>
                 Dashboard
-              </Link>
             </Button>
           </Row>
+              </Link>
 
-          <Row>
-            <Button  className='sidebar-btns' variant='secondary'>
-              <Link to="/clinic" className='nav-link'>
-                Clinic
-              </Link>
-            </Button>
-          </Row>
+          <Link to="/clinic" className='sidebar-link'>
+            <Row>
+              <Button  className='sidebar-btns' variant='secondary'>
+                  Clinic
+              </Button>
+            </Row>
+          </Link>
 
-          <Row>
-            <Button  className='sidebar-btns' variant='secondary'>
-              <Link to="/appointments" className="nav-link">
-                Appointments
-              </Link>
-            </Button>
-          </Row>
+          <Link to="/appointments" className="sidebar-link">
+            <Row>
+              <Button  className='sidebar-btns' variant='secondary'>
+                  Appointments  
+              </Button>
+            </Row>
+          </Link>
 
-          <Row>
-            <Button  className='sidebar-btns' variant='secondary'>
-              <Link to="/patients" className='nav-link'>
-                Patients
-              </Link>
-            </Button>
-          </Row>
+          <Link to="/patients" className='sidebar-link'>
+            <Row>
+              <Button  className='sidebar-btns' variant='secondary'>
+                  Patients
+              </Button>
+            </Row>
+          </Link>
 
-          <Row>
-            <Button  className='sidebar-btns' variant='secondary'>
-              <Link to="/finance" className='nav-link'>
-                Finance
-              </Link>
-            </Button>
-          </Row>
+          <Link to="/finance" className='sidebar-link'>
+            <Row>
+              <Button  className='sidebar-btns' variant='secondary'>
+                  Finance
+              </Button>
+            </Row>
+          </Link>
           
         </Col>
       </Container>
     </>
   );
 }
+
+
