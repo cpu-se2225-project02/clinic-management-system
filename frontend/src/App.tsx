@@ -16,12 +16,6 @@ function App() {
   return (
     <>
 
-       {/* <FinancePage/> */}
-       {/* <LoginPage /> */}
-
-      {/* <PatientList /> */}
-
-
       <Router>
           <Routes>
             <Route path="/" element={<Dashboard />} />
