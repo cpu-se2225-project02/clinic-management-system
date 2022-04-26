@@ -10,6 +10,7 @@ import Dashboard from './dashboard/Dashboard';
 import FinancePage from './finance/FinancePage';
 import PatientList from './patient/PatientList';
 import PatientRecord from "./patient/PatientRecord";
+import LoginPage from "./login/LoginPage";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="/appointments" element={<Appointment/>}/>
             <Route path="/patients" element={<PatientList/>}/>
             <Route path="/finance" element={<FinancePage/>}/>
+            <Route path="/login" element={<LoginPage/>}/>
           </Routes>
       </Router>
       
