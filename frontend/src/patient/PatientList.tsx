@@ -13,7 +13,7 @@ export default function PatientList() {
   const [PostButton, setPostButton] = useState(false);
   const [totalPatients, setTotalPatients] = useState(0);
 
-  return (
+  return ( 
     <>
       <Container fluid>
         <Row>
