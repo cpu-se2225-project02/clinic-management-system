@@ -18,7 +18,7 @@ export default function Sidebars() {
 
           <Row>
             <div className=' border border-dark clinic-name'>
-              Clinic Name
+              Clinic Name 
             </div>
           </Row>
 
