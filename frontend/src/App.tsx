@@ -12,7 +12,6 @@ import PatientList from './patient/PatientList';
 import PatientRecord from "./patient/PatientRecord";
 import LoginPage from "./login/LoginPage";
 
-
 function App() {
   return (
     <>
