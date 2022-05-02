@@ -26,6 +26,6 @@ server
   .then(() => {
     server.applyMiddleware({ app });
     app.listen(PORT, () => {
-      console.log(`Apollo server has started at htpp://localhost:${PORT}`);
+      console.log(`Apollo server has started at http://localhost:${PORT}`);
     });
   });
