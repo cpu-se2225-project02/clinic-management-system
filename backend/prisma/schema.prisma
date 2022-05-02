@@ -10,17 +10,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Patient{
-  id Int @id @default(autoincrement())
-  f_name String
-  l_name String
-  m_initial String
-  suffix String?
-  sex String
-  age Int
-  civil_status String
-  address String
+generator nexus {
+  provider = "nexus-prisma"
+}
+
+model Patient {
+  id            Int      @id @default(autoincrement())
+  f_name        String
+  l_name        String
+  m_initial     String
+  suffix        String?
+  sex           String
+  age           Int
+  civil_status  String
+  address       String
   philhealth_no Int
-  guardian String?
-  birthdate DateTime
+  guardian      String?
+  birthdate     DateTime
 }
