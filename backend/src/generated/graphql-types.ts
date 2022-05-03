@@ -29,7 +29,10 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   Patient: { // root type
+    address: string; // String!
+    f_name: string; // String!
     l_name: string; // String!
+    m_initial: string; // String!
   }
   Query: {};
 }
@@ -46,7 +49,10 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   Patient: { // field return type
+    address: string; // String!
+    f_name: string; // String!
     l_name: string; // String!
+    m_initial: string; // String!
   }
   Query: { // field return type
     helloWorld: string | null; // String
@@ -56,7 +62,10 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenFieldTypeNames {
   Patient: { // field return type name
+    address: 'String'
+    f_name: 'String'
     l_name: 'String'
+    m_initial: 'String'
   }
   Query: { // field return type name
     helloWorld: 'String'

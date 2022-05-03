@@ -13,7 +13,7 @@ const schema = makeSchema({
   types,
   outputs: {
     typegen: path.join(__dirname, 'generated/graphql-types.ts'),
-    schema: path.join(__dirname, 'schema.graphql'),
+    schema: path.join(__dirname, '../../frontend/schema.graphql'),
   },
 });
 

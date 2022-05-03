@@ -20,6 +20,9 @@ export const Patient = objectType({
   name: 'Patient',
   definition(t) {
     t.field(PatientType.l_name);
+    t.field(PatientType.f_name);
+    t.field(PatientType.m_initial);
+    t.field(PatientType.address);
   },
 });
 
