@@ -1,0 +1,5 @@
+query AllPatients {
+  patients {
+    f_name
+  }
+}
