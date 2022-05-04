@@ -4,9 +4,13 @@
 
 type Patient {
   address: String!
+  age: Int!
+  birthdate: String!
   f_name: String!
   l_name: String!
-  m_initial: String!
+  m_initial: String
+  sex: String!
+  suffix: String
 }
 
 type Query {

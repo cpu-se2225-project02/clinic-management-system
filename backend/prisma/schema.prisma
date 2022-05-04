@@ -15,16 +15,13 @@ generator nexus {
 }
 
 model Patient {
-  id            Int      @id @default(autoincrement())
-  f_name        String
-  l_name        String
-  m_initial     String
-  suffix        String?
-  sex           String
-  age           Int
-  civil_status  String
-  address       String
-  philhealth_no Int
-  guardian      String?
-  birthdate     DateTime
+  id        Int     @id @default(autoincrement())
+  f_name    String
+  l_name    String
+  m_initial String?
+  suffix    String?
+  sex       String
+  age       Int
+  address   String
+  birthdate String
 }

@@ -23,6 +23,10 @@ export const Patient = objectType({
     t.field(PatientType.f_name);
     t.field(PatientType.m_initial);
     t.field(PatientType.address);
+    t.field(PatientType.age);
+    t.field(PatientType.suffix);
+    t.field(PatientType.sex);
+    t.field(PatientType.birthdate);
   },
 });
 

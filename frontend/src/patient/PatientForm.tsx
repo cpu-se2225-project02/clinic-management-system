@@ -51,29 +51,13 @@ export default function PatientForm({ postButton }: Popup) {
         <label>Date of Birth:</label>
         <input
           className="form-control"
-          type="text"
+          type="date"
           placeholder="Date of Birth"
-        />
-
-        <label>Civil Status:</label>
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Civil Status"
         />
 
         <label>Address:</label>
         <input className="form-control" type="text" placeholder="Address" />
 
-        <label>PhilHeath Number:</label>
-        <input
-          className="form-control"
-          type="text"
-          placeholder="PhilHealth Number"
-        />
-
-        <label>Guardian:</label>
-        <input className="form-control" type="text" placeholder="Guardian" />
       </div>
     </div>
   );
