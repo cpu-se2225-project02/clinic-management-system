@@ -1,5 +1,9 @@
 query AllPatients {
   patients {
     f_name
+    l_name
+    m_initial
+    address
   }
+  helloWorld
 }

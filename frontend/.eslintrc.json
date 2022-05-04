@@ -21,15 +21,26 @@
         "@typescript-eslint"
     ],
     "rules": {
-      "react/jsx-filename-extension": "error", 
+      "react/jsx-filename-extension": ["error",{ 
       "extensions": [".ts", ".tsx"]
-    }, 
+    }],
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "linebreak-style": [
+      "error",
+      "windows"
+    ]
+    },
     "overrides": [
       {
         "files": [
           "*.graphql"
         ],
-       "extends": "plugin:@graphql-eslint/schema-recommended"
-      }
+       "extends": "plugin:@graphql-eslint/operations-all",
+       "parserOptions": {
+         "operations": "./**/*.graphql",
+         "schema": "./schema.graphql"
+       }
+      } 
     ]
 }

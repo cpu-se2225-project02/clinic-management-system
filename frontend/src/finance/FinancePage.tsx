@@ -1,9 +1,14 @@
-import React, { ReactElement } from 'react'
-import { Col, Row, Container, Form, Dropdown, Button } from "react-bootstrap";
-import Header from "../common/Header";
-import Sidebars from "../common/Sidebars";
-import { useState } from "react";
-import { BiSearchAlt2 } from "react-icons/bi";
+/* eslint-disable linebreak-style */
+/* eslint-disable no-unused-vars */
+/* eslint-disable linebreak-style */
+
+import React, { ReactElement, useState } from 'react';
+import {
+  Col, Row, Container, Form, Dropdown, Button,
+} from 'react-bootstrap';
+import { BiSearchAlt2 } from 'react-icons/bi';
+import Header from '../common/Header';
+import Sidebars from '../common/Sidebars';
 
 export default function FinancePage() {
   return (
@@ -19,7 +24,9 @@ export default function FinancePage() {
         </Col>
 
         <Col xs={10} className="patient-list-box p-0 mt-2 border border-dark">
-          <div className="card-body"> Finance Overview
+          <div className="card-body">
+            {' '}
+            Finance Overview
             <div className="card border-dark mb-3">
               <div className="card-body text-dark">
                 <span className="material-icons">payment</span>
@@ -32,11 +39,11 @@ export default function FinancePage() {
               </div>
             </div>
 
-
-
             <div className="card-body">
               <div className="card border-dark mb-3">
-                <div className="card-body text-dark"> <span className="material-icons">payment</span>
+                <div className="card-body text-dark">
+                  {' '}
+                  <span className="material-icons">payment</span>
                   <h5 className="card-title">PATIENT ACCOUNT</h5>
 
                 </div>
@@ -47,12 +54,9 @@ export default function FinancePage() {
             </div>
           </div>
 
-
         </Col>
       </Row>
     </Container>
-
-
 
   );
 }
