@@ -13,7 +13,7 @@ import PatientList from './patient/PatientList';
 import LoginPage from './login/LoginPage';
 
 const client = createClient({
-  url: 'http:localhost:8001/graphql',
+  url: 'http://localhost:8001/graphql',
 });
 
 function App() {

@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/button-has-type */
 /* eslint-disable linebreak-style */
@@ -5,9 +6,12 @@
 
 import React, { useState } from 'react';
 import {
-  Col, Row, Container, Form, Dropdown, Button,
+  Col, Row, Container, Form, Dropdown, Button, ListGroup, Spinner,
 } from 'react-bootstrap';
 import { BiSearchAlt2 } from 'react-icons/bi';
+import { useQuery } from 'urql';
+import { List } from '@mui/material';
+import { AllPatientsDocument } from '../queries.generated';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
 
@@ -16,7 +20,20 @@ import PatientForm from './PatientForm';
 
 export default function PatientList() {
   const [PostButton, setPostButton] = useState(false);
-  const [totalPatients, setTotalPatients] = useState(0);
+  const [allPatients] = useQuery({
+    query: AllPatientsDocument,
+  });
+
+  const { data, error, fetching } = allPatients;
+
+  if (fetching) {
+    return <Spinner animation="border" role="status" />;
+  }
+
+  if (error) {
+    console.log(error.cause);
+    return <div>Something went wrong</div>;
+  }
 
   return (
     <Container fluid>
@@ -34,11 +51,11 @@ export default function PatientList() {
               <h5 className="h5">Patient List</h5>
             </Col>
           </Row>
-          <Row>
+          <Row className="border-bottom">
             <Col xs={5} className="patient-total-label">
               Total of
               {' '}
-              {totalPatients}
+              {data?.patients?.length}
               {' '}
               patient(s)
             </Col>
@@ -77,9 +94,18 @@ export default function PatientList() {
               {PostButton && <PatientForm postButton={setPostButton} />}
             </Col>
           </Row>
-          <Row>
-            <Col className="list border">
-              {/* map of all patients from db goes here */}
+          <Row className="list-row">
+            <Col className="list">
+              <div>
+                {data?.patients?.map((patient) => (
+                  <div className="border-bottom">
+                    {' '}
+                    { patient?.f_name}
+                    {' '}
+                    { patient?.l_name }
+                  </div>
+                ))}
+              </div>
             </Col>
           </Row>
         </Col>
