@@ -31,7 +31,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+<<<<<<< HEAD
     "start": "concurrently npm:start:",
+=======
+    "start": "concurrently \"react-scripts start\" ",
+>>>>>>> 7a8919091f9f1161d1e048ecd5a013ef5a55aa84
     "start:ts": "tsc -w",
     "start:js": "nodemon build/index.js",
     "build": "react-scripts build",
