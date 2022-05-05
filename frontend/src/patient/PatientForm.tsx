@@ -1,3 +1,5 @@
+/* eslint-disable radix */
+/* eslint-disable consistent-return */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/button-has-type */
 /* eslint-disable linebreak-style */
@@ -7,7 +9,7 @@ import React, { useState } from 'react';
 import './PatientForm.css';
 import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { useMutation } from 'urql';
-import { AddPatientDocument } from '../queries.generated';
+import { AddPatientDocument, AddPatientMutationVariables } from '../queries.generated';
 
 interface Popup {
   postButton: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,9 +24,32 @@ export default function PatientForm({ postButton }: Popup) {
   const [age, setAge] = useState(0);
   const [dob, setDob] = useState('');
   const [address, setAddress] = useState('');
-  const [addPatient] = useMutation(AddPatientDocument);
+  const [addPatientResult, addPatient] = useMutation(AddPatientDocument);
 
-  const { data, error, fetching } = addPatient;
+  const { data, error, fetching } = addPatientResult;
+
+  const insertingPatient = () => {
+    addPatient({
+      newPatient: {
+        l_name: lastName,
+        f_name: firstName,
+        m_initial: middleInitial,
+        sex,
+        suffix,
+        age,
+        birthdate: dob,
+        address,
+      },
+    }).then((res) => console.log(res));
+
+    if (fetching) {
+      return <div>Inserting new patient</div>;
+    }
+    if (error) {
+      console.log(error);
+      return <div>Insertion unsuccessful</div>;
+    }
+  };
 
   return (
     <div className="popup">
@@ -69,6 +94,14 @@ export default function PatientForm({ postButton }: Popup) {
           onChange={(e) => { setSuffix(e.target.value); }}
         />
 
+        <label>Age:</label>
+        <input
+          className="form-control"
+          type="number"
+          placeholder="Age"
+          onChange={(e) => { setAge(parseInt(e.target.value)); }}
+        />
+
         <label>Sex:</label>
         <select className="form-control" onChange={(e) => { setSex(e.target.value); }}>
           <option value="Female">Female</option>
@@ -91,6 +124,14 @@ export default function PatientForm({ postButton }: Popup) {
           placeholder="Address"
           onChange={(e) => { setAddress(e.target.value); }}
         />
+
+        <button
+          className="btn btn-primary mt-2 float-end"
+          onSubmit={insertingPatient}
+          type="submit"
+        >
+          Submit
+        </button>
 
       </div>
     </div>
