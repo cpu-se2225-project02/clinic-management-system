@@ -3,7 +3,9 @@
 
 
 type Patient {
+  f_name: String!
   l_name: String!
+  m_initial: String!
 }
 
 type Query {

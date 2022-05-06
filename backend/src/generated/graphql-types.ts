@@ -14,6 +14,16 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  PatientInput: { // input type
+    address: string; // String!
+    age: number; // Int!
+    birthdate: string; // String!
+    f_name: string; // String!
+    l_name: string; // String!
+    m_initial?: string | null; // String
+    sex: string; // String!
+    suffix?: string | null; // String
+  }
 }
 
 export interface NexusGenEnums {
@@ -28,8 +38,17 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  Mutation: {};
   Patient: { // root type
+    address: string; // String!
+    age: number; // Int!
+    birthdate: string; // String!
+    f_name: string; // String!
+    id: number; // Int!
     l_name: string; // String!
+    m_initial?: string | null; // String
+    sex: string; // String!
+    suffix?: string | null; // String
   }
   Query: {};
 }
@@ -45,8 +64,19 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  Mutation: { // field return type
+    addPatient: NexusGenRootTypes['Patient'] | null; // Patient
+  }
   Patient: { // field return type
+    address: string; // String!
+    age: number; // Int!
+    birthdate: string; // String!
+    f_name: string; // String!
+    id: number; // Int!
     l_name: string; // String!
+    m_initial: string | null; // String
+    sex: string; // String!
+    suffix: string | null; // String
   }
   Query: { // field return type
     helloWorld: string | null; // String
@@ -55,8 +85,19 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  Mutation: { // field return type name
+    addPatient: 'Patient'
+  }
   Patient: { // field return type name
+    address: 'String'
+    age: 'Int'
+    birthdate: 'String'
+    f_name: 'String'
+    id: 'Int'
     l_name: 'String'
+    m_initial: 'String'
+    sex: 'String'
+    suffix: 'String'
   }
   Query: { // field return type name
     helloWorld: 'String'
@@ -65,6 +106,11 @@ export interface NexusGenFieldTypeNames {
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    addPatient: { // args
+      newPatient: NexusGenInputs['PatientInput']; // PatientInput!
+    }
+  }
 }
 
 export interface NexusGenAbstractTypeMembers {
@@ -75,7 +121,7 @@ export interface NexusGenTypeInterfaces {
 
 export type NexusGenObjectNames = keyof NexusGenObjects;
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = keyof NexusGenInputs;
 
 export type NexusGenEnumNames = never;
 

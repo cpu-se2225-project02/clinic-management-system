@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 // import { PrismaClient } from '@prisma/client';
 
 const app = express();
-const PORT = 8000;
+const PORT = 8001;
 
 app
   .use(cors())
