@@ -1,13 +1,18 @@
 /* eslint-disable linebreak-style */
 import { makeSchema } from 'nexus';
 
-import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import path from 'path';
+import { graphqlHTTP } from 'express-graphql';
+import { PrismaClient } from '@prisma/client';
+import cors from 'cors';
 import * as types from './schema';
 
 const app = express();
 const PORT = 8001;
+const db = new PrismaClient({
+  log: ['query', 'info', 'warn', 'error'],
+});
 
 const schema = makeSchema({
   types,
@@ -17,15 +22,15 @@ const schema = makeSchema({
   },
 });
 
-const server = new ApolloServer({
-  schema,
-});
-
-server
-  .start()
-  .then(() => {
-    server.applyMiddleware({ app });
-    app.listen(PORT, () => {
-      console.log(`Apollo server has started at http://localhost:${PORT}`);
-    });
+app
+  .use(cors())
+  .use('/graphql', graphqlHTTP({
+    schema,
+    graphiql: !process.env.NODE_ENV?.startsWith('prod'),
+    context: {
+      db,
+    },
+  }))
+  .listen(PORT, () => {
+    console.log(`Express Graphql server started at http://localhost:${PORT}/graphql`);
   });
