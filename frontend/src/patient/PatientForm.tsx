@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 import './PatientForm.css';
 import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { useMutation } from 'urql';
-import { Spinner } from 'react-bootstrap';
+import { Modal, Spinner } from 'react-bootstrap';
 import { AddPatientDocument, AddPatientMutationVariables } from '../queries.generated';
 
 interface Popup {
@@ -37,9 +37,6 @@ export default function PatientForm({ postButton }: Popup) {
     return <div>Insertion unsuccessful</div>;
   }
 
-  if (data) {
-    return <div>Insertion Successful</div>;
-  }
   const insertingPatient = () => {
     addPatient({
       newPatient: {
