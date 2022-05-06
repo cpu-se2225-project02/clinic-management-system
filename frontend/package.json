@@ -6,6 +6,12 @@
     "@aldabil/react-scheduler": "^2.2.1",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/near-operation-file-preset": "^2.2.9",
+    "@graphql-codegen/typed-document-node": "^2.2.8",
+    "@graphql-codegen/typescript": "^2.4.8",
+    "@graphql-codegen/typescript-operations": "^2.3.5",
+    "@graphql-typed-document-node/core": "^3.1.1",
     "@material-ui/core": "^5.0.0-beta.5",
     "@material-ui/lab": "^5.0.0-alpha.44",
     "@mui/icons-material": "^5.6.2",
@@ -20,6 +26,8 @@
     "@types/react-dom": "^18.0.1",
     "@types/react-router-dom": "^5.3.3",
     "bootstrap": "^5.1.3",
+    "concurrently": "^7.1.0",
+    "graphql": "^16.4.0",
     "react": "^18.0.0",
     "react-bootstrap": "^2.3.0",
     "react-dom": "^18.0.0",
@@ -27,15 +35,21 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "typescript": "^4.6.3",
+    "urql": "^2.2.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+<<<<<<< HEAD
     "start": "concurrently npm:start:",
-    "start:ts" : "tsc -w",
-    "start:js" : "nodemon build/index.js",
+=======
+    "start": "concurrently \"react-scripts start\" ",
+>>>>>>> 7a8919091f9f1161d1e048ecd5a013ef5a55aa84
+    "start:ts": "tsc -w",
+    "start:js": "nodemon build/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "eslintConfig": {
     "extends": [
@@ -54,5 +68,20 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/typescript": "2.4.8",
+    "@graphql-codegen/typescript-document-nodes": "2.2.8",
+    "@graphql-codegen/typescript-operations": "2.3.5",
+    "@graphql-eslint/eslint-plugin": "^3.10.3",
+    "@typescript-eslint/eslint-plugin": "^5.22.0",
+    "@typescript-eslint/parser": "^5.22.0",
+    "eslint": "^8.14.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.5.0"
   }
 }
