@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import './PatientForm.css';
 import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { useMutation } from 'urql';
+import { Spinner } from 'react-bootstrap';
 import { AddPatientDocument, AddPatientMutationVariables } from '../queries.generated';
 
 interface Popup {
@@ -19,7 +20,7 @@ export default function PatientForm({ postButton }: Popup) {
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [middleInitial, setMiddileInitial] = useState('');
-  const [sex, setSex] = useState('');
+  const [sex, setSex] = useState('Female');
   const [suffix, setSuffix] = useState('');
   const [age, setAge] = useState(0);
   const [dob, setDob] = useState('');
@@ -28,6 +29,17 @@ export default function PatientForm({ postButton }: Popup) {
 
   const { data, error, fetching } = addPatientResult;
 
+  if (fetching) {
+    return <Spinner animation="border" role="status" />;
+  }
+  if (error) {
+    console.log(error);
+    return <div>Insertion unsuccessful</div>;
+  }
+
+  if (data) {
+    return <div>Insertion Successful</div>;
+  }
   const insertingPatient = () => {
     addPatient({
       newPatient: {
@@ -41,14 +53,6 @@ export default function PatientForm({ postButton }: Popup) {
         address,
       },
     }).then((res) => console.log(res));
-
-    if (fetching) {
-      return <div>Inserting new patient</div>;
-    }
-    if (error) {
-      console.log(error);
-      return <div>Insertion unsuccessful</div>;
-    }
   };
 
   return (
@@ -127,7 +131,7 @@ export default function PatientForm({ postButton }: Popup) {
 
         <button
           className="btn btn-primary mt-2 float-end"
-          onSubmit={insertingPatient}
+          onClick={insertingPatient}
           type="submit"
         >
           Submit
