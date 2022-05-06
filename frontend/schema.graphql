@@ -2,7 +2,23 @@
 ### Do not make changes to this file directly
 
 
+type Mutation {
+  addPatient(newPatient: PatientInput!): Patient
+}
+
 type Patient {
+  address: String!
+  age: Int!
+  birthdate: String!
+  f_name: String!
+  id: Int!
+  l_name: String!
+  m_initial: String
+  sex: String!
+  suffix: String
+}
+
+input PatientInput {
   address: String!
   age: Int!
   birthdate: String!
