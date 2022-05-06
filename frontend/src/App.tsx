@@ -10,6 +10,7 @@ import Clinic from './clinic/Clinic';
 import Dashboard from './dashboard/Dashboard';
 import FinancePage from './finance/FinancePage';
 import PatientList from './patient/PatientList';
+
 import LoginPage from './login/LoginPage';
 
 const client = createClient({
@@ -25,7 +26,7 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/clinic" element={<Clinic />} />
           <Route path="/appointments" element={<Appointment />} />
-          <Route path="/patients" element={<PatientList />} />
+          <Route path="/patients/*" element={<PatientList />} />
           <Route path="/finance" element={<FinancePage />} />
           <Route path="/login" element={<LoginPage />} />
         </Routes>
