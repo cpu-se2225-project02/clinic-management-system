@@ -1,0 +1,28 @@
+query AllPatients {
+  patients {
+    id
+    f_name
+    l_name
+    m_initial
+    suffix
+    sex
+    age
+    address
+    birthdate
+  }
+  helloWorld
+}
+
+mutation AddPatient($newPatient: PatientInput!) {
+  addPatient(newPatient: $newPatient) {
+    id
+    l_name
+    f_name
+    m_initial
+    address
+    age
+    suffix
+    sex
+    birthdate
+  }
+}
