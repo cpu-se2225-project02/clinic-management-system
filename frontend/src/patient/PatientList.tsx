@@ -11,15 +11,20 @@ import {
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { useQuery } from 'urql';
 import { List } from '@mui/material';
+import {
+  Router, Routes, Route, Link,
+
+} from 'react-router-dom';
 import { AllPatientsDocument } from '../queries.generated';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
-
 import './PatientList.css';
 import PatientForm from './PatientForm';
+import PatientRecord from './PatientRecord';
 
 export default function PatientList() {
   const [PostButton, setPostButton] = useState(false);
+
   const [allPatients] = useQuery({
     query: AllPatientsDocument,
   });
@@ -98,17 +103,24 @@ export default function PatientList() {
             <Col className="list">
               <div>
                 {data?.patients?.map((patient) => (
-                  <div className="border-bottom">
-                    {' '}
-                    { patient?.f_name}
-                    {' '}
-                    { patient?.l_name }
+                  <div>
+                    <Link to={`${patient?.id}`}>
+                      {patient?.f_name}
+                      {' '}
+                      {patient?.l_name}
+                    </Link>
+
                   </div>
                 ))}
               </div>
             </Col>
           </Row>
         </Col>
+        <Row className="patient-rec-box">
+          <Routes>
+            <Route path=":id/" element={<PatientRecord />} />
+          </Routes>
+        </Row>
       </Row>
     </Container>
   );

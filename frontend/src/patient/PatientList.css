@@ -48,3 +48,8 @@
 .list-row {
   margin-top: 10px !important;
 }
+
+.patient-rec-box {
+  margin-bottom: 40px !important;
+  height: fit-content;
+}
