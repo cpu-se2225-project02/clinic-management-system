@@ -7,9 +7,21 @@ import {
 } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import './PatientRecord.css';
+import { useQuery } from 'urql';
+import { GetPatientDocument } from '../queries.generated';
 
 export default function PatientRecord() {
-  const params = useParams();
+  const params = useParams() as any;
+  const patiendID = parseInt(params.id);
+
+  const [allPatients] = useQuery({
+    query: GetPatientDocument,
+    variables: {
+      id: patiendID,
+    },
+  });
+
+  const { data } = allPatients;
 
   return (
     <Container fluid>
@@ -22,6 +34,11 @@ export default function PatientRecord() {
             <Col xs={12}>
               <h5 className="h5">
                 {params.id}
+                .
+                {' '}
+                {data?.specificPatient?.f_name}
+                {' '}
+                {data?.specificPatient?.l_name}
               </h5>
             </Col>
           </Row>
