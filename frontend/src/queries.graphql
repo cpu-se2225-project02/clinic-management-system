@@ -26,3 +26,10 @@ mutation AddPatient($newPatient: PatientInput!) {
     birthdate
   }
 }
+
+query GetPatient($id: Int!) {
+  specificPatient(patientId: $id) {
+    l_name
+    f_name
+  }
+}
