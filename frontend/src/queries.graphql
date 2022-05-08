@@ -31,5 +31,12 @@ query GetPatient($id: Int!) {
   specificPatient(patientId: $id) {
     l_name
     f_name
+    m_initial
+    sex
+    suffix
+    id
+    address
+    birthdate
+    age
   }
 }
