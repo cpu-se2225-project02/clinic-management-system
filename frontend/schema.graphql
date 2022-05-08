@@ -32,4 +32,5 @@ input PatientInput {
 type Query {
   helloWorld: String
   patients: [Patient]
+  specificPatient(patientId: Int!): Patient
 }

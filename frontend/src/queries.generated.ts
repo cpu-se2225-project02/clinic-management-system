@@ -41,6 +41,26 @@ export type AddPatientMutation = (
 
 );
 
+export type GetPatientQueryVariables = Types.Exact<{
+
+  id: Types.Scalars['Int'];
+
+}>;
+
+export type GetPatientQuery = (
+
+  { __typename?: 'Query' }
+
+  & { specificPatient?: Types.Maybe<(
+
+    { __typename?: 'Patient' }
+
+    & Pick<Types.Patient, 'l_name' | 'f_name'>
+
+  )> }
+
+);
+
 export const AllPatientsDocument = {
   kind: 'Document',
   definitions: [{
@@ -63,3 +83,19 @@ export const AddPatientDocument = {
     },
   }],
 } as unknown as DocumentNode<AddPatientMutation, AddPatientMutationVariables>;
+
+export const GetPatientDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'query',
+    name: { kind: 'Name', value: 'GetPatient' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'specificPatient' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'patientId' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'id' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'l_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'f_name' } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<GetPatientQuery, GetPatientQueryVariables>;
