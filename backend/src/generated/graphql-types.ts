@@ -80,7 +80,9 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     helloWorld: string | null; // String
+    hi: string | null; // String
     patients: Array<NexusGenRootTypes['Patient'] | null> | null; // [Patient]
+    specificPatient: NexusGenRootTypes['Patient'] | null; // Patient
   }
 }
 
@@ -101,7 +103,9 @@ export interface NexusGenFieldTypeNames {
   }
   Query: { // field return type name
     helloWorld: 'String'
+    hi: 'String'
     patients: 'Patient'
+    specificPatient: 'Patient'
   }
 }
 
@@ -109,6 +113,11 @@ export interface NexusGenArgTypes {
   Mutation: {
     addPatient: { // args
       newPatient: NexusGenInputs['PatientInput']; // PatientInput!
+    }
+  }
+  Query: {
+    specificPatient: { // args
+      patientId: number; // Int!
     }
   }
 }

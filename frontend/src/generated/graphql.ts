@@ -50,4 +50,10 @@ export interface Query {
   readonly __typename?: 'Query';
   readonly helloWorld?: Maybe<Scalars['String']>;
   readonly patients?: Maybe<ReadonlyArray<Maybe<Patient>>>;
+  readonly specificPatient?: Maybe<Patient>;
+}
+
+
+export interface QuerySpecificPatientArgs {
+  patientId: Scalars['Int'];
 }
