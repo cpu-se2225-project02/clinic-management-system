@@ -1,6 +1,7 @@
 /* eslint-disable linebreak-style */
 import {
   inputObjectType,
+  intArg,
   list,
   mutationField,
   nonNull,
@@ -34,10 +35,23 @@ export const Patient = objectType({
   },
 });
 
+// R = read
 export const patients = queryField('patients', {
   type: list(Patient),
   resolve() {
     return db.patient.findMany();
+  },
+});
+
+export const specificPatient = queryField('specificPatient', {
+  type: Patient,
+  args: {
+    patientId: nonNull(intArg()),
+  },
+  resolve(root, args) {
+    return db.patient.findUnique({
+      where: { id: args.patientId },
+    });
   },
 });
 

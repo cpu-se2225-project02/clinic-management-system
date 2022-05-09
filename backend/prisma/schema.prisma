@@ -14,6 +14,7 @@ generator nexus {
   provider = "nexus-prisma"
 }
 
+//from here: we define models || entities inside our db
 model Patient {
   id        Int     @id @default(autoincrement())
   f_name    String
