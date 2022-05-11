@@ -4,6 +4,7 @@
 
 type Mutation {
   addPatient(newPatient: PatientInput!): Patient
+  editPatient(editedPatient: PatientInput!, patientId: Int!): Patient
 }
 
 type Patient {

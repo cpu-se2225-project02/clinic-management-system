@@ -66,6 +66,7 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
     addPatient: NexusGenRootTypes['Patient'] | null; // Patient
+    editPatient: NexusGenRootTypes['Patient'] | null; // Patient
   }
   Patient: { // field return type
     address: string; // String!
@@ -89,6 +90,7 @@ export interface NexusGenFieldTypes {
 export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     addPatient: 'Patient'
+    editPatient: 'Patient'
   }
   Patient: { // field return type name
     address: 'String'
@@ -113,6 +115,10 @@ export interface NexusGenArgTypes {
   Mutation: {
     addPatient: { // args
       newPatient: NexusGenInputs['PatientInput']; // PatientInput!
+    }
+    editPatient: { // args
+      editedPatient: NexusGenInputs['PatientInput']; // PatientInput!
+      patientId: number; // Int!
     }
   }
   Query: {

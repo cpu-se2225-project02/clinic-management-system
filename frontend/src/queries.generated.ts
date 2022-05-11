@@ -61,6 +61,28 @@ export type GetPatientQuery = (
 
 );
 
+export type EditAPatientMutationVariables = Types.Exact<{
+
+  thePatient: Types.PatientInput;
+
+  pid: Types.Scalars['Int'];
+
+}>;
+
+export type EditAPatientMutation = (
+
+  { __typename?: 'Mutation' }
+
+  & { editPatient?: Types.Maybe<(
+
+    { __typename?: 'Patient' }
+
+    & Pick<Types.Patient, 'suffix' | 'f_name' | 'l_name' | 'm_initial' | 'sex' | 'address' | 'birthdate' | 'age'>
+
+  )> }
+
+);
+
 export const AllPatientsDocument = {
   kind: 'Document',
   definitions: [{
@@ -99,3 +121,19 @@ export const GetPatientDocument = {
     },
   }],
 } as unknown as DocumentNode<GetPatientQuery, GetPatientQueryVariables>;
+
+export const EditAPatientDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'mutation',
+    name: { kind: 'Name', value: 'editAPatient' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'thePatient' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'PatientInput' } } } }, { kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'pid' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'editPatient' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'editedPatient' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'thePatient' } } }, { kind: 'Argument', name: { kind: 'Name', value: 'patientId' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'pid' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'suffix' } }, { kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'm_initial' } }, { kind: 'Field', name: { kind: 'Name', value: 'sex' } }, { kind: 'Field', name: { kind: 'Name', value: 'address' } }, { kind: 'Field', name: { kind: 'Name', value: 'birthdate' } }, { kind: 'Field', name: { kind: 'Name', value: 'age' } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<EditAPatientMutation, EditAPatientMutationVariables>;

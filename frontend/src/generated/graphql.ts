@@ -15,11 +15,18 @@ export interface Scalars {
 export interface Mutation {
   readonly __typename?: 'Mutation';
   readonly addPatient?: Maybe<Patient>;
+  readonly editPatient?: Maybe<Patient>;
 }
 
 
 export interface MutationAddPatientArgs {
   newPatient: PatientInput;
+}
+
+
+export interface MutationEditPatientArgs {
+  editedPatient: PatientInput;
+  patientId: Scalars['Int'];
 }
 
 export interface Patient {
@@ -49,6 +56,7 @@ export interface PatientInput {
 export interface Query {
   readonly __typename?: 'Query';
   readonly helloWorld?: Maybe<Scalars['String']>;
+  readonly hi?: Maybe<Scalars['String']>;
   readonly patients?: Maybe<ReadonlyArray<Maybe<Patient>>>;
   readonly specificPatient?: Maybe<Patient>;
 }
