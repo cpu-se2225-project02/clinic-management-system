@@ -40,3 +40,16 @@ query GetPatient($id: Int!) {
     age
   }
 }
+
+mutation editAPatient($thePatient: PatientInput!, $pid: Int!) {
+  editPatient(editedPatient: $thePatient, patientId: $pid) {
+    suffix
+    f_name
+    l_name
+    m_initial
+    sex
+    address
+    birthdate
+    age
+  }
+}
