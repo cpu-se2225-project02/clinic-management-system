@@ -6,7 +6,7 @@ import path from 'path';
 import { graphqlHTTP } from 'express-graphql';
 import { PrismaClient } from '@prisma/client';
 import cors from 'cors';
-import * as types from './schema';
+import * as types from './schema'; 
 
 const app = express();
 const PORT = 8001;

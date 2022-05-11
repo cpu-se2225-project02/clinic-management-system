@@ -4,7 +4,7 @@ import {
   list,
   mutationField,
   nonNull,
-  objectType,
+  objectType, 
   queryField,
 } from 'nexus';
 import { Prisma, PrismaClient } from '@prisma/client';
