@@ -1,15 +1,29 @@
 /* eslint-disable max-len */
 /* eslint-disable consistent-return */
 /* eslint-disable radix */
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Container, Row, Col, Button,
 } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import './PatientRecord.css';
+import { useQuery } from 'urql';
+import { GetPatientDocument } from '../queries.generated';
+import PatientInformation from './PatientInformation';
 
 export default function PatientRecord() {
-  const params = useParams();
+  const params = useParams() as any;
+  const patiendID = parseInt(params.id);
+  const [PatientInfoBtn, setPatientInfoBtn] = useState(false);
+
+  const [allPatients] = useQuery({
+    query: GetPatientDocument,
+    variables: {
+      id: patiendID,
+    },
+  });
+
+  const { data } = allPatients;
 
   return (
     <Container fluid>
@@ -22,16 +36,29 @@ export default function PatientRecord() {
             <Col xs={12}>
               <h5 className="h5">
                 {params.id}
+                .
+                {' '}
+                {data?.specificPatient?.f_name}
+                {' '}
+                {data?.specificPatient?.l_name}
               </h5>
             </Col>
           </Row>
 
           <Row>
             <Col className="list border d-grid gap-2">
-              <Button variant="primary" className="patient-btns">
+              <Button
+                variant="primary"
+                className="patient-btns"
+                onClick={() => setPatientInfoBtn(!PatientInfoBtn)}
+              >
                 Patient Information
               </Button>
+
             </Col>
+          </Row>
+          <Row>
+            {PatientInfoBtn && <PatientInformation pId={data?.specificPatient?.id} />}
           </Row>
           <Row>
             <Col className="list border d-grid gap-2">

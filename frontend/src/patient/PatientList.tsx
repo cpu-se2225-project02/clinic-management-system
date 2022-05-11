@@ -12,7 +12,7 @@ import { BiSearchAlt2 } from 'react-icons/bi';
 import { useQuery } from 'urql';
 import { List } from '@mui/material';
 import {
-  Router, Routes, Route, Link,
+  Router, Routes, Route, Link, useNavigate,
 
 } from 'react-router-dom';
 import { AllPatientsDocument } from '../queries.generated';
@@ -21,9 +21,11 @@ import Sidebars from '../common/Sidebars';
 import './PatientList.css';
 import PatientForm from './PatientForm';
 import PatientRecord from './PatientRecord';
+import PatientInformation from './PatientInformation';
 
 export default function PatientList() {
   const [PostButton, setPostButton] = useState(false);
+  const navigate = useNavigate();
 
   const [allPatients] = useQuery({
     query: AllPatientsDocument,
@@ -104,12 +106,11 @@ export default function PatientList() {
               <div>
                 {data?.patients?.map((patient) => (
                   <div>
-                    <Link to={`${patient?.id}`}>
+                    <Button onClick={() => navigate(`/patient_record/${patient?.id}`)}>
                       {patient?.f_name}
                       {' '}
                       {patient?.l_name}
-                    </Link>
-
+                    </Button>
                   </div>
                 ))}
               </div>
