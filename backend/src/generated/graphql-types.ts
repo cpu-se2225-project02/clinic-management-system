@@ -24,6 +24,11 @@ export interface NexusGenInputs {
     sex: string; // String!
     suffix?: string | null; // String
   }
+  PrescriptionInput: { // input type
+    id: number; // Int!
+    pres_dosage: number; // Int!
+    pres_name: string; // String!
+  }
 }
 
 export interface NexusGenEnums {
@@ -50,6 +55,11 @@ export interface NexusGenObjects {
     sex: string; // String!
     suffix?: string | null; // String
   }
+  Prescription: { // root type
+    id: number; // Int!
+    pres_dosage: number; // Int!
+    pres_name: string; // String!
+  }
   Query: {};
 }
 
@@ -66,6 +76,7 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
     addPatient: NexusGenRootTypes['Patient'] | null; // Patient
+    addPrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
   }
   Patient: { // field return type
     address: string; // String!
@@ -78,6 +89,11 @@ export interface NexusGenFieldTypes {
     sex: string; // String!
     suffix: string | null; // String
   }
+  Prescription: { // field return type
+    id: number; // Int!
+    pres_dosage: number; // Int!
+    pres_name: string; // String!
+  }
   Query: { // field return type
     helloWorld: string | null; // String
     patients: Array<NexusGenRootTypes['Patient'] | null> | null; // [Patient]
@@ -87,6 +103,7 @@ export interface NexusGenFieldTypes {
 export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     addPatient: 'Patient'
+    addPrescription: 'Prescription'
   }
   Patient: { // field return type name
     address: 'String'
@@ -99,6 +116,11 @@ export interface NexusGenFieldTypeNames {
     sex: 'String'
     suffix: 'String'
   }
+  Prescription: { // field return type name
+    id: 'Int'
+    pres_dosage: 'Int'
+    pres_name: 'String'
+  }
   Query: { // field return type name
     helloWorld: 'String'
     patients: 'Patient'
@@ -109,6 +131,9 @@ export interface NexusGenArgTypes {
   Mutation: {
     addPatient: { // args
       newPatient: NexusGenInputs['PatientInput']; // PatientInput!
+    }
+    addPrescription: { // args
+      newPrescription: NexusGenInputs['PrescriptionInput']; // PrescriptionInput!
     }
   }
 }

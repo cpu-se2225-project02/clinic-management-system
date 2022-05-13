@@ -4,6 +4,7 @@
 
 type Mutation {
   addPatient(newPatient: PatientInput!): Patient
+  addPrescription(newPrescription: PrescriptionInput!): Prescription
 }
 
 type Patient {
@@ -27,6 +28,18 @@ input PatientInput {
   m_initial: String
   sex: String!
   suffix: String
+}
+
+type Prescription {
+  id: Int!
+  pres_dosage: Int!
+  pres_name: String!
+}
+
+input PrescriptionInput {
+  id: Int!
+  pres_dosage: Int!
+  pres_name: String!
 }
 
 type Query {

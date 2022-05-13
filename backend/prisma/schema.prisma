@@ -25,3 +25,9 @@ model Patient {
   address   String
   birthdate String
 }
+
+model Prescription {
+  id                Int @id
+  pres_name         String
+  pres_dosage       Int
+}
