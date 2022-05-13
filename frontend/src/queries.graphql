@@ -50,5 +50,13 @@ mutation editAPatient($thePatient: PatientInput!, $pid: Int!) {
     address
     birthdate
     age
+query AllAppointments {
+  appointments {
+    id
+    date_time
+    patient {
+      f_name
+      l_name
+    }
   }
 }

@@ -2,7 +2,19 @@
 ### Do not make changes to this file directly
 
 
+type Appointment {
+  date_time: String!
+  id: Int!
+  patient: Patient
+}
+
+input AppointmentInput {
+  date_time: String!
+  patient_id: Int!
+}
+
 type Mutation {
+  addAppointment(newAppointment: AppointmentInput!): Appointment
   addPatient(newPatient: PatientInput!): Patient
   editPatient(editedPatient: PatientInput!, patientId: Int!): Patient
 }
@@ -10,6 +22,7 @@ type Mutation {
 type Patient {
   address: String!
   age: Int!
+  appointments: [Appointment]
   birthdate: String!
   f_name: String!
   id: Int!
@@ -31,6 +44,7 @@ input PatientInput {
 }
 
 type Query {
+  appointments: [Appointment]
   helloWorld: String
   hi: String
   patients: [Patient]
