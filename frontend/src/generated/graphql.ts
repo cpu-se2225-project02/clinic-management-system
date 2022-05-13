@@ -12,9 +12,27 @@ export interface Scalars {
   Float: number;
 }
 
+export interface Appointment {
+  readonly __typename?: 'Appointment';
+  readonly date_time: Scalars['String'];
+  readonly id: Scalars['Int'];
+  readonly patient?: Maybe<Patient>;
+}
+
+export interface AppointmentInput {
+  readonly date_time: Scalars['String'];
+  readonly patient_id: Scalars['Int'];
+}
+
 export interface Mutation {
   readonly __typename?: 'Mutation';
+  readonly addAppointment?: Maybe<Appointment>;
   readonly addPatient?: Maybe<Patient>;
+}
+
+
+export interface MutationAddAppointmentArgs {
+  newAppointment: AppointmentInput;
 }
 
 
@@ -26,6 +44,7 @@ export interface Patient {
   readonly __typename?: 'Patient';
   readonly address: Scalars['String'];
   readonly age: Scalars['Int'];
+  readonly appointments?: Maybe<ReadonlyArray<Maybe<Appointment>>>;
   readonly birthdate: Scalars['String'];
   readonly f_name: Scalars['String'];
   readonly id: Scalars['Int'];
@@ -48,7 +67,9 @@ export interface PatientInput {
 
 export interface Query {
   readonly __typename?: 'Query';
+  readonly appointments?: Maybe<ReadonlyArray<Maybe<Appointment>>>;
   readonly helloWorld?: Maybe<Scalars['String']>;
+  readonly hi?: Maybe<Scalars['String']>;
   readonly patients?: Maybe<ReadonlyArray<Maybe<Patient>>>;
   readonly specificPatient?: Maybe<Patient>;
 }
