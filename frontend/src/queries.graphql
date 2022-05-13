@@ -10,7 +10,6 @@ query AllPatients {
     address
     birthdate
   }
-  helloWorld
 }
 
 mutation AddPatient($newPatient: PatientInput!) {
