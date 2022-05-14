@@ -69,7 +69,6 @@ export default function PatientForm({ postButton }: Popup) {
           placeholder="Last name"
           onChange={(e) => { setLastName(e.target.value); }}
         />
-        {lastName}
 
         <label>First name:</label>
         <input
