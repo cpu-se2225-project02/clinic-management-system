@@ -87,15 +87,19 @@ function Appointment() {
                 />
               ) : (
                 // eslint-disable-next-line react/jsx-no-useless-fragment
-                <>
+                <Row>
                   {data?.appointments?.map((appointment) => (
-                    <div>
-                      {appointment?.date_time}
-                      {appointment?.patient?.f_name}
-                      {appointment?.patient?.l_name}
-                    </div>
+                    <Row>
+                      <Col>
+                        {appointment?.date_time}
+                      </Col>
+                      <Col>
+                        {appointment?.patient?.f_name}
+                        {appointment?.patient?.l_name}
+                      </Col>
+                    </Row>
                   ))}
-                </>
+                </Row>
               )}
             </Col>
           </Row>
