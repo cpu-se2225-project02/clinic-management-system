@@ -101,3 +101,15 @@ export const EditPatient = mutationField('editPatient', {
     });
   },
 });
+
+export const DeletePatient = mutationField('deletePatient', {
+  type: Patient,
+  args: {
+    patientId: nonNull(intArg()),
+  },
+  resolve(root, args: { patientId: Prisma.PatientWhereUniqueInput }) {
+    return db.patient.delete({
+      where: { id: args.patientId as any },
+    });
+  },
+});
