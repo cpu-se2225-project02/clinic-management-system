@@ -28,6 +28,7 @@ export interface Mutation {
   readonly __typename?: 'Mutation';
   readonly addAppointment?: Maybe<Appointment>;
   readonly addPatient?: Maybe<Patient>;
+  readonly addPrescription?: Maybe<Prescription>;
   readonly editPatient?: Maybe<Patient>;
 }
 
@@ -39,6 +40,11 @@ export interface MutationAddAppointmentArgs {
 
 export interface MutationAddPatientArgs {
   newPatient: PatientInput;
+}
+
+
+export interface MutationAddPrescriptionArgs {
+  newPrescription: PrescriptionInput;
 }
 
 
@@ -70,6 +76,17 @@ export interface PatientInput {
   readonly m_initial?: InputMaybe<Scalars['String']>;
   readonly sex: Scalars['String'];
   readonly suffix?: InputMaybe<Scalars['String']>;
+}
+
+export interface Prescription {
+  readonly __typename?: 'Prescription';
+  readonly pres_dos: Scalars['Int'];
+  readonly pres_name: Scalars['String'];
+}
+
+export interface PrescriptionInput {
+  readonly pres_dos: Scalars['Int'];
+  readonly pres_name: Scalars['String'];
 }
 
 export interface Query {
