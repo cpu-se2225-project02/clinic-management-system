@@ -89,6 +89,7 @@ export interface NexusGenFieldTypes {
     addAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
     addPatient: NexusGenRootTypes['Patient'] | null; // Patient
     addPrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
+    deletePatient: NexusGenRootTypes['Patient'] | null; // Patient
     editPatient: NexusGenRootTypes['Patient'] | null; // Patient
   }
   Patient: { // field return type
@@ -126,6 +127,7 @@ export interface NexusGenFieldTypeNames {
     addAppointment: 'Appointment'
     addPatient: 'Patient'
     addPrescription: 'Prescription'
+    deletePatient: 'Patient'
     editPatient: 'Patient'
   }
   Patient: { // field return type name
@@ -163,6 +165,9 @@ export interface NexusGenArgTypes {
     }
     addPrescription: { // args
       newPrescription: NexusGenInputs['PrescriptionInput']; // PrescriptionInput!
+    }
+    deletePatient: { // args
+      patientId: number; // Int!
     }
     editPatient: { // args
       editedPatient: NexusGenInputs['PatientInput']; // PatientInput!

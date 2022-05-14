@@ -17,6 +17,7 @@ type Mutation {
   addAppointment(newAppointment: AppointmentInput!): Appointment
   addPatient(newPatient: PatientInput!): Patient
   addPrescription(newPrescription: PrescriptionInput!): Prescription
+  deletePatient(patientId: Int!): Patient
   editPatient(editedPatient: PatientInput!, patientId: Int!): Patient
 }
 

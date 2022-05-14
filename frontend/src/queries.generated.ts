@@ -125,6 +125,26 @@ export type AddPrescriptionMutation = (
 
 );
 
+export type DeleteAPatientMutationVariables = Types.Exact<{
+
+  patientID: Types.Scalars['Int'];
+
+}>;
+
+export type DeleteAPatientMutation = (
+
+  { __typename?: 'Mutation' }
+
+  & { deletePatient?: Types.Maybe<(
+
+    { __typename?: 'Patient' }
+
+    & Pick<Types.Patient, 'l_name' | 'f_name' | 'm_initial' | 'suffix' | 'sex' | 'age' | 'birthdate' | 'address'>
+
+  )> }
+
+);
+
 export const AllPatientsDocument = {
   kind: 'Document',
   definitions: [{
@@ -202,3 +222,19 @@ export const AddPrescriptionDocument = {
     },
   }],
 } as unknown as DocumentNode<AddPrescriptionMutation, AddPrescriptionMutationVariables>;
+
+export const DeleteAPatientDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'mutation',
+    name: { kind: 'Name', value: 'deleteAPatient' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'patientID' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'deletePatient' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'patientId' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'patientID' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'l_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'm_initial' } }, { kind: 'Field', name: { kind: 'Name', value: 'suffix' } }, { kind: 'Field', name: { kind: 'Name', value: 'sex' } }, { kind: 'Field', name: { kind: 'Name', value: 'age' } }, { kind: 'Field', name: { kind: 'Name', value: 'birthdate' } }, { kind: 'Field', name: { kind: 'Name', value: 'address' } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<DeleteAPatientMutation, DeleteAPatientMutationVariables>;
