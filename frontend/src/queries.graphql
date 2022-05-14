@@ -50,6 +50,9 @@ mutation editAPatient($thePatient: PatientInput!, $pid: Int!) {
     address
     birthdate
     age
+  }
+}
+
 query AllAppointments {
   appointments {
     id
@@ -58,5 +61,13 @@ query AllAppointments {
       f_name
       l_name
     }
+  }
+}
+
+mutation addPrescription($newPresc: PrescriptionInput!) {
+  addPrescription(newPrescription: $newPresc) {
+    pres_name
+    pres_dos
+    id
   }
 }
