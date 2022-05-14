@@ -68,6 +68,18 @@ mutation addPrescription($newPresc: PrescriptionInput!) {
   addPrescription(newPrescription: $newPresc) {
     pres_name
     pres_dos
-    id
+  }
+}
+
+mutation deleteAPatient($patientID: Int!) {
+  deletePatient(patientId: $patientID) {
+    l_name
+    f_name
+    m_initial
+    suffix
+    sex
+    age
+    birthdate
+    address
   }
 }
