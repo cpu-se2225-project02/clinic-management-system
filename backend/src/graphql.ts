@@ -8,6 +8,7 @@ import { PrismaClient } from '@prisma/client';
 import cors from 'cors';
 import * as patientTypes from './patient';
 import * as appointmentTypes from './appointment';
+import * as prescriptionTypes from './prescription';
 
 const app = express();
 const PORT = 8001;
@@ -16,7 +17,7 @@ const db = new PrismaClient({
 });
 
 const schema = makeSchema({
-  types: [patientTypes, appointmentTypes],
+  types: [patientTypes, appointmentTypes, prescriptionTypes],
   outputs: {
     typegen: path.join(__dirname, 'generated/graphql-types.ts'),
     schema: path.join(__dirname, '../../frontend/schema.graphql'),
@@ -25,13 +26,18 @@ const schema = makeSchema({
 
 app
   .use(cors())
-  .use('/graphql', graphqlHTTP({
-    schema,
-    graphiql: !process.env.NODE_ENV?.startsWith('prod'),
-    context: {
-      db,
-    },
-  }))
+  .use(
+    '/graphql',
+    graphqlHTTP({
+      schema,
+      graphiql: !process.env.NODE_ENV?.startsWith('prod'),
+      context: {
+        db,
+      },
+    }),
+  )
   .listen(PORT, () => {
-    console.log(`Express Graphql server started at http://localhost:${PORT}/graphql`);
+    console.log(
+      `Express Graphql server started at http://localhost:${PORT}/graphql`,
+    );
   });

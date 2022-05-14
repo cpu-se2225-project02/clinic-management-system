@@ -34,3 +34,9 @@ model Appointment {
   patient_id Int
   patient    Patient @relation(fields: [patient_id], references: [id])
 }
+
+model Prescription {
+  id        Int    @id @default(autoincrement())
+  pres_name String
+  pres_dos  Int
+}
