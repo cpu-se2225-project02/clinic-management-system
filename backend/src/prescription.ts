@@ -36,7 +36,7 @@ export const AddPresctiption = mutationField('addPrescription', {
   args: {
     newPrescription: nonNull(PrescriptionInput),
   },
-  resolve(root, args: { newPatient: Prisma.PrescriptionCreateInput }) {
-    return db.prescription.create({ data: args.newPatient });
+  resolve(root, args: { newPrescription: Prisma.PrescriptionCreateInput }) {
+    return db.prescription.create({ data: args.newPrescription });
   },
 });

@@ -12,6 +12,7 @@ import FinancePage from './finance/FinancePage';
 import PatientList from './patient/PatientList';
 
 import LoginPage from './login/LoginPage';
+import PatientRecord from './patient/PatientRecord';
 
 const client = createClient({
   url: 'http://localhost:8001/graphql',
@@ -26,9 +27,10 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/clinic" element={<Clinic />} />
           <Route path="/appointments" element={<Appointment />} />
-          <Route path="/patients/*" element={<PatientList />} />
+          <Route path="/patients" element={<PatientList />} />
           <Route path="/finance" element={<FinancePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/patient_record/:id" element={<PatientRecord />} />
         </Routes>
       </Router>
     </UrqlProvider>

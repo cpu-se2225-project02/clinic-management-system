@@ -1,4 +1,6 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable no-unused-vars */
+/* eslint-disable linebreak-style */
 import { makeSchema } from 'nexus';
 
 import express from 'express';
@@ -8,6 +10,8 @@ import { PrismaClient } from '@prisma/client';
 import cors from 'cors';
 import * as types from './schema';
 import * as PrescriptionType from './prescription';
+import * as patientTypes from './patient';
+import * as appointmentTypes from './appointment';
 
 const app = express();
 const PORT = 8001;

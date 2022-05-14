@@ -1,6 +1,7 @@
 /* eslint-disable linebreak-style */
 import {
   inputObjectType,
+  intArg,
   list,
   mutationField,
   nonNull,
@@ -9,6 +10,7 @@ import {
 } from 'nexus';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { Patient as PatientType } from 'nexus-prisma';
+import { Appointment } from './appointment';
 
 const db = new PrismaClient();
 
@@ -31,13 +33,32 @@ export const Patient = objectType({
     t.field(PatientType.suffix);
     t.field(PatientType.sex);
     t.field(PatientType.birthdate);
+    t.field('appointments', {
+      type: list(Appointment),
+      resolve(patient) {
+        return db.appointment.findMany({ where: { patient_id: patient.id } });
+      },
+    });
   },
 });
 
+// R = read
 export const patients = queryField('patients', {
   type: list(Patient),
   resolve() {
     return db.patient.findMany();
+  },
+});
+
+export const specificPatient = queryField('specificPatient', {
+  type: Patient,
+  args: {
+    patientId: nonNull(intArg()),
+  },
+  resolve(root, args) {
+    return db.patient.findUnique({
+      where: { id: args.patientId },
+    });
   },
 });
 
