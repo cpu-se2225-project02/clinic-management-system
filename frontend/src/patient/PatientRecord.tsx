@@ -10,11 +10,13 @@ import './PatientRecord.css';
 import { useQuery } from 'urql';
 import { GetPatientDocument } from '../queries.generated';
 import PatientInformation from './PatientInformation';
+import PrescriptionForm from './prescription/PrescriptionForm';
 
 export default function PatientRecord() {
   const params = useParams() as any;
   const patiendID = parseInt(params.id);
   const [PatientInfoBtn, setPatientInfoBtn] = useState(false);
+  const [PrescriptionBtn, setPrescBtn] = useState(false);
 
   const [allPatients] = useQuery({
     query: GetPatientDocument,
@@ -62,10 +64,17 @@ export default function PatientRecord() {
           </Row>
           <Row>
             <Col className="list border d-grid gap-2">
-              <Button variant="primary" className="patient-btns">
+              <Button
+                variant="primary"
+                className="patient-btns"
+                onClick={() => setPrescBtn(!PrescriptionBtn)}
+              >
                 Prescriptions
               </Button>
             </Col>
+          </Row>
+          <Row>
+            {PrescriptionBtn && <PrescriptionForm pID={data?.specificPatient?.id} />}
           </Row>
           <Row>
             <Col className="list border d-grid gap-2">

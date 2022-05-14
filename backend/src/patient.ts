@@ -1,4 +1,6 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable max-len */
+/* eslint-disable linebreak-style */
 import {
   inputObjectType,
   intArg,
@@ -83,5 +85,31 @@ export const AddPatient = mutationField('addPatient', {
   },
   resolve(root, args: { newPatient: Prisma.PatientCreateInput }) {
     return db.patient.create({ data: args.newPatient });
+  },
+});
+
+export const EditPatient = mutationField('editPatient', {
+  type: Patient,
+  args: {
+    patientId: nonNull(intArg()),
+    editedPatient: nonNull(PatientInput),
+  },
+  resolve(root, args: { editedPatient: Prisma.PatientUpdateInput, patientId: Prisma.PatientWhereUniqueInput }) {
+    return db.patient.update({
+      where: { id: args.patientId as any },
+      data: args.editedPatient,
+    });
+  },
+});
+
+export const DeletePatient = mutationField('deletePatient', {
+  type: Patient,
+  args: {
+    patientId: nonNull(intArg()),
+  },
+  resolve(root, args: { patientId: Prisma.PatientWhereUniqueInput }) {
+    return db.patient.delete({
+      where: { id: args.patientId as any },
+    });
   },
 });
