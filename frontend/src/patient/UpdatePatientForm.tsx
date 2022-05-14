@@ -14,7 +14,7 @@ interface Popup {
 }
 
 export default function UpdatePatientForm({ postButton, patientID }: Popup) {
-  const [editPatientResult, ediPatient] = useMutation(EditAPatientDocument);
+  const [editPatientResult, editPatient] = useMutation(EditAPatientDocument);
 
   const [allPatients] = useQuery({
     query: GetPatientDocument,
@@ -44,7 +44,7 @@ export default function UpdatePatientForm({ postButton, patientID }: Popup) {
   }
 
   const updatePatientInfo = () => {
-    ediPatient({
+    editPatient({
       thePatient: {
         l_name: lastName,
         f_name: firstName,
@@ -147,7 +147,7 @@ export default function UpdatePatientForm({ postButton, patientID }: Popup) {
           onClick={updatePatientInfo}
           type="submit"
         >
-          Submit
+          Update
         </button>
 
       </div>
