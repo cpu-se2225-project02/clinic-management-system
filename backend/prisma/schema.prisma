@@ -36,7 +36,7 @@ model Appointment {
 }
 
 model Prescription {
-  id                Int @id
-  pres_name         String
-  pres_dosage       Int
+  id        Int    @id @default(autoincrement())
+  pres_name String
+  pres_dos  Int
 }

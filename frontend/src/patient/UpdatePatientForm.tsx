@@ -1,33 +1,39 @@
 /* eslint-disable radix */
-/* eslint-disable consistent-return */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/button-has-type */
-/* eslint-disable linebreak-style */
-/* eslint-disable no-unused-vars */
-
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
-import './PatientForm.css';
+import './UpdatePatientForm.css';
 import { AiOutlineCloseSquare } from 'react-icons/ai';
-import { useMutation } from 'urql';
-import { Modal, Spinner } from 'react-bootstrap';
-import { AddPatientDocument, AddPatientMutationVariables } from '../queries.generated';
+import { Spinner } from 'react-bootstrap';
+import { useMutation, useQuery } from 'urql';
+import { EditAPatientDocument, GetPatientDocument } from '../queries.generated';
 
 interface Popup {
   postButton: React.Dispatch<React.SetStateAction<boolean>>;
+  patientID: number | undefined;
 }
 
-export default function PatientForm({ postButton }: Popup) {
-  const [lastName, setLastName] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [middleInitial, setMiddileInitial] = useState('');
-  const [sex, setSex] = useState('Female');
-  const [suffix, setSuffix] = useState('');
-  const [age, setAge] = useState(0);
-  const [dob, setDob] = useState('');
-  const [address, setAddress] = useState('');
-  const [addPatientResult, addPatient] = useMutation(AddPatientDocument);
+export default function UpdatePatientForm({ postButton, patientID }: Popup) {
+  const [editPatientResult, editPatient] = useMutation(EditAPatientDocument);
 
-  const { data, error, fetching } = addPatientResult;
+  const [allPatients] = useQuery({
+    query: GetPatientDocument,
+    variables: {
+      id: patientID as number,
+    },
+  });
+
+  const { data } = allPatients;
+  const [lastName, setLastName] = useState(data?.specificPatient?.l_name as string);
+  const [firstName, setFirstName] = useState(data?.specificPatient?.f_name as string);
+  const [middleInitial, setMiddileInitial] = useState(data?.specificPatient?.m_initial as string);
+  const [sex, setSex] = useState(data?.specificPatient?.sex as string);
+  const [suffix, setSuffix] = useState(data?.specificPatient?.suffix as string);
+  const [age, setAge] = useState(data?.specificPatient?.age as number);
+  const [dob, setDob] = useState(data?.specificPatient?.birthdate as string);
+  const [address, setAddress] = useState(data?.specificPatient?.address as string);
+
+  const { error, fetching } = editPatientResult;
 
   if (fetching) {
     return <Spinner animation="border" role="status" />;
@@ -37,9 +43,9 @@ export default function PatientForm({ postButton }: Popup) {
     return <div>Insertion unsuccessful</div>;
   }
 
-  const insertingPatient = () => {
-    addPatient({
-      newPatient: {
+  const updatePatientInfo = () => {
+    editPatient({
+      thePatient: {
         l_name: lastName,
         f_name: firstName,
         m_initial: middleInitial,
@@ -49,7 +55,8 @@ export default function PatientForm({ postButton }: Popup) {
         birthdate: dob,
         address,
       },
-    }).then((res) => console.log(res));
+      pid: patientID as number,
+    });
   };
 
   return (
@@ -68,6 +75,7 @@ export default function PatientForm({ postButton }: Popup) {
           type="text"
           placeholder="Last name"
           onChange={(e) => { setLastName(e.target.value); }}
+          value={lastName}
         />
 
         <label>First name:</label>
@@ -76,6 +84,7 @@ export default function PatientForm({ postButton }: Popup) {
           type="text"
           placeholder="First name"
           onChange={(e) => { setFirstName(e.target.value); }}
+          value={firstName}
         />
 
         <label>Middle Initial:</label>
@@ -84,6 +93,7 @@ export default function PatientForm({ postButton }: Popup) {
           type="text"
           placeholder="Middle Initial"
           onChange={(e) => { setMiddileInitial(e.target.value); }}
+          value={middleInitial}
 
         />
 
@@ -93,6 +103,8 @@ export default function PatientForm({ postButton }: Popup) {
           type="text"
           placeholder="Suffix"
           onChange={(e) => { setSuffix(e.target.value); }}
+          value={suffix !== 'null' ? suffix : ''}
+
         />
 
         <label>Age:</label>
@@ -101,10 +113,12 @@ export default function PatientForm({ postButton }: Popup) {
           type="number"
           placeholder="Age"
           onChange={(e) => { setAge(parseInt(e.target.value)); }}
+          value={age}
+
         />
 
         <label>Sex:</label>
-        <select className="form-control" onChange={(e) => { setSex(e.target.value); }}>
+        <select className="form-control" onChange={(e) => { setSex(e.target.value); }} value={sex}>
           <option value="Female">Female</option>
           <option value="Male">Male</option>
         </select>
@@ -115,6 +129,7 @@ export default function PatientForm({ postButton }: Popup) {
           type="date"
           placeholder="Date of Birth"
           onChange={(e) => { setDob(e.target.value); }}
+          value={dob}
 
         />
 
@@ -124,14 +139,15 @@ export default function PatientForm({ postButton }: Popup) {
           type="text"
           placeholder="Address"
           onChange={(e) => { setAddress(e.target.value); }}
+          value={address}
         />
 
         <button
           className="btn btn-primary mt-2 float-end"
-          onClick={insertingPatient}
+          onClick={updatePatientInfo}
           type="submit"
         >
-          Submit
+          Update
         </button>
 
       </div>

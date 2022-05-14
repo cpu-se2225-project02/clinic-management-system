@@ -17,6 +17,11 @@ type Mutation {
   addAppointment(newAppointment: AppointmentInput!): Appointment
   addPatient(newPatient: PatientInput!): Patient
   addPrescription(newPrescription: PrescriptionInput!): Prescription
+<<<<<<< HEAD
+=======
+  deletePatient(patientId: Int!): Patient
+  editPatient(editedPatient: PatientInput!, patientId: Int!): Patient
+>>>>>>> ab9195cc6cdc2ef58baf9ddaa3bdccac6f7574f8
 }
 
 type Patient {
@@ -44,14 +49,12 @@ input PatientInput {
 }
 
 type Prescription {
-  id: Int!
-  pres_dosage: Int!
+  pres_dos: Int!
   pres_name: String!
 }
 
 input PrescriptionInput {
-  id: Int!
-  pres_dosage: Int!
+  pres_dos: Int!
   pres_name: String!
 }
 

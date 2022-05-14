@@ -3,12 +3,6 @@
  * Do not make changes to this file directly
  */
 
-
-
-
-
-
-
 declare global {
   interface NexusGen extends NexusGenTypes {}
 }
@@ -29,8 +23,7 @@ export interface NexusGenInputs {
     suffix?: string | null; // String
   }
   PrescriptionInput: { // input type
-    id: number; // Int!
-    pres_dosage: number; // Int!
+    pres_dos: number; // Int!
     pres_name: string; // String!
   }
 }
@@ -64,8 +57,7 @@ export interface NexusGenObjects {
     suffix?: string | null; // String
   }
   Prescription: { // root type
-    id: number; // Int!
-    pres_dosage: number; // Int!
+    pres_dos: number; // Int!
     pres_name: string; // String!
   }
   Query: {};
@@ -91,6 +83,8 @@ export interface NexusGenFieldTypes {
     addAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
     addPatient: NexusGenRootTypes['Patient'] | null; // Patient
     addPrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
+    deletePatient: NexusGenRootTypes['Patient'] | null; // Patient
+    editPatient: NexusGenRootTypes['Patient'] | null; // Patient
   }
   Patient: { // field return type
     address: string; // String!
@@ -105,8 +99,7 @@ export interface NexusGenFieldTypes {
     suffix: string | null; // String
   }
   Prescription: { // field return type
-    id: number; // Int!
-    pres_dosage: number; // Int!
+    pres_dos: number; // Int!
     pres_name: string; // String!
   }
   Query: { // field return type
@@ -128,6 +121,8 @@ export interface NexusGenFieldTypeNames {
     addAppointment: 'Appointment'
     addPatient: 'Patient'
     addPrescription: 'Prescription'
+    deletePatient: 'Patient'
+    editPatient: 'Patient'
   }
   Patient: { // field return type name
     address: 'String'
@@ -142,8 +137,7 @@ export interface NexusGenFieldTypeNames {
     suffix: 'String'
   }
   Prescription: { // field return type name
-    id: 'Int'
-    pres_dosage: 'Int'
+    pres_dos: 'Int'
     pres_name: 'String'
   }
   Query: { // field return type name
@@ -165,6 +159,13 @@ export interface NexusGenArgTypes {
     }
     addPrescription: { // args
       newPrescription: NexusGenInputs['PrescriptionInput']; // PrescriptionInput!
+    }
+    deletePatient: { // args
+      patientId: number; // Int!
+    }
+    editPatient: { // args
+      editedPatient: NexusGenInputs['PatientInput']; // PatientInput!
+      patientId: number; // Int!
     }
   }
   Query: {
@@ -229,7 +230,6 @@ export interface NexusGenTypes {
   abstractsUsingStrategyResolveType: NexusGenAbstractsUsingStrategyResolveType;
   features: NexusGenFeaturesConfig;
 }
-
 
 declare global {
   interface NexusGenPluginTypeConfig<TypeName extends string> {
