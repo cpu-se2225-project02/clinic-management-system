@@ -7,17 +7,26 @@ import {
   Container, Col, Row, Spinner,
 } from 'react-bootstrap';
 import { Scheduler } from '@aldabil/react-scheduler';
+import { SelectOption } from '@aldabil/react-scheduler/dist/components/inputs/SelectInput';
 import AppointmentViewButtons from './AppointmentViewButtons';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
-import { AllAppointmentsDocument } from '../queries.generated';
+import { AllAppointmentsDocument, AllPatientsDocument, AllDocsDocument } from '../queries.generated';
 
 function Appointment() {
   const types = ['calendar', 'list'];
   const [active, setActive] = useState(types[0]);
 
+  const [allPatients] = useQuery({
+    query: AllPatientsDocument,
+  });
+
   const [allAppointments] = useQuery({
     query: AllAppointmentsDocument,
+  });
+
+  const [allDoctors] = useQuery({
+    query: AllDocsDocument,
   });
 
   const { data, error, fetching } = allAppointments;
@@ -70,18 +79,26 @@ function Appointment() {
               {active === 'calendar' ? (
                 <Scheduler
                   view="month"
-                  events={[
+                  fields={[
                     {
-                      event_id: 1,
-                      title: 'Event 1',
-                      start: new Date('2022/4/26 09:30'),
-                      end: new Date('2022/4/26 10:30'),
+                      name: 'patient_id',
+                      type: 'select',
+                      options: allPatients.data?.patients?.map((patient) => ({
+                        id: patient?.id,
+                        text: (patient?.f_name)?.concat(` ${patient.l_name}`),
+                        value: patient?.id,
+                      }) as SelectOption),
+                      config: { label: 'Select Patient', required: true },
                     },
                     {
-                      event_id: 2,
-                      title: 'Event 2',
-                      start: new Date('2022/4/28 10:00'),
-                      end: new Date('2022/4/28 11:00'),
+                      name: 'doctor-in-charge',
+                      type: 'select',
+                      options: allDoctors.data?.allDoctors?.map((doctor) => ({
+                        id: doctor?.id,
+                        text: doctor?.doc_name,
+                        value: doctor?.id,
+                      }) as SelectOption),
+                      config: { label: 'Doctor-in-Charge', required: true },
                     },
                   ]}
                 />

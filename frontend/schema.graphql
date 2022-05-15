@@ -10,7 +10,15 @@ type Appointment {
 
 input AppointmentInput {
   date_time: String!
+  doc_id: Int!
+  name: String!
   patient_id: Int!
+}
+
+type Doctor {
+  appointments: [Appointment!]!
+  doc_name: String!
+  id: Int!
 }
 
 type Mutation {
@@ -56,6 +64,7 @@ input PrescriptionInput {
 }
 
 type Query {
+  allDoctors: [Doctor]
   appointments: [Appointment]
   helloWorld: String
   hi: String

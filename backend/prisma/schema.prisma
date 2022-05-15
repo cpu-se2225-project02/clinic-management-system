@@ -30,21 +30,20 @@ model Patient {
 }
 
 model Appointment {
-  id          Int                 @id @default(autoincrement())
-  date_time   String
-  patient_id  Int
-  patient     Patient             @relation(fields: [patient_id], references: [id])
-  med_prac_id Int
-  med_prac    MedicalPractitioner @relation(fields: [med_prac_id], references: [id])
+  id         Int     @id @default(autoincrement())
+  name       String
+  dt_start   String
+  dt_end     String
+  patient_id Int
+  patient    Patient @relation(fields: [patient_id], references: [id])
+  doc_id     Int
+  doctors    Doctor  @relation(fields: [doc_id], references: [id])
 }
 
-model MedicalPractitioner {
-  id            Int           @id @default(autoincrement())
-  f_name        String
-  l_name        String
-  employee_role String
-  license_num   String
-  appointments  Appointment[]
+model Doctor {
+  id           Int           @id @default(autoincrement())
+  doc_name     String
+  appointments Appointment[]
 }
 
 model Prescription {
