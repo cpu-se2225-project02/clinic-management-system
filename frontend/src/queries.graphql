@@ -83,3 +83,10 @@ mutation deleteAPatient($patientID: Int!) {
     address
   }
 }
+
+query allDocs {
+  allDoctors {
+    doc_name
+    id
+  }
+}
