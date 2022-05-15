@@ -66,7 +66,7 @@ export default function PatientList() {
               {' '}
               patient(s)
             </Col>
-            <Col xs={3}> 
+            <Col xs={3}>
               <Form>
                 <Form.Group as={Row}>
                   <Form.Label column sm={2}>
@@ -106,11 +106,19 @@ export default function PatientList() {
               <div>
                 {data?.patients?.map((patient) => (
                   <div>
-                    <Button onClick={() => navigate(`/patient_record/${patient?.id}`)}>
-                      {patient?.f_name}
-                      {' '}
-                      {patient?.l_name}
-                    </Button>
+                    <div className="row g-0">
+                      <Button className="btn" onClick={() => navigate(`/patient_record/${patient?.id}`)}>
+
+                        <div className="col-sm-6 col-md-8">
+                          {patient?.f_name}
+                          {' '}
+                          {patient?.l_name}
+                          {'                   '}
+                          {patient?.sex}
+                        </div>
+
+                      </Button>
+                    </div>
                   </div>
                 ))}
               </div>
