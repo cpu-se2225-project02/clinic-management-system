@@ -7,14 +7,19 @@ import {
   Container, Col, Row, Spinner,
 } from 'react-bootstrap';
 import { Scheduler } from '@aldabil/react-scheduler';
+import { SelectOption } from '@aldabil/react-scheduler/dist/components/inputs/SelectInput';
 import AppointmentViewButtons from './AppointmentViewButtons';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
-import { AllAppointmentsDocument } from '../queries.generated';
+import { AllAppointmentsDocument, AllPatientsDocument } from '../queries.generated';
 
 function Appointment() {
   const types = ['calendar', 'list'];
   const [active, setActive] = useState(types[0]);
+
+  const [allPatients] = useQuery({
+    query: AllPatientsDocument,
+  });
 
   const [allAppointments] = useQuery({
     query: AllAppointmentsDocument,
@@ -74,9 +79,11 @@ function Appointment() {
                     {
                       name: 'patient_id',
                       type: 'select',
-                      options: [
-                        { id: 1, text: 'Jenny', value: 1 },
-                      ],
+                      options: allPatients.data?.patients?.map((patient) => ({
+                        id: patient?.id,
+                        text: (patient?.f_name)?.concat(` ${patient.l_name}`),
+                        value: patient?.id,
+                      }) as SelectOption),
                       config: { label: 'Select Patient', required: true },
                     },
                     {
