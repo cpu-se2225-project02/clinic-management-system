@@ -10,6 +10,8 @@ type Appointment {
 
 input AppointmentInput {
   date_time: String!
+  doc_id: Int!
+  name: String!
   patient_id: Int!
 }
 

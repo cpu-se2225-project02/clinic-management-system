@@ -16,6 +16,8 @@ declare global {
 export interface NexusGenInputs {
   AppointmentInput: { // input type
     date_time: string; // String!
+    doc_id: number; // Int!
+    name: string; // String!
     patient_id: number; // Int!
   }
   PatientInput: { // input type
