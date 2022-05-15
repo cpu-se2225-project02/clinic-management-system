@@ -52,6 +52,10 @@ export interface NexusGenObjects {
     date_time: string; // String!
     id: number; // Int!
   }
+  Doctor: { // root type
+    doc_name: string; // String!
+    id: number; // Int!
+  }
   Mutation: {};
   Patient: { // root type
     address: string; // String!
@@ -87,6 +91,11 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     patient: NexusGenRootTypes['Patient'] | null; // Patient
   }
+  Doctor: { // field return type
+    appointments: NexusGenRootTypes['Appointment'][]; // [Appointment!]!
+    doc_name: string; // String!
+    id: number; // Int!
+  }
   Mutation: { // field return type
     addAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
     addPatient: NexusGenRootTypes['Patient'] | null; // Patient
@@ -111,6 +120,7 @@ export interface NexusGenFieldTypes {
     pres_name: string; // String!
   }
   Query: { // field return type
+    allDoctors: Array<NexusGenRootTypes['Doctor'] | null> | null; // [Doctor]
     appointments: Array<NexusGenRootTypes['Appointment'] | null> | null; // [Appointment]
     helloWorld: string | null; // String
     hi: string | null; // String
@@ -124,6 +134,11 @@ export interface NexusGenFieldTypeNames {
     date_time: 'String'
     id: 'Int'
     patient: 'Patient'
+  }
+  Doctor: { // field return type name
+    appointments: 'Appointment'
+    doc_name: 'String'
+    id: 'Int'
   }
   Mutation: { // field return type name
     addAppointment: 'Appointment'
@@ -149,6 +164,7 @@ export interface NexusGenFieldTypeNames {
     pres_name: 'String'
   }
   Query: { // field return type name
+    allDoctors: 'Doctor'
     appointments: 'Appointment'
     helloWorld: 'String'
     hi: 'String'

@@ -21,7 +21,16 @@ export interface Appointment {
 
 export interface AppointmentInput {
   readonly date_time: Scalars['String'];
+  readonly doc_id: Scalars['Int'];
+  readonly name: Scalars['String'];
   readonly patient_id: Scalars['Int'];
+}
+
+export interface Doctor {
+  readonly __typename?: 'Doctor';
+  readonly appointments: ReadonlyArray<Appointment>;
+  readonly doc_name: Scalars['String'];
+  readonly id: Scalars['Int'];
 }
 
 export interface Mutation {
@@ -97,6 +106,7 @@ export interface PrescriptionInput {
 
 export interface Query {
   readonly __typename?: 'Query';
+  readonly allDoctors?: Maybe<ReadonlyArray<Maybe<Doctor>>>;
   readonly appointments?: Maybe<ReadonlyArray<Maybe<Appointment>>>;
   readonly helloWorld?: Maybe<Scalars['String']>;
   readonly hi?: Maybe<Scalars['String']>;
