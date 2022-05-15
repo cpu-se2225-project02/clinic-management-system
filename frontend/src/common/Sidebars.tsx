@@ -12,7 +12,7 @@ import './Sidebars.css';
 export default function Sidebars() {
   return (
     <Container fluid>
-      <Col sm={12} className="a">
+      <Col className="sidebar">
 
         <Row>
           <Image
@@ -54,7 +54,7 @@ export default function Sidebars() {
 
         <Link to="/patients" className="sidebar-link">
           <Row>
-            <Button className="list-group-item" variant="secondary">
+            <Button className="list-group-item">
               Patients
             </Button>
           </Row>

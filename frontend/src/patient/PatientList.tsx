@@ -66,7 +66,7 @@ export default function PatientList() {
               {' '}
               patient(s)
             </Col>
-            <Col xs={3}>
+            <Col xs={3}> 
               <Form>
                 <Form.Group as={Row}>
                   <Form.Label column sm={2}>
