@@ -46,8 +46,10 @@ export const appointments = queryField('appointments', {
 export const AppointmentInput = inputObjectType({
   name: 'AppointmentInput',
   definition(t) {
+    t.field(AppointmentType.name);
     t.field(AppointmentType.date_time);
     t.field(AppointmentType.patient_id);
+    t.field(AppointmentType.doc_id);
   },
 });
 
