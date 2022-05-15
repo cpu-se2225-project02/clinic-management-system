@@ -70,18 +70,22 @@ function Appointment() {
               {active === 'calendar' ? (
                 <Scheduler
                   view="month"
-                  events={[
+                  fields={[
                     {
-                      event_id: 1,
-                      title: 'Event 1',
-                      start: new Date('2022/4/26 09:30'),
-                      end: new Date('2022/4/26 10:30'),
+                      name: 'patient_id',
+                      type: 'select',
+                      options: [
+                        { id: 1, text: 'Jenny', value: 1 },
+                      ],
+                      config: { label: 'Select Patient', required: true },
                     },
                     {
-                      event_id: 2,
-                      title: 'Event 2',
-                      start: new Date('2022/4/28 10:00'),
-                      end: new Date('2022/4/28 11:00'),
+                      name: 'doctor-in-charge',
+                      type: 'select',
+                      options: [
+                        { id: 1, text: 'Sue', value: 1 },
+                      ],
+                      config: { label: 'Doctor-in-Charge', required: true },
                     },
                   ]}
                 />
