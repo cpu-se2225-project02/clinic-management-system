@@ -10,7 +10,6 @@ query AllPatients {
     address
     birthdate
   }
-  helloWorld
 }
 
 mutation AddPatient($newPatient: PatientInput!) {
@@ -38,5 +37,56 @@ query GetPatient($id: Int!) {
     address
     birthdate
     age
+  }
+}
+
+mutation editAPatient($thePatient: PatientInput!, $pid: Int!) {
+  editPatient(editedPatient: $thePatient, patientId: $pid) {
+    suffix
+    f_name
+    l_name
+    m_initial
+    sex
+    address
+    birthdate
+    age
+  }
+}
+
+query AllAppointments {
+  appointments {
+    id
+    date_time
+    patient {
+      f_name
+      l_name
+    }
+  }
+}
+
+mutation addPrescription($newPresc: PrescriptionInput!) {
+  addPrescription(newPrescription: $newPresc) {
+    pres_name
+    pres_dos
+  }
+}
+
+mutation deleteAPatient($patientID: Int!) {
+  deletePatient(patientId: $patientID) {
+    l_name
+    f_name
+    m_initial
+    suffix
+    sex
+    age
+    birthdate
+    address
+  }
+}
+
+query allDocs {
+  allDoctors {
+    doc_name
+    id
   }
 }

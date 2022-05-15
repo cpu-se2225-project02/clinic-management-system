@@ -1,16 +1,44 @@
 /* eslint-disable linebreak-style */
 import React, { useState } from 'react';
 import './Appointment.css';
+import { useQuery } from 'urql';
 import { FaCalendarAlt } from 'react-icons/fa';
-import { Container, Col, Row } from 'react-bootstrap';
+import {
+  Container, Col, Row, Spinner,
+} from 'react-bootstrap';
 import { Scheduler } from '@aldabil/react-scheduler';
+import { SelectOption } from '@aldabil/react-scheduler/dist/components/inputs/SelectInput';
 import AppointmentViewButtons from './AppointmentViewButtons';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
+import { AllAppointmentsDocument, AllPatientsDocument, AllDocsDocument } from '../queries.generated';
 
 function Appointment() {
   const types = ['calendar', 'list'];
   const [active, setActive] = useState(types[0]);
+
+  const [allPatients] = useQuery({
+    query: AllPatientsDocument,
+  });
+
+  const [allAppointments] = useQuery({
+    query: AllAppointmentsDocument,
+  });
+
+  const [allDoctors] = useQuery({
+    query: AllDocsDocument,
+  });
+
+  const { data, error, fetching } = allAppointments;
+
+  if (fetching) {
+    return <Spinner animation="border" role="status" />;
+  }
+
+  if (error) {
+    console.log(error.cause);
+    return <div>Something went wrong</div>;
+  }
 
   const handleChange = (event: React.MouseEvent<HTMLElement>, type: string) => {
     setActive(type);
@@ -51,25 +79,39 @@ function Appointment() {
               {active === 'calendar' ? (
                 <Scheduler
                   view="month"
-                  events={[
+                  fields={[
                     {
-                      event_id: 1,
-                      title: 'Event 1',
-                      start: new Date('2022/4/26 09:30'),
-                      end: new Date('2022/4/26 10:30'),
+                      name: 'patient_id',
+                      type: 'select',
+                      options: allPatients.data?.patients?.map((patient) => ({
+                        id: patient?.id,
+                        text: (patient?.f_name)?.concat(` ${patient.l_name}`),
+                        value: patient?.id,
+                      }) as SelectOption),
+                      config: { label: 'Select Patient', required: true },
                     },
                     {
-                      event_id: 2,
-                      title: 'Event 2',
-                      start: new Date('2022/4/28 10:00'),
-                      end: new Date('2022/4/28 11:00'),
+                      name: 'doctor-in-charge',
+                      type: 'select',
+                      options: allDoctors.data?.allDoctors?.map((doctor) => ({
+                        id: doctor?.id,
+                        text: doctor?.doc_name,
+                        value: doctor?.id,
+                      }) as SelectOption),
+                      config: { label: 'Doctor-in-Charge', required: true },
                     },
                   ]}
                 />
               ) : (
                 // eslint-disable-next-line react/jsx-no-useless-fragment
                 <>
-                  {/* map of all appointments goes here */}
+                  {data?.appointments?.map((appointment) => (
+                    <div>
+                      {appointment?.date_time}
+                      {appointment?.patient?.f_name}
+                      {appointment?.patient?.l_name}
+                    </div>
+                  ))}
                 </>
               )}
             </Col>
