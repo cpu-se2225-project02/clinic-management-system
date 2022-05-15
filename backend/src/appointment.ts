@@ -26,7 +26,10 @@ export const Appointment = objectType({
   name: 'Appointment',
   definition(t) {
     t.field(AppointmentType.id);
-    t.field(AppointmentType.date_time);
+    t.field(AppointmentType.dt_start);
+    t.field(AppointmentType.dt_end);
+    t.field(AppointmentType.name);
+    t.field(AppointmentType.doc_id);
     t.field('patient', {
       type: Patient,
       resolve(appointment) {
@@ -47,7 +50,8 @@ export const AppointmentInput = inputObjectType({
   name: 'AppointmentInput',
   definition(t) {
     t.field(AppointmentType.name);
-    t.field(AppointmentType.date_time);
+    t.field(AppointmentType.dt_start);
+    t.field(AppointmentType.dt_end);
     t.field(AppointmentType.patient_id);
     t.field(AppointmentType.doc_id);
   },
