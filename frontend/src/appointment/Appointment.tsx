@@ -11,7 +11,7 @@ import { SelectOption } from '@aldabil/react-scheduler/dist/components/inputs/Se
 import AppointmentViewButtons from './AppointmentViewButtons';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
-import { AllAppointmentsDocument, AllPatientsDocument } from '../queries.generated';
+import { AllAppointmentsDocument, AllPatientsDocument, AllDocsDocument } from '../queries.generated';
 
 function Appointment() {
   const types = ['calendar', 'list'];
@@ -23,6 +23,10 @@ function Appointment() {
 
   const [allAppointments] = useQuery({
     query: AllAppointmentsDocument,
+  });
+
+  const [allDoctors] = useQuery({
+    query: AllDocsDocument,
   });
 
   const { data, error, fetching } = allAppointments;
@@ -89,9 +93,11 @@ function Appointment() {
                     {
                       name: 'doctor-in-charge',
                       type: 'select',
-                      options: [
-                        { id: 1, text: 'Sue', value: 1 },
-                      ],
+                      options: allDoctors.data?.allDoctors?.map((doctor) => ({
+                        id: doctor?.id,
+                        text: doctor?.doc_name,
+                        value: doctor?.id,
+                      }) as SelectOption),
                       config: { label: 'Doctor-in-Charge', required: true },
                     },
                   ]}
