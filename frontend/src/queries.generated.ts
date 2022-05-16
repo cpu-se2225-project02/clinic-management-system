@@ -1,16 +1,9 @@
 /* eslint-disable linebreak-style */
-/* eslint-disable no-multiple-empty-lines */
-
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 
 import * as Types from './generated/graphql';
 
-
 export type AllPatientsQueryVariables = Types.Exact<{ [key: string]: never; }>;
-
-
-
-
 
 export type AllPatientsQuery = (
 
@@ -26,17 +19,11 @@ export type AllPatientsQuery = (
 
 );
 
-
-
 export type AddPatientMutationVariables = Types.Exact<{
 
   newPatient: Types.PatientInput;
 
 }>;
-
-
-
-
 
 export type AddPatientMutation = (
 
@@ -52,17 +39,11 @@ export type AddPatientMutation = (
 
 );
 
-
-
 export type GetPatientQueryVariables = Types.Exact<{
 
   id: Types.Scalars['Int'];
 
 }>;
-
-
-
-
 
 export type GetPatientQuery = (
 
@@ -78,8 +59,6 @@ export type GetPatientQuery = (
 
 );
 
-
-
 export type EditAPatientMutationVariables = Types.Exact<{
 
   thePatient: Types.PatientInput;
@@ -87,10 +66,6 @@ export type EditAPatientMutationVariables = Types.Exact<{
   pid: Types.Scalars['Int'];
 
 }>;
-
-
-
-
 
 export type EditAPatientMutation = (
 
@@ -106,13 +81,7 @@ export type EditAPatientMutation = (
 
 );
 
-
-
 export type GetAllAppointmentsQueryVariables = Types.Exact<{ [key: string]: never; }>;
-
-
-
-
 
 export type GetAllAppointmentsQuery = (
 
@@ -136,17 +105,11 @@ export type GetAllAppointmentsQuery = (
 
 );
 
-
-
 export type AddPrescriptionMutationVariables = Types.Exact<{
 
   newPresc: Types.PrescriptionInput;
 
 }>;
-
-
-
-
 
 export type AddPrescriptionMutation = (
 
@@ -162,17 +125,11 @@ export type AddPrescriptionMutation = (
 
 );
 
-
-
 export type DeleteAPatientMutationVariables = Types.Exact<{
 
   patientID: Types.Scalars['Int'];
 
 }>;
-
-
-
-
 
 export type DeleteAPatientMutation = (
 
@@ -188,13 +145,7 @@ export type DeleteAPatientMutation = (
 
 );
 
-
-
 export type AllDocsQueryVariables = Types.Exact<{ [key: string]: never; }>;
-
-
-
-
 
 export type AllDocsQuery = (
 
@@ -210,17 +161,11 @@ export type AllDocsQuery = (
 
 );
 
-
-
 export type AddAnAppointmentMutationVariables = Types.Exact<{
 
   appointment: Types.AppointmentInput;
 
 }>;
-
-
-
-
 
 export type AddAnAppointmentMutation = (
 
@@ -235,10 +180,6 @@ export type AddAnAppointmentMutation = (
   )> }
 
 );
-
-
-
-
 
 export const AllPatientsDocument = {
   kind: 'Document',

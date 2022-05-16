@@ -67,7 +67,6 @@ query getAllAppointments {
   }
 }
 
-
 mutation addPrescription($newPresc: PrescriptionInput!) {
   addPrescription(newPrescription: $newPresc) {
     pres_name
