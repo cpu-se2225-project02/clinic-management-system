@@ -109,3 +109,9 @@ mutation ediAnAppointment($theAppointment: AppointmentInput!, $aId: Int!) {
     doc_id
   }
 }
+
+mutation deleteAnAppointment($appId: Int!) {
+  deleteAppointment(appID: $appId) {
+    id
+  }
+}
