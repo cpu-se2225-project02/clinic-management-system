@@ -138,8 +138,10 @@ function Appointment() {
                 <>
                   {data?.appointments?.map((appointment) => (
                     <div>
-                      {appointment?.dt_end}
                       {appointment?.dt_start}
+                      {appointment?.dt_end}
+                      {appointment?.patient?.f_name}
+                      {appointment?.patient?.l_name}
                     </div>
                   ))}
                 </>

@@ -5,6 +5,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 
 import * as Types from './generated/graphql';
 
+
 export type AllPatientsQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 

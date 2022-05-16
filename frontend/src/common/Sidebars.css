@@ -27,10 +27,13 @@
   width: 90% !important;
 }
 
-.clinic-img {
+/* .clinic-img {
   width: 90% !important;
-}
+} */
 
 .sidebar-col {
   max-width: fit-content !important;
+}
+.sidebar{
+  margin: "default"
 }
