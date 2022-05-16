@@ -14,14 +14,18 @@ export interface Scalars {
 
 export interface Appointment {
   readonly __typename?: 'Appointment';
-  readonly date_time: Scalars['String'];
+  readonly doc_id: Scalars['Int'];
+  readonly dt_end: Scalars['String'];
+  readonly dt_start: Scalars['String'];
   readonly id: Scalars['Int'];
+  readonly name: Scalars['String'];
   readonly patient?: Maybe<Patient>;
 }
 
 export interface AppointmentInput {
-  readonly date_time: Scalars['String'];
   readonly doc_id: Scalars['Int'];
+  readonly dt_end: Scalars['String'];
+  readonly dt_start: Scalars['String'];
   readonly name: Scalars['String'];
   readonly patient_id: Scalars['Int'];
 }

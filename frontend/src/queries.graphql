@@ -53,16 +53,20 @@ mutation editAPatient($thePatient: PatientInput!, $pid: Int!) {
   }
 }
 
-query AllAppointments {
+query getAllAppointments {
   appointments {
+    dt_start
+    dt_end
+    name
+    doc_id
     id
-    date_time
     patient {
       f_name
       l_name
     }
   }
 }
+
 
 mutation addPrescription($newPresc: PrescriptionInput!) {
   addPrescription(newPrescription: $newPresc) {
