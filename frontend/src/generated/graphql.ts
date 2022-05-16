@@ -43,6 +43,7 @@ export interface Mutation {
   readonly addPatient?: Maybe<Patient>;
   readonly addPrescription?: Maybe<Prescription>;
   readonly deletePatient?: Maybe<Patient>;
+  readonly editAppointment?: Maybe<Appointment>;
   readonly editPatient?: Maybe<Patient>;
 }
 
@@ -64,6 +65,12 @@ export interface MutationAddPrescriptionArgs {
 
 export interface MutationDeletePatientArgs {
   patientId: Scalars['Int'];
+}
+
+
+export interface MutationEditAppointmentArgs {
+  appointmentID: Scalars['Int'];
+  editedAppointment: AppointmentInput;
 }
 
 
