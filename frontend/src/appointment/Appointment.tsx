@@ -11,7 +11,8 @@ import { SelectOption } from '@aldabil/react-scheduler/dist/components/inputs/Se
 import AppointmentViewButtons from './AppointmentViewButtons';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
-import { AllAppointmentsDocument, AllPatientsDocument, AllDocsDocument } from '../queries.generated';
+import { AllPatientsDocument, AllDocsDocument, GetAllAppointmentsDocument } from '../queries.generated';
+
 
 function Appointment() {
   const types = ['calendar', 'list'];
@@ -22,7 +23,7 @@ function Appointment() {
   });
 
   const [allAppointments] = useQuery({
-    query: AllAppointmentsDocument,
+    query: GetAllAppointmentsDocument,
   });
 
   const [allDoctors] = useQuery({
@@ -107,7 +108,8 @@ function Appointment() {
                 <>
                   {data?.appointments?.map((appointment) => (
                     <div>
-                      {appointment?.date_time}
+                      {appointment?.dt_start}
+                      {appointment?.dt_end}
                       {appointment?.patient?.f_name}
                       {appointment?.patient?.l_name}
                     </div>

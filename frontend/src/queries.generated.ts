@@ -48,13 +48,13 @@ export type EditAPatientMutation = (
   )> }
 );
 
-export type AllAppointmentsQueryVariables = Types.Exact<{ [key: string]: never; }>;
+export type GetAllAppointmentsQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
-export type AllAppointmentsQuery = (
+export type GetAllAppointmentsQuery = (
   { __typename?: 'Query' }
   & { appointments?: Types.Maybe<Array<Types.Maybe<(
     { __typename?: 'Appointment' }
-    & Pick<Types.Appointment, 'id' | 'date_time'>
+    & Pick<Types.Appointment, 'dt_start' | 'dt_end' | 'name' | 'doc_id' | 'id'>
     & { patient?: Types.Maybe<(
       { __typename?: 'Patient' }
       & Pick<Types.Patient, 'f_name' | 'l_name'>
@@ -147,12 +147,12 @@ export const EditAPatientDocument = {
     },
   }],
 } as unknown as DocumentNode<EditAPatientMutation, EditAPatientMutationVariables>;
-export const AllAppointmentsDocument = {
+export const GetAllAppointmentsDocument = {
   kind: 'Document',
   definitions: [{
-    kind: 'OperationDefinition', operation: 'query', name: { kind: 'Name', value: 'AllAppointments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'appointments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'date_time' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }] } }] } }] },
+    kind: 'OperationDefinition', operation: 'query', name: { kind: 'Name', value: 'getAllAppointments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'appointments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'dt_start' } }, { kind: 'Field', name: { kind: 'Name', value: 'dt_end' } }, { kind: 'Field', name: { kind: 'Name', value: 'name' } }, { kind: 'Field', name: { kind: 'Name', value: 'doc_id' } }, { kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }] } }] } }] },
   }],
-} as unknown as DocumentNode<AllAppointmentsQuery, AllAppointmentsQueryVariables>;
+} as unknown as DocumentNode<GetAllAppointmentsQuery, GetAllAppointmentsQueryVariables>;
 export const AddPrescriptionDocument = {
   kind: 'Document',
   definitions: [{
