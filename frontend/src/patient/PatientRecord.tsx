@@ -93,7 +93,7 @@ export default function PatientRecord() {
         </Col>
       </Row>
       <Row>
-        <MedicalNotes pId={data?.specificPatient?.id} />
+        {MedNotesBtn && <MedicalNotes pId={data?.specificPatient?.id} />}
       </Row>
       <Row>
         <Col className="list border d-grid gap-2">
