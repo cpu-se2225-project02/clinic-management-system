@@ -11,12 +11,13 @@ import { useQuery } from 'urql';
 import { GetPatientDocument } from '../queries.generated';
 import PatientInformation from './PatientInformation';
 import PrescriptionForm from './prescription/PrescriptionForm';
+import MedicalNotes from './mednotes/MedicalNotes';
 
 export default function PatientRecord() {
   const params = useParams() as any;
   const patiendID = parseInt(params.id);
-  const [PatientInfoBtn, setPatientInfoBtn] = useState(false);
   const [PrescriptionBtn, setPrescBtn] = useState(false);
+  const [MedNotesBtn, setMedNotesBtn] = useState(false);
 
   const [allPatients] = useQuery({
     query: GetPatientDocument,
@@ -26,6 +27,7 @@ export default function PatientRecord() {
   });
 
   const { data } = allPatients;
+  const thePatientId = data?.specificPatient?.id;
 
   return (
     <Container fluid>
@@ -49,18 +51,8 @@ export default function PatientRecord() {
 
           <Row>
             <Col className="list border d-grid gap-2">
-              <Button
-                variant="primary"
-                className="patient-btns"
-                onClick={() => setPatientInfoBtn(!PatientInfoBtn)}
-              >
-                Patient Information
-              </Button>
-
+              <PatientInformation pId={thePatientId} />
             </Col>
-          </Row>
-          <Row>
-            {PatientInfoBtn && <PatientInformation pId={data?.specificPatient?.id} />}
           </Row>
           <Row>
             <Col className="list border d-grid gap-2">
@@ -92,10 +84,17 @@ export default function PatientRecord() {
           </Row>
           <Row>
             <Col className="list border d-grid gap-2">
-              <Button variant="primary" className="patient-btns">
+              <Button
+                variant="primary"
+                className="patient-btns"
+                onClick={() => setMedNotesBtn(!MedNotesBtn)}
+              >
                 Medical Notes
               </Button>
             </Col>
+          </Row>
+          <Row>
+            { MedNotesBtn && <MedicalNotes pId={data?.specificPatient?.id} /> }
           </Row>
           <Row>
             <Col className="list border d-grid gap-2">
