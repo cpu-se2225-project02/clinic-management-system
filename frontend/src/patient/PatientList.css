@@ -10,6 +10,11 @@
   display: flex !important;
   justify-content: left !important;
 }
+.btn{
+  background-color: transparent;
+  color: aquamarine;
+  /* width: max-content; */
+}
 
 .h5 {
   background-color: #033076;

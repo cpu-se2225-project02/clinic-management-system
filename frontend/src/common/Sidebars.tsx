@@ -12,24 +12,25 @@ import './Sidebars.css';
 export default function Sidebars() {
   return (
     <Container fluid>
-      <Col className="sidebar-col p-0">
+      <Col className="sidebar">
+
         <Row>
           <Image
-            className="border border-dark mt-1 clinic-img"
+            className="card-img-top"
             fluid
             src="https://res.cloudinary.com/dmro06tbx/image/upload/v1650564665/techniche_tihcko.png"
           />
         </Row>
 
         <Row>
-          <div className=" border border-dark clinic-name">
+          <div className="card-title">
             Clinic Name
           </div>
         </Row>
 
         <Link to="/" className="sidebar-link">
           <Row>
-            <Button active className="sidebar-btns" variant="secondary">
+            <Button className="list-group-item">
               Dashboard
             </Button>
           </Row>
@@ -37,7 +38,7 @@ export default function Sidebars() {
 
         <Link to="/clinic" className="sidebar-link">
           <Row>
-            <Button className="sidebar-btns" variant="secondary">
+            <Button className="list-group-item">
               Clinic
             </Button>
           </Row>
@@ -45,7 +46,7 @@ export default function Sidebars() {
 
         <Link to="/appointments" className="sidebar-link">
           <Row>
-            <Button className="sidebar-btns" variant="secondary">
+            <Button className="list-group-item">
               Appointments
             </Button>
           </Row>
@@ -53,7 +54,7 @@ export default function Sidebars() {
 
         <Link to="/patients" className="sidebar-link">
           <Row>
-            <Button className="sidebar-btns" variant="secondary">
+            <Button className="list-group-item">
               Patients
             </Button>
           </Row>
@@ -61,7 +62,7 @@ export default function Sidebars() {
 
         <Link to="/finance" className="sidebar-link">
           <Row>
-            <Button className="sidebar-btns" variant="secondary">
+            <Button className="list-group-item">
               Finance
             </Button>
           </Row>
