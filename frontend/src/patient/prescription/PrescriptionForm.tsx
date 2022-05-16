@@ -38,10 +38,9 @@ export default function PrescriptionForm({ pID }: PatientID) {
 
   return (
     <>
-      {pID as number}
+      <div>{pID}</div>
       <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
       {editBtn && <UpdatePrescription editButton={setEditBtn} /> }
-      {}
       <label>Prescription name:</label>
       <input
         type="text"

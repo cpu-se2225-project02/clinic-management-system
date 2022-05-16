@@ -51,7 +51,9 @@ export const PatientMedNotes = queryField('patientMedNotes', {
   args: {
     patient_id: nonNull(intArg()),
   },
-  resolve() {
-    return db.medicalNotes.findMany();
+  resolve(root, args: {patient_id: Prisma.MedicalNotesWhereUniqueInput}) {
+    return db.medicalNotes.findMany({
+      where: { patient_id: args.patient_id as any },
+    });
   },
 });
