@@ -26,7 +26,7 @@ model Patient {
   address      String
   birthdate    String
   appointments Appointment[]
-  account      Account?
+  payment      Payment?
 }
 
 model Appointment {
@@ -52,19 +52,17 @@ model Prescription {
   pres_dos  Int
 }
 
-model Account {
-  id              Int       @id @default(autoincrement())
-  patient_balance Float
-  total_cost      Float
-  amount_paid     Float
-  patient_id      Int       @unique
-  patient         Patient   @relation(fields: [patient_id], references: [id])
-  invoices        Invoice[]
+model Payment {
+  id          Int     @id @default(autoincrement())
+  paymnt_dt   String
+  ammnt_cost  Float
+  ammnt_payed Float
+  change      Float
+  patient_id  Int     @unique
+  patient     Patient @relation(fields: [patient_id], references: [id])
 }
 
 model Invoice {
-  id      Int     @id @default(autoincrement())
-  date    String
-  acc_id  Int
-  account Account @relation(fields: [acc_id], references: [id])
+  id   Int    @id @default(autoincrement())
+  date String
 }

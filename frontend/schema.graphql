@@ -30,6 +30,7 @@ type Mutation {
   addPatient(newPatient: PatientInput!): Patient
   addPrescription(newPrescription: PrescriptionInput!): Prescription
   deletePatient(patientId: Int!): Patient
+  editAppointment(appointmentID: Int!, editedAppointment: AppointmentInput!): Appointment
   editPatient(editedPatient: PatientInput!, patientId: Int!): Patient
 }
 
@@ -57,6 +58,15 @@ input PatientInput {
   suffix: String
 }
 
+type Payment {
+  ammnt_cost: Float!
+  ammnt_payed: Float!
+  change: Float!
+  id: Int!
+  patient: Patient
+  paymnt_dt: String!
+}
+
 type Prescription {
   pres_dos: Int!
   pres_name: String!
@@ -72,6 +82,7 @@ type Query {
   appointments: [Appointment]
   helloWorld: String
   hi: String
+  hii: String
   patients: [Patient]
   specificPatient(patientId: Int!): Patient
 }
