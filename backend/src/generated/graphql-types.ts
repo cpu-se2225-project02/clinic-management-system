@@ -15,8 +15,9 @@ declare global {
 
 export interface NexusGenInputs {
   AppointmentInput: { // input type
-    date_time: string; // String!
     doc_id: number; // Int!
+    dt_end: string; // String!
+    dt_start: string; // String!
     name: string; // String!
     patient_id: number; // Int!
   }
@@ -49,8 +50,11 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   Appointment: { // root type
-    date_time: string; // String!
+    doc_id: number; // Int!
+    dt_end: string; // String!
+    dt_start: string; // String!
     id: number; // Int!
+    name: string; // String!
   }
   Doctor: { // root type
     doc_name: string; // String!
@@ -87,8 +91,11 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   Appointment: { // field return type
-    date_time: string; // String!
+    doc_id: number; // Int!
+    dt_end: string; // String!
+    dt_start: string; // String!
     id: number; // Int!
+    name: string; // String!
     patient: NexusGenRootTypes['Patient'] | null; // Patient
   }
   Doctor: { // field return type
@@ -131,8 +138,11 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenFieldTypeNames {
   Appointment: { // field return type name
-    date_time: 'String'
+    doc_id: 'Int'
+    dt_end: 'String'
+    dt_start: 'String'
     id: 'Int'
+    name: 'String'
     patient: 'Patient'
   }
   Doctor: { // field return type name

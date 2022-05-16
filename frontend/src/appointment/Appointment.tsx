@@ -1,17 +1,21 @@
+/* eslint-disable consistent-return */
 /* eslint-disable linebreak-style */
 import React, { useState } from 'react';
 import './Appointment.css';
-import { useQuery } from 'urql';
+import { useQuery, useMutation } from 'urql';
 import { FaCalendarAlt } from 'react-icons/fa';
 import {
   Container, Col, Row, Spinner,
 } from 'react-bootstrap';
 import { Scheduler } from '@aldabil/react-scheduler';
+import { ProcessedEvent, EventActions } from '@aldabil/react-scheduler/dist/types';
 import { SelectOption } from '@aldabil/react-scheduler/dist/components/inputs/SelectInput';
 import AppointmentViewButtons from './AppointmentViewButtons';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
-import { AllAppointmentsDocument, AllPatientsDocument, AllDocsDocument } from '../queries.generated';
+import {
+  AllPatientsDocument, AllDocsDocument, GetAllAppointmentsDocument, AddAnAppointmentDocument,
+} from '../queries.generated';
 
 function Appointment() {
   const types = ['calendar', 'list'];
@@ -22,26 +26,44 @@ function Appointment() {
   });
 
   const [allAppointments] = useQuery({
-    query: AllAppointmentsDocument,
+    query: GetAllAppointmentsDocument,
   });
 
   const [allDoctors] = useQuery({
     query: AllDocsDocument,
   });
 
+  const [addAppointmentResult, addAppointment] = useMutation(AddAnAppointmentDocument);
+
   const { data, error, fetching } = allAppointments;
 
-  if (fetching) {
+  if (fetching || addAppointmentResult.fetching) {
     return <Spinner animation="border" role="status" />;
   }
 
-  if (error) {
-    console.log(error.cause);
+  if (error || addAppointmentResult.error) {
+    console.log(error);
+    console.log(addAppointmentResult.error);
     return <div>Something went wrong</div>;
   }
 
   const handleChange = (event: React.MouseEvent<HTMLElement>, type: string) => {
     setActive(type);
+  };
+
+  const handleConfirm = (event: ProcessedEvent, action: EventActions) => {
+    if (action === 'create') {
+      addAppointment({
+        appointment: {
+          doc_id: 1,
+          patient_id: 2,
+          name: 'Test',
+          dt_start: '2022-05-09 9:00',
+          dt_end: '2022-05-09 10:00',
+        },
+      });
+      console.log(event.start);
+    }
   };
 
   return (
@@ -79,6 +101,15 @@ function Appointment() {
               {active === 'calendar' ? (
                 <Scheduler
                   view="month"
+                  onConfirm={handleConfirm}
+                  events={
+                    allAppointments.data?.appointments?.map((appointment) => ({
+                      event_id: appointment?.id,
+                      title: appointment?.name,
+                      start: new Date(appointment?.dt_start as string),
+                      end: new Date(appointment?.dt_end as string),
+                    }) as any as ProcessedEvent)
+                  }
                   fields={[
                     {
                       name: 'patient_id',
@@ -107,9 +138,8 @@ function Appointment() {
                 <>
                   {data?.appointments?.map((appointment) => (
                     <div>
-                      {appointment?.date_time}
-                      {appointment?.patient?.f_name}
-                      {appointment?.patient?.l_name}
+                      {appointment?.dt_end}
+                      {appointment?.dt_start}
                     </div>
                   ))}
                 </>
