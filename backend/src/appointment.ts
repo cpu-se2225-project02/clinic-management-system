@@ -82,3 +82,15 @@ export const editAppointment = mutationField('editAppointment', {
     });
   },
 });
+
+export const DeleteAppointment = mutationField('deleteAppointment', {
+  type: Appointment,
+  args: {
+    appID: nonNull(intArg()),
+  },
+  resolve(root, args: { appID: Prisma.PatientWhereUniqueInput }) {
+    return db.appointment.delete({
+      where: { id: args.appID as any },
+    });
+  },
+});
