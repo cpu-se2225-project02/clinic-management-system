@@ -8,7 +8,6 @@ import path from 'path';
 import { graphqlHTTP } from 'express-graphql';
 import { PrismaClient } from '@prisma/client';
 import cors from 'cors';
-import * as types from './schema';
 // eslint-disable-next-line import/no-duplicates
 import * as PrescriptionType from './prescription';
 import * as patientTypes from './patient';

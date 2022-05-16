@@ -3,14 +3,18 @@
 
 
 type Appointment {
-  date_time: String!
+  doc_id: Int!
+  dt_end: String!
+  dt_start: String!
   id: Int!
+  name: String!
   patient: Patient
 }
 
 input AppointmentInput {
-  date_time: String!
   doc_id: Int!
+  dt_end: String!
+  dt_start: String!
   name: String!
   patient_id: Int!
 }
@@ -25,11 +29,10 @@ type Mutation {
   addAppointment(newAppointment: AppointmentInput!): Appointment
   addPatient(newPatient: PatientInput!): Patient
   addPrescription(newPrescription: PrescriptionInput!): Prescription
-<<<<<<< HEAD
-=======
   deletePatient(patientId: Int!): Patient
+  deletePrescription(prescriptionId: Int!): Prescription
   editPatient(editedPatient: PatientInput!, patientId: Int!): Patient
->>>>>>> ab9195cc6cdc2ef58baf9ddaa3bdccac6f7574f8
+  editPrescription(editedPrescription: PrescriptionInput!, prescriptionId: Int!): Prescription
 }
 
 type Patient {
@@ -72,5 +75,7 @@ type Query {
   helloWorld: String
   hi: String
   patients: [Patient]
+  prescriptions: [Prescription]
   specificPatient(patientId: Int!): Patient
+  specificPrescription(patientId: Int!): Prescription
 }

@@ -3,14 +3,21 @@
  * Do not make changes to this file directly
  */
 
+
+
+
+
+
+
 declare global {
   interface NexusGen extends NexusGenTypes {}
 }
 
 export interface NexusGenInputs {
   AppointmentInput: { // input type
-    date_time: string; // String!
     doc_id: number; // Int!
+    dt_end: string; // String!
+    dt_start: string; // String!
     name: string; // String!
     patient_id: number; // Int!
   }
@@ -43,8 +50,11 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   Appointment: { // root type
-    date_time: string; // String!
+    doc_id: number; // Int!
+    dt_end: string; // String!
+    dt_start: string; // String!
     id: number; // Int!
+    name: string; // String!
   }
   Doctor: { // root type
     doc_name: string; // String!
@@ -81,8 +91,11 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   Appointment: { // field return type
-    date_time: string; // String!
+    doc_id: number; // Int!
+    dt_end: string; // String!
+    dt_start: string; // String!
     id: number; // Int!
+    name: string; // String!
     patient: NexusGenRootTypes['Patient'] | null; // Patient
   }
   Doctor: { // field return type
@@ -95,7 +108,9 @@ export interface NexusGenFieldTypes {
     addPatient: NexusGenRootTypes['Patient'] | null; // Patient
     addPrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
     deletePatient: NexusGenRootTypes['Patient'] | null; // Patient
+    deletePrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
     editPatient: NexusGenRootTypes['Patient'] | null; // Patient
+    editPrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
   }
   Patient: { // field return type
     address: string; // String!
@@ -119,14 +134,19 @@ export interface NexusGenFieldTypes {
     helloWorld: string | null; // String
     hi: string | null; // String
     patients: Array<NexusGenRootTypes['Patient'] | null> | null; // [Patient]
+    prescriptions: Array<NexusGenRootTypes['Prescription'] | null> | null; // [Prescription]
     specificPatient: NexusGenRootTypes['Patient'] | null; // Patient
+    specificPrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
   }
 }
 
 export interface NexusGenFieldTypeNames {
   Appointment: { // field return type name
-    date_time: 'String'
+    doc_id: 'Int'
+    dt_end: 'String'
+    dt_start: 'String'
     id: 'Int'
+    name: 'String'
     patient: 'Patient'
   }
   Doctor: { // field return type name
@@ -139,7 +159,9 @@ export interface NexusGenFieldTypeNames {
     addPatient: 'Patient'
     addPrescription: 'Prescription'
     deletePatient: 'Patient'
+    deletePrescription: 'Prescription'
     editPatient: 'Patient'
+    editPrescription: 'Prescription'
   }
   Patient: { // field return type name
     address: 'String'
@@ -163,7 +185,9 @@ export interface NexusGenFieldTypeNames {
     helloWorld: 'String'
     hi: 'String'
     patients: 'Patient'
+    prescriptions: 'Prescription'
     specificPatient: 'Patient'
+    specificPrescription: 'Prescription'
   }
 }
 
@@ -181,13 +205,23 @@ export interface NexusGenArgTypes {
     deletePatient: { // args
       patientId: number; // Int!
     }
+    deletePrescription: { // args
+      prescriptionId: number; // Int!
+    }
     editPatient: { // args
       editedPatient: NexusGenInputs['PatientInput']; // PatientInput!
       patientId: number; // Int!
     }
+    editPrescription: { // args
+      editedPrescription: NexusGenInputs['PrescriptionInput']; // PrescriptionInput!
+      prescriptionId: number; // Int!
+    }
   }
   Query: {
     specificPatient: { // args
+      patientId: number; // Int!
+    }
+    specificPrescription: { // args
       patientId: number; // Int!
     }
   }
@@ -248,6 +282,7 @@ export interface NexusGenTypes {
   abstractsUsingStrategyResolveType: NexusGenAbstractsUsingStrategyResolveType;
   features: NexusGenFeaturesConfig;
 }
+
 
 declare global {
   interface NexusGenPluginTypeConfig<TypeName extends string> {
