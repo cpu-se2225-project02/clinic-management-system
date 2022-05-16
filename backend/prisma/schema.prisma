@@ -26,7 +26,7 @@ model Patient {
   address      String
   birthdate    String
   appointments Appointment[]
-  payment      Payment?
+  payments     Payment[]
 }
 
 model Appointment {
@@ -57,8 +57,7 @@ model Payment {
   paymnt_dt   String
   ammnt_cost  Float
   ammnt_payed Float
-  change      Float
-  patient_id  Int     @unique
+  patient_id  Int
   patient     Patient @relation(fields: [patient_id], references: [id])
 }
 

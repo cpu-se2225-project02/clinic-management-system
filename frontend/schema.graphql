@@ -28,6 +28,7 @@ type Doctor {
 type Mutation {
   addAppointment(newAppointment: AppointmentInput!): Appointment
   addPatient(newPatient: PatientInput!): Patient
+  addPayment(newPayment: PaymentInput!): Payment
   addPrescription(newPrescription: PrescriptionInput!): Prescription
   deletePatient(patientId: Int!): Patient
   editAppointment(appointmentID: Int!, editedAppointment: AppointmentInput!): Appointment
@@ -61,9 +62,15 @@ input PatientInput {
 type Payment {
   ammnt_cost: Float!
   ammnt_payed: Float!
-  change: Float!
   id: Int!
   patient: Patient
+  paymnt_dt: String!
+}
+
+input PaymentInput {
+  ammnt_cost: Float!
+  ammnt_payed: Float!
+  patient_id: Int!
   paymnt_dt: String!
 }
 
@@ -82,7 +89,7 @@ type Query {
   appointments: [Appointment]
   helloWorld: String
   hi: String
-  hii: String
+  high: String
   patients: [Patient]
   specificPatient(patientId: Int!): Patient
 }
