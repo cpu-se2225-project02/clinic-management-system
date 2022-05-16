@@ -12,7 +12,9 @@
 }
 .btn{
   background-color: transparent;
-  color: aquamarine;
+  color: white;
+  /* color: black; */
+  /* outline: none; */
   /* width: max-content; */
 }
 
