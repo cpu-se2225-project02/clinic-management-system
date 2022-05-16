@@ -55,14 +55,14 @@ function Appointment() {
     if (action === 'create') {
       addAppointment({
         appointment: {
-          doc_id: 1,
-          patient_id: 2,
-          name: 'Test',
-          dt_start: '2022-05-09 9:00',
-          dt_end: '2022-05-09 10:00',
+          doc_id: event.doctor_in_charge,
+          patient_id: event.patient_id,
+          name: event.title,
+          dt_start: new Date(event.start) as any as string,
+          dt_end: new Date(event.end) as any as string,
         },
       });
-      console.log(event.start);
+      console.log(event);
     }
   };
 
@@ -122,7 +122,7 @@ function Appointment() {
                       config: { label: 'Select Patient', required: true },
                     },
                     {
-                      name: 'doctor-in-charge',
+                      name: 'doctor_in_charge',
                       type: 'select',
                       options: allDoctors.data?.allDoctors?.map((doctor) => ({
                         id: doctor?.id,
