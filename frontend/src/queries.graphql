@@ -109,3 +109,25 @@ mutation ediAnAppointment($theAppointment: AppointmentInput!, $aId: Int!) {
     doc_id
   }
 }
+
+mutation deleteAnAppointment($appId: Int!) {
+  deleteAppointment(appID: $appId) {
+    id
+  }
+}
+
+query DisplayMedNotes($pID: Int!) {
+  patientMedNotes(patient_id: $pID) {
+    date_noted
+    id
+    title
+    med_notes
+  }
+}
+
+mutation AddAMedNote($newMedNote: MedNotesInput!) {
+  addMedNotes(newMedNotes: $newMedNote) {
+    med_notes
+    title
+  }
+}

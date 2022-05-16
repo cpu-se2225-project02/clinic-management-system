@@ -21,6 +21,12 @@ export interface NexusGenInputs {
     name: string; // String!
     patient_id: number; // Int!
   }
+  MedNotesInput: { // input type
+    date_noted: string; // String!
+    med_notes: string; // String!
+    patient_id: number; // Int!
+    title: string; // String!
+  }
   PatientInput: { // input type
     address: string; // String!
     age: number; // Int!
@@ -59,6 +65,12 @@ export interface NexusGenObjects {
   Doctor: { // root type
     doc_name: string; // String!
     id: number; // Int!
+  }
+  MedicalNotes: { // root type
+    date_noted: string; // String!
+    id: number; // Int!
+    med_notes: string; // String!
+    title: string; // String!
   }
   Mutation: {};
   Patient: { // root type
@@ -103,10 +115,19 @@ export interface NexusGenFieldTypes {
     doc_name: string; // String!
     id: number; // Int!
   }
+  MedicalNotes: { // field return type
+    date_noted: string; // String!
+    id: number; // Int!
+    med_notes: string; // String!
+    patient: NexusGenRootTypes['Patient'] | null; // Patient
+    title: string; // String!
+  }
   Mutation: { // field return type
     addAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
+    addMedNotes: NexusGenRootTypes['MedicalNotes'] | null; // MedicalNotes
     addPatient: NexusGenRootTypes['Patient'] | null; // Patient
     addPrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
+    deleteAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
     deletePatient: NexusGenRootTypes['Patient'] | null; // Patient
     editAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
     editPatient: NexusGenRootTypes['Patient'] | null; // Patient
@@ -132,6 +153,7 @@ export interface NexusGenFieldTypes {
     appointments: Array<NexusGenRootTypes['Appointment'] | null> | null; // [Appointment]
     helloWorld: string | null; // String
     hi: string | null; // String
+    patientMedNotes: Array<NexusGenRootTypes['MedicalNotes'] | null> | null; // [MedicalNotes]
     patients: Array<NexusGenRootTypes['Patient'] | null> | null; // [Patient]
     specificPatient: NexusGenRootTypes['Patient'] | null; // Patient
   }
@@ -151,10 +173,19 @@ export interface NexusGenFieldTypeNames {
     doc_name: 'String'
     id: 'Int'
   }
+  MedicalNotes: { // field return type name
+    date_noted: 'String'
+    id: 'Int'
+    med_notes: 'String'
+    patient: 'Patient'
+    title: 'String'
+  }
   Mutation: { // field return type name
     addAppointment: 'Appointment'
+    addMedNotes: 'MedicalNotes'
     addPatient: 'Patient'
     addPrescription: 'Prescription'
+    deleteAppointment: 'Appointment'
     deletePatient: 'Patient'
     editAppointment: 'Appointment'
     editPatient: 'Patient'
@@ -180,6 +211,7 @@ export interface NexusGenFieldTypeNames {
     appointments: 'Appointment'
     helloWorld: 'String'
     hi: 'String'
+    patientMedNotes: 'MedicalNotes'
     patients: 'Patient'
     specificPatient: 'Patient'
   }
@@ -190,11 +222,17 @@ export interface NexusGenArgTypes {
     addAppointment: { // args
       newAppointment: NexusGenInputs['AppointmentInput']; // AppointmentInput!
     }
+    addMedNotes: { // args
+      newMedNotes: NexusGenInputs['MedNotesInput']; // MedNotesInput!
+    }
     addPatient: { // args
       newPatient: NexusGenInputs['PatientInput']; // PatientInput!
     }
     addPrescription: { // args
       newPrescription: NexusGenInputs['PrescriptionInput']; // PrescriptionInput!
+    }
+    deleteAppointment: { // args
+      appID: number; // Int!
     }
     deletePatient: { // args
       patientId: number; // Int!
@@ -209,6 +247,9 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    patientMedNotes: { // args
+      patient_id: number; // Int!
+    }
     specificPatient: { // args
       patientId: number; // Int!
     }
