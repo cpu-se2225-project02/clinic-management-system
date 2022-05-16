@@ -109,12 +109,10 @@ export default function PatientList() {
                     <div className="row g-0">
                       <Button className="btn" onClick={() => navigate(`/patient_record/${patient?.id}`)}>
 
-                        <div className="col-sm-6 col-md-8">
+                        <div className="col-sm-6 col-md-8" style={{ display: 'flex' }}>
                           {patient?.f_name}
                           {' '}
                           {patient?.l_name}
-                          {'                   '}
-                          {patient?.sex}
                         </div>
 
                       </Button>
