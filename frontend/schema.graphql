@@ -3,14 +3,18 @@
 
 
 type Appointment {
-  date_time: String!
+  doc_id: Int!
+  dt_end: String!
+  dt_start: String!
   id: Int!
+  name: String!
   patient: Patient
 }
 
 input AppointmentInput {
-  date_time: String!
   doc_id: Int!
+  dt_end: String!
+  dt_start: String!
   name: String!
   patient_id: Int!
 }
