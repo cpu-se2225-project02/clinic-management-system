@@ -67,7 +67,6 @@ query getAllAppointments {
   }
 }
 
-
 mutation addPrescription($newPresc: PrescriptionInput!) {
   addPrescription(newPrescription: $newPresc) {
     pres_name
@@ -92,5 +91,21 @@ query allDocs {
   allDoctors {
     doc_name
     id
+  }
+}
+
+mutation addAnAppointment($appointment: AppointmentInput!) {
+  addAppointment(newAppointment: $appointment) {
+    dt_start
+    dt_end
+  }
+}
+
+mutation ediAnAppointment($theAppointment: AppointmentInput!, $aId: Int!) {
+  editAppointment(editedAppointment: $theAppointment, appointmentID: $aId) {
+    name
+    dt_start
+    dt_end
+    doc_id
   }
 }

@@ -1,18 +1,22 @@
+/* eslint-disable consistent-return */
 /* eslint-disable linebreak-style */
 import React, { useState } from 'react';
 import './Appointment.css';
-import { useQuery } from 'urql';
+import { useQuery, useMutation } from 'urql';
 import { FaCalendarAlt } from 'react-icons/fa';
 import {
   Container, Col, Row, Spinner,
 } from 'react-bootstrap';
 import { Scheduler } from '@aldabil/react-scheduler';
+import { ProcessedEvent, EventActions } from '@aldabil/react-scheduler/dist/types';
 import { SelectOption } from '@aldabil/react-scheduler/dist/components/inputs/SelectInput';
 import AppointmentViewButtons from './AppointmentViewButtons';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
-import { AllPatientsDocument, AllDocsDocument, GetAllAppointmentsDocument } from '../queries.generated';
-
+import {
+  AllPatientsDocument, AllDocsDocument, GetAllAppointmentsDocument,
+  AddAnAppointmentDocument, EdiAnAppointmentDocument,
+} from '../queries.generated';
 
 function Appointment() {
   const types = ['calendar', 'list'];
@@ -30,19 +34,51 @@ function Appointment() {
     query: AllDocsDocument,
   });
 
+  const [editAppointmentResult, editAppointment] = useMutation(EdiAnAppointmentDocument);
+
+  const [addAppointmentResult, addAppointment] = useMutation(AddAnAppointmentDocument);
+
   const { data, error, fetching } = allAppointments;
 
-  if (fetching) {
+  if (fetching || addAppointmentResult.fetching || editAppointmentResult.fetching) {
     return <Spinner animation="border" role="status" />;
   }
 
-  if (error) {
-    console.log(error.cause);
+  if (error || addAppointmentResult.error || editAppointmentResult.error) {
+    console.log(error);
+    console.log(addAppointmentResult.error);
     return <div>Something went wrong</div>;
   }
 
   const handleChange = (event: React.MouseEvent<HTMLElement>, type: string) => {
     setActive(type);
+  };
+
+  const handleConfirm = (event: ProcessedEvent, action: EventActions) => {
+    if (action === 'create') {
+      addAppointment({
+        appointment: {
+          doc_id: event.doctor_in_charge,
+          patient_id: event.patient_id,
+          name: event.title,
+          dt_start: new Date(event.start) as any as string,
+          dt_end: new Date(event.end) as any as string,
+        },
+      });
+      console.log(event);
+    } else if (action === 'edit') {
+      editAppointment({
+        theAppointment: {
+          patient_id: event.patient_id,
+          doc_id: event.doctor_in_charge,
+          dt_start: new Date(event.start) as any as string,
+          dt_end: new Date(event.end) as any as string,
+          name: event.title,
+        },
+        aId: event.event_id as number,
+      });
+      console.log(event);
+    }
   };
 
   return (
@@ -80,6 +116,15 @@ function Appointment() {
               {active === 'calendar' ? (
                 <Scheduler
                   view="month"
+                  onConfirm={handleConfirm}
+                  events={
+                    allAppointments.data?.appointments?.map((appointment) => ({
+                      event_id: appointment?.id,
+                      title: appointment?.name,
+                      start: new Date(appointment?.dt_start as string),
+                      end: new Date(appointment?.dt_end as string),
+                    }) as any as ProcessedEvent)
+                  }
                   fields={[
                     {
                       name: 'patient_id',
@@ -92,7 +137,7 @@ function Appointment() {
                       config: { label: 'Select Patient', required: true },
                     },
                     {
-                      name: 'doctor-in-charge',
+                      name: 'doctor_in_charge',
                       type: 'select',
                       options: allDoctors.data?.allDoctors?.map((doctor) => ({
                         id: doctor?.id,

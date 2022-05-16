@@ -38,7 +38,7 @@ export default function PatientList() {
   }
 
   if (error) {
-    console.log(error.cause);
+    console.log(error);
     return <div>Something went wrong</div>;
   }
 
