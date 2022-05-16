@@ -10,7 +10,7 @@ import './PatientRecord.css';
 import { useQuery } from 'urql';
 import { GetPatientDocument } from '../queries.generated';
 import PatientInformation from './PatientInformation';
-import PrescriptionForm from './prescription/PrescriptionForm';
+import Prescription from './prescription/Prescription';
 
 export default function PatientRecord() {
   const params = useParams() as any;
@@ -74,7 +74,7 @@ export default function PatientRecord() {
             </Col>
           </Row>
           <Row>
-            {PrescriptionBtn && <PrescriptionForm pID={data?.specificPatient?.id} />}
+            {PrescriptionBtn && <Prescription pID={data?.specificPatient?.id} />}
           </Row>
           <Row>
             <Col className="list border d-grid gap-2">

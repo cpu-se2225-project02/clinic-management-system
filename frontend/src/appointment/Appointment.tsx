@@ -13,7 +13,6 @@ import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
 import { AllPatientsDocument, AllDocsDocument, GetAllAppointmentsDocument } from '../queries.generated';
 
-
 function Appointment() {
   const types = ['calendar', 'list'];
   const [active, setActive] = useState(types[0]);

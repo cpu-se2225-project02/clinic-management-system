@@ -4,7 +4,6 @@
 import React from 'react';
 import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { useMutation, useQuery } from 'urql';
-import { editPrescriptionDocument, getPrescriptionDocument } from '../queries.generated';
 
 interface Popup {
   editButton: React.Dispatch<React.SetStateAction<boolean>>;

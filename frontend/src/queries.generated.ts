@@ -1,7 +1,8 @@
-import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 import * as Types from './generated/graphql';
 
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type AllPatientsQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
 
 export type AllPatientsQuery = (
   { __typename?: 'Query' }
@@ -15,6 +16,7 @@ export type AddPatientMutationVariables = Types.Exact<{
   newPatient: Types.PatientInput;
 }>;
 
+
 export type AddPatientMutation = (
   { __typename?: 'Mutation' }
   & { addPatient?: Types.Maybe<(
@@ -27,6 +29,7 @@ export type GetPatientQueryVariables = Types.Exact<{
   id: Types.Scalars['Int'];
 }>;
 
+
 export type GetPatientQuery = (
   { __typename?: 'Query' }
   & { specificPatient?: Types.Maybe<(
@@ -35,10 +38,28 @@ export type GetPatientQuery = (
   )> }
 );
 
+export type GetPrescriptionQueryVariables = Types.Exact<{
+  id: Types.Scalars['Int'];
+}>;
+
+
+export type GetPrescriptionQuery = (
+  { __typename?: 'Query' }
+  & { patientPrescriptions?: Types.Maybe<Array<Types.Maybe<(
+    { __typename?: 'Prescription' }
+    & Pick<Types.Prescription, 'pres_name' | 'pres_dos'>
+    & { patient?: Types.Maybe<(
+      { __typename?: 'Patient' }
+      & Pick<Types.Patient, 'id'>
+    )> }
+  )>>> }
+);
+
 export type EditAPatientMutationVariables = Types.Exact<{
   thePatient: Types.PatientInput;
   pid: Types.Scalars['Int'];
 }>;
+
 
 export type EditAPatientMutation = (
   { __typename?: 'Mutation' }
@@ -49,6 +70,7 @@ export type EditAPatientMutation = (
 );
 
 export type GetAllAppointmentsQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
 
 export type GetAllAppointmentsQuery = (
   { __typename?: 'Query' }
@@ -66,6 +88,7 @@ export type AddPrescriptionMutationVariables = Types.Exact<{
   newPresc: Types.PrescriptionInput;
 }>;
 
+
 export type AddPrescriptionMutation = (
   { __typename?: 'Mutation' }
   & { addPrescription?: Types.Maybe<(
@@ -78,6 +101,7 @@ export type DeleteAPatientMutationVariables = Types.Exact<{
   patientID: Types.Scalars['Int'];
 }>;
 
+
 export type DeleteAPatientMutation = (
   { __typename?: 'Mutation' }
   & { deletePatient?: Types.Maybe<(
@@ -88,6 +112,7 @@ export type DeleteAPatientMutation = (
 
 export type AllDocsQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
+
 export type AllDocsQuery = (
   { __typename?: 'Query' }
   & { allDoctors?: Types.Maybe<Array<Types.Maybe<(
@@ -96,96 +121,13 @@ export type AllDocsQuery = (
   )>>> }
 );
 
-export const AllPatientsDocument = {
-  kind: 'Document',
-  definitions: [{
-    kind: 'OperationDefinition', operation: 'query', name: { kind: 'Name', value: 'AllPatients' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'patients' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'm_initial' } }, { kind: 'Field', name: { kind: 'Name', value: 'suffix' } }, { kind: 'Field', name: { kind: 'Name', value: 'sex' } }, { kind: 'Field', name: { kind: 'Name', value: 'age' } }, { kind: 'Field', name: { kind: 'Name', value: 'address' } }, { kind: 'Field', name: { kind: 'Name', value: 'birthdate' } }] } }] },
-  }],
-} as unknown as DocumentNode<AllPatientsQuery, AllPatientsQueryVariables>;
-export const AddPatientDocument = {
-  kind: 'Document',
-  definitions: [{
-    kind: 'OperationDefinition',
-    operation: 'mutation',
-    name: { kind: 'Name', value: 'AddPatient' },
-    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'newPatient' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'PatientInput' } } } }],
-    selectionSet: {
-      kind: 'SelectionSet',
-      selections: [{
-        kind: 'Field', name: { kind: 'Name', value: 'addPatient' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'newPatient' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'newPatient' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'm_initial' } }, { kind: 'Field', name: { kind: 'Name', value: 'address' } }, { kind: 'Field', name: { kind: 'Name', value: 'age' } }, { kind: 'Field', name: { kind: 'Name', value: 'suffix' } }, { kind: 'Field', name: { kind: 'Name', value: 'sex' } }, { kind: 'Field', name: { kind: 'Name', value: 'birthdate' } }] },
-      }],
-    },
-  }],
-} as unknown as DocumentNode<AddPatientMutation, AddPatientMutationVariables>;
-export const GetPatientDocument = {
-  kind: 'Document',
-  definitions: [{
-    kind: 'OperationDefinition',
-    operation: 'query',
-    name: { kind: 'Name', value: 'GetPatient' },
-    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
-    selectionSet: {
-      kind: 'SelectionSet',
-      selections: [{
-        kind: 'Field', name: { kind: 'Name', value: 'specificPatient' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'patientId' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'id' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'l_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'm_initial' } }, { kind: 'Field', name: { kind: 'Name', value: 'sex' } }, { kind: 'Field', name: { kind: 'Name', value: 'suffix' } }, { kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'address' } }, { kind: 'Field', name: { kind: 'Name', value: 'birthdate' } }, { kind: 'Field', name: { kind: 'Name', value: 'age' } }] },
-      }],
-    },
-  }],
-} as unknown as DocumentNode<GetPatientQuery, GetPatientQueryVariables>;
-export const EditAPatientDocument = {
-  kind: 'Document',
-  definitions: [{
-    kind: 'OperationDefinition',
-    operation: 'mutation',
-    name: { kind: 'Name', value: 'editAPatient' },
-    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'thePatient' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'PatientInput' } } } }, { kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'pid' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
-    selectionSet: {
-      kind: 'SelectionSet',
-      selections: [{
-        kind: 'Field', name: { kind: 'Name', value: 'editPatient' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'editedPatient' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'thePatient' } } }, { kind: 'Argument', name: { kind: 'Name', value: 'patientId' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'pid' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'suffix' } }, { kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'm_initial' } }, { kind: 'Field', name: { kind: 'Name', value: 'sex' } }, { kind: 'Field', name: { kind: 'Name', value: 'address' } }, { kind: 'Field', name: { kind: 'Name', value: 'birthdate' } }, { kind: 'Field', name: { kind: 'Name', value: 'age' } }] },
-      }],
-    },
-  }],
-} as unknown as DocumentNode<EditAPatientMutation, EditAPatientMutationVariables>;
-export const GetAllAppointmentsDocument = {
-  kind: 'Document',
-  definitions: [{
-    kind: 'OperationDefinition', operation: 'query', name: { kind: 'Name', value: 'getAllAppointments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'appointments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'dt_start' } }, { kind: 'Field', name: { kind: 'Name', value: 'dt_end' } }, { kind: 'Field', name: { kind: 'Name', value: 'name' } }, { kind: 'Field', name: { kind: 'Name', value: 'doc_id' } }, { kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }] } }] } }] },
-  }],
-} as unknown as DocumentNode<GetAllAppointmentsQuery, GetAllAppointmentsQueryVariables>;
-export const AddPrescriptionDocument = {
-  kind: 'Document',
-  definitions: [{
-    kind: 'OperationDefinition',
-    operation: 'mutation',
-    name: { kind: 'Name', value: 'addPrescription' },
-    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'newPresc' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'PrescriptionInput' } } } }],
-    selectionSet: {
-      kind: 'SelectionSet',
-      selections: [{
-        kind: 'Field', name: { kind: 'Name', value: 'addPrescription' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'newPrescription' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'newPresc' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'pres_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'pres_dos' } }] },
-      }],
-    },
-  }],
-} as unknown as DocumentNode<AddPrescriptionMutation, AddPrescriptionMutationVariables>;
-export const DeleteAPatientDocument = {
-  kind: 'Document',
-  definitions: [{
-    kind: 'OperationDefinition',
-    operation: 'mutation',
-    name: { kind: 'Name', value: 'deleteAPatient' },
-    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'patientID' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
-    selectionSet: {
-      kind: 'SelectionSet',
-      selections: [{
-        kind: 'Field', name: { kind: 'Name', value: 'deletePatient' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'patientId' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'patientID' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'l_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'm_initial' } }, { kind: 'Field', name: { kind: 'Name', value: 'suffix' } }, { kind: 'Field', name: { kind: 'Name', value: 'sex' } }, { kind: 'Field', name: { kind: 'Name', value: 'age' } }, { kind: 'Field', name: { kind: 'Name', value: 'birthdate' } }, { kind: 'Field', name: { kind: 'Name', value: 'address' } }] },
-      }],
-    },
-  }],
-} as unknown as DocumentNode<DeleteAPatientMutation, DeleteAPatientMutationVariables>;
-export const AllDocsDocument = {
-  kind: 'Document',
-  definitions: [{
-    kind: 'OperationDefinition', operation: 'query', name: { kind: 'Name', value: 'allDocs' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'allDoctors' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'doc_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'id' } }] } }] },
-  }],
-} as unknown as DocumentNode<AllDocsQuery, AllDocsQueryVariables>;
+
+export const AllPatientsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AllPatients"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"patients"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"f_name"}},{"kind":"Field","name":{"kind":"Name","value":"l_name"}},{"kind":"Field","name":{"kind":"Name","value":"m_initial"}},{"kind":"Field","name":{"kind":"Name","value":"suffix"}},{"kind":"Field","name":{"kind":"Name","value":"sex"}},{"kind":"Field","name":{"kind":"Name","value":"age"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"birthdate"}}]}}]}}]} as unknown as DocumentNode<AllPatientsQuery, AllPatientsQueryVariables>;
+export const AddPatientDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"AddPatient"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"newPatient"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PatientInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"addPatient"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"newPatient"},"value":{"kind":"Variable","name":{"kind":"Name","value":"newPatient"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"l_name"}},{"kind":"Field","name":{"kind":"Name","value":"f_name"}},{"kind":"Field","name":{"kind":"Name","value":"m_initial"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"age"}},{"kind":"Field","name":{"kind":"Name","value":"suffix"}},{"kind":"Field","name":{"kind":"Name","value":"sex"}},{"kind":"Field","name":{"kind":"Name","value":"birthdate"}}]}}]}}]} as unknown as DocumentNode<AddPatientMutation, AddPatientMutationVariables>;
+export const GetPatientDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPatient"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"specificPatient"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"patientId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"l_name"}},{"kind":"Field","name":{"kind":"Name","value":"f_name"}},{"kind":"Field","name":{"kind":"Name","value":"m_initial"}},{"kind":"Field","name":{"kind":"Name","value":"sex"}},{"kind":"Field","name":{"kind":"Name","value":"suffix"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"birthdate"}},{"kind":"Field","name":{"kind":"Name","value":"age"}}]}}]}}]} as unknown as DocumentNode<GetPatientQuery, GetPatientQueryVariables>;
+export const GetPrescriptionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetPrescription"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"patientPrescriptions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"patientId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pres_name"}},{"kind":"Field","name":{"kind":"Name","value":"pres_dos"}},{"kind":"Field","name":{"kind":"Name","value":"patient"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<GetPrescriptionQuery, GetPrescriptionQueryVariables>;
+export const EditAPatientDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"editAPatient"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"thePatient"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PatientInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"pid"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"editPatient"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"editedPatient"},"value":{"kind":"Variable","name":{"kind":"Name","value":"thePatient"}}},{"kind":"Argument","name":{"kind":"Name","value":"patientId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"pid"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"suffix"}},{"kind":"Field","name":{"kind":"Name","value":"f_name"}},{"kind":"Field","name":{"kind":"Name","value":"l_name"}},{"kind":"Field","name":{"kind":"Name","value":"m_initial"}},{"kind":"Field","name":{"kind":"Name","value":"sex"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"birthdate"}},{"kind":"Field","name":{"kind":"Name","value":"age"}}]}}]}}]} as unknown as DocumentNode<EditAPatientMutation, EditAPatientMutationVariables>;
+export const GetAllAppointmentsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAllAppointments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"appointments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"dt_start"}},{"kind":"Field","name":{"kind":"Name","value":"dt_end"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"doc_id"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"patient"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"f_name"}},{"kind":"Field","name":{"kind":"Name","value":"l_name"}}]}}]}}]}}]} as unknown as DocumentNode<GetAllAppointmentsQuery, GetAllAppointmentsQueryVariables>;
+export const AddPrescriptionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"addPrescription"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"newPresc"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PrescriptionInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"addPrescription"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"newPrescription"},"value":{"kind":"Variable","name":{"kind":"Name","value":"newPresc"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pres_name"}},{"kind":"Field","name":{"kind":"Name","value":"pres_dos"}}]}}]}}]} as unknown as DocumentNode<AddPrescriptionMutation, AddPrescriptionMutationVariables>;
+export const DeleteAPatientDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"deleteAPatient"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"patientID"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deletePatient"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"patientId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"patientID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"l_name"}},{"kind":"Field","name":{"kind":"Name","value":"f_name"}},{"kind":"Field","name":{"kind":"Name","value":"m_initial"}},{"kind":"Field","name":{"kind":"Name","value":"suffix"}},{"kind":"Field","name":{"kind":"Name","value":"sex"}},{"kind":"Field","name":{"kind":"Name","value":"age"}},{"kind":"Field","name":{"kind":"Name","value":"birthdate"}},{"kind":"Field","name":{"kind":"Name","value":"address"}}]}}]}}]} as unknown as DocumentNode<DeleteAPatientMutation, DeleteAPatientMutationVariables>;
+export const AllDocsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"allDocs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allDoctors"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"doc_name"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<AllDocsQuery, AllDocsQueryVariables>;

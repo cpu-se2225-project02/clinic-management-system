@@ -60,6 +60,7 @@ input PatientInput {
 }
 
 type Prescription {
+  patient: Patient
   pres_dos: Int!
   pres_name: String!
 }
@@ -74,8 +75,8 @@ type Query {
   appointments: [Appointment]
   helloWorld: String
   hi: String
+  patientPrescriptions(patientId: Int!): [Prescription]
   patients: [Patient]
   prescriptions: [Prescription]
   specificPatient(patientId: Int!): Patient
-  specificPrescription(patientId: Int!): Prescription
 }

@@ -125,6 +125,7 @@ export interface NexusGenFieldTypes {
     suffix: string | null; // String
   }
   Prescription: { // field return type
+    patient: NexusGenRootTypes['Patient'] | null; // Patient
     pres_dos: number; // Int!
     pres_name: string; // String!
   }
@@ -133,10 +134,10 @@ export interface NexusGenFieldTypes {
     appointments: Array<NexusGenRootTypes['Appointment'] | null> | null; // [Appointment]
     helloWorld: string | null; // String
     hi: string | null; // String
+    patientPrescriptions: Array<NexusGenRootTypes['Prescription'] | null> | null; // [Prescription]
     patients: Array<NexusGenRootTypes['Patient'] | null> | null; // [Patient]
     prescriptions: Array<NexusGenRootTypes['Prescription'] | null> | null; // [Prescription]
     specificPatient: NexusGenRootTypes['Patient'] | null; // Patient
-    specificPrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
   }
 }
 
@@ -176,6 +177,7 @@ export interface NexusGenFieldTypeNames {
     suffix: 'String'
   }
   Prescription: { // field return type name
+    patient: 'Patient'
     pres_dos: 'Int'
     pres_name: 'String'
   }
@@ -184,10 +186,10 @@ export interface NexusGenFieldTypeNames {
     appointments: 'Appointment'
     helloWorld: 'String'
     hi: 'String'
+    patientPrescriptions: 'Prescription'
     patients: 'Patient'
     prescriptions: 'Prescription'
     specificPatient: 'Patient'
-    specificPrescription: 'Prescription'
   }
 }
 
@@ -218,10 +220,10 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
-    specificPatient: { // args
+    patientPrescriptions: { // args
       patientId: number; // Int!
     }
-    specificPrescription: { // args
+    specificPatient: { // args
       patientId: number; // Int!
     }
   }

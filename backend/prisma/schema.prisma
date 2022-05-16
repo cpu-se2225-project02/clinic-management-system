@@ -26,6 +26,7 @@ model Patient {
   address      String
   birthdate    String
   appointments Appointment[]
+  prescriptions Prescription[]
 }
 
 model Appointment {
@@ -40,9 +41,11 @@ model Appointment {
 }
 
 model Prescription {
-  id        Int    @id @default(autoincrement())
-  pres_name String
-  pres_dos  Int
+  id          Int    @id @default(autoincrement())
+  patient_id  Int
+  patient     Patient @relation(fields: [patient_id], references: [id])
+  pres_name   String 
+  pres_dos    Int
 }
 
 model Doctor {

@@ -10,6 +10,7 @@ import {
 } from 'nexus';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { Prescription as PrescriptionType } from 'nexus-prisma';
+import { Patient } from './patient';
 
 const db = new PrismaClient();
 
@@ -18,6 +19,12 @@ export const Prescription = objectType({
   definition(t) {
     t.field(PrescriptionType.pres_name);
     t.field(PrescriptionType.pres_dos);
+    t.field('patient', {
+      type: Patient,
+      resolve(prescription) {
+        return db.patient.findFirst({ where: { id: prescription.patient_id } });
+      },
+    });
   },
 });
 
@@ -29,14 +36,14 @@ export const prescriptions = queryField('prescriptions', {
   },
 });
 
-export const specificPrescription = queryField('specificPrescription', {
-  type: Prescription,
+export const patientPrescriptions = queryField('patientPrescriptions', {
+  type: list(Prescription),
   args: {
     patientId: nonNull(intArg()),
   },
   resolve(root, args) {
-    return db.prescription.findUnique({
-      where: { id: args.prescriptionId },
+    return db.prescription.findMany({
+      where: { patient_id: args.patientId },
     });
   },
 });
