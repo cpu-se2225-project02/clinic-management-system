@@ -14,7 +14,8 @@ import AppointmentViewButtons from './AppointmentViewButtons';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
 import {
-  AllPatientsDocument, AllDocsDocument, GetAllAppointmentsDocument, AddAnAppointmentDocument,
+  AllPatientsDocument, AllDocsDocument, GetAllAppointmentsDocument,
+  AddAnAppointmentDocument, EdiAnAppointmentDocument,
 } from '../queries.generated';
 
 function Appointment() {
@@ -33,15 +34,17 @@ function Appointment() {
     query: AllDocsDocument,
   });
 
+  const [editAppointmentResult, editAppointment] = useMutation(EdiAnAppointmentDocument);
+
   const [addAppointmentResult, addAppointment] = useMutation(AddAnAppointmentDocument);
 
   const { data, error, fetching } = allAppointments;
 
-  if (fetching || addAppointmentResult.fetching) {
+  if (fetching || addAppointmentResult.fetching || editAppointmentResult.fetching) {
     return <Spinner animation="border" role="status" />;
   }
 
-  if (error || addAppointmentResult.error) {
+  if (error || addAppointmentResult.error || editAppointmentResult.error) {
     console.log(error);
     console.log(addAppointmentResult.error);
     return <div>Something went wrong</div>;
@@ -61,6 +64,18 @@ function Appointment() {
           dt_start: new Date(event.start) as any as string,
           dt_end: new Date(event.end) as any as string,
         },
+      });
+      console.log(event);
+    } else if (action === 'edit') {
+      editAppointment({
+        theAppointment: {
+          patient_id: event.patient_id,
+          doc_id: event.doctor_in_charge,
+          dt_start: new Date(event.start) as any as string,
+          dt_end: new Date(event.end) as any as string,
+          name: event.title,
+        },
+        aId: event.event_id as number,
       });
       console.log(event);
     }
