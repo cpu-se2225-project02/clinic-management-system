@@ -107,6 +107,7 @@ export interface NexusGenFieldTypes {
     addAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
     addPatient: NexusGenRootTypes['Patient'] | null; // Patient
     addPrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
+    deleteAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
     deletePatient: NexusGenRootTypes['Patient'] | null; // Patient
     editAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
     editPatient: NexusGenRootTypes['Patient'] | null; // Patient
@@ -155,6 +156,7 @@ export interface NexusGenFieldTypeNames {
     addAppointment: 'Appointment'
     addPatient: 'Patient'
     addPrescription: 'Prescription'
+    deleteAppointment: 'Appointment'
     deletePatient: 'Patient'
     editAppointment: 'Appointment'
     editPatient: 'Patient'
@@ -195,6 +197,9 @@ export interface NexusGenArgTypes {
     }
     addPrescription: { // args
       newPrescription: NexusGenInputs['PrescriptionInput']; // PrescriptionInput!
+    }
+    deleteAppointment: { // args
+      appID: number; // Int!
     }
     deletePatient: { // args
       patientId: number; // Int!

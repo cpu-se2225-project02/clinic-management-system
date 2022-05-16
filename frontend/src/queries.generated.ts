@@ -122,6 +122,18 @@ export type EdiAnAppointmentMutation = (
   )> }
 );
 
+export type DeleteAnAppointmentMutationVariables = Types.Exact<{
+  appId: Types.Scalars['Int'];
+}>;
+
+export type DeleteAnAppointmentMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteAppointment?: Types.Maybe<(
+    { __typename?: 'Appointment' }
+    & Pick<Types.Appointment, 'id'>
+  )> }
+);
+
 export const AllPatientsDocument = {
   kind: 'Document',
   definitions: [{
@@ -245,3 +257,18 @@ export const EdiAnAppointmentDocument = {
     },
   }],
 } as unknown as DocumentNode<EdiAnAppointmentMutation, EdiAnAppointmentMutationVariables>;
+export const DeleteAnAppointmentDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'mutation',
+    name: { kind: 'Name', value: 'deleteAnAppointment' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'appId' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'deleteAppointment' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'appID' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'appId' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<DeleteAnAppointmentMutation, DeleteAnAppointmentMutationVariables>;
