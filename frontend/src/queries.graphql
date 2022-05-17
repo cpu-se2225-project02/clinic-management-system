@@ -51,6 +51,16 @@ query GetPrescription($id: Int!) {
 }
 
 
+mutation editAPrescription($thePrescription: PrescriptionInput!, $pid: Int!) {
+  editPrescription(editedPrescription: $thePrescription, prescriptionId: $pid) {
+    pres_name
+    pres_dos
+    patient{
+      id
+    }
+  }
+}
+
 
 mutation editAPatient($thePatient: PatientInput!, $pid: Int!) {
   editPatient(editedPatient: $thePatient, patientId: $pid) {
@@ -79,11 +89,20 @@ query getAllAppointments {
   }
 }
 
-
 mutation addPrescription($newPresc: PrescriptionInput!) {
   addPrescription(newPrescription: $newPresc) {
     pres_name
     pres_dos
+  }
+}
+
+mutation deletePrescription($prescriptionId: Int!) {
+  deletePrescription(prescriptionId: $prescriptionId) {
+    pres_name
+    pres_dos
+    patient {
+      id
+    }
   }
 }
 
@@ -107,5 +126,18 @@ query allDocs {
   }
 }
 
+mutation addAnAppointment($appointment: AppointmentInput!) {
+  addAppointment(newAppointment: $appointment) {
+    dt_start
+    dt_end
+  }
+}
 
-
+mutation ediAnAppointment($theAppointment: AppointmentInput!, $aId: Int!) {
+  editAppointment(editedAppointment: $theAppointment, appointmentID: $aId) {
+    name
+    dt_start
+    dt_end
+    doc_id
+  }
+}

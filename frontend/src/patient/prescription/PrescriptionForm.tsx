@@ -11,6 +11,10 @@ interface PatientID {
   pID: number | undefined
 }
 
+interface Popup {
+  postButton: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 export default function PrescriptionForm({ pID }: PatientID) {
   const [prescName, setPrescName] = useState('');
   const [dosage, setDosage] = useState(0);

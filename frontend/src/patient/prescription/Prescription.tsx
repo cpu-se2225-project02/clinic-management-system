@@ -3,10 +3,15 @@
 import React, { Fragment } from 'react';
 import { useQuery } from 'urql';
 import { Spinner } from 'react-bootstrap';
+import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { GetPrescriptionDocument } from '../../queries.generated';
 
 interface PatientID {
     pID: number | undefined
+}
+
+interface Popup {
+  postButton: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function Prescription({ pID }: PatientID) {

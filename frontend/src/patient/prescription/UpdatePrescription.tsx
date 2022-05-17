@@ -4,12 +4,16 @@
 import React from 'react';
 import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { useMutation, useQuery } from 'urql';
+import { EditAPrescriptionDocument, GetPrescriptionDocument } from '../../queries.generated';
 
 interface Popup {
   editButton: React.Dispatch<React.SetStateAction<boolean>>;
+  patientID: number | undefined;
 }
 
-export default function UpdatePrescription({ editButton }: Popup) {
+export default function UpdatePrescriptionForm({ postButton, patientID }: Popup) {
+  const [editPrescriptionResult, editPrescription] = useMutation(EditAPrescriptionDocument);
+
   return (
     <div className="popup">
       <div className="popup-inner">

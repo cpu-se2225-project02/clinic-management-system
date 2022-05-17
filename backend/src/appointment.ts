@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable linebreak-style */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable linebreak-style */
@@ -8,6 +9,7 @@ import {
   mutationField,
   nonNull,
   inputObjectType,
+  intArg,
 } from 'nexus';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { Appointment as AppointmentType } from 'nexus-prisma';
@@ -64,5 +66,19 @@ export const addAppointment = mutationField('addAppointment', {
   },
   resolve(root, args: { newAppointment: Prisma.AppointmentCreateInput }) {
     return db.appointment.create({ data: args.newAppointment });
+  },
+});
+
+export const editAppointment = mutationField('editAppointment', {
+  type: Appointment,
+  args: {
+    editedAppointment: nonNull(AppointmentInput),
+    appointmentID: nonNull(intArg()),
+  },
+  resolve(root, args: { editedAppointment: Prisma.AppointmentUpdateInput, appointmentID: Prisma.AppointmentWhereUniqueInput }) {
+    return db.appointment.update({
+      where: { id: args.appointmentID as any },
+      data: args.editedAppointment,
+    });
   },
 });
