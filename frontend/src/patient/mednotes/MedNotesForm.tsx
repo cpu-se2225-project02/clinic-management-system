@@ -57,7 +57,7 @@ export default function MedNotesForm({ pId, postButton }: PatientID) {
         <label>Date:</label>
         <input
           className="form-control"
-          type="text"
+          type="date"
           placeholder="Enter date"
           onChange={(e) => { setMnDate(e.target.value); }}
 
