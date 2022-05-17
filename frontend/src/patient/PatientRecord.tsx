@@ -177,5 +177,6 @@ export default function PatientRecord() {
         </Col>
       </Row>
       {/* </Col> */}
+    </Container>
   );
 }

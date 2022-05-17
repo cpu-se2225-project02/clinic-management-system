@@ -40,6 +40,7 @@ query GetPatient($id: Int!) {
   }
 }
 
+
 query GetPrescription($id: Int!) {
   patientPrescriptions(patientId: $id) {
     pres_name
@@ -49,7 +50,6 @@ query GetPrescription($id: Int!) {
     } 
   }
 }
-
 
 mutation editAPrescription($thePrescription: PrescriptionInput!, $pid: Int!) {
   editPrescription(editedPrescription: $thePrescription, prescriptionId: $pid) {
@@ -118,6 +118,7 @@ mutation deleteAPatient($patientID: Int!) {
     address
   }
 }
+
 
 query allDocs {
   allDoctors {
