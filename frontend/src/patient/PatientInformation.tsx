@@ -50,7 +50,7 @@ export default function PatientInformation({ pId }: PatientId) {
         <div className="col-xl-6 col-lg-4 col-md-2">
           {data?.specificPatient?.f_name}
           {' '}
-          {data?.specificPatient?.m_initial}
+          {data?.specificPatient?.m_name}
           {'. '}
           {data?.specificPatient?.l_name}
           <br />
