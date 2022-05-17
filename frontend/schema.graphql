@@ -87,6 +87,7 @@ input PrescriptionInput {
 type Query {
   account(patientId: Int!): [Payment]
   allDoctors: [Doctor]
+  allPayments: [Payment]
   appointments: [Appointment]
   helloWorld: String
   hi: String

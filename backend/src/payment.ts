@@ -30,6 +30,13 @@ export const Payment = objectType({
   },
 });
 
+export const allPayments = queryField('allPayments', {
+  type: list(Payment),
+  resolve() {
+    return db.payment.findMany({ orderBy: { patient_id: 'asc' } });
+  },
+});
+
 export const account = queryField('account', {
   type: list(Payment),
   args: { patientId: nonNull(intArg()) },

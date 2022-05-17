@@ -150,6 +150,7 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     account: Array<NexusGenRootTypes['Payment'] | null> | null; // [Payment]
     allDoctors: Array<NexusGenRootTypes['Doctor'] | null> | null; // [Doctor]
+    allPayments: Array<NexusGenRootTypes['Payment'] | null> | null; // [Payment]
     appointments: Array<NexusGenRootTypes['Appointment'] | null> | null; // [Appointment]
     helloWorld: string | null; // String
     hi: string | null; // String
@@ -208,6 +209,7 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     account: 'Payment'
     allDoctors: 'Doctor'
+    allPayments: 'Payment'
     appointments: 'Appointment'
     helloWorld: 'String'
     hi: 'String'
