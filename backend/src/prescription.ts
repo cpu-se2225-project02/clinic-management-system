@@ -48,14 +48,15 @@ export const patientPrescriptions = queryField('patientPrescriptions', {
   },
 });
 ///
+
 export const PrescriptionInput = inputObjectType({
   name: 'PrescriptionInput',
   definition(t) {
     t.field(PrescriptionType.pres_name);
     t.field(PrescriptionType.pres_dos);
+    t.field(PrescriptionType.patient_id);
   },
 });
-
 export const AddPrescription = mutationField('addPrescription', {
   type: Prescription,
   args: {

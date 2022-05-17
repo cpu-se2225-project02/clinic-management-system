@@ -1,20 +1,19 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable no-unused-vars */
-import React, { Fragment } from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'urql';
 import { Spinner } from 'react-bootstrap';
-import { AiOutlineCloseSquare } from 'react-icons/ai';
+import { GoDiffAdded } from 'react-icons/go';
 import { GetPrescriptionDocument } from '../../queries.generated';
+import PrescriptionForm from './PrescriptionForm';
 
 interface PatientID {
     pID: number | undefined
 }
 
-interface Popup {
-  postButton: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
 export default function Prescription({ pID }: PatientID) {
+  const [PostButton, setPostButton] = useState(false);
+
   const [patientPrescriptions] = useQuery({
     query: GetPrescriptionDocument,
     variables: {
@@ -28,10 +27,12 @@ export default function Prescription({ pID }: PatientID) {
 
   if (error) {
     console.log(error);
-    return <div>Something went wrong</div>;
+    return <div>Insertion unsuccessful</div>;
   }
   return (
     <>
+      <GoDiffAdded size={30} onClick={() => { setPostButton(!PostButton); }} />
+      { PostButton && <PrescriptionForm pID={pID} postButton={setPostButton} />}
       {data?.patientPrescriptions?.map((prescription) => (
         <div>
           {prescription?.pres_name}

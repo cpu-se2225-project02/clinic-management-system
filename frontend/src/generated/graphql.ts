@@ -70,16 +70,34 @@ export interface Doctor {
 
 }
 
+export interface MedNotesInput {
+  readonly date_noted: Scalars['String'];
+  readonly med_notes: Scalars['String'];
+  readonly patient_id: Scalars['Int'];
+  readonly title: Scalars['String'];
+}
+
+export interface MedicalNotes {
+  readonly __typename?: 'MedicalNotes';
+  readonly date_noted: Scalars['String'];
+  readonly id: Scalars['Int'];
+  readonly med_notes: Scalars['String'];
+  readonly patient?: Maybe<Patient>;
+  readonly title: Scalars['String'];
+}
+
 export interface Mutation {
 
   readonly __typename?: 'Mutation';
 
   readonly addAppointment?: Maybe<Appointment>;
 
+  readonly addMedNotes?: Maybe<MedicalNotes>;
   readonly addPatient?: Maybe<Patient>;
 
   readonly addPrescription?: Maybe<Prescription>;
 
+  readonly deleteAppointment?: Maybe<Appointment>;
   readonly deletePatient?: Maybe<Patient>;
 
   readonly deletePrescription?: Maybe<Prescription>;
@@ -98,6 +116,10 @@ export interface MutationAddAppointmentArgs {
 
 }
 
+export interface MutationAddMedNotesArgs {
+  newMedNotes: MedNotesInput;
+}
+
 export interface MutationAddPatientArgs {
 
   newPatient: PatientInput;
@@ -108,6 +130,10 @@ export interface MutationAddPrescriptionArgs {
 
   newPrescription: PrescriptionInput;
 
+}
+
+export interface MutationDeleteAppointmentArgs {
+  appID: Scalars['Int'];
 }
 
 export interface MutationDeletePatientArgs {
@@ -226,6 +252,7 @@ export interface Query {
 
   readonly patientPrescriptions?: Maybe<ReadonlyArray<Maybe<Prescription>>>;
 
+  readonly patientMedNotes?: Maybe<ReadonlyArray<Maybe<MedicalNotes>>>;
   readonly patients?: Maybe<ReadonlyArray<Maybe<Patient>>>;
 
   readonly prescriptions?: Maybe<ReadonlyArray<Maybe<Prescription>>>;
@@ -238,6 +265,10 @@ export interface QueryPatientPrescriptionsArgs {
 
   patientId: Scalars['Int'];
 
+}
+
+export interface QueryPatientMedNotesArgs {
+  patient_id: Scalars['Int'];
 }
 
 export interface QuerySpecificPatientArgs {

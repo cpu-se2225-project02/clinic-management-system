@@ -15,7 +15,7 @@ import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
 import {
   AllPatientsDocument, AllDocsDocument, GetAllAppointmentsDocument,
-  AddAnAppointmentDocument, EdiAnAppointmentDocument,
+  AddAnAppointmentDocument, EdiAnAppointmentDocument, DeleteAnAppointmentDocument,
 } from '../queries.generated';
 
 function Appointment() {
@@ -34,17 +34,21 @@ function Appointment() {
     query: AllDocsDocument,
   });
 
+  const [deletAppointmentResult, deleteAnAppointment] = useMutation(DeleteAnAppointmentDocument);
+
   const [editAppointmentResult, editAppointment] = useMutation(EdiAnAppointmentDocument);
 
   const [addAppointmentResult, addAppointment] = useMutation(AddAnAppointmentDocument);
 
   const { data, error, fetching } = allAppointments;
 
-  if (fetching || addAppointmentResult.fetching || editAppointmentResult.fetching) {
+  if (fetching || addAppointmentResult.fetching || editAppointmentResult.fetching
+    || deletAppointmentResult.fetching) {
     return <Spinner animation="border" role="status" />;
   }
 
-  if (error || addAppointmentResult.error || editAppointmentResult.error) {
+  if (error || addAppointmentResult.error || editAppointmentResult.error
+    || deletAppointmentResult.error) {
     console.log(error);
     console.log(addAppointmentResult.error);
     return <div>Something went wrong</div>;
@@ -52,6 +56,12 @@ function Appointment() {
 
   const handleChange = (event: React.MouseEvent<HTMLElement>, type: string) => {
     setActive(type);
+  };
+
+  const handleDelete = (deletedId: string | number) => {
+    deleteAnAppointment({
+      appId: deletedId as number,
+    });
   };
 
   const handleConfirm = (event: ProcessedEvent, action: EventActions) => {
@@ -117,6 +127,7 @@ function Appointment() {
                 <Scheduler
                   view="month"
                   onConfirm={handleConfirm}
+                  onDelete={handleDelete}
                   events={
                     allAppointments.data?.appointments?.map((appointment) => ({
                       event_id: appointment?.id,
