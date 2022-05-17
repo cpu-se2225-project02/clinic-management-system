@@ -63,46 +63,34 @@ export default function PatientRecord() {
                 Prescriptions
               </Button>
               {PrescriptionBtn && <PrescriptionForm pID={data?.specificPatient?.id} />}
-              {/* <Row> */}
             </Col>
-
+            <Col className="list border d-grid gap-2">
+              <Button variant="primary" className="patient-btns">
+                Medical History
+              </Button>
+            </Col>
+            <Col className="list border d-grid gap-2">
+              <Button variant="primary" className="patient-btns">
+                Account
+              </Button>
+            </Col>
+            <Col className="list border d-grid gap-2">
+              <Button
+                variant="primary"
+                className="patient-btns"
+                onClick={() => setMedNotesBtn(!MedNotesBtn)}
+              >
+                Medical Notes
+              </Button>
+              {MedNotesBtn && <MedicalNotes pId={data?.specificPatient?.id} />}
+            </Col>
+            <Col className="list border d-grid gap-2">
+              <Button variant="primary" className="patient-btns">
+                Appointment
+              </Button>
+            </Col>
           </div>
         </Col>
-        <Row>
-          <Col className="list border d-grid gap-2">
-            <Button variant="primary" className="patient-btns">
-              Medical History
-            </Button>
-          </Col>
-        </Row>
-        <Row>
-          <Col className="list border d-grid gap-2">
-            <Button variant="primary" className="patient-btns">
-              Account
-            </Button>
-          </Col>
-        </Row>
-        <Row>
-          <Col className="list border d-grid gap-2">
-            <Button
-              variant="primary"
-              className="patient-btns"
-              onClick={() => setMedNotesBtn(!MedNotesBtn)}
-            >
-              Medical Notes
-            </Button>
-          </Col>
-        </Row>
-        <Row>
-          {MedNotesBtn && <MedicalNotes pId={data?.specificPatient?.id} />}
-        </Row>
-        <Row>
-          <Col className="list border d-grid gap-2">
-            <Button variant="primary" className="patient-btns">
-              Appointment
-            </Button>
-          </Col>
-        </Row>
       </Row>
     </Container>
   );
