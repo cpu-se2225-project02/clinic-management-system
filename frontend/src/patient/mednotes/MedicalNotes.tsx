@@ -1,15 +1,19 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable array-callback-return */
-import React from 'react';
+import React, { useState } from 'react';
 import { GoDiffAdded } from 'react-icons/go';
 import { useQuery } from 'urql';
 import { Spinner } from 'react-bootstrap';
 import { DisplayMedNotesDocument } from '../../queries.generated';
+import MedNotesForm from './MedNotesForm';
 
 interface PatientID {
   pId: number | undefined
 }
 
 export default function MedicalNotes({ pId }: PatientID) {
+  const [PostButton, setPostButton] = useState(false);
+
   const [allMedNotes] = useQuery({
     query: DisplayMedNotesDocument,
     variables: {
@@ -29,7 +33,8 @@ export default function MedicalNotes({ pId }: PatientID) {
 
   return (
     <>
-      <GoDiffAdded size={30} />
+      <GoDiffAdded size={30} onClick={() => { setPostButton(!PostButton); }} />
+      { PostButton && <MedNotesForm pId={pId} postButton={setPostButton} /> }
       <div>
         {data?.patientMedNotes?.map((note) => (
           <>
