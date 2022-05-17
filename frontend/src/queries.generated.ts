@@ -1,8 +1,15 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable no-multiple-empty-lines */
+
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 
 import * as Types from './generated/graphql';
 
 export type AllPatientsQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
+
+
+
 
 export type AllPatientsQuery = (
 
@@ -18,11 +25,17 @@ export type AllPatientsQuery = (
 
 );
 
+
+
 export type AddPatientMutationVariables = Types.Exact<{
 
   newPatient: Types.PatientInput;
 
 }>;
+
+
+
+
 
 export type AddPatientMutation = (
 
@@ -38,11 +51,17 @@ export type AddPatientMutation = (
 
 );
 
+
+
 export type GetPatientQueryVariables = Types.Exact<{
 
   id: Types.Scalars['Int'];
 
 }>;
+
+
+
+
 
 export type GetPatientQuery = (
 
@@ -58,6 +77,8 @@ export type GetPatientQuery = (
 
 );
 
+
+
 export type EditAPatientMutationVariables = Types.Exact<{
 
   thePatient: Types.PatientInput;
@@ -65,6 +86,10 @@ export type EditAPatientMutationVariables = Types.Exact<{
   pid: Types.Scalars['Int'];
 
 }>;
+
+
+
+
 
 export type EditAPatientMutation = (
 
@@ -80,7 +105,13 @@ export type EditAPatientMutation = (
 
 );
 
+
+
 export type GetAllAppointmentsQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
+
+
+
 
 export type GetAllAppointmentsQuery = (
 
@@ -104,11 +135,17 @@ export type GetAllAppointmentsQuery = (
 
 );
 
+
+
 export type AddPrescriptionMutationVariables = Types.Exact<{
 
   newPresc: Types.PrescriptionInput;
 
 }>;
+
+
+
+
 
 export type AddPrescriptionMutation = (
 
@@ -124,11 +161,17 @@ export type AddPrescriptionMutation = (
 
 );
 
+
+
 export type DeleteAPatientMutationVariables = Types.Exact<{
 
   patientID: Types.Scalars['Int'];
 
 }>;
+
+
+
+
 
 export type DeleteAPatientMutation = (
 
@@ -144,7 +187,13 @@ export type DeleteAPatientMutation = (
 
 );
 
+
+
 export type AllDocsQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
+
+
+
 
 export type AllDocsQuery = (
 
@@ -160,11 +209,17 @@ export type AllDocsQuery = (
 
 );
 
+
+
 export type AddAnAppointmentMutationVariables = Types.Exact<{
 
   appointment: Types.AppointmentInput;
 
 }>;
+
+
+
+
 
 export type AddAnAppointmentMutation = (
 
@@ -180,7 +235,9 @@ export type AddAnAppointmentMutation = (
 
 );
 
-export type EditAnAppointmentMutationVariables = Types.Exact<{
+
+
+export type EdiAnAppointmentMutationVariables = Types.Exact<{
 
   theAppointment: Types.AppointmentInput;
 
@@ -188,7 +245,11 @@ export type EditAnAppointmentMutationVariables = Types.Exact<{
 
 }>;
 
-export type EditAnAppointmentMutation = (
+
+
+
+
+export type EdiAnAppointmentMutation = (
 
   { __typename?: 'Mutation' }
 
@@ -201,6 +262,88 @@ export type EditAnAppointmentMutation = (
   )> }
 
 );
+
+
+
+export type DeleteAnAppointmentMutationVariables = Types.Exact<{
+
+  appId: Types.Scalars['Int'];
+
+}>;
+
+
+
+
+
+export type DeleteAnAppointmentMutation = (
+
+  { __typename?: 'Mutation' }
+
+  & { deleteAppointment?: Types.Maybe<(
+
+    { __typename?: 'Appointment' }
+
+    & Pick<Types.Appointment, 'id'>
+
+  )> }
+
+);
+
+
+
+export type DisplayMedNotesQueryVariables = Types.Exact<{
+
+  pID: Types.Scalars['Int'];
+
+}>;
+
+
+
+
+
+export type DisplayMedNotesQuery = (
+
+  { __typename?: 'Query' }
+
+  & { patientMedNotes?: Types.Maybe<Array<Types.Maybe<(
+
+    { __typename?: 'MedicalNotes' }
+
+    & Pick<Types.MedicalNotes, 'date_noted' | 'id' | 'title' | 'med_notes'>
+
+  )>>> }
+
+);
+
+
+
+export type AddAMedNoteMutationVariables = Types.Exact<{
+
+  newMedNote: Types.MedNotesInput;
+
+}>;
+
+
+
+
+
+export type AddAMedNoteMutation = (
+
+  { __typename?: 'Mutation' }
+
+  & { addMedNotes?: Types.Maybe<(
+
+    { __typename?: 'MedicalNotes' }
+
+    & Pick<Types.MedicalNotes, 'med_notes' | 'title'>
+
+  )> }
+
+);
+
+
+
+
 
 export const AllPatientsDocument = {
   kind: 'Document',
@@ -319,12 +462,12 @@ export const AddAnAppointmentDocument = {
   }],
 } as unknown as DocumentNode<AddAnAppointmentMutation, AddAnAppointmentMutationVariables>;
 
-export const EditAnAppointmentDocument = {
+export const EdiAnAppointmentDocument = {
   kind: 'Document',
   definitions: [{
     kind: 'OperationDefinition',
     operation: 'mutation',
-    name: { kind: 'Name', value: 'editAnAppointment' },
+    name: { kind: 'Name', value: 'ediAnAppointment' },
     variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'theAppointment' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'AppointmentInput' } } } }, { kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'aId' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
     selectionSet: {
       kind: 'SelectionSet',
@@ -333,4 +476,52 @@ export const EditAnAppointmentDocument = {
       }],
     },
   }],
-} as unknown as DocumentNode<EditAnAppointmentMutation, EditAnAppointmentMutationVariables>;
+} as unknown as DocumentNode<EdiAnAppointmentMutation, EdiAnAppointmentMutationVariables>;
+
+export const DeleteAnAppointmentDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'mutation',
+    name: { kind: 'Name', value: 'deleteAnAppointment' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'appId' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'deleteAppointment' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'appID' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'appId' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<DeleteAnAppointmentMutation, DeleteAnAppointmentMutationVariables>;
+
+export const DisplayMedNotesDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'query',
+    name: { kind: 'Name', value: 'DisplayMedNotes' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'pID' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'patientMedNotes' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'patient_id' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'pID' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'date_noted' } }, { kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'title' } }, { kind: 'Field', name: { kind: 'Name', value: 'med_notes' } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<DisplayMedNotesQuery, DisplayMedNotesQueryVariables>;
+
+export const AddAMedNoteDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'mutation',
+    name: { kind: 'Name', value: 'AddAMedNote' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'newMedNote' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'MedNotesInput' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'addMedNotes' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'newMedNotes' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'newMedNote' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'med_notes' } }, { kind: 'Field', name: { kind: 'Name', value: 'title' } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<AddAMedNoteMutation, AddAMedNoteMutationVariables>;

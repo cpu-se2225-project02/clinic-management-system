@@ -11,6 +11,7 @@ import * as appointmentTypes from './appointment';
 import * as prescriptionTypes from './prescription';
 import * as doctorTypes from './doctor';
 import * as paymentTypes from './payment';
+import * as medNotesTypes from './medNotes';
 
 const app = express();
 const PORT = 8001;
@@ -19,7 +20,8 @@ const db = new PrismaClient({
 });
 
 const schema = makeSchema({
-  types: [patientTypes, appointmentTypes, prescriptionTypes, doctorTypes, paymentTypes],
+  // eslint-disable-next-line max-len
+  types: [patientTypes, appointmentTypes, prescriptionTypes, doctorTypes, paymentTypes, medNotesTypes],
   outputs: {
     typegen: path.join(__dirname, 'generated/graphql-types.ts'),
     schema: path.join(__dirname, '../../frontend/schema.graphql'),

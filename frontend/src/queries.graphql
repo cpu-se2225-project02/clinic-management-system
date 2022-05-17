@@ -101,11 +101,33 @@ mutation addAnAppointment($appointment: AppointmentInput!) {
   }
 }
 
-mutation editAnAppointment($theAppointment: AppointmentInput!, $aId: Int!) {
+mutation ediAnAppointment($theAppointment: AppointmentInput!, $aId: Int!) {
   editAppointment(editedAppointment: $theAppointment, appointmentID: $aId) {
     name
     dt_start
     dt_end
     doc_id
+  }
+}
+
+mutation deleteAnAppointment($appId: Int!) {
+  deleteAppointment(appID: $appId) {
+    id
+  }
+}
+
+query DisplayMedNotes($pID: Int!) {
+  patientMedNotes(patient_id: $pID) {
+    date_noted
+    id
+    title
+    med_notes
+  }
+}
+
+mutation AddAMedNote($newMedNote: MedNotesInput!) {
+  addMedNotes(newMedNotes: $newMedNote) {
+    med_notes
+    title
   }
 }

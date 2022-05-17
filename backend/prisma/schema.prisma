@@ -16,7 +16,7 @@ generator nexus {
 
 //from here: we define models || entities inside our db
 model Patient {
-  id           Int           @id @default(autoincrement())
+  id           Int            @id @default(autoincrement())
   f_name       String
   l_name       String
   m_initial    String?
@@ -25,6 +25,7 @@ model Patient {
   age          Int
   address      String
   birthdate    String
+  medicalNotes MedicalNotes[]
   appointments Appointment[]
   payments     Payment[]
 }
@@ -64,4 +65,13 @@ model Payment {
 model Invoice {
   id   Int    @id @default(autoincrement())
   date String
+}
+
+model MedicalNotes {
+  id         Int     @id @default(autoincrement())
+  date_noted String
+  med_notes  String
+  title      String
+  patient_id Int
+  patient    Patient @relation(fields: [patient_id], references: [id])
 }

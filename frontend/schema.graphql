@@ -25,11 +25,28 @@ type Doctor {
   id: Int!
 }
 
+input MedNotesInput {
+  date_noted: String!
+  med_notes: String!
+  patient_id: Int!
+  title: String!
+}
+
+type MedicalNotes {
+  date_noted: String!
+  id: Int!
+  med_notes: String!
+  patient: Patient
+  title: String!
+}
+
 type Mutation {
   addAppointment(newAppointment: AppointmentInput!): Appointment
+  addMedNotes(newMedNotes: MedNotesInput!): MedicalNotes
   addPatient(newPatient: PatientInput!): Patient
   addPayment(newPayment: PaymentInput!): Payment
   addPrescription(newPrescription: PrescriptionInput!): Prescription
+  deleteAppointment(appID: Int!): Appointment
   deletePatient(patientId: Int!): Patient
   editAppointment(appointmentID: Int!, editedAppointment: AppointmentInput!): Appointment
   editPatient(editedPatient: PatientInput!, patientId: Int!): Patient
@@ -92,6 +109,7 @@ type Query {
   helloWorld: String
   hi: String
   high: String
+  patientMedNotes(patient_id: Int!): [MedicalNotes]
   patients: [Patient]
   specificPatient(patientId: Int!): Patient
 }
