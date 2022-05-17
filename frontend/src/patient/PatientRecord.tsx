@@ -12,11 +12,13 @@ import { GetPatientDocument } from '../queries.generated';
 import PatientInformation from './PatientInformation';
 import PrescriptionForm from './prescription/PrescriptionForm';
 import MedicalNotes from './mednotes/MedicalNotes';
+import PatientAccount from './account/PatientAccount';
 
 export default function PatientRecord() {
   const params = useParams() as any;
   const patiendID = parseInt(params.id);
   const [PrescriptionBtn, setPrescBtn] = useState(false);
+  const [AccountBtn, setAccBtn] = useState(false);
   const [MedNotesBtn, setMedNotesBtn] = useState(false);
 
   const [allPatients] = useQuery({
@@ -76,10 +78,13 @@ export default function PatientRecord() {
       </Row>
       <Row>
         <Col className="list border d-grid gap-2">
-          <Button variant="primary" className="patient-btns">
+          <Button variant="primary" className="patient-btns" onClick={() => setAccBtn(!AccountBtn)}>
             Account
           </Button>
         </Col>
+      </Row>
+      <Row>
+        {AccountBtn && <PatientAccount pID={data?.specificPatient?.id} />}
       </Row>
       <Row>
         <Col className="list border d-grid gap-2">

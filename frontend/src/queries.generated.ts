@@ -1,15 +1,8 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-multiple-empty-lines */
-
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 
 import * as Types from './generated/graphql';
 
 export type AllPatientsQueryVariables = Types.Exact<{ [key: string]: never; }>;
-
-
-
-
 
 export type AllPatientsQuery = (
 
@@ -25,17 +18,11 @@ export type AllPatientsQuery = (
 
 );
 
-
-
 export type AddPatientMutationVariables = Types.Exact<{
 
   newPatient: Types.PatientInput;
 
 }>;
-
-
-
-
 
 export type AddPatientMutation = (
 
@@ -51,17 +38,11 @@ export type AddPatientMutation = (
 
 );
 
-
-
 export type GetPatientQueryVariables = Types.Exact<{
 
   id: Types.Scalars['Int'];
 
 }>;
-
-
-
-
 
 export type GetPatientQuery = (
 
@@ -77,8 +58,6 @@ export type GetPatientQuery = (
 
 );
 
-
-
 export type EditAPatientMutationVariables = Types.Exact<{
 
   thePatient: Types.PatientInput;
@@ -86,10 +65,6 @@ export type EditAPatientMutationVariables = Types.Exact<{
   pid: Types.Scalars['Int'];
 
 }>;
-
-
-
-
 
 export type EditAPatientMutation = (
 
@@ -105,13 +80,7 @@ export type EditAPatientMutation = (
 
 );
 
-
-
 export type GetAllAppointmentsQueryVariables = Types.Exact<{ [key: string]: never; }>;
-
-
-
-
 
 export type GetAllAppointmentsQuery = (
 
@@ -135,17 +104,31 @@ export type GetAllAppointmentsQuery = (
 
 );
 
+export type GetPatientAccountQueryVariables = Types.Exact<{
 
+  patientId: Types.Scalars['Int'];
+
+}>;
+
+export type GetPatientAccountQuery = (
+
+  { __typename?: 'Query' }
+
+  & { account?: Types.Maybe<Array<Types.Maybe<(
+
+    { __typename?: 'Payment' }
+
+    & Pick<Types.Payment, 'id' | 'paymnt_dt' | 'ammnt_cost' | 'ammnt_payed'>
+
+  )>>> }
+
+);
 
 export type AddPrescriptionMutationVariables = Types.Exact<{
 
   newPresc: Types.PrescriptionInput;
 
 }>;
-
-
-
-
 
 export type AddPrescriptionMutation = (
 
@@ -161,17 +144,11 @@ export type AddPrescriptionMutation = (
 
 );
 
-
-
 export type DeleteAPatientMutationVariables = Types.Exact<{
 
   patientID: Types.Scalars['Int'];
 
 }>;
-
-
-
-
 
 export type DeleteAPatientMutation = (
 
@@ -187,13 +164,7 @@ export type DeleteAPatientMutation = (
 
 );
 
-
-
 export type AllDocsQueryVariables = Types.Exact<{ [key: string]: never; }>;
-
-
-
-
 
 export type AllDocsQuery = (
 
@@ -209,17 +180,11 @@ export type AllDocsQuery = (
 
 );
 
-
-
 export type AddAnAppointmentMutationVariables = Types.Exact<{
 
   appointment: Types.AppointmentInput;
 
 }>;
-
-
-
-
 
 export type AddAnAppointmentMutation = (
 
@@ -235,8 +200,6 @@ export type AddAnAppointmentMutation = (
 
 );
 
-
-
 export type EdiAnAppointmentMutationVariables = Types.Exact<{
 
   theAppointment: Types.AppointmentInput;
@@ -244,10 +207,6 @@ export type EdiAnAppointmentMutationVariables = Types.Exact<{
   aId: Types.Scalars['Int'];
 
 }>;
-
-
-
-
 
 export type EdiAnAppointmentMutation = (
 
@@ -263,17 +222,11 @@ export type EdiAnAppointmentMutation = (
 
 );
 
-
-
 export type DeleteAnAppointmentMutationVariables = Types.Exact<{
 
   appId: Types.Scalars['Int'];
 
 }>;
-
-
-
-
 
 export type DeleteAnAppointmentMutation = (
 
@@ -289,17 +242,11 @@ export type DeleteAnAppointmentMutation = (
 
 );
 
-
-
 export type DisplayMedNotesQueryVariables = Types.Exact<{
 
   pID: Types.Scalars['Int'];
 
 }>;
-
-
-
-
 
 export type DisplayMedNotesQuery = (
 
@@ -315,17 +262,11 @@ export type DisplayMedNotesQuery = (
 
 );
 
-
-
 export type AddAMedNoteMutationVariables = Types.Exact<{
 
   newMedNote: Types.MedNotesInput;
 
 }>;
-
-
-
-
 
 export type AddAMedNoteMutation = (
 
@@ -340,10 +281,6 @@ export type AddAMedNoteMutation = (
   )> }
 
 );
-
-
-
-
 
 export const AllPatientsDocument = {
   kind: 'Document',
@@ -406,6 +343,22 @@ export const GetAllAppointmentsDocument = {
     kind: 'OperationDefinition', operation: 'query', name: { kind: 'Name', value: 'getAllAppointments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'appointments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'dt_start' } }, { kind: 'Field', name: { kind: 'Name', value: 'dt_end' } }, { kind: 'Field', name: { kind: 'Name', value: 'name' } }, { kind: 'Field', name: { kind: 'Name', value: 'doc_id' } }, { kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }] } }] } }] },
   }],
 } as unknown as DocumentNode<GetAllAppointmentsQuery, GetAllAppointmentsQueryVariables>;
+
+export const GetPatientAccountDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'query',
+    name: { kind: 'Name', value: 'getPatientAccount' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'patientId' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'account' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'patientId' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'patientId' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'paymnt_dt' } }, { kind: 'Field', name: { kind: 'Name', value: 'ammnt_cost' } }, { kind: 'Field', name: { kind: 'Name', value: 'ammnt_payed' } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<GetPatientAccountQuery, GetPatientAccountQueryVariables>;
 
 export const AddPrescriptionDocument = {
   kind: 'Document',

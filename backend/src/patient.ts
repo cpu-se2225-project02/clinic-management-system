@@ -10,6 +10,7 @@ import {
   objectType,
   queryField,
 } from 'nexus';
+
 import { Prisma, PrismaClient } from '@prisma/client';
 import { Patient as PatientType } from 'nexus-prisma';
 import { Appointment } from './appointment';

@@ -67,6 +67,15 @@ query getAllAppointments {
   }
 }
 
+query getPatientAccount($patientId: Int!) {
+  account(patientId: $patientId) {
+    id
+    paymnt_dt
+    ammnt_cost
+    ammnt_payed
+  }
+}
+
 mutation addPrescription($newPresc: PrescriptionInput!) {
   addPrescription(newPrescription: $newPresc) {
     pres_name
