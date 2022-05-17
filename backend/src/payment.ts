@@ -1,5 +1,5 @@
 import {
-  inputObjectType, mutationField, nonNull, objectType, queryField,
+  inputObjectType, intArg, list, mutationField, nonNull, objectType, queryField,
 } from 'nexus';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { Payment as PaymentType } from 'nexus-prisma';
@@ -27,6 +27,14 @@ export const Payment = objectType({
         return db.patient.findFirst({ where: { id: payment.patient_id } });
       },
     });
+  },
+});
+
+export const account = queryField('account', {
+  type: list(Payment),
+  args: { patientId: nonNull(intArg()) },
+  resolve(root, args) {
+    return db.payment.findMany({ where: { patient_id: args.patientId } });
   },
 });
 

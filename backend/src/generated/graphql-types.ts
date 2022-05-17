@@ -148,6 +148,7 @@ export interface NexusGenFieldTypes {
     pres_name: string; // String!
   }
   Query: { // field return type
+    account: Array<NexusGenRootTypes['Payment'] | null> | null; // [Payment]
     allDoctors: Array<NexusGenRootTypes['Doctor'] | null> | null; // [Doctor]
     appointments: Array<NexusGenRootTypes['Appointment'] | null> | null; // [Appointment]
     helloWorld: string | null; // String
@@ -205,6 +206,7 @@ export interface NexusGenFieldTypeNames {
     pres_name: 'String'
   }
   Query: { // field return type name
+    account: 'Payment'
     allDoctors: 'Doctor'
     appointments: 'Appointment'
     helloWorld: 'String'
@@ -242,6 +244,9 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    account: { // args
+      patientId: number; // Int!
+    }
     specificPatient: { // args
       patientId: number; // Int!
     }
