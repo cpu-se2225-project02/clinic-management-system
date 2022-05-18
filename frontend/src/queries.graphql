@@ -76,6 +76,20 @@ query getPatientAccount($patientId: Int!) {
   }
 }
 
+mutation AddPayment($newPayment: PaymentInput!) {
+  addPayment(newPayment: $newPayment) {
+    id
+    paymnt_dt
+    ammnt_cost
+    ammnt_payed
+    patient {
+      id
+      f_name
+      l_name
+    }
+  }
+}
+
 mutation addPrescription($newPresc: PrescriptionInput!) {
   addPrescription(newPrescription: $newPresc) {
     pres_name
