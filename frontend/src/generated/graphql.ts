@@ -113,10 +113,12 @@ export interface Patient {
   readonly age: Scalars['Int'];
   readonly appointments?: Maybe<ReadonlyArray<Maybe<Appointment>>>;
   readonly birthdate: Scalars['String'];
+  readonly constactNo: Scalars['String'];
+  readonly email?: Maybe<Scalars['String']>;
   readonly f_name: Scalars['String'];
   readonly id: Scalars['Int'];
   readonly l_name: Scalars['String'];
-  readonly m_initial?: Maybe<Scalars['String']>;
+  readonly m_name?: Maybe<Scalars['String']>;
   readonly sex: Scalars['String'];
   readonly suffix?: Maybe<Scalars['String']>;
 }
@@ -125,9 +127,11 @@ export interface PatientInput {
   readonly address: Scalars['String'];
   readonly age: Scalars['Int'];
   readonly birthdate: Scalars['String'];
+  readonly constactNo: Scalars['String'];
+  readonly email?: InputMaybe<Scalars['String']>;
   readonly f_name: Scalars['String'];
   readonly l_name: Scalars['String'];
-  readonly m_initial?: InputMaybe<Scalars['String']>;
+  readonly m_name?: InputMaybe<Scalars['String']>;
   readonly sex: Scalars['String'];
   readonly suffix?: InputMaybe<Scalars['String']>;
 }

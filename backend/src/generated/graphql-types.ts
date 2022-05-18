@@ -31,9 +31,11 @@ export interface NexusGenInputs {
     address: string; // String!
     age: number; // Int!
     birthdate: string; // String!
+    constactNo: string; // String!
+    email?: string | null; // String
     f_name: string; // String!
     l_name: string; // String!
-    m_initial?: string | null; // String
+    m_name?: string | null; // String
     sex: string; // String!
     suffix?: string | null; // String
   }
@@ -77,10 +79,12 @@ export interface NexusGenObjects {
     address: string; // String!
     age: number; // Int!
     birthdate: string; // String!
+    constactNo: string; // String!
+    email?: string | null; // String
     f_name: string; // String!
     id: number; // Int!
     l_name: string; // String!
-    m_initial?: string | null; // String
+    m_name?: string | null; // String
     sex: string; // String!
     suffix?: string | null; // String
   }
@@ -137,10 +141,12 @@ export interface NexusGenFieldTypes {
     age: number; // Int!
     appointments: Array<NexusGenRootTypes['Appointment'] | null> | null; // [Appointment]
     birthdate: string; // String!
+    constactNo: string; // String!
+    email: string | null; // String
     f_name: string; // String!
     id: number; // Int!
     l_name: string; // String!
-    m_initial: string | null; // String
+    m_name: string | null; // String
     sex: string; // String!
     suffix: string | null; // String
   }
@@ -195,10 +201,12 @@ export interface NexusGenFieldTypeNames {
     age: 'Int'
     appointments: 'Appointment'
     birthdate: 'String'
+    constactNo: 'String'
+    email: 'String'
     f_name: 'String'
     id: 'Int'
     l_name: 'String'
-    m_initial: 'String'
+    m_name: 'String'
     sex: 'String'
     suffix: 'String'
   }
