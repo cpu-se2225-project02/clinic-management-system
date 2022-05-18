@@ -37,6 +37,7 @@ export default function Prescription({ pID }: PatientID) {
         <div>
           {prescription?.pres_name}
           {prescription?.pres_dos}
+          {prescription?.id}
         </div>
       ))}
     </>

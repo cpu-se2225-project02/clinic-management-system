@@ -19,6 +19,7 @@ export const Prescription = objectType({
   definition(t) {
     t.field(PrescriptionType.pres_name);
     t.field(PrescriptionType.pres_dos);
+    t.field(PrescriptionType.id);
     t.field('patient', {
       type: Patient,
       resolve(prescription) {
@@ -54,6 +55,7 @@ export const PrescriptionInput = inputObjectType({
   definition(t) {
     t.field(PrescriptionType.pres_name);
     t.field(PrescriptionType.pres_dos);
+    t.field(PrescriptionType.id);
     t.field(PrescriptionType.patient_id);
   },
 });

@@ -78,12 +78,14 @@ input PatientInput {
 }
 
 type Prescription {
+  id: Int!
   patient: Patient
   pres_dos: Int!
   pres_name: String!
 }
 
 input PrescriptionInput {
+  id: Int!
   patient_id: Int!
   pres_dos: Int!
   pres_name: String!

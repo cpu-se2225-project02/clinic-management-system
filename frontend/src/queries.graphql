@@ -40,21 +40,23 @@ query GetPatient($id: Int!) {
   }
 }
 
-
 query GetPrescription($id: Int!) {
   patientPrescriptions(patientId: $id) {
     pres_name
     pres_dos  
+    id
     patient{
       id
     } 
   }
 }
 
+
 mutation editAPrescription($thePrescription: PrescriptionInput!, $pid: Int!) {
   editPrescription(editedPrescription: $thePrescription, prescriptionId: $pid) {
     pres_name
     pres_dos
+    id
     patient{
       id
     }

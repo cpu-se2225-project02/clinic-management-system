@@ -17,12 +17,12 @@ export default function UpdatePrescriptionForm({ postButton, patientID }: Popup)
   const [allPrescriptions] = useQuery({
     query: GetPrescriptionDocument,
     variables: {
-      id: patientID as number,
+      id: 
     },
   });
 
   const { data } = allPrescriptions;
-  const [presName, setPresName] = useState(data?.patientPrescriptions?.pres_name as string);
+  const [presName, setPresName] = useState(data?.patientPrescriptions.);
 
   const { error, fetching } = editPrescriptionResult;
   

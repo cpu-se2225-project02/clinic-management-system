@@ -147,12 +147,14 @@ export interface PatientInput {
 
 export interface Prescription {
   readonly __typename?: 'Prescription';
+  readonly id: Scalars['Int'];
   readonly patient?: Maybe<Patient>;
   readonly pres_dos: Scalars['Int'];
   readonly pres_name: Scalars['String'];
 }
 
 export interface PrescriptionInput {
+  readonly id: Scalars['Int'];
   readonly patient_id: Scalars['Int'];
   readonly pres_dos: Scalars['Int'];
   readonly pres_name: Scalars['String'];

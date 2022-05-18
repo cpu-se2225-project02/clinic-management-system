@@ -32,6 +32,7 @@ export default function PrescriptionForm({ pID, postButton }: PatientID) {
       newPresc: {
         pres_name: prescName,
         pres_dos: dosage,
+        patient_id: pID as number,
       },
     });
   };

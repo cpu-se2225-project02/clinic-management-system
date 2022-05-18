@@ -38,6 +38,7 @@ export interface NexusGenInputs {
     suffix?: string | null; // String
   }
   PrescriptionInput: { // input type
+    id: number; // Int!
     patient_id: number; // Int!
     pres_dos: number; // Int!
     pres_name: string; // String!
@@ -86,6 +87,7 @@ export interface NexusGenObjects {
     suffix?: string | null; // String
   }
   Prescription: { // root type
+    id: number; // Int!
     pres_dos: number; // Int!
     pres_name: string; // String!
   }
@@ -148,6 +150,7 @@ export interface NexusGenFieldTypes {
     suffix: string | null; // String
   }
   Prescription: { // field return type
+    id: number; // Int!
     patient: NexusGenRootTypes['Patient'] | null; // Patient
     pres_dos: number; // Int!
     pres_name: string; // String!
@@ -211,6 +214,7 @@ export interface NexusGenFieldTypeNames {
     suffix: 'String'
   }
   Prescription: { // field return type name
+    id: 'Int'
     patient: 'Patient'
     pres_dos: 'Int'
     pres_name: 'String'
