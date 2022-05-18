@@ -64,13 +64,6 @@ export default function PrescriptionForm({ pID }: PatientID) {
           placeholder="Dosage"
           onChange={(e) => setDosage(parseInt(e.target.value))}
         /> */}
-
-          <button
-            type="submit"
-            onClick={addingPrescription}
-          >
-            Submit
-          </button>
         </div>
       </div>
     </>

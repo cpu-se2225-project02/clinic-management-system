@@ -42,28 +42,41 @@ export default function PatientInformation({ pId }: PatientId) {
         {editBtn && <UpdatePatientForm postButton={setEditBtn} patientID={pId} />}
       </div>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
-      <div className="row">
-        <div className="col-xl-2 col-lg-4 col-md-2">
-          <img src={PatientIcon} className="PatientIcon" alt="..." />
-        </div>
-        <div className="col-xl-6 col-lg-4 col-md-2">
-          {data?.specificPatient?.f_name}
-          {' '}
-          {data?.specificPatient?.m_name}
-          {'. '}
-          {data?.specificPatient?.l_name}
-          <br />
-          {data?.specificPatient?.sex}
-          <br />
-          {data?.specificPatient?.age}
-          <br />
-          {data?.specificPatient?.birthdate}
-          <br />
-          {data?.specificPatient?.address}
+      <div className="container">
+        <div className="row justify-content-md-center">
+          <div className="row">
+            <div className="col-sm-3">
+              <img src={PatientIcon} className="PatientIcon" alt="..." />
+            </div>
+            <div className="col-sm-2">
+              Name:
+              <br />
+              Sex:
+              <br />
+              Age:
+              <br />
+              Birthdate:
+              <br />
+              Address:
+            </div>
+            <div className="col-sm-6">
+              {data?.specificPatient?.f_name}
+              {' '}
+              {data?.specificPatient?.m_name}
+              {' '}
+              {data?.specificPatient?.l_name}
+              <br />
+              {data?.specificPatient?.sex}
+              <br />
+              {data?.specificPatient?.age}
+              <br />
+              {data?.specificPatient?.birthdate}
+              <br />
+              {data?.specificPatient?.address}
+            </div>
+          </div>
         </div>
       </div>
-
     </>
   );
 }
