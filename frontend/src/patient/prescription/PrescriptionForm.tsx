@@ -38,29 +38,41 @@ export default function PrescriptionForm({ pID }: PatientID) {
 
   return (
     <>
-      <div>{pID}</div>
-      <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
-      {editBtn && <UpdatePrescription editButton={setEditBtn} /> }
-      <label>Prescription name:</label>
-      <input
-        type="text"
-        placeholder="Prescription"
-        onChange={(e) => setPrescName(e.target.value)}
-      />
+      <div className="card border-dark mb-3">
+        <div className="h5">
+          <div className="col">Prescription</div>
+        </div>
 
-      <label>Dosage</label>
-      <input
-        type="number"
-        placeholder="Dosage"
-        onChange={(e) => setDosage(parseInt(e.target.value))}
-      />
+        <div className="col" style={{ textAlign: 'right' }}>
+          <div>{pID}</div>
+          <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
+          {editBtn && <UpdatePrescription editButton={setEditBtn} />}
+        </div>
+        <div className="col">
+          <label>Prescriptions:</label>
+          <p>
+            PrescriptionName - Dosage
+          </p>
+          {/* <input
+          type="text"
+          placeholder="Prescription"
+          onChange={(e) => setPrescName(e.target.value)}
+        /> */}
+          {/* <label>Dosage</label>
+        <input
+          type="number"
+          placeholder="Dosage"
+          onChange={(e) => setDosage(parseInt(e.target.value))}
+        /> */}
 
-      <button
-        type="submit"
-        onClick={addingPrescription}
-      >
-        Submit
-      </button>
+          <button
+            type="submit"
+            onClick={addingPrescription}
+          >
+            Submit
+          </button>
+        </div>
+      </div>
     </>
   );
 }
