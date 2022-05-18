@@ -1,22 +1,16 @@
-.patient-list-box {
+/* .patient-list-box {
   display: inline-block !important;
   overflow-x: auto;
   overflow-y: auto;
   margin-top: 4px !important;
-}
+} */
 
 .sidebar-box {
   align-content: flex-start !important;
   display: flex !important;
   justify-content: left !important;
 }
-.btn{
-  background-color: transparent;
-  color: white;
-  /* color: black; */
-  /* outline: none; */
-  /* width: max-content; */
-}
+
 
 .h5 {
   background-color: #033076;
@@ -35,17 +29,17 @@
   padding-top: 8px !important;
 }
 
-.list {
+/* .list {
   text-align: left !important;
   margin-left: 30px;
   margin-right: 30px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
+} */
 
-.patient-btns {
+/* .patient-btns {
   background-color: #d3def0;
   color: black;
-}
+} */
 
 .add-patient-btn {
   background-color: #033076;
@@ -56,7 +50,7 @@
   margin-top: 10px !important;
 }
 
-.patient-rec-box {
+/* .patient-rec-box {
   margin-bottom: 40px !important;
   height: fit-content;
-}
+} */

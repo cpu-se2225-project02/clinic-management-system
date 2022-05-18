@@ -3,7 +3,7 @@ query AllPatients {
     id
     f_name
     l_name
-    m_initial
+    m_name
     suffix
     sex
     age
@@ -17,7 +17,7 @@ mutation AddPatient($newPatient: PatientInput!) {
     id
     l_name
     f_name
-    m_initial
+    m_name
     address
     age
     suffix
@@ -30,13 +30,15 @@ query GetPatient($id: Int!) {
   specificPatient(patientId: $id) {
     l_name
     f_name
-    m_initial
+    m_name
     sex
     suffix
     id
     address
     birthdate
     age
+    constactNo
+    email
   }
 }
 
@@ -69,11 +71,13 @@ mutation editAPatient($thePatient: PatientInput!, $pid: Int!) {
     suffix
     f_name
     l_name
-    m_initial
+    m_name
     sex
     address
     birthdate
     age
+    constactNo
+    email
   }
 }
 
@@ -112,7 +116,7 @@ mutation deleteAPatient($patientID: Int!) {
   deletePatient(patientId: $patientID) {
     l_name
     f_name
-    m_initial
+    m_name
     suffix
     sex
     age
