@@ -58,6 +58,7 @@ export interface Mutation {
   readonly addAppointment?: Maybe<Appointment>;
   readonly addMedNotes?: Maybe<MedicalNotes>;
   readonly addPatient?: Maybe<Patient>;
+  readonly addPayment?: Maybe<Payment>;
   readonly addPrescription?: Maybe<Prescription>;
   readonly deleteAppointment?: Maybe<Appointment>;
   readonly deletePatient?: Maybe<Patient>;
@@ -80,6 +81,11 @@ export interface MutationAddMedNotesArgs {
 
 export interface MutationAddPatientArgs {
   newPatient: PatientInput;
+}
+
+
+export interface MutationAddPaymentArgs {
+  newPayment: PaymentInput;
 }
 
 
@@ -149,6 +155,22 @@ export interface PatientInput {
   readonly suffix?: InputMaybe<Scalars['String']>;
 }
 
+export interface Payment {
+  readonly __typename?: 'Payment';
+  readonly ammnt_cost: Scalars['Float'];
+  readonly ammnt_payed: Scalars['Float'];
+  readonly id: Scalars['Int'];
+  readonly patient?: Maybe<Patient>;
+  readonly paymnt_dt: Scalars['String'];
+}
+
+export interface PaymentInput {
+  readonly ammnt_cost: Scalars['Float'];
+  readonly ammnt_payed: Scalars['Float'];
+  readonly patient_id: Scalars['Int'];
+  readonly paymnt_dt: Scalars['String'];
+}
+
 export interface Prescription {
   readonly __typename?: 'Prescription';
   readonly id: Scalars['Int'];
@@ -166,15 +188,23 @@ export interface PrescriptionInput {
 
 export interface Query {
   readonly __typename?: 'Query';
+  readonly account?: Maybe<ReadonlyArray<Maybe<Payment>>>;
   readonly allDoctors?: Maybe<ReadonlyArray<Maybe<Doctor>>>;
+  readonly allPayments?: Maybe<ReadonlyArray<Maybe<Payment>>>;
   readonly appointments?: Maybe<ReadonlyArray<Maybe<Appointment>>>;
   readonly helloWorld?: Maybe<Scalars['String']>;
   readonly hi?: Maybe<Scalars['String']>;
+  readonly high?: Maybe<Scalars['String']>;
   readonly patientMedNotes?: Maybe<ReadonlyArray<Maybe<MedicalNotes>>>;
   readonly patientPrescriptions?: Maybe<ReadonlyArray<Maybe<Prescription>>>;
   readonly patients?: Maybe<ReadonlyArray<Maybe<Patient>>>;
   readonly prescriptions?: Maybe<ReadonlyArray<Maybe<Prescription>>>;
   readonly specificPatient?: Maybe<Patient>;
+}
+
+
+export interface QueryAccountArgs {
+  patientId: Scalars['Int'];
 }
 
 

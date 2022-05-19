@@ -49,7 +49,6 @@ export default function UpdatePrescriptionForm({ postButton, patientID }: Popup)
           type="text"
           placeholder="Prescription dosage"
         />
-
         <button
           className="btn btn-primary mt-2 float-end"
           type="submit"

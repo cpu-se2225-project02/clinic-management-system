@@ -1,4 +1,3 @@
-/* eslint-disable react/button-has-type */
 /* eslint-disable no-unused-vars */
 /* eslint-disable radix */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -38,24 +37,27 @@ export default function PrescriptionForm({ pID, postButton }: PatientID) {
   };
 
   return (
-    <div className="popup">
-      <div className="popup-inner">
-        <button
-          onClick={() => postButton(false)}
-          className="btn close-btn float-end mt-0"
-        >
-          <AiOutlineCloseSquare size={25} />
-        </button>
+    <div className="card border-dark mb-3">
+      <div className="h5">
+        <div className="col">Prescription</div>
+      </div>
 
-        <label>Prescription:</label>
-        <input
-          className="form-control"
+      <div className="col" style={{ textAlign: 'right' }}>
+        <div>{pID}</div>
+        <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
+        {editBtn && <UpdatePrescription editButton={setEditBtn} />}
+      </div>
+      <div className="col">
+        <label>Prescriptions:</label>
+        <p>
+          PrescriptionName - Dosage
+        </p>
+        {/* <input
           type="text"
-          placeholder="Prescription Label"
-          onChange={(e) => { setPrescName(e.target.value); }}
-        />
-
-        <label>Dosage:</label>
+          placeholder="Prescription"
+          onChange={(e) => setPrescName(e.target.value)}
+        /> */}
+        {/* <label>Dosage</label>
         <input
           className="form-control"
           type="number"
@@ -72,6 +74,7 @@ export default function PrescriptionForm({ pID, postButton }: PatientID) {
           Submit
         </button>
 
+        </div>
       </div>
     </div>
   );

@@ -103,22 +103,27 @@ export default function PatientList() {
           </Row>
           <Row className="list-row">
             <Col className="list">
-              <div>
-                {data?.patients?.map((patient) => (
-                  <div>
+              {/* <div> */}
+              {data?.patients?.map((patient) => (
+                <div className="patientOuterInfo">
+                  <Button className="btn btn-light" onClick={() => navigate(`/patient_record/${patient?.id}`)}>
                     <div className="row g-0">
                       <Button className="btn btn-outline-dark" onClick={() => navigate(`/patient_record/${patient?.id}`)}>
-                        {patient?.l_name}
-                        {', '}
-                        {patient?.f_name}
-                        {' '}
-                        {patient?.m_initial}
-                        {' '}
-                      </Button>
+                      {patient?.l_name}
+                      {', '}
+                      {patient?.f_name}
+                      {' '}
+                      {patient?.m_name}
+                      {' '}
+                      <br />
+                      {/* Please add phone number */}
+                      {patient?.sex}
+                      <br />
                     </div>
-                  </div>
-                ))}
-              </div>
+                  </Button>
+                </div>
+              ))}
+              {/* </div> */}
             </Col>
           </Row>
         </Col>
