@@ -112,7 +112,7 @@ export default function PatientList() {
                         {', '}
                         {patient?.f_name}
                         {' '}
-                        {patient?.m_initial}
+                        {patient?.m_name}
                         {' '}
                       </Button>
                     </div>

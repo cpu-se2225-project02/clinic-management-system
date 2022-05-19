@@ -11,11 +11,12 @@ interface PatientID {
   pID: number | undefined
 }
 
+// eslint-disable-next-line no-unused-vars
 export default function PrescriptionForm({ pID }: PatientID) {
-  const [prescName, setPrescName] = useState('');
-  const [dosage, setDosage] = useState(0);
+  // const [prescName, setPrescName] = useState('');
+  // const [dosage, setDosage] = useState(0);
   const [editBtn, setEditBtn] = useState(false);
-  const [addPrescriptionResult, addPrescription] = useMutation(AddPrescriptionDocument);
+  const [addPrescriptionResult] = useMutation(AddPrescriptionDocument);
 
   const { error, fetching } = addPrescriptionResult;
 
@@ -27,52 +28,49 @@ export default function PrescriptionForm({ pID }: PatientID) {
     return <div>Insertion unsuccessful</div>;
   }
 
-  const addingPrescription = () => {
-    addPrescription({
-      newPresc: {
-        pres_name: prescName,
-        pres_dos: dosage,
-      },
-    });
-  };
+  // const addingPrescription = () => {
+  //   addPrescription({
+  //     newPresc: {
+  //       pres_name: prescName,
+  //       pres_dos: dosage,
+  //     },
+  //   });
+  // };
 
   return (
-    <>
-      <div className="card border-dark mb-3">
-        <div className="h5">
-          <div className="col">Prescription</div>
-        </div>
+    <div className="card border-dark mb-3">
+      <div className="h5">
+        <div className="col">Prescription</div>
+      </div>
 
-        <div className="col" style={{ textAlign: 'right' }}>
-          <div>{pID}</div>
-          <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
-          {editBtn && <UpdatePrescription editButton={setEditBtn} />}
-        </div>
-        <div className="col">
-          <label>Prescriptions:</label>
-          <p>
-            PrescriptionName - Dosage
-          </p>
-          {/* <input
+      <div className="col" style={{ textAlign: 'right' }}>
+        <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
+        {editBtn && <UpdatePrescription editButton={setEditBtn} />}
+      </div>
+      <div className="col">
+        <label>Prescriptions:</label>
+        <p>
+          PrescriptionName - Dosage
+        </p>
+        {/* <input
           type="text"
           placeholder="Prescription"
           onChange={(e) => setPrescName(e.target.value)}
         /> */}
-          {/* <label>Dosage</label>
+        {/* <label>Dosage</label>
         <input
           type="number"
           placeholder="Dosage"
           onChange={(e) => setDosage(parseInt(e.target.value))}
         /> */}
 
-          <button
-            type="submit"
-            onClick={addingPrescription}
-          >
-            Submit
-          </button>
-        </div>
+        {/* <button
+          type="submit"
+          onClick={addingPrescription}
+        >
+          Submit
+        </button> */}
       </div>
-    </>
+    </div>
   );
 }
