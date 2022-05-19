@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { useMutation, useQuery } from 'urql';
-import { EditAPrescriptionDocument, GetPrescriptionDocument } from '../../queries.generated';
+// import { EditAPrescriptionDocument, GetPrescriptionDocument } from '../../queries.generated';
 
 interface Popup {
   postButton: React.Dispatch<React.SetStateAction<boolean>>;
@@ -12,25 +12,25 @@ interface Popup {
 }
 
 export default function UpdatePrescriptionForm({ postButton, patientID }: Popup) {
-  const [editPrescriptionResult, editPrescription] = useMutation(EditAPrescriptionDocument);
+  // const [editPrescriptionResult, editPrescription] = useMutation(EditAPrescriptionDocument);
 
-  const [allPrescriptions] = useQuery({
-    query: GetPrescriptionDocument,
-    variables: {
-      id: 
-    },
-  });
+  // const [allPrescriptions] = useQuery({
+  //   query: GetPrescriptionDocument,
+  //   variables: {
+  //     id:
+  //   },
+  // });
 
-  const { data } = allPrescriptions;
-  const [presName, setPresName] = useState(data?.patientPrescriptions.);
+  // const { data } = allPrescriptions;
+  // const [presName, setPresName] = useState(data?.patientPrescriptions.);
 
-  const { error, fetching } = editPrescriptionResult;
-  
+  // const { error, fetching } = editPrescriptionResult;
+
   return (
     <div className="popup">
       <div className="popup-inner">
         <button
-          onClick={() => editButton(false)}
+          // onClick={() => editButton(false)}
           className="btn close-btn float-end mt-0"
         >
           <AiOutlineCloseSquare size={25} />

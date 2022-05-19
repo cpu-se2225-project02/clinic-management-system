@@ -45,12 +45,6 @@ export interface NexusGenInputs {
     patient_id: number; // Int!
     paymnt_dt: string; // String!
   }
-  PrescriptionInput: { // input type
-    id: number; // Int!
-    patient_id: number; // Int!
-    pres_dos: number; // Int!
-    pres_name: string; // String!
-  }
 }
 
 export interface NexusGenEnums {
@@ -102,11 +96,6 @@ export interface NexusGenObjects {
     id: number; // Int!
     paymnt_dt: string; // String!
   }
-  Prescription: { // root type
-    id: number; // Int!
-    pres_dos: number; // Int!
-    pres_name: string; // String!
-  }
   Query: {};
 }
 
@@ -146,13 +135,10 @@ export interface NexusGenFieldTypes {
     addMedNotes: NexusGenRootTypes['MedicalNotes'] | null; // MedicalNotes
     addPatient: NexusGenRootTypes['Patient'] | null; // Patient
     addPayment: NexusGenRootTypes['Payment'] | null; // Payment
-    addPrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
     deleteAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
     deletePatient: NexusGenRootTypes['Patient'] | null; // Patient
-    deletePrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
     editAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
     editPatient: NexusGenRootTypes['Patient'] | null; // Patient
-    editPrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
   }
   Patient: { // field return type
     address: string; // String!
@@ -175,12 +161,6 @@ export interface NexusGenFieldTypes {
     patient: NexusGenRootTypes['Patient'] | null; // Patient
     paymnt_dt: string; // String!
   }
-  Prescription: { // field return type
-    id: number; // Int!
-    patient: NexusGenRootTypes['Patient'] | null; // Patient
-    pres_dos: number; // Int!
-    pres_name: string; // String!
-  }
   Query: { // field return type
     account: Array<NexusGenRootTypes['Payment'] | null> | null; // [Payment]
     allDoctors: Array<NexusGenRootTypes['Doctor'] | null> | null; // [Doctor]
@@ -190,9 +170,7 @@ export interface NexusGenFieldTypes {
     hi: string | null; // String
     high: string | null; // String
     patientMedNotes: Array<NexusGenRootTypes['MedicalNotes'] | null> | null; // [MedicalNotes]
-    patientPrescriptions: Array<NexusGenRootTypes['Prescription'] | null> | null; // [Prescription]
     patients: Array<NexusGenRootTypes['Patient'] | null> | null; // [Patient]
-    prescriptions: Array<NexusGenRootTypes['Prescription'] | null> | null; // [Prescription]
     specificPatient: NexusGenRootTypes['Patient'] | null; // Patient
   }
 }
@@ -223,13 +201,10 @@ export interface NexusGenFieldTypeNames {
     addMedNotes: 'MedicalNotes'
     addPatient: 'Patient'
     addPayment: 'Payment'
-    addPrescription: 'Prescription'
     deleteAppointment: 'Appointment'
     deletePatient: 'Patient'
-    deletePrescription: 'Prescription'
     editAppointment: 'Appointment'
     editPatient: 'Patient'
-    editPrescription: 'Prescription'
   }
   Patient: { // field return type name
     address: 'String'
@@ -252,12 +227,6 @@ export interface NexusGenFieldTypeNames {
     patient: 'Patient'
     paymnt_dt: 'String'
   }
-  Prescription: { // field return type name
-    id: 'Int'
-    patient: 'Patient'
-    pres_dos: 'Int'
-    pres_name: 'String'
-  }
   Query: { // field return type name
     account: 'Payment'
     allDoctors: 'Doctor'
@@ -267,9 +236,7 @@ export interface NexusGenFieldTypeNames {
     hi: 'String'
     high: 'String'
     patientMedNotes: 'MedicalNotes'
-    patientPrescriptions: 'Prescription'
     patients: 'Patient'
-    prescriptions: 'Prescription'
     specificPatient: 'Patient'
   }
 }
@@ -288,17 +255,11 @@ export interface NexusGenArgTypes {
     addPayment: { // args
       newPayment: NexusGenInputs['PaymentInput']; // PaymentInput!
     }
-    addPrescription: { // args
-      newPrescription: NexusGenInputs['PrescriptionInput']; // PrescriptionInput!
-    }
     deleteAppointment: { // args
       appID: number; // Int!
     }
     deletePatient: { // args
       patientId: number; // Int!
-    }
-    deletePrescription: { // args
-      prescriptionId: number; // Int!
     }
     editAppointment: { // args
       appointmentID: number; // Int!
@@ -308,10 +269,6 @@ export interface NexusGenArgTypes {
       editedPatient: NexusGenInputs['PatientInput']; // PatientInput!
       patientId: number; // Int!
     }
-    editPrescription: { // args
-      editedPrescription: NexusGenInputs['PrescriptionInput']; // PrescriptionInput!
-      prescriptionId: number; // Int!
-    }
   }
   Query: {
     account: { // args
@@ -319,9 +276,6 @@ export interface NexusGenArgTypes {
     }
     patientMedNotes: { // args
       patient_id: number; // Int!
-    }
-    patientPrescriptions: { // args
-      patientId: number; // Int!
     }
     specificPatient: { // args
       patientId: number; // Int!

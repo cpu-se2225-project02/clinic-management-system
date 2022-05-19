@@ -108,18 +108,16 @@ export default function PatientList() {
                 <div className="patientOuterInfo">
                   <Button className="btn btn-light" onClick={() => navigate(`/patient_record/${patient?.id}`)}>
                     <div className="row g-0">
-                      <Button className="btn btn-outline-dark" onClick={() => navigate(`/patient_record/${patient?.id}`)}>
-                        {patient?.l_name}
-                        {', '}
-                        {patient?.f_name}
-                        {' '}
-                        {patient?.m_name}
-                        {' '}
-                        <br />
-                        {/* Please add phone number */}
-                        {patient?.sex}
-                        <br />
-                      </Button>
+                      {patient?.l_name}
+                      {', '}
+                      {patient?.f_name}
+                      {' '}
+                      {patient?.m_name}
+                      {' '}
+                      <br />
+                      {/* Please add phone number */}
+                      {patient?.sex}
+                      <br />
                     </div>
                   </Button>
                 </div>
