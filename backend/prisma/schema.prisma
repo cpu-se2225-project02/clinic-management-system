@@ -16,20 +16,21 @@ generator nexus {
 
 //from here: we define models || entities inside our db
 model Patient {
-  id           Int            @id @default(autoincrement())
-  f_name       String
-  l_name       String
-  m_name       String?
-  suffix       String?
-  sex          String
-  age          Int
-  address      String
-  birthdate    String
-  constactNo   String
-  email        String?
-  medicalNotes MedicalNotes[]
-  appointments Appointment[]
-  payments     Payment[]
+  id            Int            @id @default(autoincrement())
+  f_name        String
+  l_name        String
+  m_name        String?
+  suffix        String?
+  sex           String
+  age           Int
+  address       String
+  birthdate     String
+  constactNo    String
+  email         String?
+  medicalNotes  MedicalNotes[]
+  appointments  Appointment[]
+  payments      Payment[]
+  prescriptions Prescription[]
 }
 
 model Appointment {
@@ -50,11 +51,11 @@ model Doctor {
 }
 
 model Prescription {
-  id          Int    @id @default(autoincrement())
-  patient_id  Int
-  patient     Patient @relation(fields: [patient_id], references: [id])
-  pres_name   String 
-  pres_dos    Int
+  id         Int     @id @default(autoincrement())
+  patient_id Int
+  patient    Patient @relation(fields: [patient_id], references: [id])
+  pres_name  String
+  pres_dos   Int
 }
 
 model Payment {
@@ -82,16 +83,16 @@ model MedicalNotes {
 
 // medical practioner
 model User {
-  id Int @id @default(autoincrement())
-  given_name String
-  last_name String
-  employee_role String
-  license_number String
-  email String @unique
-  password String
-  isAdmin Boolean @default(value: false)
-  resetPasswordToken String @default(value: "")
-  createdAt DateTime
-  updatedAt DateTime
-  
+  id                 Int      @id @default(autoincrement())
+  given_name         String
+  last_name          String
+  employee_role      String
+  license_number     String
+  email              String   @unique
+  password           String
+  isAdmin            Boolean  @default(value: false)
+  resetPasswordToken String   @default(value: "")
+  createdAt          DateTime
+  updatedAt          DateTime
+
 }
