@@ -47,7 +47,7 @@ function PatientAccount({ pID }: PatientId) {
             {' '}
             Change:
             {' '}
-            {acc!.ammnt_cost - acc!.ammnt_payed}
+            {acc!.ammnt_payed - acc!.ammnt_cost}
           </div>
           <div>
             <hr />
