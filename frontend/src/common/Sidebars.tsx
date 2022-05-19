@@ -23,20 +23,20 @@ export default function Sidebars() {
         </Row>
 
         <Row>
-          <div className="card-title">
+          <div className="card-title" data-testid="card-title">
             Clinic Name
           </div>
         </Row>
 
-        <Link to="/" className="sidebar-link">
+        <Link to="/" className="sidebar-link" data-testid="dashboard-link">
           <Row>
-            <Button className="list-group-item">
+            <Button className="list-group-item" data-testid="dashboard-btn">
               Dashboard
             </Button>
           </Row>
         </Link>
 
-        <Link to="/clinic" className="sidebar-link">
+        <Link to="/clinic" className="sidebar-link" data-testid="clinic-link">
           <Row>
             <Button className="list-group-item">
               Clinic
@@ -44,7 +44,7 @@ export default function Sidebars() {
           </Row>
         </Link>
 
-        <Link to="/appointments" className="sidebar-link">
+        <Link to="/appointments" className="sidebar-link" data-testid="appointments-link">
           <Row>
             <Button className="list-group-item">
               Appointments
@@ -52,7 +52,7 @@ export default function Sidebars() {
           </Row>
         </Link>
 
-        <Link to="/patients" className="sidebar-link">
+        <Link to="/patients" className="sidebar-link" data-testid="patients-link">
           <Row>
             <Button className="list-group-item">
               Patients
@@ -60,7 +60,7 @@ export default function Sidebars() {
           </Row>
         </Link>
 
-        <Link to="/finance" className="sidebar-link">
+        <Link to="/finance" className="sidebar-link" data-testid="finance-link">
           <Row>
             <Button className="list-group-item">
               Finance
