@@ -3,22 +3,54 @@
 
 
 type Appointment {
-  date_time: String!
+  doc_id: Int!
+  dt_end: String!
+  dt_start: String!
   id: Int!
+  name: String!
   patient: Patient
 }
 
 input AppointmentInput {
-  date_time: String!
+  doc_id: Int!
+  dt_end: String!
+  dt_start: String!
+  name: String!
   patient_id: Int!
+}
+
+type Doctor {
+  appointments: [Appointment!]!
+  doc_name: String!
+  id: Int!
+}
+
+input MedNotesInput {
+  date_noted: String!
+  med_notes: String!
+  patient_id: Int!
+  title: String!
+}
+
+type MedicalNotes {
+  date_noted: String!
+  id: Int!
+  med_notes: String!
+  patient: Patient
+  title: String!
 }
 
 type Mutation {
   addAppointment(newAppointment: AppointmentInput!): Appointment
+  addMedNotes(newMedNotes: MedNotesInput!): MedicalNotes
   addPatient(newPatient: PatientInput!): Patient
+  addPayment(newPayment: PaymentInput!): Payment
   addPrescription(newPrescription: PrescriptionInput!): Prescription
+  deleteAppointment(appID: Int!): Appointment
   deletePatient(patientId: Int!): Patient
+  editAppointment(appointmentID: Int!, editedAppointment: AppointmentInput!): Appointment
   editPatient(editedPatient: PatientInput!, patientId: Int!): Patient
+  editPrescription(editedPrescription: PrescriptionInput!, prescriptionId: Int!): Prescription
 }
 
 type Patient {
@@ -26,10 +58,12 @@ type Patient {
   age: Int!
   appointments: [Appointment]
   birthdate: String!
+  constactNo: String!
+  email: String
   f_name: String!
   id: Int!
   l_name: String!
-  m_initial: String
+  m_name: String
   sex: String!
   suffix: String
 }
@@ -38,27 +72,55 @@ input PatientInput {
   address: String!
   age: Int!
   birthdate: String!
+  constactNo: String!
+  email: String
   f_name: String!
   l_name: String!
-  m_initial: String
+  m_name: String
   sex: String!
   suffix: String
 }
 
+type Payment {
+  ammnt_cost: Float!
+  ammnt_payed: Float!
+  id: Int!
+  patient: Patient
+  paymnt_dt: String!
+}
+
+input PaymentInput {
+  ammnt_cost: Float!
+  ammnt_payed: Float!
+  patient_id: Int!
+  paymnt_dt: String!
+}
+
 type Prescription {
+  id: Int!
+  patient: Patient
   pres_dos: Int!
   pres_name: String!
 }
 
 input PrescriptionInput {
+  id: Int!
+  patient_id: Int!
   pres_dos: Int!
   pres_name: String!
 }
 
 type Query {
+  account(patientId: Int!): [Payment]
+  allDoctors: [Doctor]
+  allPayments: [Payment]
   appointments: [Appointment]
   helloWorld: String
   hi: String
+  high: String
+  patientMedNotes(patient_id: Int!): [MedicalNotes]
+  patientPrescriptions(patientId: Int!): [Prescription]
   patients: [Patient]
+  prescriptions: [Prescription]
   specificPatient(patientId: Int!): Patient
 }

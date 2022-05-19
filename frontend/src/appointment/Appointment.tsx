@@ -1,38 +1,94 @@
+/* eslint-disable consistent-return */
 /* eslint-disable linebreak-style */
 import React, { useState } from 'react';
 import './Appointment.css';
-import { useQuery } from 'urql';
+import { useQuery, useMutation } from 'urql';
 import { FaCalendarAlt } from 'react-icons/fa';
 import {
   Container, Col, Row, Spinner,
 } from 'react-bootstrap';
 import { Scheduler } from '@aldabil/react-scheduler';
+import { ProcessedEvent, EventActions } from '@aldabil/react-scheduler/dist/types';
+import { SelectOption } from '@aldabil/react-scheduler/dist/components/inputs/SelectInput';
 import AppointmentViewButtons from './AppointmentViewButtons';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
-import { AllAppointmentsDocument } from '../queries.generated';
+import {
+  AllPatientsDocument, AllDocsDocument, GetAllAppointmentsDocument,
+  AddAnAppointmentDocument, EdiAnAppointmentDocument, DeleteAnAppointmentDocument,
+} from '../queries.generated';
 
 function Appointment() {
   const types = ['calendar', 'list'];
   const [active, setActive] = useState(types[0]);
 
-  const [allAppointments] = useQuery({
-    query: AllAppointmentsDocument,
+  const [allPatients] = useQuery({
+    query: AllPatientsDocument,
   });
+
+  const [allAppointments] = useQuery({
+    query: GetAllAppointmentsDocument,
+  });
+
+  const [allDoctors] = useQuery({
+    query: AllDocsDocument,
+  });
+
+  const [deletAppointmentResult, deleteAnAppointment] = useMutation(DeleteAnAppointmentDocument);
+
+  const [editAppointmentResult, editAppointment] = useMutation(EdiAnAppointmentDocument);
+
+  const [addAppointmentResult, addAppointment] = useMutation(AddAnAppointmentDocument);
 
   const { data, error, fetching } = allAppointments;
 
-  if (fetching) {
+  if (fetching || addAppointmentResult.fetching || editAppointmentResult.fetching
+    || deletAppointmentResult.fetching) {
     return <Spinner animation="border" role="status" />;
   }
 
-  if (error) {
-    console.log(error.cause);
+  if (error || addAppointmentResult.error || editAppointmentResult.error
+    || deletAppointmentResult.error) {
+    console.log(error);
+    console.log(addAppointmentResult.error);
     return <div>Something went wrong</div>;
   }
 
   const handleChange = (event: React.MouseEvent<HTMLElement>, type: string) => {
     setActive(type);
+  };
+
+  const handleDelete = (deletedId: string | number) => {
+    deleteAnAppointment({
+      appId: deletedId as number,
+    });
+  };
+
+  const handleConfirm = (event: ProcessedEvent, action: EventActions) => {
+    if (action === 'create') {
+      addAppointment({
+        appointment: {
+          doc_id: event.doctor_in_charge,
+          patient_id: event.patient_id,
+          name: event.title,
+          dt_start: new Date(event.start) as any as string,
+          dt_end: new Date(event.end) as any as string,
+        },
+      });
+      console.log(event);
+    } else if (action === 'edit') {
+      editAppointment({
+        theAppointment: {
+          patient_id: event.patient_id,
+          doc_id: event.doctor_in_charge,
+          dt_start: new Date(event.start) as any as string,
+          dt_end: new Date(event.end) as any as string,
+          name: event.title,
+        },
+        aId: event.event_id as number,
+      });
+      console.log(event);
+    }
   };
 
   return (
@@ -70,32 +126,51 @@ function Appointment() {
               {active === 'calendar' ? (
                 <Scheduler
                   view="month"
-                  events={[
+                  onConfirm={handleConfirm}
+                  onDelete={handleDelete}
+                  events={
+                    allAppointments.data?.appointments?.map((appointment) => ({
+                      event_id: appointment?.id,
+                      title: appointment?.name,
+                      start: new Date(appointment?.dt_start as string),
+                      end: new Date(appointment?.dt_end as string),
+                    }) as any as ProcessedEvent)
+                  }
+                  fields={[
                     {
-                      event_id: 1,
-                      title: 'Event 1',
-                      start: new Date('2022/4/26 09:30'),
-                      end: new Date('2022/4/26 10:30'),
+                      name: 'patient_id',
+                      type: 'select',
+                      options: allPatients.data?.patients?.map((patient) => ({
+                        id: patient?.id,
+                        text: (patient?.f_name)?.concat(` ${patient.l_name}`),
+                        value: patient?.id,
+                      }) as SelectOption),
+                      config: { label: 'Select Patient', required: true },
                     },
                     {
-                      event_id: 2,
-                      title: 'Event 2',
-                      start: new Date('2022/4/28 10:00'),
-                      end: new Date('2022/4/28 11:00'),
+                      name: 'doctor_in_charge',
+                      type: 'select',
+                      options: allDoctors.data?.allDoctors?.map((doctor) => ({
+                        id: doctor?.id,
+                        text: doctor?.doc_name,
+                        value: doctor?.id,
+                      }) as SelectOption),
+                      config: { label: 'Doctor-in-Charge', required: true },
                     },
                   ]}
                 />
               ) : (
                 // eslint-disable-next-line react/jsx-no-useless-fragment
-                <>
+                <Row>
                   {data?.appointments?.map((appointment) => (
                     <div>
-                      {appointment?.date_time}
+                      {appointment?.dt_start}
+                      {appointment?.dt_end}
                       {appointment?.patient?.f_name}
                       {appointment?.patient?.l_name}
                     </div>
                   ))}
-                </>
+                </Row>
               )}
             </Col>
           </Row>

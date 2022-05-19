@@ -38,7 +38,7 @@ export default function PatientList() {
   }
 
   if (error) {
-    console.log(error.cause);
+    console.log(error);
     return <div>Something went wrong</div>;
   }
 
@@ -103,17 +103,27 @@ export default function PatientList() {
           </Row>
           <Row className="list-row">
             <Col className="list">
-              <div>
-                {data?.patients?.map((patient) => (
-                  <div>
-                    <Button onClick={() => navigate(`/patient_record/${patient?.id}`)}>
+              {/* <div> */}
+              {data?.patients?.map((patient) => (
+                <div className="patientOuterInfo">
+                  <Button className="btn btn-light" onClick={() => navigate(`/patient_record/${patient?.id}`)}>
+                    <div className="row g-0">
+                      <Button className="btn btn-outline-dark" onClick={() => navigate(`/patient_record/${patient?.id}`)}>
+                      {patient?.l_name}
+                      {', '}
                       {patient?.f_name}
                       {' '}
-                      {patient?.l_name}
-                    </Button>
-                  </div>
-                ))}
-              </div>
+                      {patient?.m_name}
+                      {' '}
+                      <br />
+                      {/* Please add phone number */}
+                      {patient?.sex}
+                      <br />
+                    </div>
+                  </Button>
+                </div>
+              ))}
+              {/* </div> */}
             </Col>
           </Row>
         </Col>

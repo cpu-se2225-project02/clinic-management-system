@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable linebreak-style */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable linebreak-style */
@@ -8,6 +9,7 @@ import {
   mutationField,
   nonNull,
   inputObjectType,
+  intArg,
 } from 'nexus';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { Appointment as AppointmentType } from 'nexus-prisma';
@@ -26,7 +28,10 @@ export const Appointment = objectType({
   name: 'Appointment',
   definition(t) {
     t.field(AppointmentType.id);
-    t.field(AppointmentType.date_time);
+    t.field(AppointmentType.dt_start);
+    t.field(AppointmentType.dt_end);
+    t.field(AppointmentType.name);
+    t.field(AppointmentType.doc_id);
     t.field('patient', {
       type: Patient,
       resolve(appointment) {
@@ -46,8 +51,11 @@ export const appointments = queryField('appointments', {
 export const AppointmentInput = inputObjectType({
   name: 'AppointmentInput',
   definition(t) {
-    t.field(AppointmentType.date_time);
+    t.field(AppointmentType.name);
+    t.field(AppointmentType.dt_start);
+    t.field(AppointmentType.dt_end);
     t.field(AppointmentType.patient_id);
+    t.field(AppointmentType.doc_id);
   },
 });
 
@@ -58,5 +66,31 @@ export const addAppointment = mutationField('addAppointment', {
   },
   resolve(root, args: { newAppointment: Prisma.AppointmentCreateInput }) {
     return db.appointment.create({ data: args.newAppointment });
+  },
+});
+
+export const editAppointment = mutationField('editAppointment', {
+  type: Appointment,
+  args: {
+    editedAppointment: nonNull(AppointmentInput),
+    appointmentID: nonNull(intArg()),
+  },
+  resolve(root, args: { editedAppointment: Prisma.AppointmentUpdateInput, appointmentID: Prisma.AppointmentWhereUniqueInput }) {
+    return db.appointment.update({
+      where: { id: args.appointmentID as any },
+      data: args.editedAppointment,
+    });
+  },
+});
+
+export const DeleteAppointment = mutationField('deleteAppointment', {
+  type: Appointment,
+  args: {
+    appID: nonNull(intArg()),
+  },
+  resolve(root, args: { appID: Prisma.PatientWhereUniqueInput }) {
+    return db.appointment.delete({
+      where: { id: args.appID as any },
+    });
   },
 });

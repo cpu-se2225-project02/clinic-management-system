@@ -16,29 +16,68 @@ generator nexus {
 
 //from here: we define models || entities inside our db
 model Patient {
-  id           Int           @id @default(autoincrement())
+  id           Int            @id @default(autoincrement())
   f_name       String
   l_name       String
-  m_initial    String?
+  m_name       String?
   suffix       String?
   sex          String
   age          Int
   address      String
   birthdate    String
+  constactNo   String
+  email        String?
+  medicalNotes MedicalNotes[]
   appointments Appointment[]
+  payments     Payment[]
 }
 
 model Appointment {
   id         Int     @id @default(autoincrement())
-  date_time  String
+  name       String
+  dt_start   String
+  dt_end     String
   patient_id Int
   patient    Patient @relation(fields: [patient_id], references: [id])
+  doc_id     Int
+  doctors    Doctor  @relation(fields: [doc_id], references: [id])
+}
+
+model Doctor {
+  id           Int           @id @default(autoincrement())
+  doc_name     String
+  appointments Appointment[]
 }
 
 model Prescription {
-  id        Int    @id @default(autoincrement())
-  pres_name String
-  pres_dos  Int
+  id          Int    @id @default(autoincrement())
+  patient_id  Int
+  patient     Patient @relation(fields: [patient_id], references: [id])
+  pres_name   String 
+  pres_dos    Int
+}
+
+model Payment {
+  id          Int     @id @default(autoincrement())
+  paymnt_dt   String
+  ammnt_cost  Float
+  ammnt_payed Float
+  patient_id  Int
+  patient     Patient @relation(fields: [patient_id], references: [id])
+}
+
+model Invoice {
+  id   Int    @id @default(autoincrement())
+  date String
+}
+
+model MedicalNotes {
+  id         Int     @id @default(autoincrement())
+  date_noted String
+  med_notes  String
+  title      String
+  patient_id Int
+  patient    Patient @relation(fields: [patient_id], references: [id])
 }
 
 // medical practioner

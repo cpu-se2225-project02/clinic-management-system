@@ -3,7 +3,7 @@ query AllPatients {
     id
     f_name
     l_name
-    m_initial
+    m_name
     suffix
     sex
     age
@@ -17,7 +17,7 @@ mutation AddPatient($newPatient: PatientInput!) {
     id
     l_name
     f_name
-    m_initial
+    m_name
     address
     age
     suffix
@@ -30,34 +30,88 @@ query GetPatient($id: Int!) {
   specificPatient(patientId: $id) {
     l_name
     f_name
-    m_initial
+    m_name
     sex
     suffix
     id
     address
     birthdate
     age
+    constactNo
+    email
   }
 }
+
+query GetPrescription($id: Int!) {
+  patientPrescriptions(patientId: $id) {
+    pres_name
+    pres_dos  
+    id
+    patient{
+      id
+    } 
+  }
+}
+
+
+mutation editAPrescription($thePrescription: PrescriptionInput!, $pid: Int!) {
+  editPrescription(editedPrescription: $thePrescription, prescriptionId: $pid) {
+    pres_name
+    pres_dos
+    id
+    patient{
+      id
+    }
+  }
+}
+
 
 mutation editAPatient($thePatient: PatientInput!, $pid: Int!) {
   editPatient(editedPatient: $thePatient, patientId: $pid) {
     suffix
     f_name
     l_name
-    m_initial
+    m_name
     sex
     address
     birthdate
     age
+    constactNo
+    email
   }
 }
 
-query AllAppointments {
+query getAllAppointments {
   appointments {
+    dt_start
+    dt_end
+    name
+    doc_id
     id
-    date_time
     patient {
+      f_name
+      l_name
+    }
+  }
+}
+
+query getPatientAccount($patientId: Int!) {
+  account(patientId: $patientId) {
+    id
+    paymnt_dt
+    ammnt_cost
+    ammnt_payed
+  }
+}
+
+mutation AddPayment($newPayment: PaymentInput!) {
+  addPayment(newPayment: $newPayment) {
+    id
+    paymnt_dt
+    ammnt_cost
+    ammnt_payed
+    patient {
+      id
       f_name
       l_name
     }
@@ -71,15 +125,71 @@ mutation addPrescription($newPresc: PrescriptionInput!) {
   }
 }
 
+mutation deletePrescription($prescriptionId: Int!) {
+  deletePrescription(prescriptionId: $prescriptionId) {
+    pres_name
+    pres_dos
+    patient {
+      id
+    }
+  }
+}
+
 mutation deleteAPatient($patientID: Int!) {
   deletePatient(patientId: $patientID) {
     l_name
     f_name
-    m_initial
+    m_name
     suffix
     sex
     age
     birthdate
     address
+  }
+}
+
+
+query allDocs {
+  allDoctors {
+    doc_name
+    id
+  }
+}
+
+mutation addAnAppointment($appointment: AppointmentInput!) {
+  addAppointment(newAppointment: $appointment) {
+    dt_start
+    dt_end
+  }
+}
+
+mutation ediAnAppointment($theAppointment: AppointmentInput!, $aId: Int!) {
+  editAppointment(editedAppointment: $theAppointment, appointmentID: $aId) {
+    name
+    dt_start
+    dt_end
+    doc_id
+  }
+}
+
+mutation deleteAnAppointment($appId: Int!) {
+  deleteAppointment(appID: $appId) {
+    id
+  }
+}
+
+query DisplayMedNotes($pID: Int!) {
+  patientMedNotes(patient_id: $pID) {
+    date_noted
+    id
+    title
+    med_notes
+  }
+}
+
+mutation AddAMedNote($newMedNote: MedNotesInput!) {
+  addMedNotes(newMedNotes: $newMedNote) {
+    med_notes
+    title
   }
 }

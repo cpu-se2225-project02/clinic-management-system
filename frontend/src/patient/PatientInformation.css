@@ -1,4 +1,10 @@
 .name {
   color: black !important;
   height: fit-content !important;
+  
 }
+.PatientIcon{
+  block-size: 2in;
+}
+
+

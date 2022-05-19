@@ -9,14 +9,16 @@ import {
 import { BiSearchAlt2 } from 'react-icons/bi';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
+import AddPaymentForm from '../patient/account/AddPaymentForm';
 
 export default function FinancePage() {
+  const [AddPaymentBtn, setAddPaymentBtn] = useState(false);
+
   return (
     <Container fluid>
       <Row>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <Header />
-
       </Row>
       <Row>
         <Col xs={2} className="sidebar-box p-0">
@@ -35,7 +37,8 @@ export default function FinancePage() {
               </div>
               <div className="btn-group" role="group" aria-label="Basic example">
                 <button type="button" className="btn btn-primary">View Payment</button>
-                <button type="button" className="btn btn-primary">Add Payment</button>
+                <button type="button" className="btn btn-primary" onClick={() => setAddPaymentBtn(true)}>Add Payment</button>
+                {AddPaymentBtn && <AddPaymentForm addPaymentBtn={setAddPaymentBtn} />}
               </div>
             </div>
 

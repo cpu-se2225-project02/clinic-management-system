@@ -9,6 +9,7 @@ import { MdDeleteOutline } from 'react-icons/md';
 import { GetPatientDocument, DeleteAPatientDocument } from '../queries.generated';
 import './PatientInformation.css';
 import UpdatePatientForm from './UpdatePatientForm';
+import PatientIcon from './assets/images.png';
 
 interface PatientId {
   pId: number | undefined
@@ -35,29 +36,47 @@ export default function PatientInformation({ pId }: PatientId) {
 
   return (
     <>
-      <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
-      <MdDeleteOutline size={30} onClick={patientDeletion} />
-      {editBtn && <UpdatePatientForm postButton={setEditBtn} patientID={pId} />}
-      <div className="name">
-        {data?.specificPatient?.l_name}
-        {' '}
-        {data?.specificPatient?.f_name}
-        {' '}
-        {data?.specificPatient?.m_initial}
+      <div className="col" style={{ textAlign: 'right' }}>
+        <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
+        <MdDeleteOutline size={30} onClick={patientDeletion} />
+        {editBtn && <UpdatePatientForm postButton={setEditBtn} patientID={pId} />}
       </div>
-      <div>
-        {data?.specificPatient?.sex}
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+      <div className="container">
+        <div className="row justify-content-md-center">
+          <div className="row">
+            <div className="col-sm-3">
+              <img src={PatientIcon} className="PatientIcon" alt="..." />
+            </div>
+            <div className="col-sm-2">
+              Name:
+              <br />
+              Sex:
+              <br />
+              Age:
+              <br />
+              Birthdate:
+              <br />
+              Address:
+            </div>
+            <div className="col-sm-6">
+              {data?.specificPatient?.f_name}
+              {' '}
+              {data?.specificPatient?.m_name}
+              {' '}
+              {data?.specificPatient?.l_name}
+              <br />
+              {data?.specificPatient?.sex}
+              <br />
+              {data?.specificPatient?.age}
+              <br />
+              {data?.specificPatient?.birthdate}
+              <br />
+              {data?.specificPatient?.address}
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        {data?.specificPatient?.age}
-      </div>
-      <div>
-        {data?.specificPatient?.birthdate}
-      </div>
-      <div>
-        {data?.specificPatient?.address}
-      </div>
-
     </>
   );
 }

@@ -1,29 +1,28 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable radix */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { useMutation } from 'urql';
 import { Spinner } from 'react-bootstrap';
-import { BiEdit } from 'react-icons/bi';
+import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { AddPrescriptionDocument } from '../../queries.generated';
-import UpdatePrescription from './UpdatePrescription';
 
 interface PatientID {
   pID: number | undefined
+  postButton: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function PrescriptionForm({ pID }: PatientID) {
+export default function PrescriptionForm({ pID, postButton }: PatientID) {
   const [prescName, setPrescName] = useState('');
   const [dosage, setDosage] = useState(0);
   const [editBtn, setEditBtn] = useState(false);
-  const [addPrescriptionResult, addPrescription] = useMutation(AddPrescriptionDocument);
 
-  const { error, fetching } = addPrescriptionResult;
-
-  if (fetching) {
+  const [AddPrescriptionresult, addPrescription] = useMutation(AddPrescriptionDocument);
+  if (AddPrescriptionresult.fetching) {
     return <Spinner animation="border" role="status" />;
   }
-  if (error) {
-    console.log(error);
+  if (AddPrescriptionresult.error) {
+    console.log(AddPrescriptionresult.error);
     return <div>Insertion unsuccessful</div>;
   }
 
@@ -32,36 +31,51 @@ export default function PrescriptionForm({ pID }: PatientID) {
       newPresc: {
         pres_name: prescName,
         pres_dos: dosage,
+        patient_id: pID as number,
       },
     });
   };
 
   return (
-    <>
-      {pID as number}
-      <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
-      {editBtn && <UpdatePrescription editButton={setEditBtn} /> }
-      {}
-      <label>Prescription name:</label>
-      <input
-        type="text"
-        placeholder="Prescription"
-        onChange={(e) => setPrescName(e.target.value)}
-      />
+    <div className="card border-dark mb-3">
+      <div className="h5">
+        <div className="col">Prescription</div>
+      </div>
 
-      <label>Dosage</label>
-      <input
-        type="number"
-        placeholder="Dosage"
-        onChange={(e) => setDosage(parseInt(e.target.value))}
-      />
+      <div className="col" style={{ textAlign: 'right' }}>
+        <div>{pID}</div>
+        <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
+        {editBtn && <UpdatePrescription editButton={setEditBtn} />}
+      </div>
+      <div className="col">
+        <label>Prescriptions:</label>
+        <p>
+          PrescriptionName - Dosage
+        </p>
+        {/* <input
+          type="text"
+          placeholder="Prescription"
+          onChange={(e) => setPrescName(e.target.value)}
+        /> */}
+        {/* <label>Dosage</label>
+        <input
+          className="form-control"
+          type="number"
+          placeholder="Dosage Amount"
+          onChange={(e) => { setDosage(parseInt(e.target.value)); }}
 
-      <button
-        type="submit"
-        onClick={addingPrescription}
-      >
-        Submit
-      </button>
-    </>
+        />
+
+        <button
+          className="btn btn-primary mt-2 float-end"
+          onClick={addingPrescription}
+          type="submit"
+        >
+          Submit
+        </button>
+
+        </div>
+      </div>
+    </div>
   );
 }

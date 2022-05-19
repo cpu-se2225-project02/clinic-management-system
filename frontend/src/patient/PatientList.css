@@ -1,15 +1,16 @@
-.patient-list-box {
+/* .patient-list-box {
   display: inline-block !important;
   overflow-x: auto;
   overflow-y: auto;
   margin-top: 4px !important;
-}
+} */
 
 .sidebar-box {
   align-content: flex-start !important;
   display: flex !important;
   justify-content: left !important;
 }
+
 
 .h5 {
   background-color: #033076;
@@ -49,6 +50,12 @@
   margin-top: 10px !important;
 }
 
+.row{
+  background-color: transparent;
+}
+.patientOuterInfo{
+  text-align: left;
+}
 .patient-rec-box {
   margin-bottom: 40px !important;
   height: fit-content;
