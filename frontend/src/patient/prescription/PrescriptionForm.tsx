@@ -38,27 +38,28 @@ export default function PrescriptionForm({ pID }: PatientID) {
   };
 
   return (
-    <div className="card border-dark mb-3">
-      <div className="h5">
-        <div className="col">Prescription</div>
-      </div>
+    <div>
+      <div className="card border-dark mb-3">
+        <div className="h5">
+          <div className="col">Prescription</div>
+        </div>
 
-      <div className="col" style={{ textAlign: 'right' }}>
-        <div>{pID}</div>
-        <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
-        {editBtn && <UpdatePrescription editButton={setEditBtn} />}
-      </div>
-      <div className="col">
-        <label>Prescriptions:</label>
-        <p>
-          PrescriptionName - Dosage
-        </p>
-        {/* <input
+        <div className="col" style={{ textAlign: 'right' }}>
+          <div>{pID}</div>
+          <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
+          {editBtn && <UpdatePrescription editButton={setEditBtn} />}
+        </div>
+        <div className="col">
+          <label>Prescriptions:</label>
+          <p>
+            PrescriptionName - Dosage
+          </p>
+          {/* <input
           type="text"
           placeholder="Prescription"
           onChange={(e) => setPrescName(e.target.value)}
         /> */}
-        {/* <label>Dosage</label>
+          {/* <label>Dosage</label>
         <input
           type="number"
           placeholder="Dosage"
