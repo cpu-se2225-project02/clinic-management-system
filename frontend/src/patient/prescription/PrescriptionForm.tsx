@@ -4,27 +4,25 @@
 import React, { useState } from 'react';
 import { useMutation } from 'urql';
 import { Spinner } from 'react-bootstrap';
-import { BiEdit } from 'react-icons/bi';
+import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { AddPrescriptionDocument } from '../../queries.generated';
-import UpdatePrescription from './UpdatePrescription';
 
 interface PatientID {
   pID: number | undefined
+  postButton: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function PrescriptionForm({ pID }: PatientID) {
+export default function PrescriptionForm({ pID, postButton }: PatientID) {
   const [prescName, setPrescName] = useState('');
   const [dosage, setDosage] = useState(0);
   const [editBtn, setEditBtn] = useState(false);
-  const [addPrescriptionResult, addPrescription] = useMutation(AddPrescriptionDocument);
 
-  const { error, fetching } = addPrescriptionResult;
-
-  if (fetching) {
+  const [AddPrescriptionresult, addPrescription] = useMutation(AddPrescriptionDocument);
+  if (AddPrescriptionresult.fetching) {
     return <Spinner animation="border" role="status" />;
   }
-  if (error) {
-    console.log(error);
+  if (AddPrescriptionresult.error) {
+    console.log(AddPrescriptionresult.error);
     return <div>Insertion unsuccessful</div>;
   }
 
@@ -33,6 +31,7 @@ export default function PrescriptionForm({ pID }: PatientID) {
       newPresc: {
         pres_name: prescName,
         pres_dos: dosage,
+        patient_id: pID as number,
       },
     });
   };
@@ -60,10 +59,20 @@ export default function PrescriptionForm({ pID }: PatientID) {
         /> */}
         {/* <label>Dosage</label>
         <input
+          className="form-control"
           type="number"
-          placeholder="Dosage"
-          onChange={(e) => setDosage(parseInt(e.target.value))}
-        /> */}
+          placeholder="Dosage Amount"
+          onChange={(e) => { setDosage(parseInt(e.target.value)); }}
+
+        />
+
+        <button
+          className="btn btn-primary mt-2 float-end"
+          onClick={addingPrescription}
+          type="submit"
+        >
+          Submit
+        </button>
 
         </div>
       </div>

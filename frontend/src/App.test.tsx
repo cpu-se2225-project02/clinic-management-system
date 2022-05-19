@@ -1,3 +1,7 @@
+/* eslint-disable no-unused-vars */
+// import React from 'react';
+// import { render, screen } from '@testing-library/react';
+// import App from './App';
 import React from 'react';
 // import { render, screen } from '@testing-l ibrary/react';
 // import App from './App';
