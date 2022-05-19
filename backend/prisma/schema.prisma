@@ -40,3 +40,19 @@ model Prescription {
   pres_name String
   pres_dos  Int
 }
+
+// medical practioner
+model User {
+  id Int @id @default(autoincrement())
+  given_name String
+  last_name String
+  employee_role String
+  license_number String
+  email String @unique
+  password String
+  isAdmin Boolean @default(value: false)
+  resetPasswordToken String @default(value: "")
+  createdAt DateTime
+  updatedAt DateTime
+  
+}
