@@ -19,7 +19,6 @@ export default function FinancePage() {
       <Row>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <Header />
-
       </Row>
       <Row>
         <Col xs={2} className="sidebar-box p-0">

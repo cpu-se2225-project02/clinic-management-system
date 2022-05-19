@@ -30,12 +30,14 @@ export const Patient = objectType({
     t.field(PatientType.id);
     t.field(PatientType.l_name);
     t.field(PatientType.f_name);
-    t.field(PatientType.m_initial);
+    t.field(PatientType.m_name);
     t.field(PatientType.address);
     t.field(PatientType.age);
     t.field(PatientType.suffix);
     t.field(PatientType.sex);
     t.field(PatientType.birthdate);
+    t.field(PatientType.constactNo);
+    t.field(PatientType.email);
     t.field('appointments', {
       type: list(Appointment),
       resolve(patient) {
@@ -70,12 +72,14 @@ export const PatientInput = inputObjectType({
   definition(t) {
     t.field(PatientType.l_name);
     t.field(PatientType.f_name);
-    t.field(PatientType.m_initial);
+    t.field(PatientType.m_name);
     t.field(PatientType.address);
     t.field(PatientType.age);
     t.field(PatientType.suffix);
     t.field(PatientType.sex);
     t.field(PatientType.birthdate);
+    t.field(PatientType.constactNo);
+    t.field(PatientType.email);
   },
 });
 

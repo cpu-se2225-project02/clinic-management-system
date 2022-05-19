@@ -19,12 +19,14 @@ interface Popup {
 export default function PatientForm({ postButton }: Popup) {
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
-  const [middleInitial, setMiddileInitial] = useState('');
+  const [middleName, setMiddleName] = useState('');
   const [sex, setSex] = useState('Female');
   const [suffix, setSuffix] = useState('');
   const [age, setAge] = useState(0);
   const [dob, setDob] = useState('');
   const [address, setAddress] = useState('');
+  const [contNo, setContNo] = useState('');
+  const [email, setEmal] = useState('');
   const [addPatientResult, addPatient] = useMutation(AddPatientDocument);
 
   const { data, error, fetching } = addPatientResult;
@@ -42,12 +44,14 @@ export default function PatientForm({ postButton }: Popup) {
       newPatient: {
         l_name: lastName,
         f_name: firstName,
-        m_initial: middleInitial,
+        m_name: middleName,
         sex,
         suffix,
         age,
         birthdate: dob,
         address,
+        constactNo: contNo,
+        email,
       },
     }).then((res) => console.log(res));
   };
@@ -83,7 +87,7 @@ export default function PatientForm({ postButton }: Popup) {
           className="form-control"
           type="text"
           placeholder="Middle Initial"
-          onChange={(e) => { setMiddileInitial(e.target.value); }}
+          onChange={(e) => { setMiddleName(e.target.value); }}
 
         />
 

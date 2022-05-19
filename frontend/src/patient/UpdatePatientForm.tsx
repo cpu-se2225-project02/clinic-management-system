@@ -26,12 +26,14 @@ export default function UpdatePatientForm({ postButton, patientID }: Popup) {
   const { data } = allPatients;
   const [lastName, setLastName] = useState(data?.specificPatient?.l_name as string);
   const [firstName, setFirstName] = useState(data?.specificPatient?.f_name as string);
-  const [middleInitial, setMiddileInitial] = useState(data?.specificPatient?.m_initial as string);
+  const [middleName, setMiddleName] = useState(data?.specificPatient?.m_name as string);
   const [sex, setSex] = useState(data?.specificPatient?.sex as string);
   const [suffix, setSuffix] = useState(data?.specificPatient?.suffix as string);
   const [age, setAge] = useState(data?.specificPatient?.age as number);
   const [dob, setDob] = useState(data?.specificPatient?.birthdate as string);
   const [address, setAddress] = useState(data?.specificPatient?.address as string);
+  const [contNo, setContNo] = useState(data?.specificPatient?.constactNo as string);
+  const [email, setEmail] = useState(data?.specificPatient?.email as string);
 
   const { error, fetching } = editPatientResult;
 
@@ -48,12 +50,14 @@ export default function UpdatePatientForm({ postButton, patientID }: Popup) {
       thePatient: {
         l_name: lastName,
         f_name: firstName,
-        m_initial: middleInitial,
+        m_name: middleName,
         sex,
         suffix,
         age,
         birthdate: dob,
         address,
+        constactNo: contNo,
+        email,
       },
       pid: patientID as number,
     });
@@ -87,13 +91,13 @@ export default function UpdatePatientForm({ postButton, patientID }: Popup) {
           value={firstName}
         />
 
-        <label>Middle Initial:</label>
+        <label>Middle Name:</label>
         <input
           className="form-control"
           type="text"
           placeholder="Middle Initial"
-          onChange={(e) => { setMiddileInitial(e.target.value); }}
-          value={middleInitial}
+          onChange={(e) => { setMiddleName(e.target.value); }}
+          value={middleName}
 
         />
 
@@ -140,6 +144,24 @@ export default function UpdatePatientForm({ postButton, patientID }: Popup) {
           placeholder="Address"
           onChange={(e) => { setAddress(e.target.value); }}
           value={address}
+        />
+
+        <label>Contact Number:</label>
+        <input
+          className="form-control"
+          type="text"
+          placeholder="Contact number"
+          onChange={(e) => { setContNo(e.target.value); }}
+          value={contNo}
+        />
+
+        <label>Email address:</label>
+        <input
+          className="form-control"
+          type="text"
+          placeholder="Email address"
+          onChange={(e) => { setEmail(e.target.value); }}
+          value={email}
         />
 
         <button

@@ -19,12 +19,14 @@ model Patient {
   id           Int            @id @default(autoincrement())
   f_name       String
   l_name       String
-  m_initial    String?
+  m_name       String?
   suffix       String?
   sex          String
   age          Int
   address      String
   birthdate    String
+  constactNo   String
+  email        String?
   medicalNotes MedicalNotes[]
   appointments Appointment[]
   payments     Payment[]
