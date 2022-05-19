@@ -39,6 +39,12 @@ export interface NexusGenInputs {
     sex: string; // String!
     suffix?: string | null; // String
   }
+  PaymentInput: { // input type
+    ammnt_cost: number; // Float!
+    ammnt_payed: number; // Float!
+    patient_id: number; // Int!
+    paymnt_dt: string; // String!
+  }
   PrescriptionInput: { // input type
     pres_dos: number; // Int!
     pres_name: string; // String!
@@ -88,6 +94,12 @@ export interface NexusGenObjects {
     sex: string; // String!
     suffix?: string | null; // String
   }
+  Payment: { // root type
+    ammnt_cost: number; // Float!
+    ammnt_payed: number; // Float!
+    id: number; // Int!
+    paymnt_dt: string; // String!
+  }
   Prescription: { // root type
     pres_dos: number; // Int!
     pres_name: string; // String!
@@ -130,6 +142,7 @@ export interface NexusGenFieldTypes {
     addAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
     addMedNotes: NexusGenRootTypes['MedicalNotes'] | null; // MedicalNotes
     addPatient: NexusGenRootTypes['Patient'] | null; // Patient
+    addPayment: NexusGenRootTypes['Payment'] | null; // Payment
     addPrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
     deleteAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
     deletePatient: NexusGenRootTypes['Patient'] | null; // Patient
@@ -150,15 +163,25 @@ export interface NexusGenFieldTypes {
     sex: string; // String!
     suffix: string | null; // String
   }
+  Payment: { // field return type
+    ammnt_cost: number; // Float!
+    ammnt_payed: number; // Float!
+    id: number; // Int!
+    patient: NexusGenRootTypes['Patient'] | null; // Patient
+    paymnt_dt: string; // String!
+  }
   Prescription: { // field return type
     pres_dos: number; // Int!
     pres_name: string; // String!
   }
   Query: { // field return type
+    account: Array<NexusGenRootTypes['Payment'] | null> | null; // [Payment]
     allDoctors: Array<NexusGenRootTypes['Doctor'] | null> | null; // [Doctor]
+    allPayments: Array<NexusGenRootTypes['Payment'] | null> | null; // [Payment]
     appointments: Array<NexusGenRootTypes['Appointment'] | null> | null; // [Appointment]
     helloWorld: string | null; // String
     hi: string | null; // String
+    high: string | null; // String
     patientMedNotes: Array<NexusGenRootTypes['MedicalNotes'] | null> | null; // [MedicalNotes]
     patients: Array<NexusGenRootTypes['Patient'] | null> | null; // [Patient]
     specificPatient: NexusGenRootTypes['Patient'] | null; // Patient
@@ -190,6 +213,7 @@ export interface NexusGenFieldTypeNames {
     addAppointment: 'Appointment'
     addMedNotes: 'MedicalNotes'
     addPatient: 'Patient'
+    addPayment: 'Payment'
     addPrescription: 'Prescription'
     deleteAppointment: 'Appointment'
     deletePatient: 'Patient'
@@ -210,15 +234,25 @@ export interface NexusGenFieldTypeNames {
     sex: 'String'
     suffix: 'String'
   }
+  Payment: { // field return type name
+    ammnt_cost: 'Float'
+    ammnt_payed: 'Float'
+    id: 'Int'
+    patient: 'Patient'
+    paymnt_dt: 'String'
+  }
   Prescription: { // field return type name
     pres_dos: 'Int'
     pres_name: 'String'
   }
   Query: { // field return type name
+    account: 'Payment'
     allDoctors: 'Doctor'
+    allPayments: 'Payment'
     appointments: 'Appointment'
     helloWorld: 'String'
     hi: 'String'
+    high: 'String'
     patientMedNotes: 'MedicalNotes'
     patients: 'Patient'
     specificPatient: 'Patient'
@@ -235,6 +269,9 @@ export interface NexusGenArgTypes {
     }
     addPatient: { // args
       newPatient: NexusGenInputs['PatientInput']; // PatientInput!
+    }
+    addPayment: { // args
+      newPayment: NexusGenInputs['PaymentInput']; // PaymentInput!
     }
     addPrescription: { // args
       newPrescription: NexusGenInputs['PrescriptionInput']; // PrescriptionInput!
@@ -255,6 +292,9 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    account: { // args
+      patientId: number; // Int!
+    }
     patientMedNotes: { // args
       patient_id: number; // Int!
     }
