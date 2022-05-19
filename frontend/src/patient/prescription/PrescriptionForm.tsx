@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable radix */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
@@ -44,6 +45,7 @@ export default function PrescriptionForm({ pID }: PatientID) {
       </div>
 
       <div className="col" style={{ textAlign: 'right' }}>
+        <div>{pID}</div>
         <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
         {editBtn && <UpdatePrescription editButton={setEditBtn} />}
       </div>
@@ -64,12 +66,6 @@ export default function PrescriptionForm({ pID }: PatientID) {
           onChange={(e) => setDosage(parseInt(e.target.value))}
         /> */}
 
-        {/* <button
-          type="submit"
-          onClick={addingPrescription}
-        >
-          Submit
-        </button> */}
       </div>
     </div>
   );

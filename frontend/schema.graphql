@@ -44,6 +44,7 @@ type Mutation {
   addAppointment(newAppointment: AppointmentInput!): Appointment
   addMedNotes(newMedNotes: MedNotesInput!): MedicalNotes
   addPatient(newPatient: PatientInput!): Patient
+  addPayment(newPayment: PaymentInput!): Payment
   addPrescription(newPrescription: PrescriptionInput!): Prescription
   deleteAppointment(appID: Int!): Appointment
   deletePatient(patientId: Int!): Patient
@@ -79,6 +80,21 @@ input PatientInput {
   suffix: String
 }
 
+type Payment {
+  ammnt_cost: Float!
+  ammnt_payed: Float!
+  id: Int!
+  patient: Patient
+  paymnt_dt: String!
+}
+
+input PaymentInput {
+  ammnt_cost: Float!
+  ammnt_payed: Float!
+  patient_id: Int!
+  paymnt_dt: String!
+}
+
 type Prescription {
   pres_dos: Int!
   pres_name: String!
@@ -90,10 +106,13 @@ input PrescriptionInput {
 }
 
 type Query {
+  account(patientId: Int!): [Payment]
   allDoctors: [Doctor]
+  allPayments: [Payment]
   appointments: [Appointment]
   helloWorld: String
   hi: String
+  high: String
   patientMedNotes(patient_id: Int!): [MedicalNotes]
   patients: [Patient]
   specificPatient(patientId: Int!): Patient

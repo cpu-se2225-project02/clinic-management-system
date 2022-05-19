@@ -29,17 +29,17 @@
   padding-top: 8px !important;
 }
 
-/* .list {
+.list {
   text-align: left !important;
   margin-left: 30px;
   margin-right: 30px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-} */
+}
 
-/* .patient-btns {
+.patient-btns {
   background-color: #d3def0;
   color: black;
-} */
+}
 
 .add-patient-btn {
   background-color: #033076;
@@ -50,7 +50,13 @@
   margin-top: 10px !important;
 }
 
-/* .patient-rec-box {
+.row{
+  background-color: transparent;
+}
+.patientOuterInfo{
+  text-align: left;
+}
+.patient-rec-box {
   margin-bottom: 40px !important;
   height: fit-content;
-} */
+}
