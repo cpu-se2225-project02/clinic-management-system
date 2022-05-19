@@ -45,12 +45,10 @@ type Mutation {
   addMedNotes(newMedNotes: MedNotesInput!): MedicalNotes
   addPatient(newPatient: PatientInput!): Patient
   addPayment(newPayment: PaymentInput!): Payment
-  addPrescription(newPrescription: PrescriptionInput!): Prescription
   deleteAppointment(appID: Int!): Appointment
   deletePatient(patientId: Int!): Patient
   editAppointment(appointmentID: Int!, editedAppointment: AppointmentInput!): Appointment
   editPatient(editedPatient: PatientInput!, patientId: Int!): Patient
-  editPrescription(editedPrescription: PrescriptionInput!, prescriptionId: Int!): Prescription
 }
 
 type Patient {
@@ -96,20 +94,6 @@ input PaymentInput {
   paymnt_dt: String!
 }
 
-type Prescription {
-  id: Int!
-  patient: Patient
-  pres_dos: Int!
-  pres_name: String!
-}
-
-input PrescriptionInput {
-  id: Int!
-  patient_id: Int!
-  pres_dos: Int!
-  pres_name: String!
-}
-
 type Query {
   account(patientId: Int!): [Payment]
   allDoctors: [Doctor]
@@ -119,8 +103,6 @@ type Query {
   hi: String
   high: String
   patientMedNotes(patient_id: Int!): [MedicalNotes]
-  patientPrescriptions(patientId: Int!): [Prescription]
   patients: [Patient]
-  prescriptions: [Prescription]
   specificPatient(patientId: Int!): Patient
 }

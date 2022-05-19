@@ -1,40 +1,40 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable radix */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { useMutation } from 'urql';
 import { Spinner } from 'react-bootstrap';
-import { AiOutlineCloseSquare } from 'react-icons/ai';
+import { BiEdit } from 'react-icons/bi';
 import { AddPrescriptionDocument } from '../../queries.generated';
+// import UpdatePrescription from './UpdatePrescription';
 
 interface PatientID {
   pID: number | undefined
-  postButton: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function PrescriptionForm({ pID, postButton }: PatientID) {
-  const [prescName, setPrescName] = useState('');
-  const [dosage, setDosage] = useState(0);
+export default function PrescriptionForm({ pID }: PatientID) {
+  // const [prescName, setPrescName] = useState('');
+  // const [dosage, setDosage] = useState(0);
   const [editBtn, setEditBtn] = useState(false);
+  const [addPrescriptionResult] = useMutation(AddPrescriptionDocument);
 
-  const [AddPrescriptionresult, addPrescription] = useMutation(AddPrescriptionDocument);
-  if (AddPrescriptionresult.fetching) {
+  const { error, fetching } = addPrescriptionResult;
+
+  if (fetching) {
     return <Spinner animation="border" role="status" />;
   }
-  if (AddPrescriptionresult.error) {
-    console.log(AddPrescriptionresult.error);
+  if (error) {
+    console.log(error);
     return <div>Insertion unsuccessful</div>;
   }
 
-  const addingPrescription = () => {
-    addPrescription({
-      newPresc: {
-        pres_name: prescName,
-        pres_dos: dosage,
-        patient_id: pID as number,
-      },
-    });
-  };
+  // const addingPrescription = () => {
+  //   addPrescription({
+  //     newPresc: {
+  //       pres_name: prescName,
+  //       pres_dos: dosage,
+  //     },
+  //   });
+  // };
 
   return (
     <div className="card border-dark mb-3">
@@ -45,7 +45,7 @@ export default function PrescriptionForm({ pID, postButton }: PatientID) {
       <div className="col" style={{ textAlign: 'right' }}>
         <div>{pID}</div>
         <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
-        {editBtn && <UpdatePrescription editButton={setEditBtn} />}
+        {/* {editBtn && <UpdatePrescription editButton={setEditBtn} />} */}
       </div>
       <div className="col">
         <label>Prescriptions:</label>
@@ -59,22 +59,10 @@ export default function PrescriptionForm({ pID, postButton }: PatientID) {
         /> */}
         {/* <label>Dosage</label>
         <input
-          className="form-control"
           type="number"
-          placeholder="Dosage Amount"
-          onChange={(e) => { setDosage(parseInt(e.target.value)); }}
-
-        />
-
-        <button
-          className="btn btn-primary mt-2 float-end"
-          onClick={addingPrescription}
-          type="submit"
-        >
-          Submit
-        </button>
-
-        </div>
+          placeholder="Dosage"
+          onChange={(e) => setDosage(parseInt(e.target.value))}
+        /> */}
       </div>
     </div>
   );
