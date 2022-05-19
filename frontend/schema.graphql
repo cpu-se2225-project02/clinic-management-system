@@ -45,7 +45,6 @@ type Mutation {
   addMedNotes(newMedNotes: MedNotesInput!): MedicalNotes
   addPatient(newPatient: PatientInput!): Patient
   addPayment(newPayment: PaymentInput!): Payment
-  addPrescription(newPrescription: PrescriptionInput!): Prescription
   deleteAppointment(appID: Int!): Appointment
   deletePatient(patientId: Int!): Patient
   editAppointment(appointmentID: Int!, editedAppointment: AppointmentInput!): Appointment
@@ -93,16 +92,6 @@ input PaymentInput {
   ammnt_payed: Float!
   patient_id: Int!
   paymnt_dt: String!
-}
-
-type Prescription {
-  pres_dos: Int!
-  pres_name: String!
-}
-
-input PrescriptionInput {
-  pres_dos: Int!
-  pres_name: String!
 }
 
 type Query {

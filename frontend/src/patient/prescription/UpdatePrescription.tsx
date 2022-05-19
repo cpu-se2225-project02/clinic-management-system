@@ -1,18 +1,36 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/button-has-type */
-import React from 'react';
+import React, { useState } from 'react';
 import { AiOutlineCloseSquare } from 'react-icons/ai';
+import { useMutation, useQuery } from 'urql';
+// import { EditAPrescriptionDocument, GetPrescriptionDocument } from '../../queries.generated';
 
 interface Popup {
-  editButton: React.Dispatch<React.SetStateAction<boolean>>;
+  postButton: React.Dispatch<React.SetStateAction<boolean>>;
+  patientID: number | undefined;
 }
 
-export default function UpdatePrescription({ editButton }: Popup) {
+export default function UpdatePrescriptionForm({ postButton, patientID }: Popup) {
+  // const [editPrescriptionResult, editPrescription] = useMutation(EditAPrescriptionDocument);
+
+  // const [allPrescriptions] = useQuery({
+  //   query: GetPrescriptionDocument,
+  //   variables: {
+  //     id:
+  //   },
+  // });
+
+  // const { data } = allPrescriptions;
+  // const [presName, setPresName] = useState(data?.patientPrescriptions.);
+
+  // const { error, fetching } = editPrescriptionResult;
+
   return (
     <div className="popup">
       <div className="popup-inner">
         <button
-          onClick={() => editButton(false)}
+          // onClick={() => editButton(false)}
           className="btn close-btn float-end mt-0"
         >
           <AiOutlineCloseSquare size={25} />

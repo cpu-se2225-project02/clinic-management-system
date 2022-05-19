@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable radix */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
@@ -6,13 +5,12 @@ import { useMutation } from 'urql';
 import { Spinner } from 'react-bootstrap';
 import { BiEdit } from 'react-icons/bi';
 import { AddPrescriptionDocument } from '../../queries.generated';
-import UpdatePrescription from './UpdatePrescription';
+// import UpdatePrescription from './UpdatePrescription';
 
 interface PatientID {
   pID: number | undefined
 }
 
-// eslint-disable-next-line no-unused-vars
 export default function PrescriptionForm({ pID }: PatientID) {
   // const [prescName, setPrescName] = useState('');
   // const [dosage, setDosage] = useState(0);
@@ -47,7 +45,7 @@ export default function PrescriptionForm({ pID }: PatientID) {
       <div className="col" style={{ textAlign: 'right' }}>
         <div>{pID}</div>
         <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
-        {editBtn && <UpdatePrescription editButton={setEditBtn} />}
+        {/* {editBtn && <UpdatePrescription editButton={setEditBtn} />} */}
       </div>
       <div className="col">
         <label>Prescriptions:</label>
@@ -65,7 +63,6 @@ export default function PrescriptionForm({ pID }: PatientID) {
           placeholder="Dosage"
           onChange={(e) => setDosage(parseInt(e.target.value))}
         /> */}
-
       </div>
     </div>
   );

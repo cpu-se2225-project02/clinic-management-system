@@ -10,6 +10,7 @@ import './PatientRecord.css';
 import { useQuery } from 'urql';
 import { GetPatientDocument } from '../queries.generated';
 import PatientInformation from './PatientInformation';
+// import Prescription from './prescription/Prescription';
 import PrescriptionForm from './prescription/PrescriptionForm';
 import MedicalNotes from './mednotes/MedicalNotes';
 import PatientAccount from './account/PatientAccount';

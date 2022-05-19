@@ -45,10 +45,6 @@ export interface NexusGenInputs {
     patient_id: number; // Int!
     paymnt_dt: string; // String!
   }
-  PrescriptionInput: { // input type
-    pres_dos: number; // Int!
-    pres_name: string; // String!
-  }
 }
 
 export interface NexusGenEnums {
@@ -100,10 +96,6 @@ export interface NexusGenObjects {
     id: number; // Int!
     paymnt_dt: string; // String!
   }
-  Prescription: { // root type
-    pres_dos: number; // Int!
-    pres_name: string; // String!
-  }
   Query: {};
 }
 
@@ -143,7 +135,6 @@ export interface NexusGenFieldTypes {
     addMedNotes: NexusGenRootTypes['MedicalNotes'] | null; // MedicalNotes
     addPatient: NexusGenRootTypes['Patient'] | null; // Patient
     addPayment: NexusGenRootTypes['Payment'] | null; // Payment
-    addPrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
     deleteAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
     deletePatient: NexusGenRootTypes['Patient'] | null; // Patient
     editAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
@@ -169,10 +160,6 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     patient: NexusGenRootTypes['Patient'] | null; // Patient
     paymnt_dt: string; // String!
-  }
-  Prescription: { // field return type
-    pres_dos: number; // Int!
-    pres_name: string; // String!
   }
   Query: { // field return type
     account: Array<NexusGenRootTypes['Payment'] | null> | null; // [Payment]
@@ -214,7 +201,6 @@ export interface NexusGenFieldTypeNames {
     addMedNotes: 'MedicalNotes'
     addPatient: 'Patient'
     addPayment: 'Payment'
-    addPrescription: 'Prescription'
     deleteAppointment: 'Appointment'
     deletePatient: 'Patient'
     editAppointment: 'Appointment'
@@ -240,10 +226,6 @@ export interface NexusGenFieldTypeNames {
     id: 'Int'
     patient: 'Patient'
     paymnt_dt: 'String'
-  }
-  Prescription: { // field return type name
-    pres_dos: 'Int'
-    pres_name: 'String'
   }
   Query: { // field return type name
     account: 'Payment'
@@ -272,9 +254,6 @@ export interface NexusGenArgTypes {
     }
     addPayment: { // args
       newPayment: NexusGenInputs['PaymentInput']; // PaymentInput!
-    }
-    addPrescription: { // args
-      newPrescription: NexusGenInputs['PrescriptionInput']; // PrescriptionInput!
     }
     deleteAppointment: { // args
       appID: number; // Int!
