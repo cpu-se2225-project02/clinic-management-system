@@ -30,6 +30,7 @@ model Patient {
   medicalNotes MedicalNotes[]
   appointments Appointment[]
   payments     Payment[]
+  prescriptions Prescription[]
 }
 
 model Appointment {
