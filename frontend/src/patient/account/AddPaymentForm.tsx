@@ -13,7 +13,7 @@ interface Popup {
 }
 
 function AddPaymentForm({ addPaymentBtn }: Popup) {
-  const [submitBtn, setSubmitBtn] = useMutation(AddPaymentDocument);
+  const [addPayment, setAddPayment] = useMutation(AddPaymentDocument);
   const [date, setDate] = useState('');
   const [ammtCost, setAmmtCost] = useState(0);
   const [ammtPd, setAmmtPd] = useState(0);
@@ -25,16 +25,16 @@ function AddPaymentForm({ addPaymentBtn }: Popup) {
 
   const { data, error, fetching } = allPatients;
 
-  if (submitBtn.fetching) {
+  if (addPayment.fetching) {
     return <Spinner animation="border" role="status" />;
   }
-  if (submitBtn.error) {
+  if (addPayment.error) {
     console.log(error);
     return <div>Insertion unsuccessful</div>;
   }
 
   const addingPayment = () => {
-    setSubmitBtn({
+    setAddPayment({
       newPayment: {
         paymnt_dt: date,
         ammnt_cost: ammtCost,
