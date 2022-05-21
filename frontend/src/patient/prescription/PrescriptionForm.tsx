@@ -1,10 +1,10 @@
 /* eslint-disable radix */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
-import { useMutation } from 'urql';
-import { Spinner } from 'react-bootstrap';
+// import { useMutation } from 'urql';
+// import { Spinner } from 'react-bootstrap';
 import { BiEdit } from 'react-icons/bi';
-import { AddPrescriptionDocument } from '../../queries.generated';
+// import { AddPrescriptionDocument } from '../../queries.generated';
 // import UpdatePrescription from './UpdatePrescription';
 
 interface PatientID {
@@ -15,17 +15,17 @@ export default function PrescriptionForm({ pID }: PatientID) {
   // const [prescName, setPrescName] = useState('');
   // const [dosage, setDosage] = useState(0);
   const [editBtn, setEditBtn] = useState(false);
-  const [addPrescriptionResult] = useMutation(AddPrescriptionDocument);
+  // const [addPrescriptionResult] = useMutation(AddPrescriptionDocument);
 
-  const { error, fetching } = addPrescriptionResult;
+  // const { error, fetching } = addPrescriptionResult;
 
-  if (fetching) {
-    return <Spinner animation="border" role="status" />;
-  }
-  if (error) {
-    console.log(error);
-    return <div>Insertion unsuccessful</div>;
-  }
+  // if (fetching) {
+  //   return <Spinner animation="border" role="status" />;
+  // }
+  // if (error) {
+  //   console.log(error);
+  //   return <div>Insertion unsuccessful</div>;
+  // }
 
   // const addingPrescription = () => {
   //   addPrescription({
@@ -43,11 +43,10 @@ export default function PrescriptionForm({ pID }: PatientID) {
           <div className="col">Prescription</div>
         </div>
 
-<<<<<<< HEAD
         <div className="col" style={{ textAlign: 'right' }}>
           <div>{pID}</div>
           <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
-          {editBtn && <UpdatePrescription editButton={setEditBtn} />}
+          {/* {editBtn && <UpdatePrescription editButton={setEditBtn} />} */}
         </div>
         <div className="col">
           <label>Prescriptions:</label>
@@ -55,19 +54,6 @@ export default function PrescriptionForm({ pID }: PatientID) {
             PrescriptionName - Dosage
           </p>
           {/* <input
-=======
-      <div className="col" style={{ textAlign: 'right' }}>
-        <div>{pID}</div>
-        <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
-        {/* {editBtn && <UpdatePrescription editButton={setEditBtn} />} */}
-      </div>
-      <div className="col">
-        <label>Prescriptions:</label>
-        <p>
-          PrescriptionName - Dosage
-        </p>
-        {/* <input
->>>>>>> badc6bd53dd9891feed4eef217b601efa349e2e8
           type="text"
           placeholder="Prescription"
           onChange={(e) => setPrescName(e.target.value)}
@@ -78,6 +64,7 @@ export default function PrescriptionForm({ pID }: PatientID) {
           placeholder="Dosage"
           onChange={(e) => setDosage(parseInt(e.target.value))}
         /> */}
+        </div>
       </div>
     </div>
   );
