@@ -38,15 +38,15 @@ function PatientAccount({ pID }: PatientId) {
             {acc?.paymnt_dt}
             {' '}
             Ammount Cost:
-            {' '}
+            {' ₱'}
             {acc?.ammnt_cost}
             {' '}
             Ammount Paid:
-            {' '}
+            {' ₱'}
             {acc?.ammnt_payed}
             {' '}
             Change:
-            {' '}
+            {' ₱'}
             {acc!.ammnt_payed - acc!.ammnt_cost}
           </div>
           <div>

@@ -42,30 +42,6 @@ query GetPatient($id: Int!) {
   }
 }
 
-query GetPrescription($id: Int!) {
-  patientPrescriptions(patientId: $id) {
-    pres_name
-    pres_dos  
-    id
-    patient{
-      id
-    } 
-  }
-}
-
-
-mutation editAPrescription($thePrescription: PrescriptionInput!, $pid: Int!) {
-  editPrescription(editedPrescription: $thePrescription, prescriptionId: $pid) {
-    pres_name
-    pres_dos
-    id
-    patient{
-      id
-    }
-  }
-}
-
-
 mutation editAPatient($thePatient: PatientInput!, $pid: Int!) {
   editPatient(editedPatient: $thePatient, patientId: $pid) {
     suffix
@@ -118,23 +94,6 @@ mutation AddPayment($newPayment: PaymentInput!) {
   }
 }
 
-mutation addPrescription($newPresc: PrescriptionInput!) {
-  addPrescription(newPrescription: $newPresc) {
-    pres_name
-    pres_dos
-  }
-}
-
-mutation deletePrescription($prescriptionId: Int!) {
-  deletePrescription(prescriptionId: $prescriptionId) {
-    pres_name
-    pres_dos
-    patient {
-      id
-    }
-  }
-}
-
 mutation deleteAPatient($patientID: Int!) {
   deletePatient(patientId: $patientID) {
     l_name
@@ -147,7 +106,6 @@ mutation deleteAPatient($patientID: Int!) {
     address
   }
 }
-
 
 query allDocs {
   allDoctors {
@@ -191,5 +149,15 @@ mutation AddAMedNote($newMedNote: MedNotesInput!) {
   addMedNotes(newMedNotes: $newMedNote) {
     med_notes
     title
+  }
+}
+
+mutation AddDoctor($newDoctor: DoctorInput!) {
+  addDoctor(newDoctor: $newDoctor) {
+    id
+    doc_name
+    appointments {
+      id
+    }
   }
 }

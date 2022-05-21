@@ -20,9 +20,13 @@ input AppointmentInput {
 }
 
 type Doctor {
-  appointments: [Appointment!]!
+  appointments: [Appointment]
   doc_name: String!
   id: Int!
+}
+
+input DoctorInput {
+  doc_name: String!
 }
 
 input MedNotesInput {
@@ -42,6 +46,7 @@ type MedicalNotes {
 
 type Mutation {
   addAppointment(newAppointment: AppointmentInput!): Appointment
+  addDoctor(newDoctor: DoctorInput!): Doctor
   addMedNotes(newMedNotes: MedNotesInput!): MedicalNotes
   addPatient(newPatient: PatientInput!): Patient
   addPayment(newPayment: PaymentInput!): Payment

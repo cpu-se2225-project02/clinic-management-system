@@ -15,18 +15,18 @@ export default function Header() {
   return (
     <Container fluid>
       <Row>
-        <Col xs={9} className="banner-text">
+        <Col xs={9} className="banner-text" data-testid="banner-text">
           Cliniche
         </Col>
 
         <Col xs={2} className="doctor-btn">
 
-          <Dropdown>
+          <Dropdown data-testid="hdr-dropdown">
             <BiUserCircle size={30} />
             <Dropdown.Toggle variant="">Dr. Suelan</Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item>
-                <Link to="/login" className="sidebar-link">Logout</Link>
+                <Link to="/login" data-testid="logout-btn" className="sidebar-link">Logout</Link>
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
