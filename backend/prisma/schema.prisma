@@ -50,14 +50,6 @@ model Doctor {
   appointments Appointment[]
 }
 
-model Prescription {
-  id         Int     @id @default(autoincrement())
-  patient_id Int
-  patient    Patient @relation(fields: [patient_id], references: [id])
-  pres_name  String
-  pres_dos   Int
-}
-
 model Payment {
   id          Int     @id @default(autoincrement())
   paymnt_dt   String
@@ -81,6 +73,14 @@ model MedicalNotes {
   patient    Patient @relation(fields: [patient_id], references: [id])
 }
 
+model Prescription {
+  id         Int     @id @default(autoincrement())
+  pres_name  String
+  pres_dos   Int
+  patient_id Int
+  patient    Patient @relation(fields: [patient_id], references: [id])
+}
+
 // medical practioner
 model User {
   id                 Int      @id @default(autoincrement())
@@ -94,5 +94,4 @@ model User {
   resetPasswordToken String   @default(value: "")
   createdAt          DateTime
   updatedAt          DateTime
-
 }

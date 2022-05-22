@@ -161,3 +161,20 @@ mutation AddDoctor($newDoctor: DoctorInput!) {
     }
   }
 }
+
+mutation AddPrescription($newPrescription: PrescriptionInput!) {
+  addPrescription(newPrescription: $newPrescription) {
+    id
+    pres_name
+    pres_dos
+    patient_id
+  }
+}
+
+query PatientPrescriptions($patientId: Int!) {
+  patientPrescriptions(patientId: $patientId) {
+    id
+    pres_name
+    pres_dos
+  }
+}
