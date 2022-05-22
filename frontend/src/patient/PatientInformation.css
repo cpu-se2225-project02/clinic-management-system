@@ -6,5 +6,10 @@
 .PatientIcon{
   block-size: 2in;
 }
-
+.container{
+  /* size: 5px; */
+}
+.editAndDelete{
+  margin-right: 3%;
+}
 
