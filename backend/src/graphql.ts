@@ -9,7 +9,7 @@ import { graphqlHTTP } from 'express-graphql';
 import { PrismaClient } from '@prisma/client';
 import cors from 'cors';
 // eslint-disable-next-line import/no-duplicates
-// import * as PrescriptionType from './prescription';
+import * as prescriptionType from './prescription';
 import * as patientTypes from './patient';
 import * as appointmentTypes from './appointment';
 // eslint-disable-next-line import/no-duplicates
@@ -25,7 +25,7 @@ const db = new PrismaClient({
 
 const schema = makeSchema({
   // eslint-disable-next-line max-len
-  types: [patientTypes, appointmentTypes, doctorTypes, paymentTypes, medNotesTypes],
+  types: [patientTypes, appointmentTypes, doctorTypes, paymentTypes, medNotesTypes, prescriptionType],
   outputs: {
     typegen: path.join(__dirname, 'generated/graphql-types.ts'),
     schema: path.join(__dirname, '../../frontend/schema.graphql'),
