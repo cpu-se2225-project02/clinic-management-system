@@ -102,7 +102,7 @@ export default function PatientList() {
               >
                 Add Patient
               </Button>
-              {PostButton && <PatientForm postButton={setPostButton} />}
+              {PostButton && <PatientForm payForm={PostButton} postButton={setPostButton} />}
             </Col>
           </Row>
           <Row className="list-row">

@@ -4,7 +4,6 @@
 /* eslint-disable react/button-has-type */
 import React, { useState } from 'react';
 import { Spinner, Modal } from 'react-bootstrap';
-import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { useMutation, useQuery } from 'urql';
 import { AddPaymentDocument, AllPatientsDocument } from '../../queries.generated';
 
@@ -19,9 +18,6 @@ function AddPaymentForm({ addPaymentBtn, payForm }: Popup) {
   const [ammtCost, setAmmtCost] = useState(0);
   const [ammtPd, setAmmtPd] = useState(0);
   const [id, setId] = useState(0);
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
 
   const [allPatients] = useQuery({
     query: AllPatientsDocument,
@@ -54,7 +50,7 @@ function AddPaymentForm({ addPaymentBtn, payForm }: Popup) {
   };
 
   return (
-    <Modal show={payForm} onHide={() => addPaymentBtn(false)} className="mt-5">
+    <Modal show={payForm} onHide={() => addPaymentBtn(false)} className="mt-5" backdrop="static">
       <Modal.Header closeButton><h5>Add Payment</h5></Modal.Header>
       <Modal.Body>
 

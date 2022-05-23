@@ -1,15 +1,16 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/button-has-type */
 import React, { useState } from 'react';
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Modal } from 'react-bootstrap';
 import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { useMutation } from 'urql';
 import { AddDoctorDocument } from '../queries.generated';
 
 interface Popup {
-    addDoctorBtn: React.Dispatch<React.SetStateAction<boolean>>;
+  addDoctorBtn: React.Dispatch<React.SetStateAction<boolean>>
+  payForm: boolean
   }
-function AddDoctorForm({ addDoctorBtn }: Popup) {
+function AddDoctorForm({ addDoctorBtn, payForm }: Popup) {
   const [docName, setDocName] = useState('');
   const [addDoctor, setAddDoctor] = useMutation(AddDoctorDocument);
 
@@ -36,15 +37,10 @@ function AddDoctorForm({ addDoctorBtn }: Popup) {
     addDoctorBtn(false);
   };
   return (
-    <div className="popup">
-      <div className="popup-inner">
-        <h5>Add Doctor</h5>
-        <button
-          onClick={() => addDoctorBtn(false)}
-          className="btn close-btn float-end mt-0"
-        >
-          <AiOutlineCloseSquare size={25} />
-        </button>
+    <Modal show={payForm} onHide={() => addDoctorBtn(false)} className="mt-5" backdrop="static">
+      <Modal.Header closeButton><h5>Add a Doctor</h5></Modal.Header>
+      <Modal.Body>
+
         <div className="input-group mb-3">
           <div className="input-group-prepend">
             <span className="input-group-text" id="basic-addon1">Name</span>
@@ -58,8 +54,9 @@ function AddDoctorForm({ addDoctorBtn }: Popup) {
         >
           Submit
         </button>
-      </div>
-    </div>
+
+      </Modal.Body>
+    </Modal>
   );
 }
 

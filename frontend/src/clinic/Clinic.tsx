@@ -26,7 +26,7 @@ function Clinic() {
             <IoPersonAddOutline />
             Add Doctor
           </button>
-          {addDoctorBtn && <AddDoctorForm addDoctorBtn={setAddDoctorBtn} />}
+          {addDoctorBtn && <AddDoctorForm payForm={addDoctorBtn} addDoctorBtn={setAddDoctorBtn} />}
 
         </Col>
       </Row>

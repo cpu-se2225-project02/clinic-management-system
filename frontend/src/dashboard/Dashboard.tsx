@@ -23,7 +23,8 @@ function Dashboard() {
   const navigate = useNavigate();
   const [PForm, setPForm] = useState(false);
   const [PayForm, setPayForm] = useState(false);
-  const handleShow = () => setPayForm(true);
+  const handleShowPayForm = () => setPayForm(true);
+  const handleShowPForm = () => setPForm(true);
   const handleClose = () => setPayForm(false);
 
   const [allAppointments] = useQuery({
@@ -55,7 +56,7 @@ function Dashboard() {
                       Add a patient
                     </Button>
                   </Card.Body>
-                  { PForm && <PatientForm postButton={setPForm} /> }
+                  { PForm && <PatientForm payForm={PForm} postButton={setPForm} /> }
                 </Card>
               </Col>
               <Col xs={4} className="mt-2">
@@ -79,7 +80,7 @@ function Dashboard() {
                     <Button
                       variant="secondary"
                       style={{ width: '100%' }}
-                      onClick={handleShow}
+                      onClick={handleShowPayForm}
                     >
                       Add a payment
                     </Button>
