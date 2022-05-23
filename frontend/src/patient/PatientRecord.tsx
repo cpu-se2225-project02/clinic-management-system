@@ -10,8 +10,9 @@ import './PatientRecord.css';
 import { useQuery } from 'urql';
 import { GetPatientDocument } from '../queries.generated';
 import PatientInformation from './PatientInformation';
-// import Prescription from './prescription/Prescription';
-import PrescriptionForm from './prescription/PrescriptionForm';
+// eslint-disable-next-line no-unused-vars
+import Prescription from './prescription/Prescription';
+// import PrescriptionForm from './prescription/PrescriptionForm';
 import MedicalNotes from './mednotes/MedicalNotes';
 import PatientAccount from './account/PatientAccount';
 import Header from '../common/Header';
@@ -65,7 +66,7 @@ export default function PatientRecord() {
               >
                 Prescriptions
               </Button>
-              {PrescriptionBtn && <PrescriptionForm pID={data?.specificPatient?.id} />}
+              {PrescriptionBtn && <Prescription pID={data?.specificPatient?.id} />}
             </Col>
             <Col className="list border d-grid gap-2">
               <Button variant="primary" className="patient-btns">

@@ -189,6 +189,30 @@ export type AddDoctorMutation = (
   )> }
 );
 
+export type AddPrescriptionMutationVariables = Types.Exact<{
+  newPrescription: Types.PrescriptionInput;
+}>;
+
+export type AddPrescriptionMutation = (
+  { __typename?: 'Mutation' }
+  & { addPrescription?: Types.Maybe<(
+    { __typename?: 'Prescription' }
+    & Pick<Types.Prescription, 'id' | 'pres_name' | 'pres_dos' | 'patient_id'>
+  )> }
+);
+
+export type PatientPrescriptionsQueryVariables = Types.Exact<{
+  patientId: Types.Scalars['Int'];
+}>;
+
+export type PatientPrescriptionsQuery = (
+  { __typename?: 'Query' }
+  & { patientPrescriptions?: Types.Maybe<Array<Types.Maybe<(
+    { __typename?: 'Prescription' }
+    & Pick<Types.Prescription, 'id' | 'pres_name' | 'pres_dos'>
+  )>>> }
+);
+
 export const AllPatientsDocument = {
   kind: 'Document',
   definitions: [{
@@ -387,3 +411,33 @@ export const AddDoctorDocument = {
     },
   }],
 } as unknown as DocumentNode<AddDoctorMutation, AddDoctorMutationVariables>;
+export const AddPrescriptionDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'mutation',
+    name: { kind: 'Name', value: 'AddPrescription' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'newPrescription' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'PrescriptionInput' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'addPrescription' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'newPrescription' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'newPrescription' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'pres_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'pres_dos' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient_id' } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<AddPrescriptionMutation, AddPrescriptionMutationVariables>;
+export const PatientPrescriptionsDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'query',
+    name: { kind: 'Name', value: 'PatientPrescriptions' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'patientId' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'patientPrescriptions' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'patientId' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'patientId' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'pres_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'pres_dos' } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<PatientPrescriptionsQuery, PatientPrescriptionsQueryVariables>;
