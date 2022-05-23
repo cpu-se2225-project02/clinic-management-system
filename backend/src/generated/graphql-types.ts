@@ -14,6 +14,11 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  AddPrescriptionInput: { // input type
+    patient_id: number; // Int!
+    pres_dos: number; // Int!
+    pres_name: string; // String!
+  }
   AppointmentInput: { // input type
     doc_id: number; // Int!
     dt_end: string; // String!
@@ -23,6 +28,10 @@ export interface NexusGenInputs {
   }
   DoctorInput: { // input type
     doc_name: string; // String!
+  }
+  EditPrescriptionInput: { // input type
+    pres_dos: number; // Int!
+    pres_name: string; // String!
   }
   MedNotesInput: { // input type
     date_noted: string; // String!
@@ -47,11 +56,6 @@ export interface NexusGenInputs {
     ammnt_payed: number; // Float!
     patient_id: number; // Int!
     paymnt_dt: string; // String!
-  }
-  PrescriptionInput: { // input type
-    patient_id: number; // Int!
-    pres_dos: number; // Int!
-    pres_name: string; // String!
   }
 }
 
@@ -301,7 +305,7 @@ export interface NexusGenArgTypes {
       newPayment: NexusGenInputs['PaymentInput']; // PaymentInput!
     }
     addPrescription: { // args
-      newPrescription: NexusGenInputs['PrescriptionInput']; // PrescriptionInput!
+      newPrescription: NexusGenInputs['AddPrescriptionInput']; // AddPrescriptionInput!
     }
     deleteAppointment: { // args
       appID: number; // Int!
@@ -321,7 +325,7 @@ export interface NexusGenArgTypes {
       patientId: number; // Int!
     }
     editPrescription: { // args
-      editedPrescription: NexusGenInputs['PrescriptionInput']; // PrescriptionInput!
+      editedPrescription: NexusGenInputs['EditPrescriptionInput']; // EditPrescriptionInput!
       prescriptionId: number; // Int!
     }
   }
