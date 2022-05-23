@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 import * as Types from './generated/graphql';
 
@@ -210,6 +211,18 @@ export type PatientPrescriptionsQuery = (
   & { patientPrescriptions?: Types.Maybe<Array<Types.Maybe<(
     { __typename?: 'Prescription' }
     & Pick<Types.Prescription, 'id' | 'pres_name' | 'pres_dos'>
+  )>>> }
+);
+
+export type PatientAppointmentsQueryVariables = Types.Exact<{
+  pID: Types.Scalars['Int'];
+}>;
+
+export type PatientAppointmentsQuery = (
+  { __typename?: 'Query' }
+  & { specificAppointment?: Types.Maybe<Array<Types.Maybe<(
+    { __typename?: 'Appointment' }
+    & Pick<Types.Appointment, 'name' | 'dt_start' | 'dt_end'>
   )>>> }
 );
 
@@ -441,3 +454,18 @@ export const PatientPrescriptionsDocument = {
     },
   }],
 } as unknown as DocumentNode<PatientPrescriptionsQuery, PatientPrescriptionsQueryVariables>;
+export const PatientAppointmentsDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'query',
+    name: { kind: 'Name', value: 'PatientAppointments' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'pID' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'specificAppointment' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'patientID' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'pID' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'name' } }, { kind: 'Field', name: { kind: 'Name', value: 'dt_start' } }, { kind: 'Field', name: { kind: 'Name', value: 'dt_end' } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<PatientAppointmentsQuery, PatientAppointmentsQueryVariables>;

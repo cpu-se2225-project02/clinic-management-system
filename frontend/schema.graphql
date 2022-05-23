@@ -128,5 +128,6 @@ type Query {
   patientPrescriptions(patientId: Int!): [Prescription]
   patients: [Patient]
   prescriptions: [Prescription]
+  specificAppointment(patientID: Int!): [Appointment]
   specificPatient(patientId: Int!): Patient
 }
