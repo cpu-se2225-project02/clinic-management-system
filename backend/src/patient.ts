@@ -52,7 +52,7 @@ export const Patient = objectType({
 export const patients = queryField('patients', {
   type: list(Patient),
   args: {
-    condition: nonNull(stringArg()),
+    condition: stringArg(),
   },
   resolve(root, args: {condition: String}) {
     if (args.condition === 'a-z') {
@@ -72,6 +72,7 @@ export const patients = queryField('patients', {
         ],
       });
     }
+    return db.patient.findMany();
   },
 });
 

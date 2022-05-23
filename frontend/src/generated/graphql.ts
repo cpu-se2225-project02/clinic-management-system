@@ -230,7 +230,7 @@ export interface QueryPatientPrescriptionsArgs {
 
 
 export interface QueryPatientsArgs {
-  condition: Scalars['String'];
+  condition?: InputMaybe<Scalars['String']>;
 }
 
 

@@ -3,7 +3,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 import * as Types from './generated/graphql';
 
 export type AllPatientsQueryVariables = Types.Exact<{
-  con: Types.Scalars['String'];
+  con?: Types.InputMaybe<Types.Scalars['String']>;
 }>;
 
 export type AllPatientsQuery = (
@@ -234,7 +234,7 @@ export const AllPatientsDocument = {
     kind: 'OperationDefinition',
     operation: 'query',
     name: { kind: 'Name', value: 'AllPatients' },
-    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'con' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } } } }],
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'con' } }, type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } } }],
     selectionSet: {
       kind: 'SelectionSet',
       selections: [{

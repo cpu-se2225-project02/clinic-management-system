@@ -1,4 +1,4 @@
-query AllPatients($con: String!) {
+query AllPatients($con: String) {
   patients(condition: $con) {
     id
     f_name
