@@ -9,6 +9,7 @@ import {
 import { BsPersonBadgeFill } from 'react-icons/bs';
 import { FaCalendarTimes } from 'react-icons/fa';
 import { MdOutlinePayment } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
 import './Dashboard.css';
@@ -16,6 +17,7 @@ import PatientForm from '../patient/PatientForm';
 import AddPaymentForm from '../patient/account/AddPaymentForm';
 
 function Dashboard() {
+  const navigate = useNavigate();
   const [PForm, setPForm] = useState(false);
   const [PayForm, setPayForm] = useState(false);
 
@@ -48,7 +50,14 @@ function Dashboard() {
           <Card style={{ width: '18rem', boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)' }}>
             <Card.Body className="card-body">
               <Card.Title><FaCalendarTimes size={100} /></Card.Title>
-              <Button variant="secondary" style={{ width: '100%' }}>Add an appointment</Button>
+              <Button
+                variant="secondary"
+                style={{ width: '100%' }}
+                onClick={() => navigate('/appointments')}
+              >
+                Add an appointment
+
+              </Button>
             </Card.Body>
           </Card>
         </Col>
