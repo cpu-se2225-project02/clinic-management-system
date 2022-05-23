@@ -2,12 +2,25 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable linebreak-style */
 
-import React from 'react';
-import { Container, Col, Row } from 'react-bootstrap';
+import React, { useState } from 'react';
+import {
+  Container, Col, Row, Card, Button,
+} from 'react-bootstrap';
+import { BsPersonBadgeFill } from 'react-icons/bs';
+import { FaCalendarTimes } from 'react-icons/fa';
+import { MdOutlinePayment } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
+import './Dashboard.css';
+import PatientForm from '../patient/PatientForm';
+import AddPaymentForm from '../patient/account/AddPaymentForm';
 
 function Dashboard() {
+  const navigate = useNavigate();
+  const [PForm, setPForm] = useState(false);
+  const [PayForm, setPayForm] = useState(false);
+
   return (
     <Container fluid>
       <Row>
@@ -18,8 +31,50 @@ function Dashboard() {
         <Col xs={2} className="sidebar-box p-0">
           <Sidebars />
         </Col>
-        <Col>
-          <h1>Dashboard</h1>
+        <Col xs={3} className="mt-2">
+          <Card style={{ width: '18rem', boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)' }}>
+            <Card.Body className="card-body">
+              <Card.Title><BsPersonBadgeFill size={100} /></Card.Title>
+              <Button
+                variant="secondary"
+                style={{ width: '100%' }}
+                onClick={() => { setPForm(true); }}
+              >
+                Add a patient
+              </Button>
+            </Card.Body>
+            { PForm && <PatientForm postButton={setPForm} /> }
+          </Card>
+        </Col>
+        <Col xs={3} className="mt-2">
+          <Card style={{ width: '18rem', boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)' }}>
+            <Card.Body className="card-body">
+              <Card.Title><FaCalendarTimes size={100} /></Card.Title>
+              <Button
+                variant="secondary"
+                style={{ width: '100%' }}
+                onClick={() => navigate('/appointments')}
+              >
+                Add an appointment
+
+              </Button>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col xs={3} className="mt-2">
+          <Card style={{ width: '18rem', boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)' }}>
+            <Card.Body className="card-body">
+              <Card.Title><MdOutlinePayment size={100} /></Card.Title>
+              <Button
+                variant="secondary"
+                style={{ width: '100%' }}
+                onClick={() => { setPayForm(true); }}
+              >
+                Add a payment
+              </Button>
+            </Card.Body>
+            {PayForm && <AddPaymentForm addPaymentBtn={setPayForm} />}
+          </Card>
         </Col>
       </Row>
     </Container>

@@ -214,6 +214,7 @@ export interface Query {
   readonly patientPrescriptions?: Maybe<ReadonlyArray<Maybe<Prescription>>>;
   readonly patients?: Maybe<ReadonlyArray<Maybe<Patient>>>;
   readonly prescriptions?: Maybe<ReadonlyArray<Maybe<Prescription>>>;
+  readonly specificAppointment?: Maybe<ReadonlyArray<Maybe<Appointment>>>;
   readonly specificPatient?: Maybe<Patient>;
 }
 
@@ -230,6 +231,16 @@ export interface QueryPatientMedNotesArgs {
 
 export interface QueryPatientPrescriptionsArgs {
   patientId: Scalars['Int'];
+}
+
+
+export interface QueryPatientsArgs {
+  condition?: InputMaybe<Scalars['String']>;
+}
+
+
+export interface QuerySpecificAppointmentArgs {
+  patientID: Scalars['Int'];
 }
 
 

@@ -202,6 +202,7 @@ export interface NexusGenFieldTypes {
     patientPrescriptions: Array<NexusGenRootTypes['Prescription'] | null> | null; // [Prescription]
     patients: Array<NexusGenRootTypes['Patient'] | null> | null; // [Patient]
     prescriptions: Array<NexusGenRootTypes['Prescription'] | null> | null; // [Prescription]
+    specificAppointment: Array<NexusGenRootTypes['Appointment'] | null> | null; // [Appointment]
     specificPatient: NexusGenRootTypes['Patient'] | null; // Patient
   }
 }
@@ -281,6 +282,7 @@ export interface NexusGenFieldTypeNames {
     patientPrescriptions: 'Prescription'
     patients: 'Patient'
     prescriptions: 'Prescription'
+    specificAppointment: 'Appointment'
     specificPatient: 'Patient'
   }
 }
@@ -336,6 +338,12 @@ export interface NexusGenArgTypes {
     }
     patientPrescriptions: { // args
       patientId: number; // Int!
+    }
+    patients: { // args
+      condition?: string | null; // String
+    }
+    specificAppointment: { // args
+      patientID: number; // Int!
     }
     specificPatient: { // args
       patientId: number; // Int!

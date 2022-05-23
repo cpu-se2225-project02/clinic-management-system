@@ -26,9 +26,13 @@ import PatientInformation from './PatientInformation';
 export default function PatientList() {
   const [PostButton, setPostButton] = useState(false);
   const navigate = useNavigate();
+  const [condition, setCondition] = useState('a-z');
 
   const [allPatients] = useQuery({
     query: AllPatientsDocument,
+    variables: {
+      con: condition,
+    },
   });
 
   const { data, error, fetching } = allPatients;
@@ -84,10 +88,10 @@ export default function PatientList() {
             </Col>
             <Col xs={2}>
               <Dropdown>
-                <Dropdown.Toggle variant="">Filter Patient</Dropdown.Toggle>
+                <Dropdown.Toggle variant="">Sort Patients</Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item>A-Z</Dropdown.Item>
-                  <Dropdown.Item>Z-A</Dropdown.Item>
+                  <Dropdown.Item onClick={() => { setCondition('a-z'); }}>A-Z</Dropdown.Item>
+                  <Dropdown.Item onClick={() => { setCondition('z-a'); }}>Z-A</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Col>

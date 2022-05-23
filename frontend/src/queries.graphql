@@ -1,5 +1,5 @@
-query AllPatients {
-  patients {
+query AllPatients($con: String) {
+  patients(condition: $con) {
     id
     f_name
     l_name
@@ -191,5 +191,13 @@ query PatientPrescriptions($patientId: Int!) {
     id
     pres_name
     pres_dos
+  }
+}
+
+query PatientAppointments($pID: Int!) {
+  specificAppointment(patientID: $pID) {
+    name
+    dt_start
+    dt_end
   }
 }
