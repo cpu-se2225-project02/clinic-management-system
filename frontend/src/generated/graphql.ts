@@ -229,6 +229,11 @@ export interface QueryPatientPrescriptionsArgs {
 }
 
 
+export interface QueryPatientsArgs {
+  condition: Scalars['String'];
+}
+
+
 export interface QuerySpecificAppointmentArgs {
   patientID: Scalars['Int'];
 }

@@ -126,7 +126,7 @@ type Query {
   high: String
   patientMedNotes(patient_id: Int!): [MedicalNotes]
   patientPrescriptions(patientId: Int!): [Prescription]
-  patients: [Patient]
+  patients(condition: String!): [Patient]
   prescriptions: [Prescription]
   specificAppointment(patientID: Int!): [Appointment]
   specificPatient(patientId: Int!): Patient

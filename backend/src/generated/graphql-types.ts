@@ -335,6 +335,9 @@ export interface NexusGenArgTypes {
     patientPrescriptions: { // args
       patientId: number; // Int!
     }
+    patients: { // args
+      condition: string; // String!
+    }
     specificAppointment: { // args
       patientID: number; // Int!
     }
