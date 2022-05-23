@@ -178,3 +178,11 @@ query PatientPrescriptions($patientId: Int!) {
     pres_dos
   }
 }
+
+query PatientAppointments($pID: Int!) {
+  specificAppointment(patientID: $pID) {
+    name
+    dt_start
+    dt_end
+  }
+}
