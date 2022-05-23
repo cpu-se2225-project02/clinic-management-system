@@ -1,7 +1,10 @@
+/* eslint-disable linebreak-style */
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 import * as Types from './generated/graphql';
 
-export type AllPatientsQueryVariables = Types.Exact<{ [key: string]: never; }>;
+export type AllPatientsQueryVariables = Types.Exact<{
+  con?: Types.InputMaybe<Types.Scalars['String']>;
+}>;
 
 export type AllPatientsQuery = (
   { __typename?: 'Query' }
@@ -213,10 +216,31 @@ export type PatientPrescriptionsQuery = (
   )>>> }
 );
 
+export type PatientAppointmentsQueryVariables = Types.Exact<{
+  pID: Types.Scalars['Int'];
+}>;
+
+export type PatientAppointmentsQuery = (
+  { __typename?: 'Query' }
+  & { specificAppointment?: Types.Maybe<Array<Types.Maybe<(
+    { __typename?: 'Appointment' }
+    & Pick<Types.Appointment, 'name' | 'dt_start' | 'dt_end'>
+  )>>> }
+);
+
 export const AllPatientsDocument = {
   kind: 'Document',
   definitions: [{
-    kind: 'OperationDefinition', operation: 'query', name: { kind: 'Name', value: 'AllPatients' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'patients' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'm_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'suffix' } }, { kind: 'Field', name: { kind: 'Name', value: 'sex' } }, { kind: 'Field', name: { kind: 'Name', value: 'age' } }, { kind: 'Field', name: { kind: 'Name', value: 'address' } }, { kind: 'Field', name: { kind: 'Name', value: 'birthdate' } }] } }] },
+    kind: 'OperationDefinition',
+    operation: 'query',
+    name: { kind: 'Name', value: 'AllPatients' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'con' } }, type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'patients' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'condition' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'con' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'm_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'suffix' } }, { kind: 'Field', name: { kind: 'Name', value: 'sex' } }, { kind: 'Field', name: { kind: 'Name', value: 'age' } }, { kind: 'Field', name: { kind: 'Name', value: 'address' } }, { kind: 'Field', name: { kind: 'Name', value: 'birthdate' } }] },
+      }],
+    },
   }],
 } as unknown as DocumentNode<AllPatientsQuery, AllPatientsQueryVariables>;
 export const AddPatientDocument = {
@@ -441,3 +465,18 @@ export const PatientPrescriptionsDocument = {
     },
   }],
 } as unknown as DocumentNode<PatientPrescriptionsQuery, PatientPrescriptionsQueryVariables>;
+export const PatientAppointmentsDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'query',
+    name: { kind: 'Name', value: 'PatientAppointments' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'pID' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'specificAppointment' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'patientID' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'pID' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'name' } }, { kind: 'Field', name: { kind: 'Name', value: 'dt_start' } }, { kind: 'Field', name: { kind: 'Name', value: 'dt_end' } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<PatientAppointmentsQuery, PatientAppointmentsQueryVariables>;

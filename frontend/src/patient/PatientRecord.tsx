@@ -17,6 +17,7 @@ import MedicalNotes from './mednotes/MedicalNotes';
 import PatientAccount from './account/PatientAccount';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
+import SpecificAppointment from './appointment/SpecificAppointment';
 
 export default function PatientRecord() {
   const params = useParams() as any;
@@ -24,6 +25,7 @@ export default function PatientRecord() {
   const [PrescriptionBtn, setPrescBtn] = useState(false);
   const [AccountBtn, setAccBtn] = useState(false);
   const [MedNotesBtn, setMedNotesBtn] = useState(false);
+  const [AppointmentBtn, setAppointmentBtn] = useState(false);
   const [allPatients] = useQuery({
     query: GetPatientDocument,
     variables: {
@@ -94,9 +96,14 @@ export default function PatientRecord() {
               {MedNotesBtn && <MedicalNotes pId={data?.specificPatient?.id} />}
             </Col>
             <Col className="list border d-grid gap-2">
-              <Button variant="primary" className="patient-btns">
+              <Button
+                variant="primary"
+                className="patient-btns"
+                onClick={() => setAppointmentBtn(!AppointmentBtn)}
+              >
                 Appointment
               </Button>
+              {AppointmentBtn && <SpecificAppointment pId={data?.specificPatient?.id} /> }
             </Col>
           </div>
         </Col>
