@@ -13,9 +13,11 @@ import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
 import './Dashboard.css';
 import PatientForm from '../patient/PatientForm';
+import AddPaymentForm from '../patient/account/AddPaymentForm';
 
 function Dashboard() {
   const [PForm, setPForm] = useState(false);
+  const [PayForm, setPayForm] = useState(false);
 
   return (
     <Container fluid>
@@ -54,8 +56,15 @@ function Dashboard() {
           <Card style={{ width: '18rem', boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)' }}>
             <Card.Body className="card-body">
               <Card.Title><MdOutlinePayment size={100} /></Card.Title>
-              <Button variant="secondary" style={{ width: '100%' }}>Add a payment</Button>
+              <Button
+                variant="secondary"
+                style={{ width: '100%' }}
+                onClick={() => { setPayForm(true); }}
+              >
+                Add a payment
+              </Button>
             </Card.Body>
+            {PayForm && <AddPaymentForm addPaymentBtn={setPayForm} />}
           </Card>
         </Col>
       </Row>
