@@ -47,7 +47,7 @@ export default function PatientList() {
       <Row>
         <Header />
       </Row>
-      <Row>
+      <Row className="patientList">
         <Col xs={2} className="sidebar-box p-0">
           <Sidebars />
         </Col>
@@ -105,7 +105,7 @@ export default function PatientList() {
             <Col className="list">
               {/* <div> */}
               {data?.patients?.map((patient) => (
-                <div>
+                <div className="patientInfo d-grid gap-2">
                   <Button className="patientInfo btn-primary" onClick={() => navigate(`/patient_record/${patient?.id}`)}>
                     <div className="patientInfo">
                       <div className="patientName fw-bold">

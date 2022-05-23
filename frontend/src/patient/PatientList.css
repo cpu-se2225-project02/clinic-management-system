@@ -1,10 +1,7 @@
-/* .patient-list-box {
-  display: inline-block !important;
-  overflow-x: auto;
-  overflow-y: auto;
-  margin-top: 4px !important;
-} */
 
+.patientList{
+  margin-left: 3%;
+}
 .sidebar-box {
   align-content: flex-start !important;
   display: flex !important;
@@ -50,17 +47,20 @@
   margin-top: 10px !important;
 }
 
-.row{
+.row {
   background-color: transparent;
 }
-.patientInfo{
-/* visibility: hidden; */
-/* color: #033076; */
-text-align: left;
+
+.patientInfo {
+  background-color: transparent;
+  text-align: left;
+
 }
-.patientName{
+
+.patientName {
   color: rgb(12, 49, 104);
 }
+
 .patient-rec-box {
   margin-bottom: 40px !important;
   height: fit-content;
