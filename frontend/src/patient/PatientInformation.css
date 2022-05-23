@@ -5,11 +5,12 @@
 }
 .PatientIcon{
   block-size: 2in;
-}
-.container{
-  /* size: 5px; */
+  margin-left: 10%;
 }
 .editAndDelete{
   margin-right: 3%;
+}
+.patientFullName{
+  font-size: 23px;
 }
 

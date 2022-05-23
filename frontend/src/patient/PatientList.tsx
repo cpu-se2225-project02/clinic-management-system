@@ -105,17 +105,20 @@ export default function PatientList() {
             <Col className="list">
               {/* <div> */}
               {data?.patients?.map((patient) => (
-                <div className="patientOuterInfo">
-                  <Button className="btn btn-light" onClick={() => navigate(`/patient_record/${patient?.id}`)}>
-                    <div className="row g-0">
-                      {patient?.l_name}
-                      {', '}
-                      {patient?.f_name}
-                      {' '}
-                      {patient?.m_name}
-                      {' '}
-                      <br />
+                <div>
+                  <Button className="patientInfo btn-primary" onClick={() => navigate(`/patient_record/${patient?.id}`)}>
+                    <div className="patientInfo">
+                      <div className="patientName fw-bold">
+                        {patient?.l_name}
+                        {', '}
+                        {patient?.f_name}
+                        {' '}
+                        {patient?.m_name}
+                        {' '}
+                      </div>
                       {/* Please add phone number */}
+                      +639496651088
+                      <br />
                       {patient?.sex}
                       <br />
                     </div>

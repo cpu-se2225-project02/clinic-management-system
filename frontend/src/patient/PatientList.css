@@ -53,8 +53,13 @@
 .row{
   background-color: transparent;
 }
-.patientOuterInfo{
-  text-align: left;
+.patientInfo{
+/* visibility: hidden; */
+/* color: #033076; */
+text-align: left;
+}
+.patientName{
+  color: rgb(12, 49, 104);
 }
 .patient-rec-box {
   margin-bottom: 40px !important;
