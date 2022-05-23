@@ -2,17 +2,18 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { useMutation } from 'urql';
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Modal } from 'react-bootstrap';
 import React, { useState } from 'react';
 import { AddAMedNoteDocument } from '../../queries.generated';
 import './MedNotesForm.css';
 
 interface PatientID {
   pId: number | undefined
-  postButton: React.Dispatch<React.SetStateAction<boolean>>;
+  postButton: React.Dispatch<React.SetStateAction<boolean>>
+  payForm: boolean
 }
 
-export default function MedNotesForm({ pId, postButton }: PatientID) {
+export default function MedNotesForm({ pId, postButton, payForm }: PatientID) {
   const [mnTitle, setMnTitle] = useState('');
   const [mnDate, setMnDate] = useState('');
   const [mnNotes, setMnNotes] = useState('');
@@ -37,8 +38,10 @@ export default function MedNotesForm({ pId, postButton }: PatientID) {
     });
   };
   return (
-    <div className="popup">
-      <div className="popup-inner">
+    <Modal show={payForm} onHide={() => postButton(false)} className="mt-5" backdrop="static">
+      <Modal.Header closeButton><h5>Add a Doctor</h5></Modal.Header>
+      <Modal.Body>
+
         <button
           onClick={() => postButton(false)}
           className="btn close-btn float-end mt-0"
@@ -60,7 +63,6 @@ export default function MedNotesForm({ pId, postButton }: PatientID) {
           type="date"
           placeholder="Enter date"
           onChange={(e) => { setMnDate(e.target.value); }}
-
         />
 
         <label>Notes</label>
@@ -78,7 +80,7 @@ export default function MedNotesForm({ pId, postButton }: PatientID) {
           Submit
         </button>
 
-      </div>
-    </div>
+      </Modal.Body>
+    </Modal>
   );
 }

@@ -34,7 +34,7 @@ export default function MedicalNotes({ pId }: PatientID) {
   return (
     <>
       <GoDiffAdded size={30} onClick={() => { setPostButton(!PostButton); }} />
-      { PostButton && <MedNotesForm pId={pId} postButton={setPostButton} /> }
+      { PostButton && <MedNotesForm payForm={PostButton} pId={pId} postButton={setPostButton} /> }
       <div>
         {data?.patientMedNotes?.map((note) => (
           <>
