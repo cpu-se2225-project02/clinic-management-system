@@ -5,6 +5,7 @@
 import React, { useState } from 'react';
 import {
   Container, Col, Row, Card, Button, Table,
+  Spinner, Modal,
 } from 'react-bootstrap';
 import { BsPersonBadgeFill } from 'react-icons/bs';
 import { FaCalendarTimes } from 'react-icons/fa';
@@ -22,6 +23,8 @@ function Dashboard() {
   const navigate = useNavigate();
   const [PForm, setPForm] = useState(false);
   const [PayForm, setPayForm] = useState(false);
+  const handleShow = () => setPayForm(true);
+  const handleClose = () => setPayForm(false);
 
   const [allAppointments] = useQuery({
     query: GetAllAppointmentsDocument,
@@ -76,12 +79,12 @@ function Dashboard() {
                     <Button
                       variant="secondary"
                       style={{ width: '100%' }}
-                      onClick={() => { setPayForm(true); }}
+                      onClick={handleShow}
                     >
                       Add a payment
                     </Button>
                   </Card.Body>
-                  {PayForm && <AddPaymentForm addPaymentBtn={setPayForm} />}
+                  {PayForm && <AddPaymentForm payForm={PayForm} addPaymentBtn={setPayForm} />}
                 </Card>
               </Col>
             </Row>

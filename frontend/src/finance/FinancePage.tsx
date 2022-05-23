@@ -38,7 +38,12 @@ export default function FinancePage() {
               <div className="btn-group" role="group" aria-label="Basic example">
                 <button type="button" className="btn btn-primary">View Payment</button>
                 <button type="button" className="btn btn-primary" onClick={() => setAddPaymentBtn(true)}>Add Payment</button>
-                {AddPaymentBtn && <AddPaymentForm addPaymentBtn={setAddPaymentBtn} />}
+                {AddPaymentBtn && (
+                <AddPaymentForm
+                  payForm={AddPaymentBtn}
+                  addPaymentBtn={setAddPaymentBtn}
+                />
+                )}
               </div>
             </div>
 

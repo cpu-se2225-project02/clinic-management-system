@@ -3,21 +3,25 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/button-has-type */
 import React, { useState } from 'react';
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Modal } from 'react-bootstrap';
 import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { useMutation, useQuery } from 'urql';
 import { AddPaymentDocument, AllPatientsDocument } from '../../queries.generated';
 
 interface Popup {
-  addPaymentBtn: React.Dispatch<React.SetStateAction<boolean>>;
+  addPaymentBtn: React.Dispatch<React.SetStateAction<boolean>>
+  payForm: boolean
 }
 
-function AddPaymentForm({ addPaymentBtn }: Popup) {
+function AddPaymentForm({ addPaymentBtn, payForm }: Popup) {
   const [addPayment, setAddPayment] = useMutation(AddPaymentDocument);
   const [date, setDate] = useState('');
   const [ammtCost, setAmmtCost] = useState(0);
   const [ammtPd, setAmmtPd] = useState(0);
   const [id, setId] = useState(0);
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   const [allPatients] = useQuery({
     query: AllPatientsDocument,
@@ -50,15 +54,10 @@ function AddPaymentForm({ addPaymentBtn }: Popup) {
   };
 
   return (
-    <div className="popup">
-      <div className="popup-inner">
-        <h5>Add Payment</h5>
-        <button
-          onClick={() => addPaymentBtn(false)}
-          className="btn close-btn float-end mt-0"
-        >
-          <AiOutlineCloseSquare size={25} />
-        </button>
+    <Modal show={payForm} onHide={() => addPaymentBtn(false)} className="mt-5">
+      <Modal.Header closeButton><h5>Add Payment</h5></Modal.Header>
+      <Modal.Body>
+
         <div className="input-group mb-3">
           <div className="input-group-prepend">
             <label className="input-group-text" htmlFor="inputGroupSelect01">Patient</label>
@@ -104,8 +103,10 @@ function AddPaymentForm({ addPaymentBtn }: Popup) {
         >
           Submit
         </button>
-      </div>
-    </div>
+
+      </Modal.Body>
+    </Modal>
+
   );
 }
 
