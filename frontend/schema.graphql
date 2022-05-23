@@ -2,6 +2,12 @@
 ### Do not make changes to this file directly
 
 
+input AddPrescriptionInput {
+  patient_id: Int!
+  pres_dos: Int!
+  pres_name: String!
+}
+
 type Appointment {
   doc_id: Int!
   dt_end: String!
@@ -29,6 +35,11 @@ input DoctorInput {
   doc_name: String!
 }
 
+input EditPrescriptionInput {
+  pres_dos: Int!
+  pres_name: String!
+}
+
 input MedNotesInput {
   date_noted: String!
   med_notes: String!
@@ -50,13 +61,13 @@ type Mutation {
   addMedNotes(newMedNotes: MedNotesInput!): MedicalNotes
   addPatient(newPatient: PatientInput!): Patient
   addPayment(newPayment: PaymentInput!): Payment
-  addPrescription(newPrescription: PrescriptionInput!): Prescription
+  addPrescription(newPrescription: AddPrescriptionInput!): Prescription
   deleteAppointment(appID: Int!): Appointment
   deletePatient(patientId: Int!): Patient
   deletePrescription(prescriptionId: Int!): Prescription
   editAppointment(appointmentID: Int!, editedAppointment: AppointmentInput!): Appointment
   editPatient(editedPatient: PatientInput!, patientId: Int!): Patient
-  editPrescription(editedPrescription: PrescriptionInput!, prescriptionId: Int!): Prescription
+  editPrescription(editedPrescription: EditPrescriptionInput!, prescriptionId: Int!): Prescription
 }
 
 type Patient {
@@ -105,12 +116,6 @@ input PaymentInput {
 type Prescription {
   id: Int!
   patient: Patient
-  patient_id: Int!
-  pres_dos: Int!
-  pres_name: String!
-}
-
-input PrescriptionInput {
   patient_id: Int!
   pres_dos: Int!
   pres_name: String!

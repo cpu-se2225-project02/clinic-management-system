@@ -53,19 +53,26 @@ export const patientPrescriptions = queryField('patientPrescriptions', {
   },
 });
 
-export const PrescriptionInput = inputObjectType({
-  name: 'PrescriptionInput',
+export const AddPrescriptionInput = inputObjectType({
+  name: 'AddPrescriptionInput',
   definition(t) {
     t.field(PrescriptionType.pres_name);
     t.field(PrescriptionType.pres_dos);
     t.field(PrescriptionType.patient_id);
   },
 });
+export const EditPrescriptionInput = inputObjectType({
+  name: 'EditPrescriptionInput',
+  definition(t) {
+    t.field(PrescriptionType.pres_name);
+    t.field(PrescriptionType.pres_dos);
+  },
+});
 
 export const AddPrescription = mutationField('addPrescription', {
   type: Prescription,
   args: {
-    newPrescription: nonNull(PrescriptionInput),
+    newPrescription: nonNull(AddPrescriptionInput),
   },
   resolve(root, args: { newPrescription: Prisma.PrescriptionCreateInput }) {
     return db.prescription.create({ data: args.newPrescription });
@@ -76,8 +83,9 @@ export const EditPrescription = mutationField('editPrescription', {
   type: Prescription,
   args: {
     prescriptionId: nonNull(intArg()),
-    editedPrescription: nonNull(PrescriptionInput),
+    editedPrescription: nonNull(EditPrescriptionInput),
   },
+
   // eslint-disable-next-line max-len
   resolve(root, args: { editedPrescription: Prisma.PrescriptionUpdateInput, prescriptionId: Prisma.PrescriptionWhereUniqueInput }) {
     return db.prescription.update({

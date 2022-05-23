@@ -12,6 +12,12 @@ export interface Scalars {
   Float: number;
 }
 
+export interface AddPrescriptionInput {
+  readonly patient_id: Scalars['Int'];
+  readonly pres_dos: Scalars['Int'];
+  readonly pres_name: Scalars['String'];
+}
+
 export interface Appointment {
   readonly __typename?: 'Appointment';
   readonly doc_id: Scalars['Int'];
@@ -39,6 +45,11 @@ export interface Doctor {
 
 export interface DoctorInput {
   readonly doc_name: Scalars['String'];
+}
+
+export interface EditPrescriptionInput {
+  readonly pres_dos: Scalars['Int'];
+  readonly pres_name: Scalars['String'];
 }
 
 export interface MedNotesInput {
@@ -100,7 +111,7 @@ export interface MutationAddPaymentArgs {
 
 
 export interface MutationAddPrescriptionArgs {
-  newPrescription: PrescriptionInput;
+  newPrescription: AddPrescriptionInput;
 }
 
 
@@ -132,7 +143,7 @@ export interface MutationEditPatientArgs {
 
 
 export interface MutationEditPrescriptionArgs {
-  editedPrescription: PrescriptionInput;
+  editedPrescription: EditPrescriptionInput;
   prescriptionId: Scalars['Int'];
 }
 
@@ -185,12 +196,6 @@ export interface Prescription {
   readonly __typename?: 'Prescription';
   readonly id: Scalars['Int'];
   readonly patient?: Maybe<Patient>;
-  readonly patient_id: Scalars['Int'];
-  readonly pres_dos: Scalars['Int'];
-  readonly pres_name: Scalars['String'];
-}
-
-export interface PrescriptionInput {
   readonly patient_id: Scalars['Int'];
   readonly pres_dos: Scalars['Int'];
   readonly pres_name: Scalars['String'];

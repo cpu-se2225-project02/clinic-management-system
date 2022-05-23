@@ -162,8 +162,23 @@ mutation AddDoctor($newDoctor: DoctorInput!) {
   }
 }
 
-mutation AddPrescription($newPrescription: PrescriptionInput!) {
+mutation AddPrescription($newPrescription: AddPrescriptionInput!) {
   addPrescription(newPrescription: $newPrescription) {
+    id
+    pres_name
+    pres_dos
+    patient_id
+  }
+}
+
+mutation EditPrescription(
+  $editedPrescription: EditPrescriptionInput!
+  $prescriptionId: Int!
+) {
+  editPrescription(
+    prescriptionId: $prescriptionId
+    editedPrescription: $editedPrescription
+  ) {
     id
     pres_name
     pres_dos
