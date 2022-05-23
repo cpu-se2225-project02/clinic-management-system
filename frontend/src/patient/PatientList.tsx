@@ -11,9 +11,9 @@ import {
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { useQuery } from 'urql';
 import { List } from '@mui/material';
+import { MdAccountBox } from 'react-icons/md';
 import {
   Router, Routes, Route, Link, useNavigate,
-
 } from 'react-router-dom';
 import { AllPatientsDocument } from '../queries.generated';
 import Header from '../common/Header';
@@ -47,7 +47,7 @@ export default function PatientList() {
       <Row>
         <Header />
       </Row>
-      <Row className="patientList">
+      <Row>
         <Col xs={2} className="sidebar-box p-0">
           <Sidebars />
         </Col>
@@ -55,10 +55,14 @@ export default function PatientList() {
         <Col xs={10} className="patient-list-box p-0 mt-2 border border-dark">
           <Row>
             <Col xs={12}>
-              <h5 className="h5">Patient List</h5>
+              <h5 className="h5">
+                <MdAccountBox className="patient-icon" />
+                Patient List
+              </h5>
             </Col>
           </Row>
-          <Row className="border-bottom">
+
+          <Row>
             <Col xs={5} className="patient-total-label">
               Total of
               {' '}
@@ -103,7 +107,6 @@ export default function PatientList() {
           </Row>
           <Row className="list-row">
             <Col className="list">
-              {/* <div> */}
               {data?.patients?.map((patient) => (
                 <div className="patientInfo d-grid gap-2">
                   <Button className="patientInfo btn-primary" onClick={() => navigate(`/patient_record/${patient?.id}`)}>
@@ -125,7 +128,6 @@ export default function PatientList() {
                   </Button>
                 </div>
               ))}
-              {/* </div> */}
             </Col>
           </Row>
         </Col>
