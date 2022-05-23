@@ -1,6 +1,5 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { useMutation } from 'urql';
 import { Spinner, Modal } from 'react-bootstrap';
 import React, { useState } from 'react';
@@ -39,15 +38,8 @@ export default function MedNotesForm({ pId, postButton, payForm }: PatientID) {
   };
   return (
     <Modal show={payForm} onHide={() => postButton(false)} className="mt-5" backdrop="static">
-      <Modal.Header closeButton><h5>Add a Doctor</h5></Modal.Header>
+      <Modal.Header closeButton><h5>Add Medical Note</h5></Modal.Header>
       <Modal.Body>
-
-        <button
-          onClick={() => postButton(false)}
-          className="btn close-btn float-end mt-0"
-        >
-          <AiOutlineCloseSquare size={25} />
-        </button>
 
         <label>Title:</label>
         <input
