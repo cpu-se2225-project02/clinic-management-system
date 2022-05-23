@@ -9,6 +9,7 @@ import {
   nonNull,
   objectType,
   queryField,
+  stringArg,
 } from 'nexus';
 
 import { Prisma, PrismaClient } from '@prisma/client';
@@ -50,8 +51,27 @@ export const Patient = objectType({
 // R = read
 export const patients = queryField('patients', {
   type: list(Patient),
-  resolve() {
-    return db.patient.findMany();
+  args: {
+    condition: nonNull(stringArg()),
+  },
+  resolve(root, args: {condition: String}) {
+    if (args.condition === 'a-z') {
+      return db.patient.findMany({
+        orderBy: [
+          {
+            l_name: 'asc',
+          },
+        ],
+      });
+    } if (args.condition === 'z-a') {
+      return db.patient.findMany({
+        orderBy: [
+          {
+            l_name: 'desc',
+          },
+        ],
+      });
+    }
   },
 });
 
