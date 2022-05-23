@@ -88,7 +88,7 @@ function Dashboard() {
             <Row className="mt-5">
               <Col xs={12}>
                 <Table striped bordered hover size="sm" className="tb">
-                  <thead>
+                  <thead className="tb-head">
                     <tr>
                       <th>Appointment Title</th>
                       <th>Start</th>

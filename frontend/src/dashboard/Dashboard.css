@@ -10,3 +10,8 @@
 .tb {
   border: 5px !important;
 }
+
+.tb-head {
+  background-color: #033076;
+  color: white;
+}
