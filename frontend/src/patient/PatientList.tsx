@@ -84,7 +84,7 @@ export default function PatientList() {
             </Col>
             <Col xs={2}>
               <Dropdown>
-                <Dropdown.Toggle variant="">Filter Patient</Dropdown.Toggle>
+                <Dropdown.Toggle variant="">Sort Patients</Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item>A-Z</Dropdown.Item>
                   <Dropdown.Item>Z-A</Dropdown.Item>
