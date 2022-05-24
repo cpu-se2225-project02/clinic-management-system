@@ -61,7 +61,7 @@ export default function FinancePage() {
                     variant="secondary"
                     style={{ width: '100%' }}
                   >
-                    All Payments
+                    View patients account
                   </Button>
                 </Card.Body>
               </Card>
