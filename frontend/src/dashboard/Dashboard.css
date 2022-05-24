@@ -1,4 +1,17 @@
-.card-body {
+.c-body {
   text-align: center !important;
   width: 18rem !important;
+}
+
+.c-body:hover {
+  background-color: rgb(166, 166, 166);
+}
+
+.tb {
+  border: 5px !important;
+}
+
+.tb-head {
+  background-color: #033076;
+  color: white;
 }

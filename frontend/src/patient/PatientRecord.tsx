@@ -78,7 +78,7 @@ export default function PatientRecord() {
             <Row>
               <Col className="list border d-grid gap-2">
                 <Button variant="primary" className="patient-btns" onClick={() => setAccBtn(!AccountBtn)}>
-                  Account
+                  Accounts
                 </Button>
               </Col>
             </Row>
@@ -101,7 +101,7 @@ export default function PatientRecord() {
                 className="patient-btns"
                 onClick={() => setAppointmentBtn(!AppointmentBtn)}
               >
-                Appointment
+                Appointments
               </Button>
               {AppointmentBtn && <SpecificAppointment pId={data?.specificPatient?.id} /> }
             </Col>

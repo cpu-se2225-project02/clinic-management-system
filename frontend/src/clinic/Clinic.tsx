@@ -24,9 +24,10 @@ function Clinic() {
           <h1>Clinic</h1>
           <button type="button" className="btn btn-primary" onClick={() => setAddDoctorBtn(true)}>
             <IoPersonAddOutline />
+            {' '}
             Add Doctor
           </button>
-          {addDoctorBtn && <AddDoctorForm addDoctorBtn={setAddDoctorBtn} />}
+          {addDoctorBtn && <AddDoctorForm payForm={addDoctorBtn} addDoctorBtn={setAddDoctorBtn} />}
 
         </Col>
       </Row>

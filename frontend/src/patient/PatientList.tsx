@@ -15,6 +15,7 @@ import {
   Router, Routes, Route, Link, useNavigate,
 
 } from 'react-router-dom';
+import { BsPersonBadgeFill } from 'react-icons/bs';
 import { AllPatientsDocument } from '../queries.generated';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
@@ -100,9 +101,11 @@ export default function PatientList() {
                 className="add-patient-btn btn-sm float-start"
                 onClick={() => setPostButton(true)}
               >
+                <BsPersonBadgeFill size={20} />
+                {' '}
                 Add Patient
               </Button>
-              {PostButton && <PatientForm postButton={setPostButton} />}
+              {PostButton && <PatientForm payForm={PostButton} postButton={setPostButton} />}
             </Col>
           </Row>
           <Row className="list-row">
