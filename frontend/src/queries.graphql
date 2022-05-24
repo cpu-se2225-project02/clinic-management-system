@@ -202,6 +202,13 @@ query PatientAppointments($pID: Int!) {
   }
 }
 
+mutation DeletePrescription($prescId: Int!) {
+  deletePrescription(prescriptionId: $prescId) {
+    id
+    pres_name
+    patient_id
+  }
+}
 query AllDoctors {
   allDoctors {
     doc_name
