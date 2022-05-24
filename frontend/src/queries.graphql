@@ -201,3 +201,9 @@ query PatientAppointments($pID: Int!) {
     dt_end
   }
 }
+
+query AllDoctors {
+  allDoctors {
+    doc_name
+  }
+}
