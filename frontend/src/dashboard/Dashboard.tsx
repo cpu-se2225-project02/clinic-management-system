@@ -45,9 +45,14 @@ function Dashboard() {
           <Col xs={10}>
             <Row>
               <Col xs={4} className="mt-2">
-                <Card style={{ width: '18rem', boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)' }}>
+                <Card style={{
+                  width: '18rem',
+                  boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)',
+                  borderRadius: '20px',
+                }}
+                >
                   <Card.Body className="c-body">
-                    <Card.Title><BsPersonBadgeFill size={100} /></Card.Title>
+                    <Card.Title><BsPersonBadgeFill size={80} /></Card.Title>
                     <Button
                       variant="secondary"
                       style={{ width: '100%' }}
@@ -60,9 +65,14 @@ function Dashboard() {
                 </Card>
               </Col>
               <Col xs={4} className="mt-2">
-                <Card style={{ width: '18rem', boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)' }}>
+                <Card style={{
+                  width: '18rem',
+                  boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)',
+                  borderRadius: '20px',
+                }}
+                >
                   <Card.Body className="c-body">
-                    <Card.Title><FaCalendarTimes size={100} /></Card.Title>
+                    <Card.Title><FaCalendarTimes size={80} /></Card.Title>
                     <Button
                       variant="secondary"
                       style={{ width: '100%' }}
@@ -74,9 +84,14 @@ function Dashboard() {
                 </Card>
               </Col>
               <Col xs={4} className="mt-2">
-                <Card style={{ width: '18rem', boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)' }}>
+                <Card style={{
+                  width: '18rem',
+                  boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)',
+                  borderRadius: '20px',
+                }}
+                >
                   <Card.Body className="c-body">
-                    <Card.Title><MdOutlinePayment size={100} /></Card.Title>
+                    <Card.Title><MdOutlinePayment size={80} /></Card.Title>
                     <Button
                       variant="secondary"
                       style={{ width: '100%' }}
