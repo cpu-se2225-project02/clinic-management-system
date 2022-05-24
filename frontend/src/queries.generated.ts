@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 import * as Types from './generated/graphql';
 
