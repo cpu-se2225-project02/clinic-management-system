@@ -36,7 +36,7 @@ export default function PatientInformation({ pId }: PatientId) {
 
   return (
     <>
-      <div className="col" style={{ textAlign: 'right' }}>
+      <div className="col" test-dataid="PatientInfo" style={{ textAlign: 'right' }}>
         <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
         <MdDeleteOutline size={30} onClick={patientDeletion} />
         {editBtn && <UpdatePatientForm postButton={setEditBtn} patientID={pId} />}
