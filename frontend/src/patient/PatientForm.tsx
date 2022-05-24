@@ -72,6 +72,7 @@ export default function PatientForm({ postButton, payForm }: Popup) {
 
         <label>First name:</label>
         <input
+          required
           className="form-control"
           type="text"
           placeholder="First name"

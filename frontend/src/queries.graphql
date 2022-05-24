@@ -209,3 +209,8 @@ mutation DeletePrescription($prescId: Int!) {
     patient_id
   }
 }
+query AllDoctors {
+  allDoctors {
+    doc_name
+  }
+}

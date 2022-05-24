@@ -252,6 +252,16 @@ export type DeletePrescriptionMutation = (
   )> }
 );
 
+export type AllDoctorsQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
+export type AllDoctorsQuery = (
+  { __typename?: 'Query' }
+  & { allDoctors?: Types.Maybe<Array<Types.Maybe<(
+    { __typename?: 'Doctor' }
+    & Pick<Types.Doctor, 'doc_name'>
+  )>>> }
+);
+
 export const AllPatientsDocument = {
   kind: 'Document',
   definitions: [{
@@ -534,3 +544,9 @@ export const DeletePrescriptionDocument = {
     },
   }],
 } as unknown as DocumentNode<DeletePrescriptionMutation, DeletePrescriptionMutationVariables>;
+export const AllDoctorsDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition', operation: 'query', name: { kind: 'Name', value: 'AllDoctors' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'allDoctors' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'doc_name' } }] } }] },
+  }],
+} as unknown as DocumentNode<AllDoctorsQuery, AllDoctorsQueryVariables>;
