@@ -59,6 +59,7 @@ function AddPaymentForm({ addPaymentBtn, payForm }: Popup) {
             <label className="input-group-text" htmlFor="inputGroupSelect01">Patient</label>
           </div>
           <select className="custom-select" id="inputGroupSelect01" onChange={(e) => setId(parseInt(e.target.value))}>
+            <option selected>Select a patient</option>
             {data?.patients?.map((patient) => (
               <option value={patient?.id}>
                 {patient?.f_name}
