@@ -25,15 +25,9 @@ export default function Sidebars() {
             src="https://res.cloudinary.com/dmro06tbx/image/upload/v1650564665/techniche_tihcko.png"
           />
         </Row>
-
-        <Row>
-          <div className="card-title" data-testid="card-title">
-            Clinic Name
-          </div>
-        </Row>
-
+        <Row />
         <Link to="/" className="sidebar-link" data-testid="dashboard-link">
-          <Row>
+          <Row className="mt-4">
             <Button className="list-group-item sidebar-btns" data-testid="dashboard-btn">
               <AiOutlineDashboard size={25} />
               {' '}
