@@ -12,6 +12,7 @@ import { FaFileInvoice } from 'react-icons/fa';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
 import AddPaymentForm from '../patient/account/AddPaymentForm';
+import Footer from '../common/Footer';
 
 export default function FinancePage() {
   const [AddPaymentBtn, setAddPaymentBtn] = useState(false);
@@ -89,6 +90,7 @@ export default function FinancePage() {
           </Row>
         </Col>
       </Row>
+      <Footer />
     </Container>
 
   );
