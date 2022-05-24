@@ -201,3 +201,11 @@ query PatientAppointments($pID: Int!) {
     dt_end
   }
 }
+
+mutation DeletePrescription($prescId: Int!) {
+  deletePrescription(prescriptionId: $prescId) {
+    id
+    pres_name
+    patient_id
+  }
+}
