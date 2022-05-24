@@ -5,7 +5,9 @@ import './Footer.css';
 export default function Footer() {
   return (
     <Row className="ft-des">
-      All rights reserved 2022
+      <div className="copyright">
+        All rights reserved 2022
+      </div>
     </Row>
   );
 }

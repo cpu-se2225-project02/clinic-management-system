@@ -7,3 +7,8 @@
   font-size: xx-small;
   height: 30px;
 }
+
+.copyright {
+  text-align: center !important;
+  margin-top: 10px;
+}
