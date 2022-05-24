@@ -23,6 +23,7 @@ import './PatientList.css';
 import PatientForm from './PatientForm';
 import PatientRecord from './PatientRecord';
 import PatientInformation from './PatientInformation';
+import Footer from '../common/Footer';
 
 export default function PatientList() {
   const [PostButton, setPostButton] = useState(false);
@@ -139,6 +140,7 @@ export default function PatientList() {
           </Routes>
         </Row>
       </Row>
+      <Footer />
     </Container>
   );
 }

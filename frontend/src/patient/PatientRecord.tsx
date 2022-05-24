@@ -18,6 +18,7 @@ import PatientAccount from './account/PatientAccount';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
 import SpecificAppointment from './appointment/SpecificAppointment';
+import Footer from '../common/Footer';
 
 export default function PatientRecord() {
   const params = useParams() as any;
@@ -36,7 +37,7 @@ export default function PatientRecord() {
   const { data } = allPatients;
 
   return (
-    <Container fluid className="PatientInfo">
+    <Container fluid className="PatientInfo mb-5">
       <Row>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <Header />
@@ -108,6 +109,7 @@ export default function PatientRecord() {
           </div>
         </Col>
       </Row>
+      <Footer />
     </Container>
   );
 }

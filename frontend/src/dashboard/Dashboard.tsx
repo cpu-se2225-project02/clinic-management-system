@@ -8,16 +8,27 @@ import {
   Spinner, Modal,
 } from 'react-bootstrap';
 import { BsPersonBadgeFill } from 'react-icons/bs';
-import { FaCalendarTimes } from 'react-icons/fa';
+import { FaCalendarTimes, FaStethoscope } from 'react-icons/fa';
 import { MdOutlinePayment } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
+import { IoIosPeople } from 'react-icons/io';
 import { useQuery } from 'urql';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
 import './Dashboard.css';
 import PatientForm from '../patient/PatientForm';
 import AddPaymentForm from '../patient/account/AddPaymentForm';
-import { GetAllAppointmentsDocument } from '../queries.generated';
+import { AllDoctorsDocument, AllPatientsDocument, GetAllAppointmentsDocument } from '../queries.generated';
+import Footer from '../common/Footer';
+
+const today = () => {
+  const date = new Date();
+  return (
+    <div>
+      {date.toLocaleDateString()}
+    </div>
+  );
+};
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -26,6 +37,12 @@ function Dashboard() {
   const handleShowPayForm = () => setPayForm(true);
   const handleShowPForm = () => setPForm(true);
   const handleClose = () => setPayForm(false);
+  const [allPatients] = useQuery({
+    query: AllPatientsDocument,
+  });
+  const [allDocs] = useQuery({
+    query: AllDoctorsDocument,
+  });
 
   const [allAppointments] = useQuery({
     query: GetAllAppointmentsDocument,
@@ -42,12 +59,67 @@ function Dashboard() {
           <Col xs={2} className="sidebar-box p-0">
             <Sidebars />
           </Col>
+
           <Col xs={10}>
+            <Row className="mt-3 pb-2 border-bottom">
+              <Col xs={4}>
+                <Card style={{
+                  width: '18rem',
+                  textAlign: 'center',
+                  boxShadow: '0px 0px 6px 5px rgba(209,209,209,1)',
+                }}
+                >
+                  <Card.Header><strong>Today</strong></Card.Header>
+                  <Card.Body>{ today() }</Card.Body>
+                </Card>
+              </Col>
+              <Col xs={4}>
+                <Card style={{
+                  width: '18rem',
+                  textAlign: 'center',
+                  boxShadow: '0px 0px 6px 5px rgba(209,209,209,1)',
+                }}
+                >
+                  <Card.Body>
+                    <IoIosPeople size={64} />
+                    {' '}
+                    Total of
+                    {' '}
+                    <strong>{allPatients.data?.patients?.length}</strong>
+                    {' '}
+                    patients
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col xs={4}>
+                <Card style={{
+                  width: '18rem',
+                  textAlign: 'center',
+                  boxShadow: '0px 0px 6px 5px rgba(209,209,209,1)',
+                }}
+                >
+                  <Card.Body>
+                    <FaStethoscope size={64} />
+                    {' '}
+                    Total of
+                    {' '}
+                    <strong>{allDocs.data?.allDoctors?.length}</strong>
+                    {' '}
+                    Doctors
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
             <Row>
               <Col xs={4} className="mt-2">
-                <Card style={{ width: '18rem', boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)' }}>
+                <Card style={{
+                  width: '18rem',
+                  boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)',
+                  borderRadius: '20px',
+                }}
+                >
                   <Card.Body className="c-body">
-                    <Card.Title><BsPersonBadgeFill size={100} /></Card.Title>
+                    <Card.Title><BsPersonBadgeFill size={80} /></Card.Title>
                     <Button
                       variant="secondary"
                       style={{ width: '100%' }}
@@ -60,9 +132,14 @@ function Dashboard() {
                 </Card>
               </Col>
               <Col xs={4} className="mt-2">
-                <Card style={{ width: '18rem', boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)' }}>
+                <Card style={{
+                  width: '18rem',
+                  boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)',
+                  borderRadius: '20px',
+                }}
+                >
                   <Card.Body className="c-body">
-                    <Card.Title><FaCalendarTimes size={100} /></Card.Title>
+                    <Card.Title><FaCalendarTimes size={80} /></Card.Title>
                     <Button
                       variant="secondary"
                       style={{ width: '100%' }}
@@ -74,9 +151,14 @@ function Dashboard() {
                 </Card>
               </Col>
               <Col xs={4} className="mt-2">
-                <Card style={{ width: '18rem', boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)' }}>
+                <Card style={{
+                  width: '18rem',
+                  boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)',
+                  borderRadius: '20px',
+                }}
+                >
                   <Card.Body className="c-body">
-                    <Card.Title><MdOutlinePayment size={100} /></Card.Title>
+                    <Card.Title><MdOutlinePayment size={80} /></Card.Title>
                     <Button
                       variant="secondary"
                       style={{ width: '100%' }}
@@ -112,6 +194,7 @@ function Dashboard() {
           </Col>
         </Row>
       </Row>
+      <Footer />
     </Container>
   );
 }
