@@ -1,13 +1,5 @@
 .sidebar-btns {
   text-align: left !important;
-  margin-top: 5px !important;
-  background-color: white !important;
-  color: #033076 !important;
-  border-radius: 0px !important;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 15px !important;
-  font-weight: bold;
-  width: 90% !important;
 }
 
 .sidebar-link {
@@ -15,7 +7,11 @@
 }
 
 .sidebar-btns:hover {
-  background-color: rgba(202, 202, 202, 0.973) !important;
+  background-color:#033076 !important;
+}
+
+.sidebar-btns:active {
+  background-color: #033076 !important;
 }
 
 .clinic-name {

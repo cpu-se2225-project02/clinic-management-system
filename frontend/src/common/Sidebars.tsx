@@ -8,6 +8,10 @@ import {
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Sidebars.css';
+import { AiOutlineDashboard, AiOutlineCalendar } from 'react-icons/ai';
+import { BsPeople } from 'react-icons/bs';
+import { FaRegMoneyBillAlt } from 'react-icons/fa';
+import { BiClinic } from 'react-icons/bi';
 
 export default function Sidebars() {
   return (
@@ -30,7 +34,9 @@ export default function Sidebars() {
 
         <Link to="/" className="sidebar-link" data-testid="dashboard-link">
           <Row>
-            <Button className="list-group-item" data-testid="dashboard-btn">
+            <Button className="list-group-item sidebar-btns" data-testid="dashboard-btn">
+              <AiOutlineDashboard size={25} />
+              {' '}
               Dashboard
             </Button>
           </Row>
@@ -38,7 +44,9 @@ export default function Sidebars() {
 
         <Link to="/clinic" className="sidebar-link" data-testid="clinic-link">
           <Row>
-            <Button className="list-group-item">
+            <Button className="list-group-item sidebar-btns">
+              <BiClinic size={25} />
+              {' '}
               Clinic
             </Button>
           </Row>
@@ -46,7 +54,9 @@ export default function Sidebars() {
 
         <Link to="/appointments" className="sidebar-link" data-testid="appointments-link">
           <Row>
-            <Button className="list-group-item">
+            <Button className="list-group-item sidebar-btns">
+              <AiOutlineCalendar size={25} />
+              {' '}
               Appointments
             </Button>
           </Row>
@@ -54,7 +64,9 @@ export default function Sidebars() {
 
         <Link to="/patients" className="sidebar-link" data-testid="patients-link">
           <Row>
-            <Button className="list-group-item">
+            <Button className="list-group-item sidebar-btns">
+              <BsPeople size={25} />
+              {' '}
               Patients
             </Button>
           </Row>
@@ -62,7 +74,9 @@ export default function Sidebars() {
 
         <Link to="/finance" className="sidebar-link" data-testid="finance-link">
           <Row>
-            <Button className="list-group-item">
+            <Button className="list-group-item sidebar-btns">
+              <FaRegMoneyBillAlt size={25} />
+              {' '}
               Finance
             </Button>
           </Row>
