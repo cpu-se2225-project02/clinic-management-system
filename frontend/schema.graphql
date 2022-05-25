@@ -10,6 +10,7 @@ input AddPrescriptionInput {
 
 type Appointment {
   doc_id: Int!
+  doctor: Doctor
   dt_end: String!
   dt_start: String!
   id: Int!

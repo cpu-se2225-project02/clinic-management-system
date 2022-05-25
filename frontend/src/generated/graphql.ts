@@ -21,6 +21,7 @@ export interface AddPrescriptionInput {
 export interface Appointment {
   readonly __typename?: 'Appointment';
   readonly doc_id: Scalars['Int'];
+  readonly doctor?: Maybe<Doctor>;
   readonly dt_end: Scalars['String'];
   readonly dt_start: Scalars['String'];
   readonly id: Scalars['Int'];
