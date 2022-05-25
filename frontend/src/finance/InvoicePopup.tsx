@@ -4,7 +4,9 @@ import React, { useState } from 'react';
 import { Button, Modal, Spinner } from 'react-bootstrap';
 import './InvoicePopup.css';
 import { useQuery } from 'urql';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { AllPatientsDocument } from '../queries.generated';
+import InvoiceForm from './InvoiceForm';
 
 interface Popup {
   invPop: React.Dispatch<React.SetStateAction<boolean>>
@@ -12,6 +14,7 @@ interface Popup {
 }
 
 export default function InvoicePopup({ invPop, invForm }: Popup) {
+  const navigate = useNavigate();
   const [id, setId] = useState(0);
 
   const [allPatients] = useQuery({
@@ -54,7 +57,15 @@ export default function InvoicePopup({ invPop, invForm }: Popup) {
             ))}
           </select>
         </div>
-        <Button className="float-end">Generate</Button>
+        <Button
+          className="float-end"
+          onClick={() => navigate(`/invoice/${id}`)}
+        >
+          Generate
+        </Button>
+        <Routes>
+          <Route path=":id/" element={<InvoiceForm />} />
+        </Routes>
       </Modal.Body>
     </Modal>
   );
