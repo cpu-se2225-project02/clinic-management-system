@@ -2,7 +2,7 @@
 /* eslint-disable linebreak-style */
 import React, { useState } from 'react';
 import {
-  Container, Col, Row, Table,
+  Container, Col, Row, Table, Button,
 } from 'react-bootstrap';
 import { IoPersonAddOutline } from 'react-icons/io5';
 import { useQuery } from 'urql';
@@ -58,11 +58,11 @@ function Clinic() {
                       <td>
                         {doc?.doc_name}
                       </td>
-                      {/* <td>
-                        <Button>Patients</Button>
+                      <td>
+                        <Button variant="warning">Patients</Button>
                         {' '}
-                        <Button>Appointments</Button>
-                      </td> */}
+                        <Button variant="warning">Appointments</Button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
