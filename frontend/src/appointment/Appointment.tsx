@@ -126,6 +126,19 @@ function Appointment() {
             <Col>
               {active === 'calendar' ? (
                 <Scheduler
+                  month={{
+                    weekDays: [0, 1, 2, 3, 4, 5, 6],
+                    weekStartOn: 0,
+                    startHour: 7,
+                    endHour: 16,
+                  }}
+                  week={{
+                    weekDays: [0, 1, 2, 3, 4, 5, 6],
+                    weekStartOn: 0,
+                    startHour: 7,
+                    endHour: 16,
+                    step: 60,
+                  }}
                   view="month"
                   onConfirm={handleConfirm}
                   onDelete={handleDelete}

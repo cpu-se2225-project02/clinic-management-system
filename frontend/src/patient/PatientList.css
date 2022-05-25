@@ -4,7 +4,9 @@
   overflow-y: auto;
   margin-top: 4px !important;
 } */
-
+body {
+  overflow-x: hidden;
+}
 .sidebar-box {
   align-content: flex-start !important;
   display: flex !important;
