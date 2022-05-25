@@ -11,6 +11,7 @@ import Sidebars from '../common/Sidebars';
 import AddDoctorForm from '../doctor/AddDoctorForm';
 import { AllDoctorsDocument } from '../queries.generated';
 import Footer from '../common/Footer';
+import './Clinic.css';
 
 function Clinic() {
   const [addDoctorBtn, setAddDoctorBtn] = useState(false);
@@ -69,6 +70,7 @@ function Clinic() {
               </Table>
             </Col>
           </Row>
+          <Row className="res-row" />
         </Col>
       </Row>
       <Footer />
