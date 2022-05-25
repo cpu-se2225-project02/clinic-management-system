@@ -46,7 +46,7 @@ export default function PatientRecord() {
         <Col xs={2} className="sidebar-box p-0">
           <Sidebars />
         </Col>
-        <Col xs={10} className="patient-list-box p-0 mt-2 border border-dark">
+        <Col xs={10} className="patient-list-box p-0 mt-2 border border-2 border-dark right-side">
           <div className="card border-dark mb-3">
             <div className="h5">
               <div className="row">

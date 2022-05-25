@@ -62,3 +62,7 @@ body {
   margin-bottom: 40px !important;
   height: fit-content;
 }
+
+.right-side{
+  box-shadow: -4px 6px 8px 5px rgba(230, 230, 230, 1);;
+}
