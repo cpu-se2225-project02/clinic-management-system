@@ -3,17 +3,17 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import './UpdatePatientForm.css';
-import { AiOutlineCloseSquare } from 'react-icons/ai';
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Modal } from 'react-bootstrap';
 import { useMutation, useQuery } from 'urql';
 import { EditAPatientDocument, GetPatientDocument } from '../queries.generated';
 
 interface Popup {
-  postButton: React.Dispatch<React.SetStateAction<boolean>>;
-  patientID: number | undefined;
+  postButton: React.Dispatch<React.SetStateAction<boolean>>
+  patientID: number | undefined
+  payForm: boolean
 }
 
-export default function UpdatePatientForm({ postButton, patientID }: Popup) {
+export default function UpdatePatientForm({ postButton, patientID, payForm }: Popup) {
   const [editPatientResult, editPatient] = useMutation(EditAPatientDocument);
 
   const [allPatients] = useQuery({
@@ -64,14 +64,9 @@ export default function UpdatePatientForm({ postButton, patientID }: Popup) {
   };
 
   return (
-    <div className="popup">
-      <div className="popup-inner">
-        <button
-          onClick={() => postButton(false)}
-          className="btn close-btn float-end mt-0"
-        >
-          <AiOutlineCloseSquare size={25} />
-        </button>
+    <Modal show={payForm} onHide={() => postButton(false)} className="mt-5 mb-5" backdrop="static">
+      <Modal.Header closeButton><h5>Add a Patient</h5></Modal.Header>
+      <Modal.Body>
 
         <label>Last name:</label>
         <input
@@ -98,7 +93,6 @@ export default function UpdatePatientForm({ postButton, patientID }: Popup) {
           placeholder="Middle Initial"
           onChange={(e) => { setMiddleName(e.target.value); }}
           value={middleName}
-
         />
 
         <label>Suffix:</label>
@@ -108,7 +102,6 @@ export default function UpdatePatientForm({ postButton, patientID }: Popup) {
           placeholder="Suffix"
           onChange={(e) => { setSuffix(e.target.value); }}
           value={suffix !== 'null' ? suffix : ''}
-
         />
 
         <label>Age:</label>
@@ -118,7 +111,6 @@ export default function UpdatePatientForm({ postButton, patientID }: Popup) {
           placeholder="Age"
           onChange={(e) => { setAge(parseInt(e.target.value)); }}
           value={age}
-
         />
 
         <label>Sex:</label>
@@ -134,7 +126,6 @@ export default function UpdatePatientForm({ postButton, patientID }: Popup) {
           placeholder="Date of Birth"
           onChange={(e) => { setDob(e.target.value); }}
           value={dob}
-
         />
 
         <label>Address:</label>
@@ -172,7 +163,8 @@ export default function UpdatePatientForm({ postButton, patientID }: Popup) {
           Update
         </button>
 
-      </div>
-    </div>
+      </Modal.Body>
+    </Modal>
+
   );
 }
