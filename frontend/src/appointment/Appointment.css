@@ -20,4 +20,8 @@
 
 .appointment-icon {
     margin-right: 0.5rem;
-  }
+}
+
+.right-side {
+      box-shadow: -4px 6px 8px 5px rgba(230, 230, 230, 1);
+}
