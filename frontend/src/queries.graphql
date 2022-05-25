@@ -227,3 +227,13 @@ mutation addBill($bill: BillInput!) {
     patient_id
   }
 }
+
+query Invoice($pID: Int!) {
+  invoice(patientId: $pID) {
+    ammnt_cost
+    patient {
+      l_name
+      f_name
+    }
+  }
+}
