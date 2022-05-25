@@ -15,10 +15,10 @@ import { BiClinic } from 'react-icons/bi';
 
 export default function Sidebars() {
   return (
-    <Container fluid>
+    <Container fluid className="border-end sb">
       <Col className="sidebar">
 
-        <Row>
+        <Row className="all-btns mt-3">
           <Image
             className="card-img-top"
             fluid
@@ -26,56 +26,57 @@ export default function Sidebars() {
           />
         </Row>
         <Row />
-        <Link to="/" className="sidebar-link" data-testid="dashboard-link">
-          <Row className="mt-4">
-            <Button className="list-group-item sidebar-btns" data-testid="dashboard-btn">
-              <AiOutlineDashboard size={25} />
-              {' '}
-              Dashboard
-            </Button>
-          </Row>
-        </Link>
+        <Row className="all-btns">
+          <Link to="/" className="sidebar-link" data-testid="dashboard-link">
+            <Row className="">
+              <Button className="list-group-item sidebar-btns" data-testid="dashboard-btn">
+                <AiOutlineDashboard size={25} />
+                {' '}
+                Dashboard
+              </Button>
+            </Row>
+          </Link>
 
-        <Link to="/clinic" className="sidebar-link" data-testid="clinic-link">
-          <Row>
-            <Button className="list-group-item sidebar-btns">
-              <BiClinic size={25} />
-              {' '}
-              Clinic
-            </Button>
-          </Row>
-        </Link>
+          <Link to="/clinic" className="sidebar-link" data-testid="clinic-link">
+            <Row>
+              <Button className="list-group-item sidebar-btns">
+                <BiClinic size={25} />
+                {' '}
+                Clinic
+              </Button>
+            </Row>
+          </Link>
 
-        <Link to="/appointments" className="sidebar-link" data-testid="appointments-link">
-          <Row>
-            <Button className="list-group-item sidebar-btns">
-              <AiOutlineCalendar size={25} />
-              {' '}
-              Appointments
-            </Button>
-          </Row>
-        </Link>
+          <Link to="/appointments" className="sidebar-link" data-testid="appointments-link">
+            <Row>
+              <Button className="list-group-item sidebar-btns">
+                <AiOutlineCalendar size={25} />
+                {' '}
+                Appointments
+              </Button>
+            </Row>
+          </Link>
 
-        <Link to="/patients" className="sidebar-link" data-testid="patients-link">
-          <Row>
-            <Button className="list-group-item sidebar-btns">
-              <BsPeople size={25} />
-              {' '}
-              Patients
-            </Button>
-          </Row>
-        </Link>
+          <Link to="/patients" className="sidebar-link" data-testid="patients-link">
+            <Row>
+              <Button className="list-group-item sidebar-btns">
+                <BsPeople size={25} />
+                {' '}
+                Patients
+              </Button>
+            </Row>
+          </Link>
 
-        <Link to="/finance" className="sidebar-link" data-testid="finance-link">
-          <Row>
-            <Button className="list-group-item sidebar-btns">
-              <FaRegMoneyBillAlt size={25} />
-              {' '}
-              Finance
-            </Button>
-          </Row>
-        </Link>
-
+          <Link to="/finance" className="sidebar-link" data-testid="finance-link">
+            <Row>
+              <Button className="list-group-item sidebar-btns">
+                <FaRegMoneyBillAlt size={25} />
+                {' '}
+                Finance
+              </Button>
+            </Row>
+          </Link>
+        </Row>
       </Col>
     </Container>
   );

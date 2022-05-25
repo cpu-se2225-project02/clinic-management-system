@@ -133,6 +133,7 @@ export default function PatientList() {
               {/* </div> */}
             </Col>
           </Row>
+          <Row className="res-row" />
         </Col>
         <Row className="patient-rec-box">
           <Routes>

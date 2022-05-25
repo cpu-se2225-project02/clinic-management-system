@@ -64,5 +64,9 @@ body {
 }
 
 .right-side{
-  box-shadow: -4px 6px 8px 5px rgba(230, 230, 230, 1);;
+  box-shadow: -4px 6px 8px 5px rgba(230, 230, 230, 1);
+}
+
+.res-row{
+  height: 60px !important;
 }
