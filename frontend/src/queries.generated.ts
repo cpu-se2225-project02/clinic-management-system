@@ -57,8 +57,11 @@ export type GetAllAppointmentsQuery = (
   { __typename?: 'Query' }
   & { appointments?: Types.Maybe<Array<Types.Maybe<(
     { __typename?: 'Appointment' }
-    & Pick<Types.Appointment, 'dt_start' | 'dt_end' | 'name' | 'doc_id' | 'id'>
-    & { patient?: Types.Maybe<(
+    & Pick<Types.Appointment, 'dt_start' | 'dt_end' | 'name' | 'id'>
+    & { doctor?: Types.Maybe<(
+      { __typename?: 'Doctor' }
+      & Pick<Types.Doctor, 'doc_name'>
+    )>, patient?: Types.Maybe<(
       { __typename?: 'Patient' }
       & Pick<Types.Patient, 'f_name' | 'l_name'>
     )> }
@@ -364,7 +367,7 @@ export const EditAPatientDocument = {
 export const GetAllAppointmentsDocument = {
   kind: 'Document',
   definitions: [{
-    kind: 'OperationDefinition', operation: 'query', name: { kind: 'Name', value: 'getAllAppointments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'appointments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'dt_start' } }, { kind: 'Field', name: { kind: 'Name', value: 'dt_end' } }, { kind: 'Field', name: { kind: 'Name', value: 'name' } }, { kind: 'Field', name: { kind: 'Name', value: 'doc_id' } }, { kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }] } }] } }] },
+    kind: 'OperationDefinition', operation: 'query', name: { kind: 'Name', value: 'getAllAppointments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'appointments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'dt_start' } }, { kind: 'Field', name: { kind: 'Name', value: 'dt_end' } }, { kind: 'Field', name: { kind: 'Name', value: 'name' } }, { kind: 'Field', name: { kind: 'Name', value: 'doctor' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'doc_name' } }] } }, { kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }] } }] } }] },
   }],
 } as unknown as DocumentNode<GetAllAppointmentsQuery, GetAllAppointmentsQueryVariables>;
 export const GetPatientAccountDocument = {

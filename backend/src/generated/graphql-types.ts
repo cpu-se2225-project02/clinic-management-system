@@ -135,6 +135,7 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 export interface NexusGenFieldTypes {
   Appointment: { // field return type
     doc_id: number; // Int!
+    doctor: NexusGenRootTypes['Doctor'] | null; // Doctor
     dt_end: string; // String!
     dt_start: string; // String!
     id: number; // Int!
@@ -218,6 +219,7 @@ export interface NexusGenFieldTypes {
 export interface NexusGenFieldTypeNames {
   Appointment: { // field return type name
     doc_id: 'Int'
+    doctor: 'Doctor'
     dt_end: 'String'
     dt_start: 'String'
     id: 'Int'

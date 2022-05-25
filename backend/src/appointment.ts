@@ -14,6 +14,7 @@ import {
 import { Prisma, PrismaClient } from '@prisma/client';
 import { Appointment as AppointmentType } from 'nexus-prisma';
 import { Patient } from './patient';
+import { Doctor } from './doctor';
 
 const db = new PrismaClient();
 
@@ -32,6 +33,14 @@ export const Appointment = objectType({
     t.field(AppointmentType.dt_end);
     t.field(AppointmentType.name);
     t.field(AppointmentType.doc_id);
+    t.field('doctor', {
+      type: Doctor,
+      resolve(appointment) {
+        return db.doctor.findFirst({
+          where: { id: appointment.doc_id },
+        });
+      },
+    });
     t.field('patient', {
       type: Patient,
       resolve(appointment) {
@@ -102,7 +111,7 @@ export const SpecificAppointment = queryField('specificAppointment', {
   },
   resolve(root, args: { patientID: Prisma.AppointmentWhereUniqueInput }) {
     return db.appointment.findMany({
-      where: { patient_id: args.patientID as any},
+      where: { patient_id: args.patientID as any },
     });
   },
 });
