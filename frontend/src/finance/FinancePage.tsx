@@ -11,6 +11,7 @@ import {
 } from 'react-bootstrap';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { MdOutlinePayment, MdPayments } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 import { FaFileInvoice } from 'react-icons/fa';
 import { useQuery } from 'urql';
 import { GrMoney } from 'react-icons/gr';
@@ -19,11 +20,15 @@ import Sidebars from '../common/Sidebars';
 import AddPaymentForm from '../patient/account/AddPaymentForm';
 import Footer from '../common/Footer';
 import { AllPaymentsDocument } from '../queries.generated';
+import InvoicePopup from './InvoicePopup';
 
 export default function FinancePage() {
+  const navigate = useNavigate();
   const [AddPaymentBtn, setAddPaymentBtn] = useState(false);
   const [PayForm, setPayForm] = useState(false);
   const handleShowPayForm = () => setPayForm(true);
+  const [InvPop, setInvPop] = useState(false);
+  const handleShowInvPop = () => setInvPop(true);
   const [allPayments] = useQuery({
     query: AllPaymentsDocument,
   });
@@ -75,10 +80,12 @@ export default function FinancePage() {
                   <Button
                     variant="secondary"
                     style={{ width: '100%' }}
+                    onClick={handleShowInvPop}
                   >
                     Generate Invoice
                   </Button>
                 </Card.Body>
+                {InvPop && <InvoicePopup invForm={InvPop} invPop={setInvPop} />}
               </Card>
             </Col>
             <Col xs={4} className="mt-2">
@@ -93,6 +100,7 @@ export default function FinancePage() {
                   <Button
                     variant="secondary"
                     style={{ width: '100%' }}
+                    onClick={() => navigate('/patients')}
                   >
                     View patients account
                   </Button>
