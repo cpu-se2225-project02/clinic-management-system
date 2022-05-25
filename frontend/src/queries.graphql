@@ -62,7 +62,9 @@ query getAllAppointments {
     dt_start
     dt_end
     name
-    doc_id
+    doctor {
+      doc_name
+    }
     id
     patient {
       f_name
