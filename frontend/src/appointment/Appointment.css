@@ -1,7 +1,7 @@
 .appointment-box {
     display: inline-block !important;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: hidden;
     margin-top: 4px !important;
   }
 
