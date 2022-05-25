@@ -205,6 +205,7 @@ export interface NexusGenFieldTypes {
     helloWorld: string | null; // String
     hi: string | null; // String
     high: string | null; // String
+    invoice: Array<NexusGenRootTypes['Bill'] | null> | null; // [Bill]
     patientMedNotes: Array<NexusGenRootTypes['MedicalNotes'] | null> | null; // [MedicalNotes]
     patientPrescriptions: Array<NexusGenRootTypes['Prescription'] | null> | null; // [Prescription]
     patients: Array<NexusGenRootTypes['Patient'] | null> | null; // [Patient]
@@ -287,6 +288,7 @@ export interface NexusGenFieldTypeNames {
     helloWorld: 'String'
     hi: 'String'
     high: 'String'
+    invoice: 'Bill'
     patientMedNotes: 'MedicalNotes'
     patientPrescriptions: 'Prescription'
     patients: 'Patient'
@@ -343,6 +345,9 @@ export interface NexusGenArgTypes {
   }
   Query: {
     account: { // args
+      patientId: number; // Int!
+    }
+    invoice: { // args
       patientId: number; // Int!
     }
     patientMedNotes: { // args

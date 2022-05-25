@@ -136,6 +136,7 @@ type Query {
   helloWorld: String
   hi: String
   high: String
+  invoice(patientId: Int!): [Bill]
   patientMedNotes(patient_id: Int!): [MedicalNotes]
   patientPrescriptions(patientId: Int!): [Prescription]
   patients(condition: String): [Patient]

@@ -285,6 +285,22 @@ export type AddBillMutation = (
   )> }
 );
 
+export type InvoiceQueryVariables = Types.Exact<{
+  pID: Types.Scalars['Int'];
+}>;
+
+export type InvoiceQuery = (
+  { __typename?: 'Query' }
+  & { invoice?: Types.Maybe<Array<Types.Maybe<(
+    { __typename?: 'Bill' }
+    & Pick<Types.Bill, 'ammnt_cost'>
+    & { patient?: Types.Maybe<(
+      { __typename?: 'Patient' }
+      & Pick<Types.Patient, 'l_name' | 'f_name'>
+    )> }
+  )>>> }
+);
+
 export const AllPatientsDocument = {
   kind: 'Document',
   definitions: [{
@@ -594,3 +610,18 @@ export const AddBillDocument = {
     },
   }],
 } as unknown as DocumentNode<AddBillMutation, AddBillMutationVariables>;
+export const InvoiceDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'query',
+    name: { kind: 'Name', value: 'Invoice' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'pID' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'invoice' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'patientId' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'pID' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'ammnt_cost' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'l_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'f_name' } }] } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<InvoiceQuery, InvoiceQueryVariables>;

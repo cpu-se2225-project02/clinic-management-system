@@ -222,6 +222,7 @@ export interface Query {
   readonly helloWorld?: Maybe<Scalars['String']>;
   readonly hi?: Maybe<Scalars['String']>;
   readonly high?: Maybe<Scalars['String']>;
+  readonly invoice?: Maybe<ReadonlyArray<Maybe<Bill>>>;
   readonly patientMedNotes?: Maybe<ReadonlyArray<Maybe<MedicalNotes>>>;
   readonly patientPrescriptions?: Maybe<ReadonlyArray<Maybe<Prescription>>>;
   readonly patients?: Maybe<ReadonlyArray<Maybe<Patient>>>;
@@ -232,6 +233,11 @@ export interface Query {
 
 
 export interface QueryAccountArgs {
+  patientId: Scalars['Int'];
+}
+
+
+export interface QueryInvoiceArgs {
   patientId: Scalars['Int'];
 }
 
