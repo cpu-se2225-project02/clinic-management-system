@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 import React from 'react';
 import { Spinner } from 'react-bootstrap';
 import { useQuery } from 'urql';
@@ -43,11 +44,11 @@ function PatientAccount({ pID }: PatientId) {
             {' '}
             Ammount Paid:
             {' ₱'}
-            {acc?.ammnt_payed}
+            {acc?.ammnt_paid}
             {' '}
             Change:
             {' ₱'}
-            {acc!.ammnt_payed - acc!.ammnt_cost}
+            {/* {acc!.ammnt_paid - acc!.ammnt_cost} */}
           </div>
           <div>
             <hr />

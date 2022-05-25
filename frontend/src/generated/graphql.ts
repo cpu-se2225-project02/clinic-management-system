@@ -36,6 +36,21 @@ export interface AppointmentInput {
   readonly patient_id: Scalars['Int'];
 }
 
+export interface Bill {
+  readonly __typename?: 'Bill';
+  readonly ammnt_cost: Scalars['Float'];
+  readonly ammnt_paid?: Maybe<Scalars['Float']>;
+  readonly id: Scalars['Int'];
+  readonly patient?: Maybe<Patient>;
+  readonly patient_id: Scalars['Int'];
+  readonly paymnt_dt?: Maybe<Scalars['String']>;
+}
+
+export interface BillInput {
+  readonly ammnt_cost: Scalars['Float'];
+  readonly patient_id: Scalars['Int'];
+}
+
 export interface Doctor {
   readonly __typename?: 'Doctor';
   readonly appointments?: Maybe<ReadonlyArray<Maybe<Appointment>>>;
@@ -71,10 +86,11 @@ export interface MedicalNotes {
 export interface Mutation {
   readonly __typename?: 'Mutation';
   readonly addAppointment?: Maybe<Appointment>;
+  readonly addBill?: Maybe<Bill>;
   readonly addDoctor?: Maybe<Doctor>;
   readonly addMedNotes?: Maybe<MedicalNotes>;
   readonly addPatient?: Maybe<Patient>;
-  readonly addPayment?: Maybe<Payment>;
+  readonly addPayment?: Maybe<Bill>;
   readonly addPrescription?: Maybe<Prescription>;
   readonly deleteAppointment?: Maybe<Appointment>;
   readonly deletePatient?: Maybe<Patient>;
@@ -87,6 +103,11 @@ export interface Mutation {
 
 export interface MutationAddAppointmentArgs {
   newAppointment: AppointmentInput;
+}
+
+
+export interface MutationAddBillArgs {
+  newBill: BillInput;
 }
 
 
@@ -176,20 +197,11 @@ export interface PatientInput {
   readonly suffix?: InputMaybe<Scalars['String']>;
 }
 
-export interface Payment {
-  readonly __typename?: 'Payment';
-  readonly ammnt_cost: Scalars['Float'];
-  readonly ammnt_payed: Scalars['Float'];
-  readonly id: Scalars['Int'];
-  readonly patient?: Maybe<Patient>;
-  readonly paymnt_dt: Scalars['String'];
-}
-
 export interface PaymentInput {
   readonly ammnt_cost: Scalars['Float'];
-  readonly ammnt_payed: Scalars['Float'];
+  readonly ammnt_paid?: InputMaybe<Scalars['Float']>;
   readonly patient_id: Scalars['Int'];
-  readonly paymnt_dt: Scalars['String'];
+  readonly paymnt_dt?: InputMaybe<Scalars['String']>;
 }
 
 export interface Prescription {
@@ -203,13 +215,14 @@ export interface Prescription {
 
 export interface Query {
   readonly __typename?: 'Query';
-  readonly account?: Maybe<ReadonlyArray<Maybe<Payment>>>;
+  readonly account?: Maybe<ReadonlyArray<Maybe<Bill>>>;
   readonly allDoctors?: Maybe<ReadonlyArray<Maybe<Doctor>>>;
-  readonly allPayments?: Maybe<ReadonlyArray<Maybe<Payment>>>;
+  readonly allPayments?: Maybe<ReadonlyArray<Maybe<Bill>>>;
   readonly appointments?: Maybe<ReadonlyArray<Maybe<Appointment>>>;
   readonly helloWorld?: Maybe<Scalars['String']>;
   readonly hi?: Maybe<Scalars['String']>;
   readonly high?: Maybe<Scalars['String']>;
+  readonly invoice?: Maybe<ReadonlyArray<Maybe<Bill>>>;
   readonly patientMedNotes?: Maybe<ReadonlyArray<Maybe<MedicalNotes>>>;
   readonly patientPrescriptions?: Maybe<ReadonlyArray<Maybe<Prescription>>>;
   readonly patients?: Maybe<ReadonlyArray<Maybe<Patient>>>;
@@ -220,6 +233,11 @@ export interface Query {
 
 
 export interface QueryAccountArgs {
+  patientId: Scalars['Int'];
+}
+
+
+export interface QueryInvoiceArgs {
   patientId: Scalars['Int'];
 }
 

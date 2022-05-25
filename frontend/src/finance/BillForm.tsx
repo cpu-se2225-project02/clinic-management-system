@@ -5,15 +5,15 @@
 import React, { useState } from 'react';
 import { Spinner, Modal } from 'react-bootstrap';
 import { useMutation, useQuery } from 'urql';
-import { AddPaymentDocument, AllPatientsDocument } from '../../queries.generated';
+import { AddBillDocument, AllPatientsDocument } from '../queries.generated';
 
 interface Popup {
   addPaymentBtn: React.Dispatch<React.SetStateAction<boolean>>
   payForm: boolean
 }
 
-function AddPaymentForm({ addPaymentBtn, payForm }: Popup) {
-  const [addPayment, setAddPayment] = useMutation(AddPaymentDocument);
+function BillForm({ addPaymentBtn, payForm }: Popup) {
+  const [addPayment, setAddPayment] = useMutation(AddBillDocument);
   const [date, setDate] = useState('');
   const [ammtCost, setAmmtCost] = useState(0);
   const [ammtPd, setAmmtPd] = useState(0);
@@ -35,10 +35,8 @@ function AddPaymentForm({ addPaymentBtn, payForm }: Popup) {
 
   const addingPayment = () => {
     setAddPayment({
-      newPayment: {
-        paymnt_dt: date,
+      bill: {
         ammnt_cost: ammtCost,
-        ammnt_paid: ammtPd,
         patient_id: id,
       },
     }).then((res) => console.log(res));
@@ -51,7 +49,7 @@ function AddPaymentForm({ addPaymentBtn, payForm }: Popup) {
 
   return (
     <Modal show={payForm} onHide={() => addPaymentBtn(false)} className="mt-5" backdrop="static">
-      <Modal.Header closeButton><h5>Add Payment</h5></Modal.Header>
+      <Modal.Header closeButton><h5>Add Bill</h5></Modal.Header>
       <Modal.Body>
 
         <div className="input-group mb-3">
@@ -69,12 +67,7 @@ function AddPaymentForm({ addPaymentBtn, payForm }: Popup) {
             ))}
           </select>
         </div>
-        <div className="input-group mb-3">
-          <div className="input-group-prepend">
-            <span className="input-group-text" id="basic-addon1">Date</span>
-          </div>
-          <input type="date" className="form-control" placeholder="Date" aria-label="Date" aria-describedby="basic-addon1" onChange={(e) => setDate(e.target.value)} />
-        </div>
+
         <div className="input-group mb-3">
           <div className="input-group-prepend">
             <span className="input-group-text">Ammount Cost ₱</span>
@@ -84,15 +77,7 @@ function AddPaymentForm({ addPaymentBtn, payForm }: Popup) {
             <span className="input-group-text">.00</span>
           </div>
         </div>
-        <div className="input-group mb-3">
-          <div className="input-group-prepend">
-            <span className="input-group-text">Ammount Payed ₱</span>
-          </div>
-          <input type="number" className="form-control" aria-label="Amount (to the nearest peso)" onChange={(e) => { setAmmtPd(parseInt(e.target.value)); }} />
-          <div className="input-group-append">
-            <span className="input-group-text">.00</span>
-          </div>
-        </div>
+
         <button
           className="btn btn-primary mt-2 float-end"
           onClick={onSubmitBtnClicked}
@@ -107,4 +92,4 @@ function AddPaymentForm({ addPaymentBtn, payForm }: Popup) {
   );
 }
 
-export default AddPaymentForm;
+export default BillForm;

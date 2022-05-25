@@ -29,7 +29,7 @@ model Patient {
   email         String?
   medicalNotes  MedicalNotes[]
   appointments  Appointment[]
-  payments      Payment[]
+  payments      Bill[]
   prescriptions Prescription[]
 }
 
@@ -50,13 +50,13 @@ model Doctor {
   appointments Appointment[]
 }
 
-model Payment {
-  id          Int     @id @default(autoincrement())
-  paymnt_dt   String
-  ammnt_cost  Float
-  ammnt_payed Float
-  patient_id  Int
-  patient     Patient @relation(fields: [patient_id], references: [id])
+model Bill {
+  id         Int     @id @default(autoincrement())
+  paymnt_dt  String?
+  ammnt_cost Float
+  ammnt_paid Float?
+  patient_id Int
+  patient    Patient @relation(fields: [patient_id], references: [id])
 }
 
 model Invoice {

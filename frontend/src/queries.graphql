@@ -76,7 +76,7 @@ query getPatientAccount($patientId: Int!) {
     id
     paymnt_dt
     ammnt_cost
-    ammnt_payed
+    ammnt_paid
   }
 }
 
@@ -85,7 +85,7 @@ mutation AddPayment($newPayment: PaymentInput!) {
     id
     paymnt_dt
     ammnt_cost
-    ammnt_payed
+    ammnt_paid
     patient {
       id
       f_name
@@ -212,5 +212,28 @@ mutation DeletePrescription($prescId: Int!) {
 query AllDoctors {
   allDoctors {
     doc_name
+  }
+}
+
+query AllPayments {
+  allPayments {
+    ammnt_paid
+  }
+}
+
+mutation addBill($bill: BillInput!) {
+  addBill(newBill: $bill) {
+    ammnt_cost
+    patient_id
+  }
+}
+
+query Invoice($pID: Int!) {
+  invoice(patientId: $pID) {
+    ammnt_cost
+    patient {
+      l_name
+      f_name
+    }
   }
 }
