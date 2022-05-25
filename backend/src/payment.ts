@@ -84,3 +84,13 @@ export const AddBill = mutationField('addBill', {
     return db.bill.create({ data: args.newBill });
   },
 });
+
+export const Invoice = queryField('invoice', {
+  type: list(Bill),
+  args: { patientId: nonNull(intArg()) },
+  resolve(root, args) {
+    return db.bill.findMany({
+      where: { patient_id: args.patientId, ammnt_paid: null },
+    });
+  },
+});
