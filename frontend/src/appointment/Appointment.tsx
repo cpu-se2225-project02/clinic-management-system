@@ -17,6 +17,7 @@ import {
   AllPatientsDocument, AllDocsDocument, GetAllAppointmentsDocument,
   AddAnAppointmentDocument, EdiAnAppointmentDocument, DeleteAnAppointmentDocument,
 } from '../queries.generated';
+import Footer from '../common/Footer';
 
 function Appointment() {
   const types = ['calendar', 'list'];
@@ -174,6 +175,7 @@ function Appointment() {
           </Row>
         </Col>
       </Row>
+      <Footer />
     </Container>
   );
 }

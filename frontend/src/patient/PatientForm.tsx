@@ -13,10 +13,11 @@ import { Modal, Spinner } from 'react-bootstrap';
 import { AddPatientDocument, AddPatientMutationVariables } from '../queries.generated';
 
 interface Popup {
-  postButton: React.Dispatch<React.SetStateAction<boolean>>;
+  postButton: React.Dispatch<React.SetStateAction<boolean>>
+  payForm: boolean
 }
 
-export default function PatientForm({ postButton }: Popup) {
+export default function PatientForm({ postButton, payForm }: Popup) {
   const [lastName, setLastName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [middleName, setMiddleName] = useState('');
@@ -57,14 +58,9 @@ export default function PatientForm({ postButton }: Popup) {
   };
 
   return (
-    <div className="popup">
-      <div className="popup-inner">
-        <button
-          onClick={() => postButton(false)}
-          className="btn close-btn float-end mt-0"
-        >
-          <AiOutlineCloseSquare size={25} />
-        </button>
+    <Modal show={payForm} onHide={() => postButton(false)} className="mt-5 mb-5" backdrop="static">
+      <Modal.Header closeButton><h5>Add a Patient</h5></Modal.Header>
+      <Modal.Body>
 
         <label>Last name:</label>
         <input
@@ -76,6 +72,7 @@ export default function PatientForm({ postButton }: Popup) {
 
         <label>First name:</label>
         <input
+          required
           className="form-control"
           type="text"
           placeholder="First name"
@@ -88,7 +85,6 @@ export default function PatientForm({ postButton }: Popup) {
           type="text"
           placeholder="Middle Initial"
           onChange={(e) => { setMiddleName(e.target.value); }}
-
         />
 
         <label>Suffix:</label>
@@ -119,7 +115,6 @@ export default function PatientForm({ postButton }: Popup) {
           type="date"
           placeholder="Date of Birth"
           onChange={(e) => { setDob(e.target.value); }}
-
         />
 
         <label>Address:</label>
@@ -138,7 +133,8 @@ export default function PatientForm({ postButton }: Popup) {
           Submit
         </button>
 
-      </div>
-    </div>
+      </Modal.Body>
+    </Modal>
+
   );
 }

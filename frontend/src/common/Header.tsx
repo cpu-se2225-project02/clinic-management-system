@@ -4,9 +4,9 @@
 import React, { useState } from 'react';
 
 import {
-  Dropdown, Row, Col, Container,
+  Dropdown, Row, Col, Container, Button,
 } from 'react-bootstrap';
-import { BiUserCircle } from 'react-icons/bi';
+import { RiAdminLine } from 'react-icons/ri';
 import './Header.css';
 import { Link } from 'react-router-dom';
 
@@ -22,8 +22,8 @@ export default function Header() {
         <Col xs={2} className="doctor-btn">
 
           <Dropdown data-testid="hdr-dropdown">
-            <BiUserCircle size={30} />
-            <Dropdown.Toggle variant="">Dr. Suelan</Dropdown.Toggle>
+            <RiAdminLine size={30} />
+            <Dropdown.Toggle variant="">Administrator</Dropdown.Toggle>
             <Dropdown.Menu>
               <Dropdown.Item>
                 <Link to="/login" data-testid="logout-btn" className="sidebar-link">Logout</Link>

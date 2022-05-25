@@ -3,16 +3,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/button-has-type */
 import React, { useState } from 'react';
-import { Spinner } from 'react-bootstrap';
-import { AiOutlineCloseSquare } from 'react-icons/ai';
+import { Spinner, Modal } from 'react-bootstrap';
 import { useMutation, useQuery } from 'urql';
 import { AddPaymentDocument, AllPatientsDocument } from '../../queries.generated';
 
 interface Popup {
-  addPaymentBtn: React.Dispatch<React.SetStateAction<boolean>>;
+  addPaymentBtn: React.Dispatch<React.SetStateAction<boolean>>
+  payForm: boolean
 }
 
-function AddPaymentForm({ addPaymentBtn }: Popup) {
+function AddPaymentForm({ addPaymentBtn, payForm }: Popup) {
   const [addPayment, setAddPayment] = useMutation(AddPaymentDocument);
   const [date, setDate] = useState('');
   const [ammtCost, setAmmtCost] = useState(0);
@@ -50,20 +50,16 @@ function AddPaymentForm({ addPaymentBtn }: Popup) {
   };
 
   return (
-    <div className="popup">
-      <div className="popup-inner">
-        <h5>Add Payment</h5>
-        <button
-          onClick={() => addPaymentBtn(false)}
-          className="btn close-btn float-end mt-0"
-        >
-          <AiOutlineCloseSquare size={25} />
-        </button>
+    <Modal show={payForm} onHide={() => addPaymentBtn(false)} className="mt-5" backdrop="static">
+      <Modal.Header closeButton><h5>Add Payment</h5></Modal.Header>
+      <Modal.Body>
+
         <div className="input-group mb-3">
           <div className="input-group-prepend">
             <label className="input-group-text" htmlFor="inputGroupSelect01">Patient</label>
           </div>
-          <select className="custom-select" id="inputGroupSelect01" onChange={(e) => setId(parseInt(e.target.value))}>
+          <select className="custom-select" id="inputGroupSelect01" onChange={(e) => setId(parseInt(e.target.value))} required>
+            <option selected>Select a patient</option>
             {data?.patients?.map((patient) => (
               <option value={patient?.id}>
                 {patient?.f_name}
@@ -104,8 +100,10 @@ function AddPaymentForm({ addPaymentBtn }: Popup) {
         >
           Submit
         </button>
-      </div>
-    </div>
+
+      </Modal.Body>
+    </Modal>
+
   );
 }
 

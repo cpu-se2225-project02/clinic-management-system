@@ -1,5 +1,5 @@
-query AllPatients {
-  patients {
+query AllPatients($con: String) {
+  patients(condition: $con) {
     id
     f_name
     l_name
@@ -162,8 +162,23 @@ mutation AddDoctor($newDoctor: DoctorInput!) {
   }
 }
 
-mutation AddPrescription($newPrescription: PrescriptionInput!) {
+mutation AddPrescription($newPrescription: AddPrescriptionInput!) {
   addPrescription(newPrescription: $newPrescription) {
+    id
+    pres_name
+    pres_dos
+    patient_id
+  }
+}
+
+mutation EditPrescription(
+  $editedPrescription: EditPrescriptionInput!
+  $prescriptionId: Int!
+) {
+  editPrescription(
+    prescriptionId: $prescriptionId
+    editedPrescription: $editedPrescription
+  ) {
     id
     pres_name
     pres_dos
@@ -176,5 +191,26 @@ query PatientPrescriptions($patientId: Int!) {
     id
     pres_name
     pres_dos
+  }
+}
+
+query PatientAppointments($pID: Int!) {
+  specificAppointment(patientID: $pID) {
+    name
+    dt_start
+    dt_end
+  }
+}
+
+mutation DeletePrescription($prescId: Int!) {
+  deletePrescription(prescriptionId: $prescId) {
+    id
+    pres_name
+    patient_id
+  }
+}
+query AllDoctors {
+  allDoctors {
+    doc_name
   }
 }

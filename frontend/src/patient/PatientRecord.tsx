@@ -17,6 +17,8 @@ import MedicalNotes from './mednotes/MedicalNotes';
 import PatientAccount from './account/PatientAccount';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
+import SpecificAppointment from './appointment/SpecificAppointment';
+import Footer from '../common/Footer';
 
 export default function PatientRecord() {
   const params = useParams() as any;
@@ -24,6 +26,7 @@ export default function PatientRecord() {
   const [PrescriptionBtn, setPrescBtn] = useState(false);
   const [AccountBtn, setAccBtn] = useState(false);
   const [MedNotesBtn, setMedNotesBtn] = useState(false);
+  const [AppointmentBtn, setAppointmentBtn] = useState(false);
   const [allPatients] = useQuery({
     query: GetPatientDocument,
     variables: {
@@ -34,7 +37,7 @@ export default function PatientRecord() {
   const { data } = allPatients;
 
   return (
-    <Container fluid className="PatientInfo">
+    <Container fluid className="PatientInfo mb-5">
       <Row>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <Header />
@@ -76,7 +79,7 @@ export default function PatientRecord() {
             <Row>
               <Col className="list border d-grid gap-2">
                 <Button variant="primary" className="patient-btns" onClick={() => setAccBtn(!AccountBtn)}>
-                  Account
+                  Accounts
                 </Button>
               </Col>
             </Row>
@@ -94,13 +97,19 @@ export default function PatientRecord() {
               {MedNotesBtn && <MedicalNotes pId={data?.specificPatient?.id} />}
             </Col>
             <Col className="list border d-grid gap-2">
-              <Button variant="primary" className="patient-btns">
-                Appointment
+              <Button
+                variant="primary"
+                className="patient-btns"
+                onClick={() => setAppointmentBtn(!AppointmentBtn)}
+              >
+                Appointments
               </Button>
+              {AppointmentBtn && <SpecificAppointment pId={data?.specificPatient?.id} /> }
             </Col>
           </div>
         </Col>
       </Row>
+      <Footer />
     </Container>
   );
 }

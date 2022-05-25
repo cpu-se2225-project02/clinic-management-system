@@ -9,15 +9,14 @@ import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { AddPrescriptionDocument } from '../../queries.generated';
 // import UpdatePrescription from './UpdatePrescription';
 
-interface PrescFormProps {
+interface AddPrescFormProps {
   pID: number | undefined
   popup: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function PrescriptionForm(prescFormProps: PrescFormProps) {
+export default function PrescriptionForm(addPrescFormProps: AddPrescFormProps) {
   const [prescName, setPrescName] = useState('');
   const [dosage, setDosage] = useState(0);
-  // const [editBtn, setEditBtn] = useState(false);
   const [addPresc, setAddPresc] = useMutation(AddPrescriptionDocument);
 
   // const { error, fetching } = addPresc;
@@ -35,30 +34,25 @@ export default function PrescriptionForm(prescFormProps: PrescFormProps) {
       newPrescription: {
         pres_name: prescName,
         pres_dos: dosage,
-        patient_id: prescFormProps.pID as number,
+        patient_id: addPrescFormProps.pID as number,
       },
     });
   };
   const onSubmitBtnClicked = () => {
     addPrescription();
-    prescFormProps.popup(false);
+    addPrescFormProps.popup(false);
   };
 
   return (
     <div className="popup">
       <div className="popup-inner">
-        <h5>Add Payment</h5>
+        <h5>Add Prescription</h5>
         <button
-          onClick={() => prescFormProps.popup(false)}
+          onClick={() => addPrescFormProps.popup(false)}
           className="btn close-btn float-end mt-0"
         >
           <AiOutlineCloseSquare size={25} />
         </button>
-
-        <div className="col" style={{ textAlign: 'right' }}>
-          {/* <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} /> */}
-          {/* {editBtn && <UpdatePrescription editButton={setEditBtn} />} */}
-        </div>
         <div className="col">
           <div>
             <input

@@ -4,20 +4,24 @@
 
 import React, { ReactElement, useState } from 'react';
 import {
-  Col, Row, Container, Form, Dropdown, Button,
+  Col, Row, Container, Form, Dropdown, Button, Card,
 } from 'react-bootstrap';
 import { BiSearchAlt2 } from 'react-icons/bi';
+import { MdOutlinePayment, MdPayments } from 'react-icons/md';
+import { FaFileInvoice } from 'react-icons/fa';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
 import AddPaymentForm from '../patient/account/AddPaymentForm';
+import Footer from '../common/Footer';
 
 export default function FinancePage() {
   const [AddPaymentBtn, setAddPaymentBtn] = useState(false);
+  const [PayForm, setPayForm] = useState(false);
+  const handleShowPayForm = () => setPayForm(true);
 
   return (
     <Container fluid>
       <Row>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <Header />
       </Row>
       <Row>
@@ -25,40 +29,68 @@ export default function FinancePage() {
           <Sidebars />
         </Col>
 
-        <Col xs={10} className="patient-list-box p-0 mt-2 border border-dark">
-          <div className="card-body">
-            {' '}
-            Finance Overview
-            <div className="card border-dark mb-3">
-              <div className="card-body text-dark">
-                <span className="material-icons">payment</span>
-                <h5 className="card-title">PAYMENT</h5>
-                <p className="card-text">00.00 PHP</p>
-              </div>
-              <div className="btn-group" role="group" aria-label="Basic example">
-                <button type="button" className="btn btn-primary">View Payment</button>
-                <button type="button" className="btn btn-primary" onClick={() => setAddPaymentBtn(true)}>Add Payment</button>
-                {AddPaymentBtn && <AddPaymentForm addPaymentBtn={setAddPaymentBtn} />}
-              </div>
-            </div>
-
-            <div className="card-body">
-              <div className="card border-dark mb-3">
-                <div className="card-body text-dark">
-                  {' '}
-                  <span className="material-icons">payment</span>
-                  <h5 className="card-title">PATIENT ACCOUNT</h5>
-
-                </div>
-
-                <button type="button" className="btn btn-primary">View Patient Accounts</button>
-              </div>
-
-            </div>
-          </div>
-
+        <Col xs={10}>
+          <Row>
+            <Col xs={4} className="mt-2">
+              <Card style={{
+                width: '18rem',
+                boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)',
+                borderRadius: '20px',
+              }}
+              >
+                <Card.Body className="c-body">
+                  <Card.Title><FaFileInvoice size={80} /></Card.Title>
+                  <Button
+                    variant="secondary"
+                    style={{ width: '100%' }}
+                  >
+                    Generate Invoice
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col xs={4} className="mt-2">
+              <Card style={{
+                width: '18rem',
+                boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)',
+                borderRadius: '20px',
+              }}
+              >
+                <Card.Body className="c-body">
+                  <Card.Title><MdPayments size={80} /></Card.Title>
+                  <Button
+                    variant="secondary"
+                    style={{ width: '100%' }}
+                  >
+                    View patients account
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col xs={4} className="mt-2">
+              <Card style={{
+                width: '18rem',
+                boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)',
+                borderRadius: '20px',
+              }}
+              >
+                <Card.Body className="c-body">
+                  <Card.Title><MdOutlinePayment size={80} /></Card.Title>
+                  <Button
+                    variant="secondary"
+                    style={{ width: '100%' }}
+                    onClick={handleShowPayForm}
+                  >
+                    Add Payment
+                  </Button>
+                </Card.Body>
+                {PayForm && <AddPaymentForm payForm={PayForm} addPaymentBtn={setPayForm} />}
+              </Card>
+            </Col>
+          </Row>
         </Col>
       </Row>
+      <Footer />
     </Container>
 
   );

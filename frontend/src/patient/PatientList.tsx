@@ -15,6 +15,7 @@ import { MdAccountBox } from 'react-icons/md';
 import {
   Router, Routes, Route, Link, useNavigate,
 } from 'react-router-dom';
+import { BsPersonBadgeFill } from 'react-icons/bs';
 import { AllPatientsDocument } from '../queries.generated';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
@@ -22,13 +23,18 @@ import './PatientList.css';
 import PatientForm from './PatientForm';
 import PatientRecord from './PatientRecord';
 import PatientInformation from './PatientInformation';
+import Footer from '../common/Footer';
 
 export default function PatientList() {
   const [PostButton, setPostButton] = useState(false);
   const navigate = useNavigate();
+  const [condition, setCondition] = useState('a-z');
 
   const [allPatients] = useQuery({
     query: AllPatientsDocument,
+    variables: {
+      con: condition,
+    },
   });
 
   const { data, error, fetching } = allPatients;
@@ -88,10 +94,10 @@ export default function PatientList() {
             </Col>
             <Col xs={2}>
               <Dropdown>
-                <Dropdown.Toggle variant="">Filter Patient</Dropdown.Toggle>
+                <Dropdown.Toggle variant="">Sort Patients</Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item>A-Z</Dropdown.Item>
-                  <Dropdown.Item>Z-A</Dropdown.Item>
+                  <Dropdown.Item onClick={() => { setCondition('a-z'); }}>A-Z</Dropdown.Item>
+                  <Dropdown.Item onClick={() => { setCondition('z-a'); }}>Z-A</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Col>
@@ -100,9 +106,11 @@ export default function PatientList() {
                 className="add-patient-btn btn-sm float-start"
                 onClick={() => setPostButton(true)}
               >
+                <BsPersonBadgeFill size={20} />
+                {' '}
                 Add Patient
               </Button>
-              {PostButton && <PatientForm postButton={setPostButton} />}
+              {PostButton && <PatientForm payForm={PostButton} postButton={setPostButton} />}
             </Col>
           </Row>
           <Row className="list-row">
@@ -137,6 +145,7 @@ export default function PatientList() {
           </Routes>
         </Row>
       </Row>
+      <Footer />
     </Container>
   );
 }
