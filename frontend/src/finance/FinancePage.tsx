@@ -21,11 +21,14 @@ import AddPaymentForm from '../patient/account/AddPaymentForm';
 import Footer from '../common/Footer';
 import { AllPaymentsDocument } from '../queries.generated';
 import InvoicePopup from './InvoicePopup';
+import BillForm from './BillForm';
 
 export default function FinancePage() {
   const navigate = useNavigate();
   const [AddPaymentBtn, setAddPaymentBtn] = useState(false);
   const [PayForm, setPayForm] = useState(false);
+  const [BillingForm, setBillForm] = useState(false);
+  const handleBIllForm = () => setBillForm(true);
   const handleShowPayForm = () => setPayForm(true);
   const [InvPop, setInvPop] = useState(false);
   const handleShowInvPop = () => setInvPop(true);
@@ -125,6 +128,28 @@ export default function FinancePage() {
                   </Button>
                 </Card.Body>
                 {PayForm && <AddPaymentForm payForm={PayForm} addPaymentBtn={setPayForm} />}
+              </Card>
+            </Col>
+          </Row>
+          <Row className="mt-3 mb-3">
+            <Col xs={4} className="mt-2">
+              <Card style={{
+                width: '18rem',
+                boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)',
+                borderRadius: '20px',
+              }}
+              >
+                <Card.Body className="c-body">
+                  <Card.Title><MdOutlinePayment size={80} /></Card.Title>
+                  <Button
+                    variant="secondary"
+                    style={{ width: '100%' }}
+                    onClick={handleBIllForm}
+                  >
+                    Add Bill
+                  </Button>
+                </Card.Body>
+                {BillForm && <BillForm payForm={BillingForm} addPaymentBtn={setBillForm} />}
               </Card>
             </Col>
           </Row>

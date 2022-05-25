@@ -1,8 +1,9 @@
+/* eslint-disable linebreak-style */
 import {
   inputObjectType, intArg, list, mutationField, nonNull, objectType, queryField,
 } from 'nexus';
 import { Prisma, PrismaClient } from '@prisma/client';
-import { Payment as PaymentType } from 'nexus-prisma';
+import { Bill as BillType } from 'nexus-prisma';
 import { Patient } from './patient';
 
 const db = new PrismaClient();
@@ -14,13 +15,14 @@ export const hii = queryField('high', {
   },
 });
 
-export const Payment = objectType({
-  name: 'Payment',
+export const Bill = objectType({
+  name: 'Bill',
   definition(t) {
-    t.field(PaymentType.id);
-    t.field(PaymentType.paymnt_dt);
-    t.field(PaymentType.ammnt_cost);
-    t.field(PaymentType.ammnt_payed);
+    t.field(BillType.id);
+    t.field(BillType.paymnt_dt);
+    t.field(BillType.ammnt_cost);
+    t.field(BillType.ammnt_paid);
+    t.field(BillType.patient_id);
     t.field('patient', {
       type: Patient,
       resolve(payment) {
@@ -31,36 +33,54 @@ export const Payment = objectType({
 });
 
 export const allPayments = queryField('allPayments', {
-  type: list(Payment),
+  type: list(Bill),
   resolve() {
-    return db.payment.findMany({ orderBy: { patient_id: 'asc' } });
+    return db.bill.findMany({ orderBy: { patient_id: 'asc' } });
   },
 });
 
 export const account = queryField('account', {
-  type: list(Payment),
+  type: list(Bill),
   args: { patientId: nonNull(intArg()) },
   resolve(root, args) {
-    return db.payment.findMany({ where: { patient_id: args.patientId } });
+    return db.bill.findMany({ where: { patient_id: args.patientId } });
   },
 });
 
 export const PaymentInput = inputObjectType({
   name: 'PaymentInput',
   definition(t) {
-    t.field(PaymentType.paymnt_dt);
-    t.field(PaymentType.ammnt_cost);
-    t.field(PaymentType.ammnt_payed);
-    t.field(PaymentType.patient_id);
+    t.field(BillType.paymnt_dt);
+    t.field(BillType.ammnt_cost);
+    t.field(BillType.ammnt_paid);
+    t.field(BillType.patient_id);
   },
 });
 
 export const addPayment = mutationField('addPayment', {
-  type: Payment,
+  type: Bill,
   args: {
     newPayment: nonNull(PaymentInput),
   },
-  resolve(root, args: { newPayment: Prisma.PaymentCreateInput }) {
-    return db.payment.create({ data: args.newPayment });
+  resolve(root, args: { newPayment: Prisma.BillCreateInput }) {
+    return db.bill.create({ data: args.newPayment });
+  },
+});
+
+export const BillInput = inputObjectType({
+  name: 'BillInput',
+  definition(t) {
+    t.field(BillType.ammnt_cost);
+    t.field(BillType.patient_id);
+  },
+});
+
+export const AddBill = mutationField('addBill', {
+  type: Bill,
+  args: {
+    newBill: nonNull(BillInput),
+  },
+  resolve(root, args: { newBill: Prisma.BillCreateInput }) {
+    return db.bill.create({ data: args.newBill });
   },
 });

@@ -76,7 +76,7 @@ query getPatientAccount($patientId: Int!) {
     id
     paymnt_dt
     ammnt_cost
-    ammnt_payed
+    ammnt_paid
   }
 }
 
@@ -85,7 +85,7 @@ mutation AddPayment($newPayment: PaymentInput!) {
     id
     paymnt_dt
     ammnt_cost
-    ammnt_payed
+    ammnt_paid
     patient {
       id
       f_name
@@ -217,6 +217,13 @@ query AllDoctors {
 
 query AllPayments {
   allPayments {
-    ammnt_payed
+    ammnt_paid
+  }
+}
+
+mutation addBill($bill: BillInput!) {
+  addBill(newBill: $bill) {
+    ammnt_cost
+    patient_id
   }
 }
