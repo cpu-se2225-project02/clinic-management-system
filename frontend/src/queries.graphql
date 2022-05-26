@@ -144,6 +144,9 @@ query DisplayMedNotes($pID: Int!) {
     id
     title
     med_notes
+    doctor {
+      doc_name
+    }
   }
 }
 
@@ -151,6 +154,7 @@ mutation AddAMedNote($newMedNote: MedNotesInput!) {
   addMedNotes(newMedNotes: $newMedNote) {
     med_notes
     title
+    doc_id
   }
 }
 

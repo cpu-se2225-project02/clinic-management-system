@@ -40,7 +40,8 @@ export default function MedicalNotes({ pId }: PatientID) {
           <>
             <div>{note?.title}</div>
             <div>{ note?.date_noted}</div>
-            <div>{ note?.med_notes }</div>
+            <div>{note?.med_notes}</div>
+            <div>{ note?.doctor?.doc_name }</div>
           </>
         ))}
       </div>
