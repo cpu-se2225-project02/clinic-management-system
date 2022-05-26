@@ -164,6 +164,10 @@ export type DisplayMedNotesQuery = (
   & { patientMedNotes?: Types.Maybe<Array<Types.Maybe<(
     { __typename?: 'MedicalNotes' }
     & Pick<Types.MedicalNotes, 'date_noted' | 'id' | 'title' | 'med_notes'>
+    & { doctor?: Types.Maybe<(
+      { __typename?: 'Doctor' }
+      & Pick<Types.Doctor, 'doc_name'>
+    )> }
   )>>> }
 );
 
@@ -175,7 +179,7 @@ export type AddAMedNoteMutation = (
   { __typename?: 'Mutation' }
   & { addMedNotes?: Types.Maybe<(
     { __typename?: 'MedicalNotes' }
-    & Pick<Types.MedicalNotes, 'med_notes' | 'title'>
+    & Pick<Types.MedicalNotes, 'med_notes' | 'title' | 'doc_id'>
   )> }
 );
 
@@ -476,7 +480,7 @@ export const DisplayMedNotesDocument = {
     selectionSet: {
       kind: 'SelectionSet',
       selections: [{
-        kind: 'Field', name: { kind: 'Name', value: 'patientMedNotes' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'patient_id' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'pID' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'date_noted' } }, { kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'title' } }, { kind: 'Field', name: { kind: 'Name', value: 'med_notes' } }] },
+        kind: 'Field', name: { kind: 'Name', value: 'patientMedNotes' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'patient_id' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'pID' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'date_noted' } }, { kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'title' } }, { kind: 'Field', name: { kind: 'Name', value: 'med_notes' } }, { kind: 'Field', name: { kind: 'Name', value: 'doctor' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'doc_name' } }] } }] },
       }],
     },
   }],
@@ -491,7 +495,7 @@ export const AddAMedNoteDocument = {
     selectionSet: {
       kind: 'SelectionSet',
       selections: [{
-        kind: 'Field', name: { kind: 'Name', value: 'addMedNotes' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'newMedNotes' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'newMedNote' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'med_notes' } }, { kind: 'Field', name: { kind: 'Name', value: 'title' } }] },
+        kind: 'Field', name: { kind: 'Name', value: 'addMedNotes' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'newMedNotes' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'newMedNote' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'med_notes' } }, { kind: 'Field', name: { kind: 'Name', value: 'title' } }, { kind: 'Field', name: { kind: 'Name', value: 'doc_id' } }] },
       }],
     },
   }],
