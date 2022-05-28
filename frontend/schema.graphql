@@ -77,6 +77,7 @@ type Mutation {
   addPatient(newPatient: PatientInput!): Patient
   addPayment(newPayment: PaymentInput!): Bill
   addPrescription(newPrescription: AddPrescriptionInput!): Prescription
+  addReferral(newReferral: ReferralInput!): Referral
   deleteAppointment(appID: Int!): Appointment
   deletePatient(patientId: Int!): Patient
   deletePrescription(prescriptionId: Int!): Prescription
@@ -143,4 +144,17 @@ type Query {
   prescriptions: [Prescription]
   specificAppointment(patientID: Int!): [Appointment]
   specificPatient(patientId: Int!): Patient
+}
+
+type Referral {
+  doctor: Doctor
+  hosp_name: String!
+  id: Int!
+  patient: Patient
+}
+
+input ReferralInput {
+  doctor_id: Int!
+  hosp_name: String!
+  patient_id: Int!
 }

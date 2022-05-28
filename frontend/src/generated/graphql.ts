@@ -92,6 +92,7 @@ export interface Mutation {
   readonly addPatient?: Maybe<Patient>;
   readonly addPayment?: Maybe<Bill>;
   readonly addPrescription?: Maybe<Prescription>;
+  readonly addReferral?: Maybe<Referral>;
   readonly deleteAppointment?: Maybe<Appointment>;
   readonly deletePatient?: Maybe<Patient>;
   readonly deletePrescription?: Maybe<Prescription>;
@@ -133,6 +134,11 @@ export interface MutationAddPaymentArgs {
 
 export interface MutationAddPrescriptionArgs {
   newPrescription: AddPrescriptionInput;
+}
+
+
+export interface MutationAddReferralArgs {
+  newReferral: ReferralInput;
 }
 
 
@@ -264,4 +270,18 @@ export interface QuerySpecificAppointmentArgs {
 
 export interface QuerySpecificPatientArgs {
   patientId: Scalars['Int'];
+}
+
+export interface Referral {
+  readonly __typename?: 'Referral';
+  readonly doctor?: Maybe<Doctor>;
+  readonly hosp_name: Scalars['String'];
+  readonly id: Scalars['Int'];
+  readonly patient?: Maybe<Patient>;
+}
+
+export interface ReferralInput {
+  readonly doctor_id: Scalars['Int'];
+  readonly hosp_name: Scalars['String'];
+  readonly patient_id: Scalars['Int'];
 }

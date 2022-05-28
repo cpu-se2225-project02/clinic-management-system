@@ -72,6 +72,14 @@ export default function PatientRecord() {
               {PrescriptionBtn && <Prescription pID={data?.specificPatient?.id} />}
             </Col>
             <Col className="list border d-grid gap-2">
+              <Button
+                variant="primary"
+                className="patient-btns"
+              >
+                Referrals
+              </Button>
+            </Col>
+            <Col className="list border d-grid gap-2">
               <Button variant="primary" className="patient-btns">
                 Medical History
               </Button>

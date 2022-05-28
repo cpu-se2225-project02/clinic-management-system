@@ -61,6 +61,11 @@ export interface NexusGenInputs {
     patient_id: number; // Int!
     paymnt_dt?: string | null; // String
   }
+  ReferralInput: { // input type
+    doctor_id: number; // Int!
+    hosp_name: string; // String!
+    patient_id: number; // Int!
+  }
 }
 
 export interface NexusGenEnums {
@@ -120,6 +125,10 @@ export interface NexusGenObjects {
     pres_name: string; // String!
   }
   Query: {};
+  Referral: { // root type
+    hosp_name: string; // String!
+    id: number; // Int!
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -169,6 +178,7 @@ export interface NexusGenFieldTypes {
     addPatient: NexusGenRootTypes['Patient'] | null; // Patient
     addPayment: NexusGenRootTypes['Bill'] | null; // Bill
     addPrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
+    addReferral: NexusGenRootTypes['Referral'] | null; // Referral
     deleteAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
     deletePatient: NexusGenRootTypes['Patient'] | null; // Patient
     deletePrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
@@ -213,6 +223,12 @@ export interface NexusGenFieldTypes {
     specificAppointment: Array<NexusGenRootTypes['Appointment'] | null> | null; // [Appointment]
     specificPatient: NexusGenRootTypes['Patient'] | null; // Patient
   }
+  Referral: { // field return type
+    doctor: NexusGenRootTypes['Doctor'] | null; // Doctor
+    hosp_name: string; // String!
+    id: number; // Int!
+    patient: NexusGenRootTypes['Patient'] | null; // Patient
+  }
 }
 
 export interface NexusGenFieldTypeNames {
@@ -252,6 +268,7 @@ export interface NexusGenFieldTypeNames {
     addPatient: 'Patient'
     addPayment: 'Bill'
     addPrescription: 'Prescription'
+    addReferral: 'Referral'
     deleteAppointment: 'Appointment'
     deletePatient: 'Patient'
     deletePrescription: 'Prescription'
@@ -296,6 +313,12 @@ export interface NexusGenFieldTypeNames {
     specificAppointment: 'Appointment'
     specificPatient: 'Patient'
   }
+  Referral: { // field return type name
+    doctor: 'Doctor'
+    hosp_name: 'String'
+    id: 'Int'
+    patient: 'Patient'
+  }
 }
 
 export interface NexusGenArgTypes {
@@ -320,6 +343,9 @@ export interface NexusGenArgTypes {
     }
     addPrescription: { // args
       newPrescription: NexusGenInputs['AddPrescriptionInput']; // AddPrescriptionInput!
+    }
+    addReferral: { // args
+      newReferral: NexusGenInputs['ReferralInput']; // ReferralInput!
     }
     deleteAppointment: { // args
       appID: number; // Int!

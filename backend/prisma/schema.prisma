@@ -31,6 +31,8 @@ model Patient {
   appointments  Appointment[]
   payments      Bill[]
   prescriptions Prescription[]
+  referral      Referral[]
+  doctors       Doctor[]
 }
 
 model Appointment {
@@ -47,7 +49,9 @@ model Appointment {
 model Doctor {
   id           Int           @id @default(autoincrement())
   doc_name     String
+  patients     Patient[]
   appointments Appointment[]
+  referrals    Referral[]
 }
 
 model Bill {
@@ -71,6 +75,15 @@ model MedicalNotes {
   title      String
   patient_id Int
   patient    Patient @relation(fields: [patient_id], references: [id])
+}
+
+model Referral {
+  id         Int     @id @default(autoincrement())
+  patient_id Int
+  patient    Patient @relation(fields: [patient_id], references: [id])
+  doctor_id  Int
+  doctor     Doctor  @relation(fields: [doctor_id], references: [id])
+  hosp_name  String
 }
 
 model Prescription {
