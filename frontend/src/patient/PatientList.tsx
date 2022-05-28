@@ -117,7 +117,7 @@ export default function PatientList() {
             <Col className="list">
               {data?.patients?.map((patient) => (
                 <div className="patientInfo d-grid gap-2">
-                  <Button className="patientInfo btn-primary" onClick={() => navigate(`/patient_record/${patient?.id}`)}>
+                  <button type="button" className="patientInfo" onClick={() => navigate(`/patient_record/${patient?.id}`)}>
                     <div className="patientInfo">
                       <div className="patientName fw-bold">
                         {patient?.l_name}
@@ -133,7 +133,7 @@ export default function PatientList() {
                       {patient?.sex}
                       <br />
                     </div>
-                  </Button>
+                  </button>
                 </div>
               ))}
             </Col>

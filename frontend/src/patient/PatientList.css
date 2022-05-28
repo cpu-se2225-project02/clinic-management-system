@@ -1,10 +1,11 @@
-
-.patientList{
+.patientList {
   margin-left: 3%;
 }
+
 body {
   overflow-x: hidden;
 }
+
 .sidebar-box {
   align-content: flex-start !important;
   display: flex !important;
@@ -43,7 +44,7 @@ body {
 }
 
 .add-patient-btn {
-  background-color: #033076;
+  /* background-color: #033076; */
   margin-top: 3px;
 }
 
@@ -56,9 +57,17 @@ body {
 }
 
 .patientInfo {
-  background-color: transparent;
+  transition-duration: 0.4s;
   text-align: left;
+  border: none;
+  border-radius: 4px;
+  background-color: none;
+  padding: 2px
+}
 
+.patientInfo:hover {
+  background-color: #f9ebbe; /* Green */
+  color: black;
 }
 
 .patientName {
@@ -74,16 +83,17 @@ body {
   margin-right: 0.5rem;
 }
 
-.patient-list-box{
+.patient-list-box {
   display: inline-block !important;
   overflow-x: hidden;
   overflow-y: scroll;
   margin-top: 4px !important;
 }
-.right-side{
+
+.right-side {
   box-shadow: -4px 6px 8px 5px rgba(230, 230, 230, 1);
 }
 
-.res-row{
+.res-row {
   height: 60px !important;
 }
