@@ -71,13 +71,13 @@ export default function PatientInformation({ pId }: PatientId) {
           </div>
           <div className="col">
             <div className="btn-group" role="group">
-              <button type="button" className="editAndDltBtn">
-                <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
+              <button type="button" className="editAndDltBtn" onClick={() => setEditBtn(!editBtn)}>
+                <BiEdit size={30} />
               </button>
-              <button type="button" className="editAndDltBtn">
-                <MdDeleteOutline size={30} onClick={patientDeletion} />
+              <button type="button" className="editAndDltBtn" onClick={patientDeletion}>
+                <MdDeleteOutline size={30} />
               </button>
-              {editBtn && <UpdatePatientForm postButton={setEditBtn} patientID={pId} payForm={false} />}
+              {editBtn && <UpdatePatientForm payForm={editBtn} postButton={setEditBtn} patientID={pId} />}
             </div>
           </div>
         </div>
