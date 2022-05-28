@@ -43,36 +43,44 @@ export default function PatientInformation({ pId }: PatientId) {
       </div>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
       <div className="container">
-        <div className="row justify-content-md-center">
-          <div className="row">
-            <div className="col-sm-3">
-              <img src={PatientIcon} className="PatientIcon" alt="..." />
-            </div>
-            <div className="col-sm-2">
-              Name:
+        <div className="row">
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+          <div className="col">
+            <img src={PatientIcon} className="PatientIcon" alt="..." />
+          </div>
+          <div className="col-6">
+            <div className="patientFullName fw-bold">
               <br />
-              Sex:
-              <br />
-              Age:
-              <br />
-              Birthdate:
-              <br />
-              Address:
-            </div>
-            <div className="col-sm-6">
               {data?.specificPatient?.f_name}
               {' '}
               {data?.specificPatient?.m_name}
               {' '}
               {data?.specificPatient?.l_name}
               <br />
-              {data?.specificPatient?.sex}
-              <br />
-              {data?.specificPatient?.age}
-              <br />
-              {data?.specificPatient?.birthdate}
-              <br />
-              {data?.specificPatient?.address}
+            </div>
+            Sex:
+            {' '}
+            {data?.specificPatient?.sex}
+            <br />
+            Age:
+            {' '}
+            {data?.specificPatient?.age}
+            <br />
+            Birthdate:
+            {' '}
+            {data?.specificPatient?.birthdate}
+            <br />
+            Address:
+            {' '}
+            {data?.specificPatient?.address}
+          </div>
+          <div className="col">
+            <div className="editAndDelete">
+              <div className="col" style={{ textAlign: 'right' }}>
+                <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
+                <MdDeleteOutline size={30} onClick={patientDeletion} />
+                {editBtn && <UpdatePatientForm postButton={setEditBtn} patientID={pId} payForm={false} />}
+              </div>
             </div>
           </div>
         </div>

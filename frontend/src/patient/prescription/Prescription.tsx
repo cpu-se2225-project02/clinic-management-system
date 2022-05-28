@@ -14,7 +14,7 @@ import PrescriptionForm from './PrescriptionForm';
 import UpdatePrescriptionForm from './UpdatePrescriptionForm';
 
 interface PatientID {
-    pID: undefined | number
+  pID: undefined | number
 }
 
 export default function Prescription({ pID }: PatientID) {
@@ -57,13 +57,13 @@ export default function Prescription({ pID }: PatientID) {
   return (
     <>
       <div>
-        <button onClick={() => { setAddPrescBtn(true); }}>
+        <button onClick={() => { setAddPrescBtn(true); }} className="btn btn-outline-secondary">
           <RiAddFill size={30} />
           Add Prescription
         </button>
 
       </div>
-      { addPrescBtn && <PrescriptionForm popup={setAddPrescBtn} pID={pID as number} />}
+      {addPrescBtn && <PrescriptionForm popup={setAddPrescBtn} pID={pID as number} />}
       {data?.patientPrescriptions?.length !== 0
         ? data?.patientPrescriptions?.map((prescription) => (
 

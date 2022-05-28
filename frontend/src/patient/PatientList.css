@@ -1,18 +1,16 @@
-/* .patient-list-box {
-  display: inline-block !important;
-  overflow-x: auto;
-  overflow-y: auto;
-  margin-top: 4px !important;
-} */
+.patientList {
+  margin-left: 3%;
+}
+
 body {
   overflow-x: hidden;
 }
+
 .sidebar-box {
   align-content: flex-start !important;
   display: flex !important;
   justify-content: left !important;
 }
-
 
 .h5 {
   background-color: #033076;
@@ -29,6 +27,8 @@ body {
 .patient-total-label {
   padding-left: 40px !important;
   padding-top: 8px !important;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px !important;
 }
 
 .list {
@@ -44,7 +44,7 @@ body {
 }
 
 .add-patient-btn {
-  background-color: #033076;
+  /* background-color: #033076; */
   margin-top: 3px;
 }
 
@@ -52,21 +52,48 @@ body {
   margin-top: 10px !important;
 }
 
-.row{
+.row {
   background-color: transparent;
 }
-.patientOuterInfo{
+
+.patientInfo {
+  transition-duration: 0.4s;
   text-align: left;
+  border: none;
+  border-radius: 4px;
+  background-color: none;
+  padding: 2px
 }
+
+.patientInfo:hover {
+  background-color: #f9ebbe; /* Green */
+  color: black;
+}
+
+.patientName {
+  color: rgb(12, 49, 104);
+}
+
 .patient-rec-box {
   margin-bottom: 40px !important;
   height: fit-content;
 }
 
-.right-side{
+.patient-icon {
+  margin-right: 0.5rem;
+}
+
+.patient-list-box {
+  display: inline-block !important;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin-top: 4px !important;
+}
+
+.right-side {
   box-shadow: -4px 6px 8px 5px rgba(230, 230, 230, 1);
 }
 
-.res-row{
+.res-row {
   height: 60px !important;
 }

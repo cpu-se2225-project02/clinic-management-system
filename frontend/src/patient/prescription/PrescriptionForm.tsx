@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { useMutation } from 'urql';
-import { Spinner } from 'react-bootstrap';
+// import { Spinner } from 'react-bootstrap';
 import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { AddPrescriptionDocument } from '../../queries.generated';
 // import UpdatePrescription from './UpdatePrescription';
@@ -19,15 +19,15 @@ export default function PrescriptionForm(addPrescFormProps: AddPrescFormProps) {
   const [dosage, setDosage] = useState(0);
   const [addPresc, setAddPresc] = useMutation(AddPrescriptionDocument);
 
-  const { error, fetching } = addPresc;
+  // const { error, fetching } = addPresc;
 
-  if (fetching) {
-    return <Spinner animation="border" role="status" />;
-  }
-  if (error) {
-    console.log(error);
-    return <div>Insertion unsuccessful</div>;
-  }
+  // if (fetching) {
+  //   return <Spinner animation="border" role="status" />;
+  // }
+  // if (error) {
+  //   console.log(error);
+  //   return <div>Insertion unsuccessful</div>;
+  // }
 
   const addPrescription = () => {
     setAddPresc({

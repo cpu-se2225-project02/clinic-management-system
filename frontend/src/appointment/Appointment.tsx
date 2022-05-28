@@ -93,12 +93,10 @@ function Appointment() {
   };
 
   return (
-    <Container fluid className="mb-5">
-
+    <Container fluid>
       <Row>
         <Header />
       </Row>
-
       <Row>
         <Col xs={2} className="sidebar-box p-0">
           <Sidebars />
