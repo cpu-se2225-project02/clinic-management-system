@@ -102,7 +102,7 @@ function Appointment() {
           <Sidebars />
         </Col>
 
-        <Col xs={10} className="appointment-box p-0 mt-2 border border-2 border-dark right-side">
+        <Col xs={10} className="appointment-box p-0 mt-3 border border-2 border-dark right-side">
           <Row>
             <Col xs={12}>
               <h5 className="h5">
