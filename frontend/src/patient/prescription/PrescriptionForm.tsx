@@ -43,7 +43,7 @@ export default function PrescriptionForm(addPrescFormProps: AddPrescFormProps) {
     addPrescription();
     addPrescFormProps.popup(false);
   };
-
+  console.log(addPresc);
   return (
     <div className="popup">
       <div className="popup-inner">

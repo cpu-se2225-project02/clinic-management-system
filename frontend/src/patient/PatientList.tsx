@@ -58,7 +58,7 @@ export default function PatientList() {
           <Sidebars />
         </Col>
 
-        <Col xs={10} className="patient-list-box p-0 mt-2 border border-2 border-dark right-side">
+        <Col xs={10} className="patient-list-box p-0 mt-3 border border-2 border-dark right-side">
           <Row>
             <Col xs={12}>
               <h5 className="h5">
@@ -127,8 +127,8 @@ export default function PatientList() {
                         {patient?.m_name}
                         {' '}
                       </div>
-                      {/* Please add phone number */}
-                      +639496651088
+                      {patient?.constactNo}
+
                       <br />
                       {patient?.sex}
                       <br />

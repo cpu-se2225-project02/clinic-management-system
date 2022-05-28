@@ -8,7 +8,7 @@ query AllPatients($con: String) {
     sex
     age
     address
-    birthdate
+    constactNo
   }
 }
 

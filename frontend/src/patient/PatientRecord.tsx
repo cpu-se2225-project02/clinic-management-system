@@ -48,7 +48,7 @@ export default function PatientRecord() {
           <Sidebars />
         </Col>
 
-        <Col xs={10} className="patient-list-box p-0 mt-2 border border-2 border-dark right-side">
+        <Col xs={10} className="patient-list-box p-0 mt-3 border border-2 border-dark right-side">
           <Row>
             <Col xs={12}>
               <h5 className="h5">
@@ -77,9 +77,11 @@ export default function PatientRecord() {
             </Button>
           </Col>
           <Col className="list border d-grid gap-2">
-            <Button variant="primary"
+            <Button
+              variant="primary"
               className="patient-btns"
-              onClick={() => setAccBtn(!AccountBtn)}>
+              onClick={() => setAccBtn(!AccountBtn)}
+            >
               Accounts
             </Button>
             {AccountBtn && <PatientAccount pID={data?.specificPatient?.id} />}

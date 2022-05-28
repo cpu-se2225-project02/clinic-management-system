@@ -61,7 +61,7 @@ function Dashboard() {
           </Col>
 
           <Col xs={10}>
-            <Row className="mt-3 pb-2 border-bottom">
+            <Row className="mt-3 pb-2">
               <Col xs={4}>
                 <Card style={{
                   width: '18rem',
