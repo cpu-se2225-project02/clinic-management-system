@@ -36,11 +36,6 @@ export default function PatientInformation({ pId }: PatientId) {
 
   return (
     <>
-      <div className="col" style={{ textAlign: 'right' }}>
-        <BiEdit size={30} onClick={() => setEditBtn(!editBtn)} />
-        <MdDeleteOutline size={30} onClick={patientDeletion} />
-        {editBtn && <UpdatePatientForm payForm={editBtn} postButton={setEditBtn} patientID={pId} />}
-      </div>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
       <div className="container">
         <div className="row">
