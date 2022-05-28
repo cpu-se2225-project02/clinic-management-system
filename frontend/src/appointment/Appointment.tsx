@@ -102,7 +102,7 @@ function Appointment() {
           <Sidebars />
         </Col>
 
-        <Col xs={10} className="appointment-box p-0 mt-3 border border-2 border-dark right-side">
+        <Col xs={10} className="appointment-box p-0 mt-3  mb-5 border border-2 border-dark right-side">
           <Row>
             <Col xs={12}>
               <h5 className="h5">
@@ -124,6 +124,7 @@ function Appointment() {
             <Col>
               {active === 'calendar' ? (
                 <Scheduler
+                  height={500}
                   month={{
                     weekDays: [0, 1, 2, 3, 4, 5, 6],
                     weekStartOn: 0,
