@@ -125,8 +125,6 @@ function Appointment() {
             <Col>
               {active === 'calendar' ? (
                 <Scheduler
-<<<<<<< HEAD
-=======
                   height={500}
                   month={{
                     weekDays: [0, 1, 2, 3, 4, 5, 6],
@@ -141,7 +139,6 @@ function Appointment() {
                     endHour: 16,
                     step: 60,
                   }}
->>>>>>> f5639d2d52a70909487f2400e56c61be881497dd
                   view="month"
                   onConfirm={handleConfirm}
                   onDelete={handleDelete}
@@ -199,7 +196,7 @@ function Appointment() {
                             {appointment?.patient?.l_name}
                           </td>
                           <td>
-                            {allDoctors.data?.allDoctors?.find(((doc) => doc!.id === appointment?.doc_id))?.doc_name}
+                            {allDoctors.data?.allDoctors?.find(((doc) => doc?.id === appointment?.doctor!.id))?.doc_name}
                           </td>
                           <td>{appointment?.dt_start}</td>
                           <td>{appointment?.dt_end}</td>
