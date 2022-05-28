@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable radix */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -10,14 +11,15 @@ import { AddPaymentDocument, AllPatientsDocument } from '../../queries.generated
 interface Popup {
   addPaymentBtn: React.Dispatch<React.SetStateAction<boolean>>
   payForm: boolean
+  patId?: number
 }
 
-function AddPaymentForm({ addPaymentBtn, payForm }: Popup) {
+function AddPaymentForm({ addPaymentBtn, payForm, patId = 0 }: Popup) {
   const [addPayment, setAddPayment] = useMutation(AddPaymentDocument);
   const [date, setDate] = useState('');
   const [ammtCost, setAmmtCost] = useState(0);
   const [ammtPd, setAmmtPd] = useState(0);
-  const [id, setId] = useState(0);
+  const [id, setId] = useState(patId);
 
   const [allPatients] = useQuery({
     query: AllPatientsDocument,

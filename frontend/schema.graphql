@@ -10,6 +10,7 @@ input AddPrescriptionInput {
 
 type Appointment {
   doc_id: Int!
+  doctor: Doctor
   dt_end: String!
   dt_start: String!
   id: Int!
@@ -56,6 +57,7 @@ input EditPrescriptionInput {
 
 input MedNotesInput {
   date_noted: String!
+  doc_id: Int!
   med_notes: String!
   patient_id: Int!
   title: String!
@@ -63,6 +65,8 @@ input MedNotesInput {
 
 type MedicalNotes {
   date_noted: String!
+  doc_id: Int!
+  doctor: Doctor
   id: Int!
   med_notes: String!
   patient: Patient

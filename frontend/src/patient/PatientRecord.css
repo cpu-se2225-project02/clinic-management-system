@@ -11,7 +11,9 @@
   padding-top: 50px;
   
 } */
-
+.right-side {
+  box-shadow: -4px 6px 8px 5px rgba(230, 230, 230, 1);
+}
 
 
 .PatientInfo {

@@ -1,0 +1,18 @@
+.res-row {
+  height: 200px !important;
+}
+
+.span-style {
+  background-color: #f9ebbe !important;
+  font-family: 'Franklin Gothic Medium',
+    'Arial Narrow',
+    Arial,
+    sans-serif;
+}
+
+.deets {
+  font-family: Arial,
+    Helvetica,
+    sans-serif;
+  padding-left: 15px !important;
+}

@@ -79,7 +79,7 @@ export default function PatientForm({ postButton, payForm }: Popup) {
           onChange={(e) => { setFirstName(e.target.value); }}
         />
 
-        <label>Middle Initial:</label>
+        <label>Middle name:</label>
         <input
           className="form-control"
           type="text"
@@ -123,6 +123,22 @@ export default function PatientForm({ postButton, payForm }: Popup) {
           type="text"
           placeholder="Address"
           onChange={(e) => { setAddress(e.target.value); }}
+        />
+
+        <label>Email address:</label>
+        <input
+          className="form-control"
+          type="text"
+          placeholder="Email address"
+          onChange={(e) => { setEmal(e.target.value); }}
+        />
+
+        <label>Phone number:</label>
+        <input
+          className="form-control"
+          type="number"
+          placeholder="Phone number"
+          onChange={(e) => { setContNo(e.target.value); }}
         />
 
         <button

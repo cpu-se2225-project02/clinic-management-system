@@ -4,9 +4,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { useMutation } from 'urql';
-import { Spinner } from 'react-bootstrap';
+// import { Spinner } from 'react-bootstrap';
 import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { AddPrescriptionDocument } from '../../queries.generated';
+import './PrescriptionForm.css';
 // import UpdatePrescription from './UpdatePrescription';
 
 interface AddPrescFormProps {
@@ -19,15 +20,15 @@ export default function PrescriptionForm(addPrescFormProps: AddPrescFormProps) {
   const [dosage, setDosage] = useState(0);
   const [addPresc, setAddPresc] = useMutation(AddPrescriptionDocument);
 
-  const { error, fetching } = addPresc;
+  // const { error, fetching } = addPresc;
 
-  if (fetching) {
-    return <Spinner animation="border" role="status" />;
-  }
-  if (error) {
-    console.log(error);
-    return <div>Insertion unsuccessful</div>;
-  }
+  // if (fetching) {
+  //   return <Spinner animation="border" role="status" />;
+  // }
+  // if (error) {
+  //   console.log(error);
+  //   return <div>Insertion unsuccessful</div>;
+  // }
 
   const addPrescription = () => {
     setAddPresc({
@@ -42,40 +43,42 @@ export default function PrescriptionForm(addPrescFormProps: AddPrescFormProps) {
     addPrescription();
     addPrescFormProps.popup(false);
   };
-
+  console.log(addPresc);
   return (
     <div className="popup">
       <div className="popup-inner">
-        <h5>Add Prescription</h5>
-        <button
-          onClick={() => addPrescFormProps.popup(false)}
-          className="btn close-btn float-end mt-0"
-        >
-          <AiOutlineCloseSquare size={25} />
-        </button>
-        <div className="col">
-          <div>
-            <input
-              type="text"
-              placeholder="Enter Prescription"
-              onChange={(e) => setPrescName(e.target.value)}
-            />
-          </div>
-          <div>
-            <input
-              type="number"
-              placeholder="Enter Dosage"
-              onChange={(e) => setDosage(parseInt(e.target.value))}
-            />
-          </div>
-
+        <div className="AddPrescriptionForm">
+          <h5>Add Prescription</h5>
           <button
-            className="btn btn-primary mt-2 float-end"
-            onClick={onSubmitBtnClicked}
-            type="submit"
+            onClick={() => addPrescFormProps.popup(false)}
+            className="btn close-btn float-end mt-0"
           >
-            Submit
+            <AiOutlineCloseSquare size={25} />
           </button>
+          <div className="col">
+            <div>
+              <input
+                type="text"
+                placeholder="Enter Prescription"
+                onChange={(e) => setPrescName(e.target.value)}
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                placeholder="Enter Dosage"
+                onChange={(e) => setDosage(parseInt(e.target.value))}
+              />
+            </div>
+
+            <button
+              className="btn btn-primary mt-2 float-end"
+              onClick={onSubmitBtnClicked}
+              type="submit"
+            >
+              Submit
+            </button>
+          </div>
         </div>
       </div>
     </div>

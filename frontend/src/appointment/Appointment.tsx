@@ -94,20 +94,18 @@ function Appointment() {
   };
 
   return (
-    <Container fluid className="mb-5">
-
+    <Container fluid>
       <Row>
         <Header />
       </Row>
-
       <Row>
         <Col xs={2} className="sidebar-box p-0">
           <Sidebars />
         </Col>
 
-        <Col xs={10} className="appointment-box p-0 mt-2 border border-dark">
+        <Col xs={10} className="appointment-box p-0 mt-3  mb-5 border border-2 border-dark right-side">
           <Row>
-            <Col>
+            <Col xs={12}>
               <h5 className="h5">
                 <FaCalendarAlt className="appointment-icon" />
                 Appointments
@@ -127,6 +125,23 @@ function Appointment() {
             <Col>
               {active === 'calendar' ? (
                 <Scheduler
+<<<<<<< HEAD
+=======
+                  height={500}
+                  month={{
+                    weekDays: [0, 1, 2, 3, 4, 5, 6],
+                    weekStartOn: 0,
+                    startHour: 7,
+                    endHour: 16,
+                  }}
+                  week={{
+                    weekDays: [0, 1, 2, 3, 4, 5, 6],
+                    weekStartOn: 0,
+                    startHour: 7,
+                    endHour: 16,
+                    step: 60,
+                  }}
+>>>>>>> f5639d2d52a70909487f2400e56c61be881497dd
                   view="month"
                   onConfirm={handleConfirm}
                   onDelete={handleDelete}

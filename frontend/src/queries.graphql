@@ -8,7 +8,7 @@ query AllPatients($con: String) {
     sex
     age
     address
-    birthdate
+    constactNo
   }
 }
 
@@ -62,7 +62,9 @@ query getAllAppointments {
     dt_start
     dt_end
     name
-    doc_id
+    doctor {
+      doc_name
+    }
     id
     patient {
       f_name
@@ -142,6 +144,9 @@ query DisplayMedNotes($pID: Int!) {
     id
     title
     med_notes
+    doctor {
+      doc_name
+    }
   }
 }
 
@@ -149,6 +154,7 @@ mutation AddAMedNote($newMedNote: MedNotesInput!) {
   addMedNotes(newMedNotes: $newMedNote) {
     med_notes
     title
+    doc_id
   }
 }
 

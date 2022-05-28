@@ -39,6 +39,7 @@ export interface NexusGenInputs {
   }
   MedNotesInput: { // input type
     date_noted: string; // String!
+    doc_id: number; // Int!
     med_notes: string; // String!
     patient_id: number; // Int!
     title: string; // String!
@@ -100,6 +101,7 @@ export interface NexusGenObjects {
   }
   MedicalNotes: { // root type
     date_noted: string; // String!
+    doc_id: number; // Int!
     id: number; // Int!
     med_notes: string; // String!
     title: string; // String!
@@ -144,6 +146,7 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 export interface NexusGenFieldTypes {
   Appointment: { // field return type
     doc_id: number; // Int!
+    doctor: NexusGenRootTypes['Doctor'] | null; // Doctor
     dt_end: string; // String!
     dt_start: string; // String!
     id: number; // Int!
@@ -165,6 +168,8 @@ export interface NexusGenFieldTypes {
   }
   MedicalNotes: { // field return type
     date_noted: string; // String!
+    doc_id: number; // Int!
+    doctor: NexusGenRootTypes['Doctor'] | null; // Doctor
     id: number; // Int!
     med_notes: string; // String!
     patient: NexusGenRootTypes['Patient'] | null; // Patient
@@ -234,6 +239,7 @@ export interface NexusGenFieldTypes {
 export interface NexusGenFieldTypeNames {
   Appointment: { // field return type name
     doc_id: 'Int'
+    doctor: 'Doctor'
     dt_end: 'String'
     dt_start: 'String'
     id: 'Int'
@@ -255,6 +261,8 @@ export interface NexusGenFieldTypeNames {
   }
   MedicalNotes: { // field return type name
     date_noted: 'String'
+    doc_id: 'Int'
+    doctor: 'Doctor'
     id: 'Int'
     med_notes: 'String'
     patient: 'Patient'

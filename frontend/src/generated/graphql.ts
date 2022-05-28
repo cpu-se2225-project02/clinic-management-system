@@ -21,6 +21,7 @@ export interface AddPrescriptionInput {
 export interface Appointment {
   readonly __typename?: 'Appointment';
   readonly doc_id: Scalars['Int'];
+  readonly doctor?: Maybe<Doctor>;
   readonly dt_end: Scalars['String'];
   readonly dt_start: Scalars['String'];
   readonly id: Scalars['Int'];
@@ -69,6 +70,7 @@ export interface EditPrescriptionInput {
 
 export interface MedNotesInput {
   readonly date_noted: Scalars['String'];
+  readonly doc_id: Scalars['Int'];
   readonly med_notes: Scalars['String'];
   readonly patient_id: Scalars['Int'];
   readonly title: Scalars['String'];
@@ -77,6 +79,8 @@ export interface MedNotesInput {
 export interface MedicalNotes {
   readonly __typename?: 'MedicalNotes';
   readonly date_noted: Scalars['String'];
+  readonly doc_id: Scalars['Int'];
+  readonly doctor?: Maybe<Doctor>;
   readonly id: Scalars['Int'];
   readonly med_notes: Scalars['String'];
   readonly patient?: Maybe<Patient>;

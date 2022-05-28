@@ -11,9 +11,9 @@ import {
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { useQuery } from 'urql';
 import { List } from '@mui/material';
+import { MdAccountBox } from 'react-icons/md';
 import {
   Router, Routes, Route, Link, useNavigate,
-
 } from 'react-router-dom';
 import { BsPersonBadgeFill } from 'react-icons/bs';
 import { AllPatientsDocument } from '../queries.generated';
@@ -58,13 +58,17 @@ export default function PatientList() {
           <Sidebars />
         </Col>
 
-        <Col xs={10} className="patient-list-box p-0 mt-2 border border-dark">
+        <Col xs={10} className="patient-list-box p-0 mt-3 border border-2 border-dark right-side">
           <Row>
             <Col xs={12}>
-              <h5 className="h5">Patient List</h5>
+              <h5 className="h5">
+                <MdAccountBox className="patient-icon" />
+                Patient List
+              </h5>
             </Col>
           </Row>
-          <Row className="border-bottom">
+
+          <Row>
             <Col xs={5} className="patient-total-label">
               Total of
               {' '}
@@ -111,28 +115,30 @@ export default function PatientList() {
           </Row>
           <Row className="list-row">
             <Col className="list">
-              {/* <div> */}
               {data?.patients?.map((patient) => (
-                <div className="patientOuterInfo">
-                  <Button className="btn btn-light" onClick={() => navigate(`/patient_record/${patient?.id}`)}>
-                    <div className="row g-0">
-                      {patient?.l_name}
-                      {', '}
-                      {patient?.f_name}
-                      {' '}
-                      {patient?.m_name}
-                      {' '}
+                <div className="patientInfo d-grid gap-2">
+                  <button type="button" className="patientInfo" onClick={() => navigate(`/patient_record/${patient?.id}`)}>
+                    <div className="patientInfo">
+                      <div className="patientName fw-bold">
+                        {patient?.l_name}
+                        {', '}
+                        {patient?.f_name}
+                        {' '}
+                        {patient?.m_name}
+                        {' '}
+                      </div>
+                      {patient?.constactNo}
+
                       <br />
-                      {/* Please add phone number */}
                       {patient?.sex}
                       <br />
                     </div>
-                  </Button>
+                  </button>
                 </div>
               ))}
-              {/* </div> */}
             </Col>
           </Row>
+          <Row className="res-row" />
         </Col>
         <Row className="patient-rec-box">
           <Routes>

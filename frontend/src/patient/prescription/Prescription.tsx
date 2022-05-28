@@ -12,9 +12,10 @@ import { MdDeleteOutline } from 'react-icons/md';
 import { DeletePrescriptionDocument, PatientPrescriptionsDocument } from '../../queries.generated';
 import PrescriptionForm from './PrescriptionForm';
 import UpdatePrescriptionForm from './UpdatePrescriptionForm';
+import './Prescription.css';
 
 interface PatientID {
-    pID: undefined | number
+  pID: undefined | number
 }
 
 export default function Prescription({ pID }: PatientID) {
@@ -56,40 +57,48 @@ export default function Prescription({ pID }: PatientID) {
   };
   return (
     <>
-      <div>
-        <button onClick={() => { setAddPrescBtn(true); }}>
-          <RiAddFill size={30} />
-          Add Prescription
-        </button>
-
-      </div>
-      { addPrescBtn && <PrescriptionForm popup={setAddPrescBtn} pID={pID as number} />}
+      {addPrescBtn && <PrescriptionForm popup={setAddPrescBtn} pID={pID as number} />}
       {data?.patientPrescriptions?.length !== 0
         ? data?.patientPrescriptions?.map((prescription) => (
-
-          <div>
-            <div>
-              <div className="col" style={{ textAlign: 'right' }}>
-                <button onClick={() => onEditBtnClicked(prescription?.id as number)}>
-                  <BiEdit size={30} />
-                </button>
-                <button onClick={() => deletePrescription(prescription?.id as number)}>
-                  <MdDeleteOutline size={30} />
-                </button>
+          <>
+            <div className="container">
+              <div className="row">
+                <div className="col-sm-11">
+                  <button onClick={() => { setAddPrescBtn(true); }} className="btn btn-outline-secondary">
+                    <RiAddFill size={30} />
+                    Add Prescription
+                  </button>
+                </div>
+                <div className="col-sm-1">
+                  <div className="btn-group" role="group">
+                    <button type="button" className="editAndDltBtn" onClick={() => onEditBtnClicked(prescription?.id as number)}>
+                      <BiEdit size={30} />
+                    </button>
+                    <button type="button" className="editAndDltBtn" onClick={() => deletePrescription(prescription?.id as number)}>
+                      <MdDeleteOutline size={30} />
+                    </button>
+                    {updatePrescBtn && <UpdatePrescriptionForm popup={setUpdatePrescBtn} pID={pID as number} prescID={editBtnValue} />}
+                  </div>
+                </div>
               </div>
-              Prescription Name:
-              {' '}
-              {prescription?.pres_name}
-              <div>
-                Prescription Dosage:
+            </div>
+
+            <div>
+              <div className="prescriptions">
+                <div className="medicine">
+                  {prescription?.pres_name}
+                </div>
+                Dosage:
                 {' '}
                 {prescription?.pres_dos}
+                {' '}
+                <br />
+                Number of times a day/ week
+                <br />
               </div>
-              {updatePrescBtn && <UpdatePrescriptionForm popup={setUpdatePrescBtn} pID={pID as number} prescID={editBtnValue} /> }
+              <hr />
             </div>
-            <hr />
-
-          </div>
+          </>
         ))
         : <div>No prescription given to patient.</div>}
     </>
