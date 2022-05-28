@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable consistent-return */
 /* eslint-disable linebreak-style */
 import React, { useState } from 'react';
@@ -126,19 +127,6 @@ function Appointment() {
             <Col>
               {active === 'calendar' ? (
                 <Scheduler
-                  month={{
-                    weekDays: [0, 1, 2, 3, 4, 5, 6],
-                    weekStartOn: 0,
-                    startHour: 7,
-                    endHour: 16,
-                  }}
-                  week={{
-                    weekDays: [0, 1, 2, 3, 4, 5, 6],
-                    weekStartOn: 0,
-                    startHour: 7,
-                    endHour: 16,
-                    step: 60,
-                  }}
                   view="month"
                   onConfirm={handleConfirm}
                   onDelete={handleDelete}
@@ -175,15 +163,36 @@ function Appointment() {
                 />
               ) : (
                 // eslint-disable-next-line react/jsx-no-useless-fragment
-                <Row>
-                  {data?.appointments?.map((appointment) => (
-                    <div>
-                      {appointment?.dt_start}
-                      {appointment?.dt_end}
-                      {appointment?.patient?.f_name}
-                      {appointment?.patient?.l_name}
-                    </div>
-                  ))}
+                <Row className="m-auto">
+                  <table className="table ">
+                    <thead>
+                      <tr>
+                        <th scope="col">Patient</th>
+                        <th scope="col">Doctor</th>
+                        <th scope="col">Start</th>
+                        <th scope="col">End</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      {data?.appointments?.map((appointment) => (
+                        <tr>
+                          <td>
+                            {appointment?.patient?.f_name}
+                            {' '}
+                            {' '}
+                            {appointment?.patient?.l_name}
+                          </td>
+                          <td>
+                            {allDoctors.data?.allDoctors?.find(((doc) => doc!.id === appointment?.doc_id))?.doc_name}
+                          </td>
+                          <td>{appointment?.dt_start}</td>
+                          <td>{appointment?.dt_end}</td>
+                        </tr>
+                      ))}
+
+                    </tbody>
+                  </table>
                 </Row>
               )}
             </Col>
