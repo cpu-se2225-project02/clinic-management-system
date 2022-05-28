@@ -127,8 +127,8 @@ export default function PatientList() {
                         {patient?.m_name}
                         {' '}
                       </div>
-                      {/* Please add phone number */}
-                      +639496651088
+                      {patient?.constactNo}
+
                       <br />
                       {patient?.sex}
                       <br />

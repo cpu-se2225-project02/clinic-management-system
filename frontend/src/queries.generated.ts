@@ -10,7 +10,7 @@ export type AllPatientsQuery = (
   { __typename?: 'Query' }
   & { patients?: Types.Maybe<Array<Types.Maybe<(
     { __typename?: 'Patient' }
-    & Pick<Types.Patient, 'id' | 'f_name' | 'l_name' | 'm_name' | 'suffix' | 'sex' | 'age' | 'address' | 'birthdate'>
+    & Pick<Types.Patient, 'id' | 'f_name' | 'l_name' | 'm_name' | 'suffix' | 'sex' | 'age' | 'address' | 'constactNo'>
   )>>> }
 );
 
@@ -318,7 +318,7 @@ export const AllPatientsDocument = {
     selectionSet: {
       kind: 'SelectionSet',
       selections: [{
-        kind: 'Field', name: { kind: 'Name', value: 'patients' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'condition' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'con' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'm_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'suffix' } }, { kind: 'Field', name: { kind: 'Name', value: 'sex' } }, { kind: 'Field', name: { kind: 'Name', value: 'age' } }, { kind: 'Field', name: { kind: 'Name', value: 'address' } }, { kind: 'Field', name: { kind: 'Name', value: 'birthdate' } }] },
+        kind: 'Field', name: { kind: 'Name', value: 'patients' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'condition' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'con' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'm_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'suffix' } }, { kind: 'Field', name: { kind: 'Name', value: 'sex' } }, { kind: 'Field', name: { kind: 'Name', value: 'age' } }, { kind: 'Field', name: { kind: 'Name', value: 'address' } }, { kind: 'Field', name: { kind: 'Name', value: 'constactNo' } }] },
       }],
     },
   }],
