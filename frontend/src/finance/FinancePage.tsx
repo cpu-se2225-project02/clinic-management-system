@@ -22,6 +22,7 @@ import Footer from '../common/Footer';
 import { AllPaymentsDocument } from '../queries.generated';
 import InvoicePopup from './InvoicePopup';
 import BillForm from './BillForm';
+import PatientAccountPopup from './PatientAccountPopup';
 
 export default function FinancePage() {
   const navigate = useNavigate();
@@ -31,7 +32,9 @@ export default function FinancePage() {
   const handleBIllForm = () => setBillForm(true);
   const handleShowPayForm = () => setPayForm(true);
   const [InvPop, setInvPop] = useState(false);
+  const [AccPop, setAccPop] = useState(false);
   const handleShowInvPop = () => setInvPop(true);
+  const handleAccPop = () => setAccPop(true);
   const [allPayments] = useQuery({
     query: AllPaymentsDocument,
   });
@@ -103,11 +106,12 @@ export default function FinancePage() {
                   <Button
                     variant="secondary"
                     style={{ width: '100%' }}
-                    onClick={() => navigate('/patients')}
+                    onClick={handleAccPop}
                   >
                     View patients account
                   </Button>
                 </Card.Body>
+                {AccPop && <PatientAccountPopup invForm={AccPop} invPop={setAccPop} />}
               </Card>
             </Col>
             <Col xs={4} className="mt-2">
