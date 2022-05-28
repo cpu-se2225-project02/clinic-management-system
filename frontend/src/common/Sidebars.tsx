@@ -22,7 +22,7 @@ export default function Sidebars() {
           <Image
             className="card-img-top"
             fluid
-            src="https://res.cloudinary.com/dmro06tbx/image/upload/v1650564665/techniche_tihcko.png"
+            src="https://res.cloudinary.com/dmro06tbx/image/upload/v1653738111/White_Hospital_Icon_Medical_Logo_1_yuxx8x.png"
           />
         </Row>
         <Row />
