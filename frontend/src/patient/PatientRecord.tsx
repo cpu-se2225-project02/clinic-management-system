@@ -8,6 +8,7 @@ import {
 import { useParams } from 'react-router-dom';
 import './PatientRecord.css';
 import { useQuery } from 'urql';
+import { MdInfoOutline } from 'react-icons/md';
 import { GetPatientDocument } from '../queries.generated';
 import PatientInformation from './PatientInformation';
 // eslint-disable-next-line no-unused-vars
@@ -37,7 +38,7 @@ export default function PatientRecord() {
   const { data } = allPatients;
 
   return (
-    <Container fluid className="PatientInfo mb-5">
+    <Container fluid>
       <Row>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
         <Header />
@@ -46,67 +47,63 @@ export default function PatientRecord() {
         <Col xs={2} className="sidebar-box p-0">
           <Sidebars />
         </Col>
+
         <Col xs={10} className="patient-list-box p-0 mt-2 border border-2 border-dark right-side">
-          <div className="card border-dark mb-3">
-            <div className="h5">
-              <div className="row">
-                <div className="col-sm-2">
-                  <span className="material-symbols-outlined">
-                    info
-                  </span>
-                </div>
-                <div className="col-sm-10">Patient Information</div>
-              </div>
-            </div>
-            <Col>
-              <PatientInformation pId={data?.specificPatient?.id} />
+          <Row>
+            <Col xs={12}>
+              <h5 className="h5">
+                <MdInfoOutline className="appointment-icon" />
+                Patient Record
+              </h5>
             </Col>
-            <Col className="list border d-grid gap-2">
-              <Button
-                variant="primary"
-                className="patient-btns"
-                onClick={() => setPrescBtn(!PrescriptionBtn)}
-              >
-                Prescriptions
-              </Button>
-              {PrescriptionBtn && <Prescription pID={data?.specificPatient?.id} />}
-            </Col>
-            <Col className="list border d-grid gap-2">
-              <Button variant="primary" className="patient-btns">
-                Medical History
-              </Button>
-            </Col>
-            <Row>
-              <Col className="list border d-grid gap-2">
-                <Button variant="primary" className="patient-btns" onClick={() => setAccBtn(!AccountBtn)}>
-                  Accounts
-                </Button>
-              </Col>
-            </Row>
-            <Row>
-              {AccountBtn && <PatientAccount pID={data?.specificPatient?.id} />}
-            </Row>
-            <Col className="list border d-grid gap-2">
-              <Button
-                variant="primary"
-                className="patient-btns"
-                onClick={() => setMedNotesBtn(!MedNotesBtn)}
-              >
-                Medical Notes
-              </Button>
-              {MedNotesBtn && <MedicalNotes pId={data?.specificPatient?.id} />}
-            </Col>
-            <Col className="list border d-grid gap-2">
-              <Button
-                variant="primary"
-                className="patient-btns"
-                onClick={() => setAppointmentBtn(!AppointmentBtn)}
-              >
-                Appointments
-              </Button>
-              {AppointmentBtn && <SpecificAppointment pId={data?.specificPatient?.id} /> }
-            </Col>
-          </div>
+          </Row>
+
+          <Col>
+            <PatientInformation pId={data?.specificPatient?.id} />
+          </Col>
+          <Col className="list border d-grid gap-2">
+            <Button
+              variant="primary"
+              className="patient-btns"
+              onClick={() => setPrescBtn(!PrescriptionBtn)}
+            >
+              Prescriptions
+            </Button>
+            {PrescriptionBtn && <Prescription pID={data?.specificPatient?.id} />}
+          </Col>
+          <Col className="list border d-grid gap-2">
+            <Button variant="primary" className="patient-btns">
+              Medical History
+            </Button>
+          </Col>
+          <Col className="list border d-grid gap-2">
+            <Button variant="primary" className="patient-btns" onClick={() => setAccBtn(!AccountBtn)}>
+              Accounts
+            </Button>
+          </Col>
+          <Row>
+            {AccountBtn && <PatientAccount pID={data?.specificPatient?.id} />}
+          </Row>
+          <Col className="list border d-grid gap-2">
+            <Button
+              variant="primary"
+              className="patient-btns"
+              onClick={() => setMedNotesBtn(!MedNotesBtn)}
+            >
+              Medical Notes
+            </Button>
+            {MedNotesBtn && <MedicalNotes pId={data?.specificPatient?.id} />}
+          </Col>
+          <Col className="list border d-grid gap-2">
+            <Button
+              variant="primary"
+              className="patient-btns"
+              onClick={() => setAppointmentBtn(!AppointmentBtn)}
+            >
+              Appointments
+            </Button>
+            {AppointmentBtn && <SpecificAppointment pId={data?.specificPatient?.id} />}
+          </Col>
         </Col>
       </Row>
       <Footer />

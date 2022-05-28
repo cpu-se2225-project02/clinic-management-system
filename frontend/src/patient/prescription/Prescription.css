@@ -1,0 +1,19 @@
+.medicine {
+    font-weight: bold;
+    
+}.prescriptions{
+    padding-left: 6px;
+}
+
+.editAndDltBtn {
+    transition-duration: 0.4s;
+    float: left;
+    border-color: transparent;
+    border-radius: 4px;;
+    background-color: white;
+}
+
+.editAndDltBtn:hover {
+    background-color: #f9ebbe;
+    color: #051329;
+}
