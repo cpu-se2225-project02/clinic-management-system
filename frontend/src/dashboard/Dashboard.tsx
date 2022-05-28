@@ -25,7 +25,7 @@ const today = () => {
   const date = new Date();
   return (
     <div>
-      {date.toLocaleDateString()}
+      {date.toDateString()}
     </div>
   );
 };
@@ -171,12 +171,14 @@ function Dashboard() {
                 </Card>
               </Col>
             </Row>
-            <Row className="mt-5">
+            <Row className="mt-5 mb-5">
               <Col xs={12}>
                 <Table striped bordered hover size="sm" className="tb">
                   <thead className="tb-head">
                     <tr>
                       <th>Appointment Title</th>
+                      <th>Patient Name</th>
+                      <th>Doctor-in-Charge</th>
                       <th>Start</th>
                       <th>End</th>
                     </tr>
@@ -184,8 +186,22 @@ function Dashboard() {
                   {allAppointments.data?.appointments?.map((appointment) => (
                     <tbody>
                       <td>{appointment?.name}</td>
-                      <td>{appointment?.dt_start}</td>
-                      <td>{ appointment?.dt_end }</td>
+                      <td>
+                        {appointment?.patient?.f_name}
+                        {' '}
+                        {appointment?.patient?.l_name }
+                      </td>
+                      <td>{ appointment?.doctor?.doc_name }</td>
+                      <td>
+                        {new Date(appointment?.dt_start as string).toDateString()}
+                        {' '}
+                        { new Date(appointment?.dt_start as string).toLocaleTimeString() }
+                      </td>
+                      <td>
+                        {new Date(appointment?.dt_end as string).toDateString()}
+                        {' '}
+                        { new Date(appointment?.dt_end as string).toLocaleTimeString() }
+                      </td>
                     </tbody>
                   ))}
                 </Table>

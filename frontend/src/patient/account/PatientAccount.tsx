@@ -1,13 +1,17 @@
-import React from 'react';
+/* eslint-disable no-unsafe-optional-chaining */
+import React, { useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { useQuery } from 'urql';
+import { GoDiffAdded } from 'react-icons/go';
 import { GetPatientAccountDocument } from '../../queries.generated';
+import AddPaymentForm from './AddPaymentForm';
 
 interface PatientId {
     pID: number | undefined
 }
 
 function PatientAccount({ pID }: PatientId) {
+  const [addPayment, setAddPayment] = useState(false);
   const [patientAccount] = useQuery({
     query: GetPatientAccountDocument,
     variables: {
@@ -28,6 +32,14 @@ function PatientAccount({ pID }: PatientId) {
 
   return (
     <div>
+      <GoDiffAdded size={30} onClick={() => { setAddPayment(true); }} />
+      {addPayment && (
+      <AddPaymentForm
+        patId={pID}
+        payForm={addPayment}
+        addPaymentBtn={setAddPayment}
+      />
+      )}
       {data?.account?.map((acc) => (
         <div>
           <div>
@@ -43,11 +55,11 @@ function PatientAccount({ pID }: PatientId) {
             {' '}
             Ammount Paid:
             {' ₱'}
-            {acc?.ammnt_payed}
+            {acc?.ammnt_paid}
             {' '}
             Change:
             {' ₱'}
-            {acc!.ammnt_payed - acc!.ammnt_cost}
+            {/* {acc!.ammnt_paid - acc!.ammnt_cost} */}
           </div>
           <div>
             <hr />

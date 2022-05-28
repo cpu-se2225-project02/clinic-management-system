@@ -10,6 +10,7 @@ input AddPrescriptionInput {
 
 type Appointment {
   doc_id: Int!
+  doctor: Doctor
   dt_end: String!
   dt_start: String!
   id: Int!
@@ -22,6 +23,20 @@ input AppointmentInput {
   dt_end: String!
   dt_start: String!
   name: String!
+  patient_id: Int!
+}
+
+type Bill {
+  ammnt_cost: Float!
+  ammnt_paid: Float
+  id: Int!
+  patient: Patient
+  patient_id: Int!
+  paymnt_dt: String
+}
+
+input BillInput {
+  ammnt_cost: Float!
   patient_id: Int!
 }
 
@@ -42,6 +57,7 @@ input EditPrescriptionInput {
 
 input MedNotesInput {
   date_noted: String!
+  doc_id: Int!
   med_notes: String!
   patient_id: Int!
   title: String!
@@ -49,6 +65,8 @@ input MedNotesInput {
 
 type MedicalNotes {
   date_noted: String!
+  doc_id: Int!
+  doctor: Doctor
   id: Int!
   med_notes: String!
   patient: Patient
@@ -57,10 +75,11 @@ type MedicalNotes {
 
 type Mutation {
   addAppointment(newAppointment: AppointmentInput!): Appointment
+  addBill(newBill: BillInput!): Bill
   addDoctor(newDoctor: DoctorInput!): Doctor
   addMedNotes(newMedNotes: MedNotesInput!): MedicalNotes
   addPatient(newPatient: PatientInput!): Patient
-  addPayment(newPayment: PaymentInput!): Payment
+  addPayment(newPayment: PaymentInput!): Bill
   addPrescription(newPrescription: AddPrescriptionInput!): Prescription
   deleteAppointment(appID: Int!): Appointment
   deletePatient(patientId: Int!): Patient
@@ -98,19 +117,11 @@ input PatientInput {
   suffix: String
 }
 
-type Payment {
-  ammnt_cost: Float!
-  ammnt_payed: Float!
-  id: Int!
-  patient: Patient
-  paymnt_dt: String!
-}
-
 input PaymentInput {
   ammnt_cost: Float!
-  ammnt_payed: Float!
+  ammnt_paid: Float
   patient_id: Int!
-  paymnt_dt: String!
+  paymnt_dt: String
 }
 
 type Prescription {
@@ -122,13 +133,14 @@ type Prescription {
 }
 
 type Query {
-  account(patientId: Int!): [Payment]
+  account(patientId: Int!): [Bill]
   allDoctors: [Doctor]
-  allPayments: [Payment]
+  allPayments: [Bill]
   appointments: [Appointment]
   helloWorld: String
   hi: String
   high: String
+  invoice(patientId: Int!): [Bill]
   patientMedNotes(patient_id: Int!): [MedicalNotes]
   patientPrescriptions(patientId: Int!): [Prescription]
   patients(condition: String): [Patient]

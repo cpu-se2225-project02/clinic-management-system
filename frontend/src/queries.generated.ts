@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 import * as Types from './generated/graphql';
 
@@ -56,8 +57,11 @@ export type GetAllAppointmentsQuery = (
   { __typename?: 'Query' }
   & { appointments?: Types.Maybe<Array<Types.Maybe<(
     { __typename?: 'Appointment' }
-    & Pick<Types.Appointment, 'dt_start' | 'dt_end' | 'name' | 'doc_id' | 'id'>
-    & { patient?: Types.Maybe<(
+    & Pick<Types.Appointment, 'dt_start' | 'dt_end' | 'name' | 'id'>
+    & { doctor?: Types.Maybe<(
+      { __typename?: 'Doctor' }
+      & Pick<Types.Doctor, 'doc_name'>
+    )>, patient?: Types.Maybe<(
       { __typename?: 'Patient' }
       & Pick<Types.Patient, 'f_name' | 'l_name'>
     )> }
@@ -71,8 +75,8 @@ export type GetPatientAccountQueryVariables = Types.Exact<{
 export type GetPatientAccountQuery = (
   { __typename?: 'Query' }
   & { account?: Types.Maybe<Array<Types.Maybe<(
-    { __typename?: 'Payment' }
-    & Pick<Types.Payment, 'id' | 'paymnt_dt' | 'ammnt_cost' | 'ammnt_payed'>
+    { __typename?: 'Bill' }
+    & Pick<Types.Bill, 'id' | 'paymnt_dt' | 'ammnt_cost' | 'ammnt_paid'>
   )>>> }
 );
 
@@ -83,8 +87,8 @@ export type AddPaymentMutationVariables = Types.Exact<{
 export type AddPaymentMutation = (
   { __typename?: 'Mutation' }
   & { addPayment?: Types.Maybe<(
-    { __typename?: 'Payment' }
-    & Pick<Types.Payment, 'id' | 'paymnt_dt' | 'ammnt_cost' | 'ammnt_payed'>
+    { __typename?: 'Bill' }
+    & Pick<Types.Bill, 'id' | 'paymnt_dt' | 'ammnt_cost' | 'ammnt_paid'>
     & { patient?: Types.Maybe<(
       { __typename?: 'Patient' }
       & Pick<Types.Patient, 'id' | 'f_name' | 'l_name'>
@@ -160,6 +164,10 @@ export type DisplayMedNotesQuery = (
   & { patientMedNotes?: Types.Maybe<Array<Types.Maybe<(
     { __typename?: 'MedicalNotes' }
     & Pick<Types.MedicalNotes, 'date_noted' | 'id' | 'title' | 'med_notes'>
+    & { doctor?: Types.Maybe<(
+      { __typename?: 'Doctor' }
+      & Pick<Types.Doctor, 'doc_name'>
+    )> }
   )>>> }
 );
 
@@ -171,7 +179,7 @@ export type AddAMedNoteMutation = (
   { __typename?: 'Mutation' }
   & { addMedNotes?: Types.Maybe<(
     { __typename?: 'MedicalNotes' }
-    & Pick<Types.MedicalNotes, 'med_notes' | 'title'>
+    & Pick<Types.MedicalNotes, 'med_notes' | 'title' | 'doc_id'>
   )> }
 );
 
@@ -262,6 +270,44 @@ export type AllDoctorsQuery = (
   )>>> }
 );
 
+export type AllPaymentsQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
+export type AllPaymentsQuery = (
+  { __typename?: 'Query' }
+  & { allPayments?: Types.Maybe<Array<Types.Maybe<(
+    { __typename?: 'Bill' }
+    & Pick<Types.Bill, 'ammnt_paid'>
+  )>>> }
+);
+
+export type AddBillMutationVariables = Types.Exact<{
+  bill: Types.BillInput;
+}>;
+
+export type AddBillMutation = (
+  { __typename?: 'Mutation' }
+  & { addBill?: Types.Maybe<(
+    { __typename?: 'Bill' }
+    & Pick<Types.Bill, 'ammnt_cost' | 'patient_id'>
+  )> }
+);
+
+export type InvoiceQueryVariables = Types.Exact<{
+  pID: Types.Scalars['Int'];
+}>;
+
+export type InvoiceQuery = (
+  { __typename?: 'Query' }
+  & { invoice?: Types.Maybe<Array<Types.Maybe<(
+    { __typename?: 'Bill' }
+    & Pick<Types.Bill, 'ammnt_cost'>
+    & { patient?: Types.Maybe<(
+      { __typename?: 'Patient' }
+      & Pick<Types.Patient, 'l_name' | 'f_name'>
+    )> }
+  )>>> }
+);
+
 export const AllPatientsDocument = {
   kind: 'Document',
   definitions: [{
@@ -325,7 +371,7 @@ export const EditAPatientDocument = {
 export const GetAllAppointmentsDocument = {
   kind: 'Document',
   definitions: [{
-    kind: 'OperationDefinition', operation: 'query', name: { kind: 'Name', value: 'getAllAppointments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'appointments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'dt_start' } }, { kind: 'Field', name: { kind: 'Name', value: 'dt_end' } }, { kind: 'Field', name: { kind: 'Name', value: 'name' } }, { kind: 'Field', name: { kind: 'Name', value: 'doc_id' } }, { kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }] } }] } }] },
+    kind: 'OperationDefinition', operation: 'query', name: { kind: 'Name', value: 'getAllAppointments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'appointments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'dt_start' } }, { kind: 'Field', name: { kind: 'Name', value: 'dt_end' } }, { kind: 'Field', name: { kind: 'Name', value: 'name' } }, { kind: 'Field', name: { kind: 'Name', value: 'doctor' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'doc_name' } }] } }, { kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }] } }] } }] },
   }],
 } as unknown as DocumentNode<GetAllAppointmentsQuery, GetAllAppointmentsQueryVariables>;
 export const GetPatientAccountDocument = {
@@ -338,7 +384,7 @@ export const GetPatientAccountDocument = {
     selectionSet: {
       kind: 'SelectionSet',
       selections: [{
-        kind: 'Field', name: { kind: 'Name', value: 'account' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'patientId' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'patientId' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'paymnt_dt' } }, { kind: 'Field', name: { kind: 'Name', value: 'ammnt_cost' } }, { kind: 'Field', name: { kind: 'Name', value: 'ammnt_payed' } }] },
+        kind: 'Field', name: { kind: 'Name', value: 'account' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'patientId' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'patientId' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'paymnt_dt' } }, { kind: 'Field', name: { kind: 'Name', value: 'ammnt_cost' } }, { kind: 'Field', name: { kind: 'Name', value: 'ammnt_paid' } }] },
       }],
     },
   }],
@@ -353,7 +399,7 @@ export const AddPaymentDocument = {
     selectionSet: {
       kind: 'SelectionSet',
       selections: [{
-        kind: 'Field', name: { kind: 'Name', value: 'addPayment' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'newPayment' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'newPayment' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'paymnt_dt' } }, { kind: 'Field', name: { kind: 'Name', value: 'ammnt_cost' } }, { kind: 'Field', name: { kind: 'Name', value: 'ammnt_payed' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }] } }] },
+        kind: 'Field', name: { kind: 'Name', value: 'addPayment' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'newPayment' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'newPayment' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'paymnt_dt' } }, { kind: 'Field', name: { kind: 'Name', value: 'ammnt_cost' } }, { kind: 'Field', name: { kind: 'Name', value: 'ammnt_paid' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }] } }] },
       }],
     },
   }],
@@ -434,7 +480,7 @@ export const DisplayMedNotesDocument = {
     selectionSet: {
       kind: 'SelectionSet',
       selections: [{
-        kind: 'Field', name: { kind: 'Name', value: 'patientMedNotes' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'patient_id' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'pID' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'date_noted' } }, { kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'title' } }, { kind: 'Field', name: { kind: 'Name', value: 'med_notes' } }] },
+        kind: 'Field', name: { kind: 'Name', value: 'patientMedNotes' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'patient_id' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'pID' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'date_noted' } }, { kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'title' } }, { kind: 'Field', name: { kind: 'Name', value: 'med_notes' } }, { kind: 'Field', name: { kind: 'Name', value: 'doctor' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'doc_name' } }] } }] },
       }],
     },
   }],
@@ -449,7 +495,7 @@ export const AddAMedNoteDocument = {
     selectionSet: {
       kind: 'SelectionSet',
       selections: [{
-        kind: 'Field', name: { kind: 'Name', value: 'addMedNotes' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'newMedNotes' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'newMedNote' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'med_notes' } }, { kind: 'Field', name: { kind: 'Name', value: 'title' } }] },
+        kind: 'Field', name: { kind: 'Name', value: 'addMedNotes' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'newMedNotes' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'newMedNote' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'med_notes' } }, { kind: 'Field', name: { kind: 'Name', value: 'title' } }, { kind: 'Field', name: { kind: 'Name', value: 'doc_id' } }] },
       }],
     },
   }],
@@ -550,3 +596,39 @@ export const AllDoctorsDocument = {
     kind: 'OperationDefinition', operation: 'query', name: { kind: 'Name', value: 'AllDoctors' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'allDoctors' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'doc_name' } }] } }] },
   }],
 } as unknown as DocumentNode<AllDoctorsQuery, AllDoctorsQueryVariables>;
+export const AllPaymentsDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition', operation: 'query', name: { kind: 'Name', value: 'AllPayments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'allPayments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'ammnt_paid' } }] } }] },
+  }],
+} as unknown as DocumentNode<AllPaymentsQuery, AllPaymentsQueryVariables>;
+export const AddBillDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'mutation',
+    name: { kind: 'Name', value: 'addBill' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'bill' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'BillInput' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'addBill' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'newBill' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'bill' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'ammnt_cost' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient_id' } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<AddBillMutation, AddBillMutationVariables>;
+export const InvoiceDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'query',
+    name: { kind: 'Name', value: 'Invoice' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'pID' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'invoice' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'patientId' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'pID' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'ammnt_cost' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'l_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'f_name' } }] } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<InvoiceQuery, InvoiceQueryVariables>;

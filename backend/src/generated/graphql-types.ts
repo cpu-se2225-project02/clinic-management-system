@@ -26,6 +26,10 @@ export interface NexusGenInputs {
     name: string; // String!
     patient_id: number; // Int!
   }
+  BillInput: { // input type
+    ammnt_cost: number; // Float!
+    patient_id: number; // Int!
+  }
   DoctorInput: { // input type
     doc_name: string; // String!
   }
@@ -35,6 +39,7 @@ export interface NexusGenInputs {
   }
   MedNotesInput: { // input type
     date_noted: string; // String!
+    doc_id: number; // Int!
     med_notes: string; // String!
     patient_id: number; // Int!
     title: string; // String!
@@ -53,9 +58,9 @@ export interface NexusGenInputs {
   }
   PaymentInput: { // input type
     ammnt_cost: number; // Float!
-    ammnt_payed: number; // Float!
+    ammnt_paid?: number | null; // Float
     patient_id: number; // Int!
-    paymnt_dt: string; // String!
+    paymnt_dt?: string | null; // String
   }
 }
 
@@ -78,12 +83,20 @@ export interface NexusGenObjects {
     id: number; // Int!
     name: string; // String!
   }
+  Bill: { // root type
+    ammnt_cost: number; // Float!
+    ammnt_paid?: number | null; // Float
+    id: number; // Int!
+    patient_id: number; // Int!
+    paymnt_dt?: string | null; // String
+  }
   Doctor: { // root type
     doc_name: string; // String!
     id: number; // Int!
   }
   MedicalNotes: { // root type
     date_noted: string; // String!
+    doc_id: number; // Int!
     id: number; // Int!
     med_notes: string; // String!
     title: string; // String!
@@ -101,12 +114,6 @@ export interface NexusGenObjects {
     m_name?: string | null; // String
     sex: string; // String!
     suffix?: string | null; // String
-  }
-  Payment: { // root type
-    ammnt_cost: number; // Float!
-    ammnt_payed: number; // Float!
-    id: number; // Int!
-    paymnt_dt: string; // String!
   }
   Prescription: { // root type
     id: number; // Int!
@@ -130,11 +137,20 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 export interface NexusGenFieldTypes {
   Appointment: { // field return type
     doc_id: number; // Int!
+    doctor: NexusGenRootTypes['Doctor'] | null; // Doctor
     dt_end: string; // String!
     dt_start: string; // String!
     id: number; // Int!
     name: string; // String!
     patient: NexusGenRootTypes['Patient'] | null; // Patient
+  }
+  Bill: { // field return type
+    ammnt_cost: number; // Float!
+    ammnt_paid: number | null; // Float
+    id: number; // Int!
+    patient: NexusGenRootTypes['Patient'] | null; // Patient
+    patient_id: number; // Int!
+    paymnt_dt: string | null; // String
   }
   Doctor: { // field return type
     appointments: Array<NexusGenRootTypes['Appointment'] | null> | null; // [Appointment]
@@ -143,6 +159,8 @@ export interface NexusGenFieldTypes {
   }
   MedicalNotes: { // field return type
     date_noted: string; // String!
+    doc_id: number; // Int!
+    doctor: NexusGenRootTypes['Doctor'] | null; // Doctor
     id: number; // Int!
     med_notes: string; // String!
     patient: NexusGenRootTypes['Patient'] | null; // Patient
@@ -150,10 +168,11 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     addAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
+    addBill: NexusGenRootTypes['Bill'] | null; // Bill
     addDoctor: NexusGenRootTypes['Doctor'] | null; // Doctor
     addMedNotes: NexusGenRootTypes['MedicalNotes'] | null; // MedicalNotes
     addPatient: NexusGenRootTypes['Patient'] | null; // Patient
-    addPayment: NexusGenRootTypes['Payment'] | null; // Payment
+    addPayment: NexusGenRootTypes['Bill'] | null; // Bill
     addPrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
     deleteAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
     deletePatient: NexusGenRootTypes['Patient'] | null; // Patient
@@ -176,13 +195,6 @@ export interface NexusGenFieldTypes {
     sex: string; // String!
     suffix: string | null; // String
   }
-  Payment: { // field return type
-    ammnt_cost: number; // Float!
-    ammnt_payed: number; // Float!
-    id: number; // Int!
-    patient: NexusGenRootTypes['Patient'] | null; // Patient
-    paymnt_dt: string; // String!
-  }
   Prescription: { // field return type
     id: number; // Int!
     patient: NexusGenRootTypes['Patient'] | null; // Patient
@@ -191,13 +203,14 @@ export interface NexusGenFieldTypes {
     pres_name: string; // String!
   }
   Query: { // field return type
-    account: Array<NexusGenRootTypes['Payment'] | null> | null; // [Payment]
+    account: Array<NexusGenRootTypes['Bill'] | null> | null; // [Bill]
     allDoctors: Array<NexusGenRootTypes['Doctor'] | null> | null; // [Doctor]
-    allPayments: Array<NexusGenRootTypes['Payment'] | null> | null; // [Payment]
+    allPayments: Array<NexusGenRootTypes['Bill'] | null> | null; // [Bill]
     appointments: Array<NexusGenRootTypes['Appointment'] | null> | null; // [Appointment]
     helloWorld: string | null; // String
     hi: string | null; // String
     high: string | null; // String
+    invoice: Array<NexusGenRootTypes['Bill'] | null> | null; // [Bill]
     patientMedNotes: Array<NexusGenRootTypes['MedicalNotes'] | null> | null; // [MedicalNotes]
     patientPrescriptions: Array<NexusGenRootTypes['Prescription'] | null> | null; // [Prescription]
     patients: Array<NexusGenRootTypes['Patient'] | null> | null; // [Patient]
@@ -210,11 +223,20 @@ export interface NexusGenFieldTypes {
 export interface NexusGenFieldTypeNames {
   Appointment: { // field return type name
     doc_id: 'Int'
+    doctor: 'Doctor'
     dt_end: 'String'
     dt_start: 'String'
     id: 'Int'
     name: 'String'
     patient: 'Patient'
+  }
+  Bill: { // field return type name
+    ammnt_cost: 'Float'
+    ammnt_paid: 'Float'
+    id: 'Int'
+    patient: 'Patient'
+    patient_id: 'Int'
+    paymnt_dt: 'String'
   }
   Doctor: { // field return type name
     appointments: 'Appointment'
@@ -223,6 +245,8 @@ export interface NexusGenFieldTypeNames {
   }
   MedicalNotes: { // field return type name
     date_noted: 'String'
+    doc_id: 'Int'
+    doctor: 'Doctor'
     id: 'Int'
     med_notes: 'String'
     patient: 'Patient'
@@ -230,10 +254,11 @@ export interface NexusGenFieldTypeNames {
   }
   Mutation: { // field return type name
     addAppointment: 'Appointment'
+    addBill: 'Bill'
     addDoctor: 'Doctor'
     addMedNotes: 'MedicalNotes'
     addPatient: 'Patient'
-    addPayment: 'Payment'
+    addPayment: 'Bill'
     addPrescription: 'Prescription'
     deleteAppointment: 'Appointment'
     deletePatient: 'Patient'
@@ -256,13 +281,6 @@ export interface NexusGenFieldTypeNames {
     sex: 'String'
     suffix: 'String'
   }
-  Payment: { // field return type name
-    ammnt_cost: 'Float'
-    ammnt_payed: 'Float'
-    id: 'Int'
-    patient: 'Patient'
-    paymnt_dt: 'String'
-  }
   Prescription: { // field return type name
     id: 'Int'
     patient: 'Patient'
@@ -271,13 +289,14 @@ export interface NexusGenFieldTypeNames {
     pres_name: 'String'
   }
   Query: { // field return type name
-    account: 'Payment'
+    account: 'Bill'
     allDoctors: 'Doctor'
-    allPayments: 'Payment'
+    allPayments: 'Bill'
     appointments: 'Appointment'
     helloWorld: 'String'
     hi: 'String'
     high: 'String'
+    invoice: 'Bill'
     patientMedNotes: 'MedicalNotes'
     patientPrescriptions: 'Prescription'
     patients: 'Patient'
@@ -291,6 +310,9 @@ export interface NexusGenArgTypes {
   Mutation: {
     addAppointment: { // args
       newAppointment: NexusGenInputs['AppointmentInput']; // AppointmentInput!
+    }
+    addBill: { // args
+      newBill: NexusGenInputs['BillInput']; // BillInput!
     }
     addDoctor: { // args
       newDoctor: NexusGenInputs['DoctorInput']; // DoctorInput!
@@ -331,6 +353,9 @@ export interface NexusGenArgTypes {
   }
   Query: {
     account: { // args
+      patientId: number; // Int!
+    }
+    invoice: { // args
       patientId: number; // Int!
     }
     patientMedNotes: { // args

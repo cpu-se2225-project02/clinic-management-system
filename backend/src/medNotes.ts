@@ -7,6 +7,7 @@ import {
   inputObjectType, intArg, list, mutationField, nonNull, objectType, queryField,
 } from 'nexus';
 import { Patient } from './patient';
+import { Doctor } from './doctor';
 
 const db = new PrismaClient();
 
@@ -17,6 +18,13 @@ export const MedicalNotes = objectType({
     t.field(MedNotesType.title);
     t.field(MedNotesType.date_noted);
     t.field(MedNotesType.med_notes);
+    t.field(MedNotesType.doc_id);
+    t.field('doctor', {
+      type: Doctor,
+      resolve(medicalNotes) {
+        return db.doctor.findFirst({ where: { id: medicalNotes.doc_id } });
+      },
+    });
     t.field('patient', {
       type: Patient,
       resolve(medicalNotes) {
@@ -33,6 +41,7 @@ export const MedNotesInput = inputObjectType({
     t.field(MedNotesType.date_noted);
     t.field(MedNotesType.med_notes);
     t.field(MedNotesType.patient_id);
+    t.field(MedNotesType.doc_id);
   },
 });
 

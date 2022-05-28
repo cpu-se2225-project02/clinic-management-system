@@ -1,14 +1,15 @@
 .ft-des {
-  background-color: #033076;
   color: white;
   position: fixed;
   bottom: 0;
   width: 100% !important;
   font-size: xx-small;
   height: 30px;
+  margin-top: 5px;
 }
 
 .copyright {
   text-align: center !important;
-  margin-top: 10px;
+  padding-top: 5px;
+  background-color: #033076;
 }
