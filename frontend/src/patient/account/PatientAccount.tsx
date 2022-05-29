@@ -2,12 +2,14 @@
 import React, { useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { useQuery } from 'urql';
-import { GoDiffAdded } from 'react-icons/go';
+import { MdAddCircleOutline } from 'react-icons/md';
+import { BiEdit } from 'react-icons/bi';
 import { GetPatientAccountDocument } from '../../queries.generated';
 import AddPaymentForm from './AddPaymentForm';
+import './PatientAccount.css';
 
 interface PatientId {
-    pID: number | undefined
+  pID: number | undefined
 }
 
 function PatientAccount({ pID }: PatientId) {
@@ -32,42 +34,51 @@ function PatientAccount({ pID }: PatientId) {
 
   return (
     <div>
-      <GoDiffAdded size={30} onClick={() => { setAddPayment(true); }} />
-      {addPayment && (
-      <AddPaymentForm
-        patId={pID}
-        payForm={addPayment}
-        addPaymentBtn={setAddPayment}
-      />
-      )}
       {data?.account?.map((acc) => (
         <div>
-          <div>
-            {Number(data.account?.indexOf(acc)) + 1}
-            {'. '}
-            Date:
-            {' '}
-            {acc?.paymnt_dt}
-            {' '}
-            Ammount Cost:
-            {' ₱'}
-            {acc?.ammnt_cost}
-            {' '}
-            Ammount Paid:
-            {' ₱'}
-            {acc?.ammnt_paid}
-            {' '}
-            Change:
-            {' ₱'}
-            {/* {acc!.ammnt_paid - acc!.ammnt_cost} */}
+          <div className="card">
+            <div className="card-header">
+              {Number(data.account?.indexOf(acc)) + 1}
+            </div>
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item">
+                Date:
+                {' '}
+                {acc?.paymnt_dt}
+              </li>
+              <li className="list-group-item">
+                Ammount Cost:
+                {' ₱'}
+                {acc?.ammnt_cost}
+              </li>
+              <li className="list-group-item">
+                Ammount Paid:
+                {' ₱'}
+                {acc?.ammnt_paid}
+              </li>
+            </ul>
           </div>
-          <div>
-            <hr />
-          </div>
+          <hr />
         </div>
       ))}
+      <div className="editAndAdd">
+        <div className="btn-group" role="group">
+          <button type="button" className="editAndAdd">
+            <BiEdit size={30} />
+          </button>
+          <button type="button" className="editAndAdd" onClick={() => { setAddPayment(true); }}>
+            <MdAddCircleOutline size={30} />
+          </button>
+          {addPayment && (
+            <AddPaymentForm
+              patId={pID}
+              payForm={addPayment}
+              addPaymentBtn={setAddPayment}
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 }
-
 export default PatientAccount;

@@ -63,7 +63,7 @@ export default function PatientInformation({ pId }: PatientId) {
             <br />
             Birthdate:
             {' '}
-            {new Date(data?.specificPatient?.birthdate as string).toLocaleDateString()}
+            {data?.specificPatient?.birthdate}
             <br />
             Address:
             {' '}
