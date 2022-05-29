@@ -16,21 +16,22 @@ generator nexus {
 
 //from here: we define models || entities inside our db
 model Patient {
-  id            Int            @id @default(autoincrement())
-  f_name        String
-  l_name        String
-  m_name        String?
-  suffix        String?
-  sex           String
-  age           Int
-  address       String
-  birthdate     String
-  constactNo    String
-  email         String?
-  medicalNotes  MedicalNotes[]
-  appointments  Appointment[]
-  payments      Bill[]
-  prescriptions Prescription[]
+  id             Int              @id @default(autoincrement())
+  f_name         String
+  l_name         String
+  m_name         String?
+  suffix         String?
+  sex            String
+  age            Int
+  address        String
+  birthdate      String
+  constactNo     String
+  email          String?
+  medicalNotes   MedicalNotes[]
+  appointments   Appointment[]
+  payments       Bill[]
+  prescriptions  Prescription[]
+  MedicalHistory MedicalHistory[]
 }
 
 model Appointment {
@@ -75,6 +76,15 @@ model MedicalNotes {
   doc_id     Int
   doctor     Doctor  @relation(fields: [doc_id], references: [id])
 
+}
+
+model MedicalHistory {
+  id             Int     @id @default(autoincrement())
+  diagnosis      String
+  treatment_plan String
+  description    String
+  patient_id     Int
+  patient        Patient @relation(fields: [patient_id], references: [id])
 }
 
 model Prescription {
