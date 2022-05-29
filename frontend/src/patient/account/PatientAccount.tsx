@@ -37,47 +37,35 @@ function PatientAccount({ pID }: PatientId) {
       <div className="container">
         <div className="row">
           <div className="col">
-            <div className="col">
-              <div className="right">
-                <div className="btn-group" role="group">
-                  <button type="button" className="editAndAdd">
-                    <BiEdit size={30} />
-                  </button>
-                  <button type="button" className="editAndAdd" onClick={() => { setAddPayment(true); }}>
-                    <MdAddCircleOutline size={30} />
-                  </button>
-                  {addPayment && (
-                    <AddPaymentForm
-                      patId={pID}
-                      payForm={addPayment}
-                      addPaymentBtn={setAddPayment}
-                    />
-                  )}
+            {data?.account?.map((acc) => (
+              <div>
+                <div className="card">
+                  <div className="card-header">
+                    {Number(data.account?.indexOf(acc)) + 1}
+                  </div>
+                  <ul className="list-group list-group-flush">
+                    <li className="list-group-item">
+                      Date:
+                      {' '}
+                      {acc?.paymnt_dt}
+                    </li>
+                    <li className="list-group-item">
+                      Ammount Cost:
+                      {' ₱'}
+                      {acc?.ammnt_cost}
+                    </li>
+                    <li className="list-group-item">
+                      Ammount Paid:
+                      {' ₱'}
+                      {acc?.ammnt_paid}
+                    </li>
+                  </ul>
+
                 </div>
               </div>
-            </div>
+            ))}
           </div>
-          <div className="col">
-            <div className="col">
-              <div className="right">
-                <div className="btn-group" role="group">
-                  <button type="button" className="editAndAdd">
-                    <BiEdit size={30} />
-                  </button>
-                  <button type="button" className="editAndAdd" onClick={() => { setAddPayment(true); }}>
-                    <MdAddCircleOutline size={30} />
-                  </button>
-                  {addPayment && (
-                    <AddPaymentForm
-                      patId={pID}
-                      payForm={addPayment}
-                      addPaymentBtn={setAddPayment}
-                    />
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
+
           <div className="col">
             <div className="col">
               <div className="right">
@@ -102,7 +90,7 @@ function PatientAccount({ pID }: PatientId) {
         </div>
       </div>
 
-      {data?.account?.map((acc) => (
+      {/* {data?.account?.map((acc) => (
         <div>
           <div className="card">
             <div className="card-header">
@@ -128,7 +116,7 @@ function PatientAccount({ pID }: PatientId) {
             <hr />
           </div>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }

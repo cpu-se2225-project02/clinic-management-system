@@ -32,8 +32,9 @@
 }
 .sidebar{
   margin: "default";
-  padding-top:30%;
-  
+  padding-top:4%;
+  position: fixed;
+  width: 13rem;
 }
 
 
