@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable max-len */
 /* eslint-disable consistent-return */
 /* eslint-disable radix */
@@ -22,13 +23,17 @@ import SpecificAppointment from './appointment/SpecificAppointment';
 import Footer from '../common/Footer';
 import Referral from './referral/Referral';
 
-export default function PatientRecord() {
+interface OpProps {
+  accountToggle?: boolean
+}
+
+export default function PatientRecord({ accountToggle = false } : OpProps) {
   const params = useParams() as any;
   const patiendID = parseInt(params.id);
   const [PrescriptionBtn, setPrescBtn] = useState(false);
   const [AccountBtn, setAccBtn] = useState(false);
   const [MedNotesBtn, setMedNotesBtn] = useState(false);
-  const [AppointmentBtn, setAppointmentBtn] = useState(false);
+  const [AppointmentBtn, setAppointmentBtn] = useState(accountToggle);
   const [ReferralBtn, setReferralBtn] = useState(false);
   const [allPatients] = useQuery({
     query: GetPatientDocument,
