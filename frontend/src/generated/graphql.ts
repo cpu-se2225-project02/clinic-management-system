@@ -68,6 +68,11 @@ export interface EditPrescriptionInput {
   readonly pres_name: Scalars['String'];
 }
 
+export interface EditReferralInput {
+  readonly doctor_id: Scalars['Int'];
+  readonly hosp_name: Scalars['String'];
+}
+
 export interface MedNotesInput {
   readonly date_noted: Scalars['String'];
   readonly doc_id: Scalars['Int'];
@@ -100,9 +105,11 @@ export interface Mutation {
   readonly deleteAppointment?: Maybe<Appointment>;
   readonly deletePatient?: Maybe<Patient>;
   readonly deletePrescription?: Maybe<Prescription>;
+  readonly deleteReferral?: Maybe<Referral>;
   readonly editAppointment?: Maybe<Appointment>;
   readonly editPatient?: Maybe<Patient>;
   readonly editPrescription?: Maybe<Prescription>;
+  readonly editReferral?: Maybe<Referral>;
 }
 
 
@@ -161,6 +168,11 @@ export interface MutationDeletePrescriptionArgs {
 }
 
 
+export interface MutationDeleteReferralArgs {
+  referralId: Scalars['Int'];
+}
+
+
 export interface MutationEditAppointmentArgs {
   appointmentID: Scalars['Int'];
   editedAppointment: AppointmentInput;
@@ -176,6 +188,12 @@ export interface MutationEditPatientArgs {
 export interface MutationEditPrescriptionArgs {
   editedPrescription: EditPrescriptionInput;
   prescriptionId: Scalars['Int'];
+}
+
+
+export interface MutationEditReferralArgs {
+  editedReferral: EditReferralInput;
+  referralID: Scalars['Int'];
 }
 
 export interface Patient {
@@ -235,6 +253,7 @@ export interface Query {
   readonly invoice?: Maybe<ReadonlyArray<Maybe<Bill>>>;
   readonly patientMedNotes?: Maybe<ReadonlyArray<Maybe<MedicalNotes>>>;
   readonly patientPrescriptions?: Maybe<ReadonlyArray<Maybe<Prescription>>>;
+  readonly patientReferrals?: Maybe<ReadonlyArray<Maybe<Referral>>>;
   readonly patients?: Maybe<ReadonlyArray<Maybe<Patient>>>;
   readonly prescriptions?: Maybe<ReadonlyArray<Maybe<Prescription>>>;
   readonly specificAppointment?: Maybe<ReadonlyArray<Maybe<Appointment>>>;
@@ -259,6 +278,11 @@ export interface QueryPatientMedNotesArgs {
 
 export interface QueryPatientPrescriptionsArgs {
   patientId: Scalars['Int'];
+}
+
+
+export interface QueryPatientReferralsArgs {
+  patientID: Scalars['Int'];
 }
 
 

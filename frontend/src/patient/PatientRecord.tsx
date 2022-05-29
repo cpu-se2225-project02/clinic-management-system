@@ -20,6 +20,7 @@ import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
 import SpecificAppointment from './appointment/SpecificAppointment';
 import Footer from '../common/Footer';
+import Referral from './referral/Referral';
 
 export default function PatientRecord() {
   const params = useParams() as any;
@@ -28,6 +29,7 @@ export default function PatientRecord() {
   const [AccountBtn, setAccBtn] = useState(false);
   const [MedNotesBtn, setMedNotesBtn] = useState(false);
   const [AppointmentBtn, setAppointmentBtn] = useState(false);
+  const [ReferralBtn, setReferralBtn] = useState(false);
   const [allPatients] = useQuery({
     query: GetPatientDocument,
     variables: {
@@ -47,6 +49,7 @@ export default function PatientRecord() {
         <Col xs={2} className="sidebar-box p-0">
           <Sidebars />
         </Col>
+
         <Col xs={10} className="patient-list-box p-0 mt-3 border border-2 border-dark right-side">
           <Row>
             <Col xs={12}>
@@ -54,62 +57,6 @@ export default function PatientRecord() {
                 <MdInfoOutline className="appointment-icon" />
                 Patient Record
               </h5>
-            </Col>
-            <Col>
-              <PatientInformation pId={data?.specificPatient?.id} />
-            </Col>
-            <Col className="list border d-grid gap-2">
-              <Button
-                variant="primary"
-                className="patient-btns"
-                onClick={() => setPrescBtn(!PrescriptionBtn)}
-              >
-                Prescriptions
-              </Button>
-              {PrescriptionBtn && <Prescription pID={data?.specificPatient?.id} />}
-            </Col>
-            <Col className="list border d-grid gap-2">
-              <Button
-                variant="primary"
-                className="patient-btns"
-              >
-                Referrals
-              </Button>
-            </Col>
-            <Col className="list border d-grid gap-2">
-              <Button variant="primary" className="patient-btns">
-                Medical History
-              </Button>
-            </Col>
-            <Row>
-              <Col className="list border d-grid gap-2">
-                <Button variant="primary" className="patient-btns" onClick={() => setAccBtn(!AccountBtn)}>
-                  Accounts
-                </Button>
-              </Col>
-            </Row>
-            <Row>
-              {AccountBtn && <PatientAccount pID={data?.specificPatient?.id} />}
-            </Row>
-            <Col className="list border d-grid gap-2">
-              <Button
-                variant="primary"
-                className="patient-btns"
-                onClick={() => setMedNotesBtn(!MedNotesBtn)}
-              >
-                Medical Notes
-              </Button>
-              {MedNotesBtn && <MedicalNotes pId={data?.specificPatient?.id} />}
-            </Col>
-            <Col className="list border d-grid gap-2">
-              <Button
-                variant="primary"
-                className="patient-btns"
-                onClick={() => setAppointmentBtn(!AppointmentBtn)}
-              >
-                Appointments
-              </Button>
-              {AppointmentBtn && <SpecificAppointment pId={data?.specificPatient?.id} /> }
             </Col>
           </Row>
 
@@ -125,6 +72,16 @@ export default function PatientRecord() {
               Prescriptions
             </Button>
             {PrescriptionBtn && <Prescription pID={data?.specificPatient?.id} />}
+          </Col>
+          <Col className="list border d-grid gap-2">
+            <Button
+              variant="primary"
+              className="patient-btns"
+              onClick={() => setReferralBtn(!ReferralBtn)}
+            >
+              Referrals
+            </Button>
+            {ReferralBtn && <Referral pID={data?.specificPatient?.id} />}
           </Col>
           <Col className="list border d-grid gap-2">
             <Button variant="primary" className="patient-btns">
