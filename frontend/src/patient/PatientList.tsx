@@ -58,7 +58,7 @@ export default function PatientList() {
           <Sidebars />
         </Col>
 
-        <Col xs={10} className="patient-list-box p-0 mt-3 border border-2 border-dark right-side">
+        <Col xs={10} className="patientListPage">
           <Row>
             <Col xs={12}>
               <h5 className="h5">

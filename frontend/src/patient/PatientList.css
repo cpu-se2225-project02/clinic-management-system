@@ -97,3 +97,7 @@ body {
 .res-row {
   height: 60px !important;
 }
+.patientListPage{
+  padding-top: 5% ;
+  padding-bottom: 5%;
+}
