@@ -34,6 +34,74 @@ function PatientAccount({ pID }: PatientId) {
 
   return (
     <div>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <div className="col">
+              <div className="right">
+                <div className="btn-group" role="group">
+                  <button type="button" className="editAndAdd">
+                    <BiEdit size={30} />
+                  </button>
+                  <button type="button" className="editAndAdd" onClick={() => { setAddPayment(true); }}>
+                    <MdAddCircleOutline size={30} />
+                  </button>
+                  {addPayment && (
+                    <AddPaymentForm
+                      patId={pID}
+                      payForm={addPayment}
+                      addPaymentBtn={setAddPayment}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <div className="col">
+              <div className="right">
+                <div className="btn-group" role="group">
+                  <button type="button" className="editAndAdd">
+                    <BiEdit size={30} />
+                  </button>
+                  <button type="button" className="editAndAdd" onClick={() => { setAddPayment(true); }}>
+                    <MdAddCircleOutline size={30} />
+                  </button>
+                  {addPayment && (
+                    <AddPaymentForm
+                      patId={pID}
+                      payForm={addPayment}
+                      addPaymentBtn={setAddPayment}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <div className="col">
+              <div className="right">
+                <div className="btn-group" role="group">
+                  <button type="button" className="editAndAdd">
+                    <BiEdit size={30} />
+                  </button>
+                  <button type="button" className="editAndAdd" onClick={() => { setAddPayment(true); }}>
+                    <MdAddCircleOutline size={30} />
+                  </button>
+                  {addPayment && (
+                    <AddPaymentForm
+                      patId={pID}
+                      payForm={addPayment}
+                      addPaymentBtn={setAddPayment}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {data?.account?.map((acc) => (
         <div>
           <div className="card">
@@ -57,27 +125,10 @@ function PatientAccount({ pID }: PatientId) {
                 {acc?.ammnt_paid}
               </li>
             </ul>
+            <hr />
           </div>
-          <hr />
         </div>
       ))}
-      <div className="editAndAdd">
-        <div className="btn-group" role="group">
-          <button type="button" className="editAndAdd">
-            <BiEdit size={30} />
-          </button>
-          <button type="button" className="editAndAdd" onClick={() => { setAddPayment(true); }}>
-            <MdAddCircleOutline size={30} />
-          </button>
-          {addPayment && (
-            <AddPaymentForm
-              patId={pID}
-              payForm={addPayment}
-              addPaymentBtn={setAddPayment}
-            />
-          )}
-        </div>
-      </div>
     </div>
   );
 }

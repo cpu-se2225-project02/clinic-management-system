@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import './Appointment.css';
 import { useQuery, useMutation } from 'urql';
 import { FaCalendarAlt } from 'react-icons/fa';
+// import Moment from 'react-moment';
 import {
   Container, Col, Row, Spinner,
 } from 'react-bootstrap';
@@ -145,9 +146,11 @@ function Appointment() {
                     allAppointments.data?.appointments?.map((appointment) => ({
                       event_id: appointment?.id,
                       title: appointment?.name,
+
                       start: new Date(appointment?.dt_start as string),
                       end: new Date(appointment?.dt_end as string),
                     }) as any as ProcessedEvent)
+
                   }
                   fields={[
                     {
@@ -176,11 +179,16 @@ function Appointment() {
                 // eslint-disable-next-line react/jsx-no-useless-fragment
                 <Row>
                   {data?.appointments?.map((appointment) => (
-                    <div>
+                    <div className="card">
+                      <div className="patientName">
+                        {appointment?.patient?.f_name}
+                        {' '}
+                        {appointment?.patient?.l_name}
+                      </div>
                       {appointment?.dt_start}
+                      {' '}
                       {appointment?.dt_end}
-                      {appointment?.patient?.f_name}
-                      {appointment?.patient?.l_name}
+                      {' '}
                     </div>
                   ))}
                 </Row>

@@ -31,7 +31,8 @@
   max-width: fit-content !important;
 }
 .sidebar{
-  margin: "default"
+  margin: "default";
+  padding-top:30%;
 }
 
 

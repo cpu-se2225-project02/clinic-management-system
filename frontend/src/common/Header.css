@@ -8,7 +8,10 @@
   color: white;
   display: inline-block;
 }
-
+.header{
+  position: fixed;
+  width: 100%;
+}
 
 .doctor-btn {
   background-color: #d3def0;
