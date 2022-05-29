@@ -103,10 +103,10 @@ function Appointment() {
           <Sidebars />
         </Col>
 
-        <Col xs={10} className="appointment-box p-0 mt-3  mb-5 border border-2 border-dark right-side">
+        <Col xs={10} className="appointment-box">
           <Row>
             <Col xs={12}>
-              <h5 className="h5">
+              <h5 className="appointmentBar">
                 <FaCalendarAlt className="appointment-icon" />
                 Appointments
               </h5>

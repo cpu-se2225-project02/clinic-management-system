@@ -6,6 +6,8 @@
   font-size: xx-small;
   height: 30px;
   margin-top: 5px;
+  z-index: 1;
+
 }
 
 .copyright {
