@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { FaFileInvoice } from 'react-icons/fa';
 import { useQuery } from 'urql';
 import { GrMoney } from 'react-icons/gr';
+import './FinancePage.css';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
 import AddPaymentForm from '../patient/account/AddPaymentForm';
@@ -51,7 +52,7 @@ export default function FinancePage() {
           <Sidebars />
         </Col>
 
-        <Col xs={10}>
+        <Col xs={10} className="financePage">
           <Row className="mt-3">
             <Col>
               <Card style={{

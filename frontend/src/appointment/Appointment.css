@@ -1,27 +1,33 @@
 .appointment-box {
-    display: inline-block !important;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    margin-top: 4px !important;
-  }
+  /* display: inline-block !important; */
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding-top: 5% !important;
+  padding-bottom: 5%;
+ 
+}
+.patientName{
+  font-weight: bold;
+}
 
-  .h5 {
-    background-color: #051329;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px !important;
-    padding: 10px !important;
-  }
+
+.appointmentBar {
+  background-color: #528e9c;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px !important;
+  padding: 10px !important;
+}
 
 .appointment-toggle-btn {
-   float: right;
-   margin-right: 25px;
+  float: right;
+  margin-right: 25px;
 }
 
 .appointment-icon {
-    margin-right: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .right-side {
-      box-shadow: -4px 6px 8px 5px rgba(230, 230, 230, 1);
+  box-shadow: -4px 6px 8px 5px rgba(230, 230, 230, 1);
 }

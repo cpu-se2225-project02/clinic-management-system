@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import './Appointment.css';
 import { useQuery, useMutation } from 'urql';
 import { FaCalendarAlt } from 'react-icons/fa';
+// import Moment from 'react-moment';
 import {
   Container, Col, Row, Spinner,
 } from 'react-bootstrap';
@@ -103,10 +104,10 @@ function Appointment() {
           <Sidebars />
         </Col>
 
-        <Col xs={10} className="appointment-box p-0 mt-3  mb-5 border border-2 border-dark right-side">
+        <Col xs={10} className="appointment-box">
           <Row>
             <Col xs={12}>
-              <h5 className="h5">
+              <h5 className="appointmentBar">
                 <FaCalendarAlt className="appointment-icon" />
                 Appointments
               </h5>
@@ -146,9 +147,11 @@ function Appointment() {
                     allAppointments.data?.appointments?.map((appointment) => ({
                       event_id: appointment?.id,
                       title: appointment?.name,
+
                       start: new Date(appointment?.dt_start as string),
                       end: new Date(appointment?.dt_end as string),
                     }) as any as ProcessedEvent)
+
                   }
                   fields={[
                     {
@@ -175,6 +178,7 @@ function Appointment() {
                 />
               ) : (
                 // eslint-disable-next-line react/jsx-no-useless-fragment
+
                 <Row className="m-auto">
                   <table className="table ">
                     <thead>
@@ -205,6 +209,7 @@ function Appointment() {
 
                     </tbody>
                   </table>
+
                 </Row>
               )}
             </Col>
