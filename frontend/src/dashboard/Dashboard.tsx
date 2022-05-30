@@ -60,7 +60,7 @@ function Dashboard() {
             <Sidebars />
           </Col>
 
-          <Col xs={10}>
+          <Col xs={10} className="dashboardPage">
             <Row className="mt-3 pb-2">
               <Col xs={4}>
                 <Card style={{
@@ -70,7 +70,7 @@ function Dashboard() {
                 }}
                 >
                   <Card.Header><strong>Today</strong></Card.Header>
-                  <Card.Body>{ today() }</Card.Body>
+                  <Card.Body>{today()}</Card.Body>
                 </Card>
               </Col>
               <Col xs={4}>
@@ -128,7 +128,7 @@ function Dashboard() {
                       Add a patient
                     </Button>
                   </Card.Body>
-                  { PForm && <PatientForm payForm={PForm} postButton={setPForm} /> }
+                  {PForm && <PatientForm payForm={PForm} postButton={setPForm} />}
                 </Card>
               </Col>
               <Col xs={4} className="mt-2">
@@ -189,18 +189,18 @@ function Dashboard() {
                       <td>
                         {appointment?.patient?.f_name}
                         {' '}
-                        {appointment?.patient?.l_name }
+                        {appointment?.patient?.l_name}
                       </td>
-                      <td>{ appointment?.doctor?.doc_name }</td>
+                      <td>{appointment?.doctor?.doc_name}</td>
                       <td>
                         {new Date(appointment?.dt_start as string).toDateString()}
                         {' '}
-                        { new Date(appointment?.dt_start as string).toLocaleTimeString() }
+                        {new Date(appointment?.dt_start as string).toLocaleTimeString()}
                       </td>
                       <td>
                         {new Date(appointment?.dt_end as string).toDateString()}
                         {' '}
-                        { new Date(appointment?.dt_end as string).toLocaleTimeString() }
+                        {new Date(appointment?.dt_end as string).toLocaleTimeString()}
                       </td>
                     </tbody>
                   ))}

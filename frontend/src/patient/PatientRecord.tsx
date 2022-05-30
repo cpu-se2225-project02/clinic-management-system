@@ -55,7 +55,7 @@ export default function PatientRecord({ accountToggle = false } : OpProps) {
           <Sidebars />
         </Col>
 
-        <Col xs={10} className="patient-list-box p-0 mt-3 border border-2 border-dark right-side">
+        <Col xs={10} className="patientRecordPage">
           <Row>
             <Col xs={12}>
               <h5 className="h5">

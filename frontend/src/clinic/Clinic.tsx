@@ -30,7 +30,7 @@ function Clinic() {
         <Col xs={2} className="sidebar-box p-0 mb-5">
           <Sidebars />
         </Col>
-        <Col>
+        <Col xs={10} className="clinicPage">
           <Row className="mt-3 border-bottom">
             <Col xs={2}>
               <button type="button" className="btn btn-primary">
@@ -68,10 +68,10 @@ function Clinic() {
                 Add Doctor
               </button>
               {addDoctorBtn && (
-              <AddDoctorForm
-                payForm={addDoctorBtn}
-                addDoctorBtn={setAddDoctorBtn}
-              />
+                <AddDoctorForm
+                  payForm={addDoctorBtn}
+                  addDoctorBtn={setAddDoctorBtn}
+                />
               )}
             </Col>
             <Col>
