@@ -21,6 +21,7 @@ import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
 import SpecificAppointment from './appointment/SpecificAppointment';
 import Footer from '../common/Footer';
+import Referral from './referral/Referral';
 
 interface OpProps {
   accountToggle?: boolean
@@ -33,6 +34,7 @@ export default function PatientRecord({ accountToggle = false } : OpProps) {
   const [AccountBtn, setAccBtn] = useState(false);
   const [MedNotesBtn, setMedNotesBtn] = useState(false);
   const [AppointmentBtn, setAppointmentBtn] = useState(accountToggle);
+  const [ReferralBtn, setReferralBtn] = useState(false);
   const [allPatients] = useQuery({
     query: GetPatientDocument,
     variables: {
@@ -75,6 +77,16 @@ export default function PatientRecord({ accountToggle = false } : OpProps) {
               Prescriptions
             </Button>
             {PrescriptionBtn && <Prescription pID={data?.specificPatient?.id} />}
+          </Col>
+          <Col className="list border d-grid gap-2">
+            <Button
+              variant="primary"
+              className="patient-btns"
+              onClick={() => setReferralBtn(!ReferralBtn)}
+            >
+              Referrals
+            </Button>
+            {ReferralBtn && <Referral pID={data?.specificPatient?.id} />}
           </Col>
           <Col className="list border d-grid gap-2">
             <Button variant="primary" className="patient-btns">

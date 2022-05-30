@@ -1,4 +1,3 @@
-/* eslint-disable linebreak-style */
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 import * as Types from './generated/graphql';
 
@@ -60,7 +59,7 @@ export type GetAllAppointmentsQuery = (
     & Pick<Types.Appointment, 'dt_start' | 'dt_end' | 'name' | 'id'>
     & { doctor?: Types.Maybe<(
       { __typename?: 'Doctor' }
-      & Pick<Types.Doctor, 'doc_name'>
+      & Pick<Types.Doctor, 'doc_name' | 'id'>
     )>, patient?: Types.Maybe<(
       { __typename?: 'Patient' }
       & Pick<Types.Patient, 'f_name' | 'l_name'>
@@ -308,6 +307,83 @@ export type InvoiceQuery = (
   )>>> }
 );
 
+export type PatientReferralsQueryVariables = Types.Exact<{
+  patientId: Types.Scalars['Int'];
+}>;
+
+export type PatientReferralsQuery = (
+  { __typename?: 'Query' }
+  & { patientReferrals?: Types.Maybe<Array<Types.Maybe<(
+    { __typename?: 'Referral' }
+    & Pick<Types.Referral, 'id' | 'hosp_name'>
+    & { patient?: Types.Maybe<(
+      { __typename?: 'Patient' }
+      & Pick<Types.Patient, 'id' | 'f_name' | 'l_name' | 'm_name'>
+    )>, doctor?: Types.Maybe<(
+      { __typename?: 'Doctor' }
+      & Pick<Types.Doctor, 'id' | 'doc_name'>
+    )> }
+  )>>> }
+);
+
+export type AddReferralMutationVariables = Types.Exact<{
+  newReferral: Types.ReferralInput;
+}>;
+
+export type AddReferralMutation = (
+  { __typename?: 'Mutation' }
+  & { addReferral?: Types.Maybe<(
+    { __typename?: 'Referral' }
+    & Pick<Types.Referral, 'id' | 'hosp_name'>
+    & { patient?: Types.Maybe<(
+      { __typename?: 'Patient' }
+      & Pick<Types.Patient, 'id'>
+    )>, doctor?: Types.Maybe<(
+      { __typename?: 'Doctor' }
+      & Pick<Types.Doctor, 'id'>
+    )> }
+  )> }
+);
+
+export type DeleteReferralMutationVariables = Types.Exact<{
+  referralId: Types.Scalars['Int'];
+}>;
+
+export type DeleteReferralMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteReferral?: Types.Maybe<(
+    { __typename?: 'Referral' }
+    & Pick<Types.Referral, 'id' | 'hosp_name'>
+    & { doctor?: Types.Maybe<(
+      { __typename?: 'Doctor' }
+      & Pick<Types.Doctor, 'id'>
+    )>, patient?: Types.Maybe<(
+      { __typename?: 'Patient' }
+      & Pick<Types.Patient, 'id'>
+    )> }
+  )> }
+);
+
+export type EditReferralMutationVariables = Types.Exact<{
+  editedReferral: Types.EditReferralInput;
+  referralID: Types.Scalars['Int'];
+}>;
+
+export type EditReferralMutation = (
+  { __typename?: 'Mutation' }
+  & { editReferral?: Types.Maybe<(
+    { __typename?: 'Referral' }
+    & Pick<Types.Referral, 'id' | 'hosp_name'>
+    & { doctor?: Types.Maybe<(
+      { __typename?: 'Doctor' }
+      & Pick<Types.Doctor, 'id'>
+    )>, patient?: Types.Maybe<(
+      { __typename?: 'Patient' }
+      & Pick<Types.Patient, 'id'>
+    )> }
+  )> }
+);
+
 export const AllPatientsDocument = {
   kind: 'Document',
   definitions: [{
@@ -371,7 +447,7 @@ export const EditAPatientDocument = {
 export const GetAllAppointmentsDocument = {
   kind: 'Document',
   definitions: [{
-    kind: 'OperationDefinition', operation: 'query', name: { kind: 'Name', value: 'getAllAppointments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'appointments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'dt_start' } }, { kind: 'Field', name: { kind: 'Name', value: 'dt_end' } }, { kind: 'Field', name: { kind: 'Name', value: 'name' } }, { kind: 'Field', name: { kind: 'Name', value: 'doctor' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'doc_name' } }] } }, { kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }] } }] } }] },
+    kind: 'OperationDefinition', operation: 'query', name: { kind: 'Name', value: 'getAllAppointments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'appointments' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'dt_start' } }, { kind: 'Field', name: { kind: 'Name', value: 'dt_end' } }, { kind: 'Field', name: { kind: 'Name', value: 'name' } }, { kind: 'Field', name: { kind: 'Name', value: 'doctor' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'doc_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'id' } }] } }, { kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }] } }] } }] },
   }],
 } as unknown as DocumentNode<GetAllAppointmentsQuery, GetAllAppointmentsQueryVariables>;
 export const GetPatientAccountDocument = {
@@ -632,3 +708,63 @@ export const InvoiceDocument = {
     },
   }],
 } as unknown as DocumentNode<InvoiceQuery, InvoiceQueryVariables>;
+export const PatientReferralsDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'query',
+    name: { kind: 'Name', value: 'PatientReferrals' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'patientId' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'patientReferrals' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'patientID' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'patientId' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'hosp_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'm_name' } }] } }, { kind: 'Field', name: { kind: 'Name', value: 'doctor' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'doc_name' } }] } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<PatientReferralsQuery, PatientReferralsQueryVariables>;
+export const AddReferralDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'mutation',
+    name: { kind: 'Name', value: 'AddReferral' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'newReferral' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'ReferralInput' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'addReferral' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'newReferral' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'newReferral' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }] } }, { kind: 'Field', name: { kind: 'Name', value: 'doctor' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }] } }, { kind: 'Field', name: { kind: 'Name', value: 'hosp_name' } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<AddReferralMutation, AddReferralMutationVariables>;
+export const DeleteReferralDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'mutation',
+    name: { kind: 'Name', value: 'DeleteReferral' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'referralId' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'deleteReferral' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'referralId' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'referralId' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'doctor' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }] } }, { kind: 'Field', name: { kind: 'Name', value: 'hosp_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }] } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<DeleteReferralMutation, DeleteReferralMutationVariables>;
+export const EditReferralDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'mutation',
+    name: { kind: 'Name', value: 'EditReferral' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'editedReferral' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'EditReferralInput' } } } }, { kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'referralID' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'editReferral' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'referralID' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'referralID' } } }, { kind: 'Argument', name: { kind: 'Name', value: 'editedReferral' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'editedReferral' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'hosp_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'doctor' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }] } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }] } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<EditReferralMutation, EditReferralMutationVariables>;
