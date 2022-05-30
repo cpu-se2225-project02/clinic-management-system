@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable consistent-return */
 /* eslint-disable linebreak-style */
 import React, { useState } from 'react';
@@ -177,20 +178,38 @@ function Appointment() {
                 />
               ) : (
                 // eslint-disable-next-line react/jsx-no-useless-fragment
-                <Row>
-                  {data?.appointments?.map((appointment) => (
-                    <div className="card">
-                      <div className="patientName">
-                        {appointment?.patient?.f_name}
-                        {' '}
-                        {appointment?.patient?.l_name}
-                      </div>
-                      {appointment?.dt_start}
-                      {' '}
-                      {appointment?.dt_end}
-                      {' '}
-                    </div>
-                  ))}
+
+                <Row className="m-auto">
+                  <table className="table ">
+                    <thead>
+                      <tr>
+                        <th scope="col">Patient</th>
+                        <th scope="col">Doctor</th>
+                        <th scope="col">Start</th>
+                        <th scope="col">End</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      {data?.appointments?.map((appointment) => (
+                        <tr>
+                          <td>
+                            {appointment?.patient?.f_name}
+                            {' '}
+                            {' '}
+                            {appointment?.patient?.l_name}
+                          </td>
+                          <td>
+                            {allDoctors.data?.allDoctors?.find(((doc) => doc?.id === appointment?.doctor!.id))?.doc_name}
+                          </td>
+                          <td>{appointment?.dt_start}</td>
+                          <td>{appointment?.dt_end}</td>
+                        </tr>
+                      ))}
+
+                    </tbody>
+                  </table>
+
                 </Row>
               )}
             </Col>

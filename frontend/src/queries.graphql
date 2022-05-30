@@ -64,6 +64,7 @@ query getAllAppointments {
     name
     doctor {
       doc_name
+      id
     }
     id
     patient {
@@ -240,6 +241,62 @@ query Invoice($pID: Int!) {
     patient {
       l_name
       f_name
+    }
+  }
+}
+
+query PatientReferrals($patientId: Int!) {
+  patientReferrals(patientID: $patientId) {
+    id
+    hosp_name
+    patient {
+      id
+      f_name
+      l_name
+      m_name
+    }
+    doctor {
+      id
+      doc_name
+    }
+  }
+}
+
+mutation AddReferral($newReferral: ReferralInput!) {
+  addReferral(newReferral: $newReferral) {
+    id
+    patient {
+      id
+    }
+    doctor {
+      id
+    }
+    hosp_name
+  }
+}
+
+mutation DeleteReferral($referralId: Int!) {
+  deleteReferral(referralId: $referralId) {
+    id
+    doctor {
+      id
+    }
+    hosp_name
+    patient {
+      id
+    }
+  }
+}
+
+mutation EditReferral($editedReferral: EditReferralInput!, $referralID: Int!) {
+  editReferral(referralID: $referralID, editedReferral: $editedReferral) {
+    id
+    hosp_name
+    doctor {
+      id
+    }
+    patient {
+      id
     }
   }
 }
