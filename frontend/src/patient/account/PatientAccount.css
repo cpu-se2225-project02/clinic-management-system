@@ -1,0 +1,18 @@
+.card{
+    width: 18rem;
+}
+.editAndAdd {
+    transition-duration: 0.4s;
+    float: left;
+    border-color: transparent;
+    border-radius: 4px;;
+    background-color: white;
+}
+
+.editAndAdd:hover {
+    background-color: #f9ebbe;
+    color: #051329;
+}
+.right{
+    float:right;
+}

@@ -15,4 +15,9 @@
     Helvetica,
     sans-serif;
   padding-left: 15px !important;
+  padding-bottom: 5%;
+}
+
+.clinicPage{
+  padding-top: 5%;
 }
