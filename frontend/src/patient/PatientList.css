@@ -47,7 +47,9 @@ body {
   /* background-color: #033076; */
   margin-top: 3px;
 }
-
+.PatientListBar{
+  background-color: #528e9c;
+}
 .list-row {
   margin-top: 10px !important;
 }

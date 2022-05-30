@@ -60,7 +60,7 @@ export default function PatientList() {
 
         <Col xs={10} className="patientListPage">
           <Row>
-            <Col xs={12}>
+            <Col xs={12} className="PatientListBar">
               <h5 className="h5">
                 <MdAccountBox className="patient-icon" />
                 Patient List
