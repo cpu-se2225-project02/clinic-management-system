@@ -78,27 +78,24 @@ function Referral({ pID }: PatientID) {
       <div>
         {data?.patientReferrals?.map((referral) => (
           <>
-
             <div className="container">
               <div className="row">
                 <div className="col">
-            <div className="btn-group" role="group">
-              <button type="button" className="editAndDltBtn" onClick={() => onEditBtnClicked(referral?.id as number)}>
-                <BiEdit size={30} />
-              </button>
-              <button type="button" className="editAndDltBtn" onClick={() => onDeleteBtnClicked(referral?.id as number)}>
-                <MdDeleteOutline size={30} />
-              </button>
+                  <div className="btn-group editAndDelete" role="group">
+                    <button type="button" className="editAndDltBtn" onClick={() => onEditBtnClicked(referral?.id as number)}>
+                      <BiEdit size={30} />
+                    </button>
+                    <button type="button" className="editAndDltBtn" onClick={() => onDeleteBtnClicked(referral?.id as number)}>
+                      <MdDeleteOutline size={30} />
+                    </button>
                   </div>
                 </div>
               </div>
-
             </div>
 
             {updateReferral && <UpdateReferralForm pID={pID} popup={setUpdatReferral} refID={editBtnValue} />}
-            <div className="referredHospital">
             {deleteConfirmation && <ConfirmDelete onDeleteTrue={handleDeleteTrue} onDeleteFalse={handleDeleteFalse} />}
-            <div>
+            <div className="referredHospital">
               {referral?.hosp_name}
               <br />
               {referral?.doctor?.doc_name}

@@ -201,8 +201,17 @@ function Appointment() {
                           <td>
                             {allDoctors.data?.allDoctors?.find(((doc) => doc?.id === appointment?.doctor!.id))?.doc_name}
                           </td>
-                          <td>{appointment?.dt_start}</td>
-                          <td>{appointment?.dt_end}</td>
+                          <td>
+                            {new Date(appointment?.dt_start as string).toDateString()}
+                            {' '}
+                            {new Date(appointment?.dt_start as string).toLocaleTimeString()}
+                          </td>
+                          <td>
+                            {' '}
+                            {new Date(appointment?.dt_end as string).toDateString()}
+                            {' '}
+                            {new Date(appointment?.dt_end as string).toLocaleTimeString()}
+                          </td>
                         </tr>
                       ))}
 
