@@ -178,7 +178,6 @@ function Appointment() {
                 />
               ) : (
                 // eslint-disable-next-line react/jsx-no-useless-fragment
-
                 <Row className="m-auto">
                   <table className="table ">
                     <thead>
@@ -209,7 +208,6 @@ function Appointment() {
 
                     </tbody>
                   </table>
-
                 </Row>
               )}
             </Col>
