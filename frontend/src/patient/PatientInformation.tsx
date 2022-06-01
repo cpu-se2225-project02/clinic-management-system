@@ -70,7 +70,7 @@ export default function PatientInformation({ pId }: PatientId) {
             {data?.specificPatient?.address}
           </div>
           <div className="col">
-            <div className="btn-group" role="group">
+            <div className="btn-group editAndDltBtn" role="group">
               <button type="button" className="editAndDltBtn" onClick={() => setEditBtn(!editBtn)}>
                 <BiEdit size={30} />
               </button>
