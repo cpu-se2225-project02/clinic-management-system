@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 export default function Header() {
   const [doctorName, setDoctorName] = useState('');
   return (
-    <Container className="header">
+    <Container className="fixed-top">
       <Row>
         <Col xs={9} className="banner-text" data-testid="banner-text">
           Cliniche
