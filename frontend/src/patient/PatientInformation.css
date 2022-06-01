@@ -8,8 +8,9 @@
   margin-left: 10%;
 }
 .editAndDelete{
-  margin-right: 3%;
+  float: right;
 }
+
 .patientFullName{
   font-size: 23px;
 }

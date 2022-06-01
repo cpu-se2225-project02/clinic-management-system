@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable max-len */
 /* eslint-disable import/prefer-default-export */
 import { Prisma, PrismaClient } from '@prisma/client';

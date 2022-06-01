@@ -1,336 +1,665 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-multiple-empty-lines */
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
+
 import * as Types from './generated/graphql';
 
 export type AllPatientsQueryVariables = Types.Exact<{
+
   con?: Types.InputMaybe<Types.Scalars['String']>;
+
 }>;
+
+
+
 
 
 export type AllPatientsQuery = (
+
   { __typename?: 'Query' }
+
   & { patients?: Types.Maybe<Array<Types.Maybe<(
+
     { __typename?: 'Patient' }
+
     & Pick<Types.Patient, 'id' | 'f_name' | 'l_name' | 'm_name' | 'suffix' | 'sex' | 'age' | 'address' | 'constactNo'>
+
   )>>> }
+
 );
 
+
+
 export type AddPatientMutationVariables = Types.Exact<{
+
   newPatient: Types.PatientInput;
+
 }>;
+
+
+
 
 
 export type AddPatientMutation = (
+
   { __typename?: 'Mutation' }
+
   & { addPatient?: Types.Maybe<(
+
     { __typename?: 'Patient' }
+
     & Pick<Types.Patient, 'id' | 'l_name' | 'f_name' | 'm_name' | 'address' | 'age' | 'suffix' | 'sex' | 'birthdate'>
+
   )> }
+
 );
 
+
+
 export type GetPatientQueryVariables = Types.Exact<{
+
   id: Types.Scalars['Int'];
+
 }>;
+
+
+
 
 
 export type GetPatientQuery = (
+
   { __typename?: 'Query' }
+
   & { specificPatient?: Types.Maybe<(
+
     { __typename?: 'Patient' }
+
     & Pick<Types.Patient, 'l_name' | 'f_name' | 'm_name' | 'sex' | 'suffix' | 'id' | 'address' | 'birthdate' | 'age' | 'constactNo' | 'email'>
+
   )> }
+
 );
 
+
+
 export type EditAPatientMutationVariables = Types.Exact<{
+
   thePatient: Types.PatientInput;
+
   pid: Types.Scalars['Int'];
+
 }>;
 
 
+
+
+
 export type EditAPatientMutation = (
+
   { __typename?: 'Mutation' }
+
   & { editPatient?: Types.Maybe<(
+
     { __typename?: 'Patient' }
+
     & Pick<Types.Patient, 'suffix' | 'f_name' | 'l_name' | 'm_name' | 'sex' | 'address' | 'birthdate' | 'age' | 'constactNo' | 'email'>
+
   )> }
+
 );
+
+
 
 export type GetAllAppointmentsQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
+
+
+
 export type GetAllAppointmentsQuery = (
+
   { __typename?: 'Query' }
+
   & { appointments?: Types.Maybe<Array<Types.Maybe<(
+
     { __typename?: 'Appointment' }
+
     & Pick<Types.Appointment, 'dt_start' | 'dt_end' | 'name' | 'id'>
+
     & { doctor?: Types.Maybe<(
+
       { __typename?: 'Doctor' }
+
       & Pick<Types.Doctor, 'doc_name' | 'id'>
+
     )>, patient?: Types.Maybe<(
+
       { __typename?: 'Patient' }
+
       & Pick<Types.Patient, 'f_name' | 'l_name'>
+
     )> }
+
   )>>> }
+
 );
 
+
+
 export type GetPatientAccountQueryVariables = Types.Exact<{
+
   patientId: Types.Scalars['Int'];
+
 }>;
+
+
+
 
 
 export type GetPatientAccountQuery = (
+
   { __typename?: 'Query' }
+
   & { account?: Types.Maybe<Array<Types.Maybe<(
+
     { __typename?: 'Bill' }
+
     & Pick<Types.Bill, 'id' | 'paymnt_dt' | 'ammnt_cost' | 'ammnt_paid'>
+
   )>>> }
+
 );
 
+
+
 export type AddPaymentMutationVariables = Types.Exact<{
+
   newPayment: Types.PaymentInput;
+
 }>;
+
+
+
 
 
 export type AddPaymentMutation = (
+
   { __typename?: 'Mutation' }
+
   & { addPayment?: Types.Maybe<(
+
     { __typename?: 'Bill' }
+
     & Pick<Types.Bill, 'id' | 'paymnt_dt' | 'ammnt_cost' | 'ammnt_paid'>
+
     & { patient?: Types.Maybe<(
+
       { __typename?: 'Patient' }
+
       & Pick<Types.Patient, 'id' | 'f_name' | 'l_name'>
+
     )> }
+
   )> }
+
 );
 
+
+
 export type DeleteAPatientMutationVariables = Types.Exact<{
+
   patientID: Types.Scalars['Int'];
+
 }>;
 
 
+
+
+
 export type DeleteAPatientMutation = (
+
   { __typename?: 'Mutation' }
+
   & { deletePatient?: Types.Maybe<(
+
     { __typename?: 'Patient' }
+
     & Pick<Types.Patient, 'l_name' | 'f_name' | 'm_name' | 'suffix' | 'sex' | 'age' | 'birthdate' | 'address'>
+
   )> }
+
 );
+
+
 
 export type AllDocsQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
+
+
+
 export type AllDocsQuery = (
+
   { __typename?: 'Query' }
+
   & { allDoctors?: Types.Maybe<Array<Types.Maybe<(
+
     { __typename?: 'Doctor' }
+
     & Pick<Types.Doctor, 'doc_name' | 'id'>
+
   )>>> }
+
 );
 
+
+
 export type AddAnAppointmentMutationVariables = Types.Exact<{
+
   appointment: Types.AppointmentInput;
+
 }>;
+
+
+
 
 
 export type AddAnAppointmentMutation = (
+
   { __typename?: 'Mutation' }
+
   & { addAppointment?: Types.Maybe<(
+
     { __typename?: 'Appointment' }
+
     & Pick<Types.Appointment, 'dt_start' | 'dt_end'>
+
   )> }
+
 );
 
+
+
 export type EdiAnAppointmentMutationVariables = Types.Exact<{
+
   theAppointment: Types.AppointmentInput;
+
   aId: Types.Scalars['Int'];
+
 }>;
+
+
+
 
 
 export type EdiAnAppointmentMutation = (
+
   { __typename?: 'Mutation' }
+
   & { editAppointment?: Types.Maybe<(
+
     { __typename?: 'Appointment' }
+
     & Pick<Types.Appointment, 'name' | 'dt_start' | 'dt_end' | 'doc_id'>
+
   )> }
+
 );
 
+
+
 export type DeleteAnAppointmentMutationVariables = Types.Exact<{
+
   appId: Types.Scalars['Int'];
+
 }>;
+
+
+
 
 
 export type DeleteAnAppointmentMutation = (
+
   { __typename?: 'Mutation' }
+
   & { deleteAppointment?: Types.Maybe<(
+
     { __typename?: 'Appointment' }
+
     & Pick<Types.Appointment, 'id'>
+
   )> }
+
 );
 
+
+
 export type DisplayMedNotesQueryVariables = Types.Exact<{
+
   pID: Types.Scalars['Int'];
+
 }>;
+
+
+
 
 
 export type DisplayMedNotesQuery = (
+
   { __typename?: 'Query' }
+
   & { patientMedNotes?: Types.Maybe<Array<Types.Maybe<(
+
     { __typename?: 'MedicalNotes' }
+
     & Pick<Types.MedicalNotes, 'date_noted' | 'id' | 'title' | 'med_notes'>
+
     & { doctor?: Types.Maybe<(
+
       { __typename?: 'Doctor' }
+
       & Pick<Types.Doctor, 'doc_name'>
+
     )> }
+
   )>>> }
+
 );
 
+
+
 export type AddAMedNoteMutationVariables = Types.Exact<{
+
   newMedNote: Types.MedNotesInput;
+
 }>;
+
+
+
 
 
 export type AddAMedNoteMutation = (
+
   { __typename?: 'Mutation' }
+
   & { addMedNotes?: Types.Maybe<(
+
     { __typename?: 'MedicalNotes' }
+
     & Pick<Types.MedicalNotes, 'med_notes' | 'title' | 'doc_id'>
+
   )> }
+
 );
 
+
+
 export type AddDoctorMutationVariables = Types.Exact<{
+
   newDoctor: Types.DoctorInput;
+
 }>;
+
+
+
 
 
 export type AddDoctorMutation = (
+
   { __typename?: 'Mutation' }
+
   & { addDoctor?: Types.Maybe<(
+
     { __typename?: 'Doctor' }
+
     & Pick<Types.Doctor, 'id' | 'doc_name'>
+
     & { appointments?: Types.Maybe<Array<Types.Maybe<(
+
       { __typename?: 'Appointment' }
+
       & Pick<Types.Appointment, 'id'>
+
     )>>> }
+
   )> }
+
 );
 
+
+
 export type AddPrescriptionMutationVariables = Types.Exact<{
+
   newPrescription: Types.AddPrescriptionInput;
+
 }>;
+
+
+
 
 
 export type AddPrescriptionMutation = (
+
   { __typename?: 'Mutation' }
+
   & { addPrescription?: Types.Maybe<(
+
     { __typename?: 'Prescription' }
+
     & Pick<Types.Prescription, 'id' | 'pres_name' | 'pres_dos' | 'patient_id'>
+
   )> }
+
 );
 
+
+
 export type EditPrescriptionMutationVariables = Types.Exact<{
+
   editedPrescription: Types.EditPrescriptionInput;
+
   prescriptionId: Types.Scalars['Int'];
+
 }>;
+
+
+
 
 
 export type EditPrescriptionMutation = (
+
   { __typename?: 'Mutation' }
+
   & { editPrescription?: Types.Maybe<(
+
     { __typename?: 'Prescription' }
+
     & Pick<Types.Prescription, 'id' | 'pres_name' | 'pres_dos' | 'patient_id'>
+
   )> }
+
 );
 
+
+
 export type PatientPrescriptionsQueryVariables = Types.Exact<{
+
   patientId: Types.Scalars['Int'];
+
 }>;
+
+
+
 
 
 export type PatientPrescriptionsQuery = (
+
   { __typename?: 'Query' }
+
   & { patientPrescriptions?: Types.Maybe<Array<Types.Maybe<(
+
     { __typename?: 'Prescription' }
+
     & Pick<Types.Prescription, 'id' | 'pres_name' | 'pres_dos'>
+
   )>>> }
+
 );
 
+
+
 export type PatientAppointmentsQueryVariables = Types.Exact<{
+
   pID: Types.Scalars['Int'];
+
 }>;
+
+
+
 
 
 export type PatientAppointmentsQuery = (
+
   { __typename?: 'Query' }
+
   & { specificAppointment?: Types.Maybe<Array<Types.Maybe<(
+
     { __typename?: 'Appointment' }
+
     & Pick<Types.Appointment, 'name' | 'dt_start' | 'dt_end'>
+
   )>>> }
+
 );
 
+
+
 export type DeletePrescriptionMutationVariables = Types.Exact<{
+
   prescId: Types.Scalars['Int'];
+
 }>;
 
 
+
+
+
 export type DeletePrescriptionMutation = (
+
   { __typename?: 'Mutation' }
+
   & { deletePrescription?: Types.Maybe<(
+
     { __typename?: 'Prescription' }
+
     & Pick<Types.Prescription, 'id' | 'pres_name' | 'patient_id'>
+
   )> }
+
 );
+
+
 
 export type AllDoctorsQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
+
+
+
 export type AllDoctorsQuery = (
+
   { __typename?: 'Query' }
+
   & { allDoctors?: Types.Maybe<Array<Types.Maybe<(
+
     { __typename?: 'Doctor' }
+
     & Pick<Types.Doctor, 'doc_name'>
+
   )>>> }
+
 );
+
+
 
 export type AllPaymentsQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
+
+
+
 export type AllPaymentsQuery = (
+
   { __typename?: 'Query' }
+
   & { allPayments?: Types.Maybe<Array<Types.Maybe<(
+
     { __typename?: 'Bill' }
+
     & Pick<Types.Bill, 'ammnt_paid'>
+
   )>>> }
+
 );
 
+
+
 export type AddBillMutationVariables = Types.Exact<{
+
   bill: Types.BillInput;
+
 }>;
+
+
+
 
 
 export type AddBillMutation = (
+
   { __typename?: 'Mutation' }
+
   & { addBill?: Types.Maybe<(
+
     { __typename?: 'Bill' }
+
     & Pick<Types.Bill, 'ammnt_cost' | 'patient_id'>
+
   )> }
+
 );
 
+
+
 export type InvoiceQueryVariables = Types.Exact<{
+
   pID: Types.Scalars['Int'];
+
 }>;
 
 
+
+
+
 export type InvoiceQuery = (
+
   { __typename?: 'Query' }
+
   & { invoice?: Types.Maybe<Array<Types.Maybe<(
+
     { __typename?: 'Bill' }
+
     & Pick<Types.Bill, 'ammnt_cost'>
+
     & { patient?: Types.Maybe<(
+
       { __typename?: 'Patient' }
+
       & Pick<Types.Patient, 'l_name' | 'f_name'>
+
     )> }
+
   )>>> }
+
 );
 
 export type PatientMedHistoryQueryVariables = Types.Exact<{
@@ -415,80 +744,230 @@ export const PatientMedHistoryDocument = {"kind":"Document","definitions":[{"kin
 export const AddMedHistoryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"AddMedHistory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"newMedHistory"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"AddMedHistoryInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"addMedHistory"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"newMedHistory"},"value":{"kind":"Variable","name":{"kind":"Name","value":"newMedHistory"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"diagnosis"}},{"kind":"Field","name":{"kind":"Name","value":"treatment_plan"}},{"kind":"Field","name":{"kind":"Name","value":"patient_id"}}]}}]}}]} as unknown as DocumentNode<AddMedHistoryMutation, AddMedHistoryMutationVariables>;
 export const EditMedHistoryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"EditMedHistory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"editedMedHistory"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EditMedHistoryInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"medicalhistoryId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"editMedHistory"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"medicalhistoryId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"medicalhistoryId"}}},{"kind":"Argument","name":{"kind":"Name","value":"editedMedHistory"},"value":{"kind":"Variable","name":{"kind":"Name","value":"editedMedHistory"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"diagnosis"}},{"kind":"Field","name":{"kind":"Name","value":"treatment_plan"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"patient_id"}}]}}]}}]} as unknown as DocumentNode<EditMedHistoryMutation, EditMedHistoryMutationVariables>;
 export const DeleteMedHistoryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteMedHistory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"medicalhistoryId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteMedHistory"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"medicalhistoryId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"medicalhistoryId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"diagnosis"}},{"kind":"Field","name":{"kind":"Name","value":"treatment_plan"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<DeleteMedHistoryMutation, DeleteMedHistoryMutationVariables>;
+
+
 export type PatientReferralsQueryVariables = Types.Exact<{
+
   patientId: Types.Scalars['Int'];
+
 }>;
+
+
+
+
 
 export type PatientReferralsQuery = (
+
   { __typename?: 'Query' }
+
   & { patientReferrals?: Types.Maybe<Array<Types.Maybe<(
+
     { __typename?: 'Referral' }
+
     & Pick<Types.Referral, 'id' | 'hosp_name'>
+
     & { patient?: Types.Maybe<(
+
       { __typename?: 'Patient' }
+
       & Pick<Types.Patient, 'id' | 'f_name' | 'l_name' | 'm_name'>
+
     )>, doctor?: Types.Maybe<(
+
       { __typename?: 'Doctor' }
+
       & Pick<Types.Doctor, 'id' | 'doc_name'>
+
     )> }
+
   )>>> }
+
 );
+
+
 
 export type AddReferralMutationVariables = Types.Exact<{
+
   newReferral: Types.ReferralInput;
+
 }>;
+
+
+
+
 
 export type AddReferralMutation = (
+
   { __typename?: 'Mutation' }
+
   & { addReferral?: Types.Maybe<(
+
     { __typename?: 'Referral' }
+
     & Pick<Types.Referral, 'id' | 'hosp_name'>
+
     & { patient?: Types.Maybe<(
+
       { __typename?: 'Patient' }
+
       & Pick<Types.Patient, 'id'>
+
     )>, doctor?: Types.Maybe<(
+
       { __typename?: 'Doctor' }
+
       & Pick<Types.Doctor, 'id'>
+
     )> }
+
   )> }
+
 );
+
+
 
 export type DeleteReferralMutationVariables = Types.Exact<{
+
   referralId: Types.Scalars['Int'];
+
 }>;
+
+
+
+
 
 export type DeleteReferralMutation = (
+
   { __typename?: 'Mutation' }
+
   & { deleteReferral?: Types.Maybe<(
+
     { __typename?: 'Referral' }
+
     & Pick<Types.Referral, 'id' | 'hosp_name'>
+
     & { doctor?: Types.Maybe<(
+
       { __typename?: 'Doctor' }
+
       & Pick<Types.Doctor, 'id'>
+
     )>, patient?: Types.Maybe<(
+
       { __typename?: 'Patient' }
+
       & Pick<Types.Patient, 'id'>
+
     )> }
+
   )> }
+
 );
+
+
 
 export type EditReferralMutationVariables = Types.Exact<{
+
   editedReferral: Types.EditReferralInput;
+
   referralID: Types.Scalars['Int'];
+
 }>;
 
+
+
+
+
 export type EditReferralMutation = (
+
   { __typename?: 'Mutation' }
+
   & { editReferral?: Types.Maybe<(
+
     { __typename?: 'Referral' }
+
     & Pick<Types.Referral, 'id' | 'hosp_name'>
+
     & { doctor?: Types.Maybe<(
+
       { __typename?: 'Doctor' }
+
       & Pick<Types.Doctor, 'id'>
+
     )>, patient?: Types.Maybe<(
+
       { __typename?: 'Patient' }
+
       & Pick<Types.Patient, 'id'>
+
     )> }
+
   )> }
+
 );
 
+
+
+export const PatientReferralsDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'query',
+    name: { kind: 'Name', value: 'PatientReferrals' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'patientId' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'patientReferrals' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'patientID' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'patientId' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'hosp_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'f_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'l_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'm_name' } }] } }, { kind: 'Field', name: { kind: 'Name', value: 'doctor' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'doc_name' } }] } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<PatientReferralsQuery, PatientReferralsQueryVariables>;
+
+export const AddReferralDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'mutation',
+    name: { kind: 'Name', value: 'AddReferral' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'newReferral' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'ReferralInput' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'addReferral' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'newReferral' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'newReferral' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }] } }, { kind: 'Field', name: { kind: 'Name', value: 'doctor' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }] } }, { kind: 'Field', name: { kind: 'Name', value: 'hosp_name' } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<AddReferralMutation, AddReferralMutationVariables>;
+
+export const DeleteReferralDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'mutation',
+    name: { kind: 'Name', value: 'DeleteReferral' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'referralId' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'deleteReferral' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'referralId' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'referralId' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'doctor' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }] } }, { kind: 'Field', name: { kind: 'Name', value: 'hosp_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }] } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<DeleteReferralMutation, DeleteReferralMutationVariables>;
+
+export const EditReferralDocument = {
+  kind: 'Document',
+  definitions: [{
+    kind: 'OperationDefinition',
+    operation: 'mutation',
+    name: { kind: 'Name', value: 'EditReferral' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'editedReferral' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'EditReferralInput' } } } }, { kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'referralID' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
+    selectionSet: {
+      kind: 'SelectionSet',
+      selections: [{
+        kind: 'Field', name: { kind: 'Name', value: 'editReferral' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'referralID' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'referralID' } } }, { kind: 'Argument', name: { kind: 'Name', value: 'editedReferral' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'editedReferral' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'hosp_name' } }, { kind: 'Field', name: { kind: 'Name', value: 'doctor' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }] } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }] } }] },
+      }],
+    },
+  }],
+} as unknown as DocumentNode<EditReferralMutation, EditReferralMutationVariables>;
