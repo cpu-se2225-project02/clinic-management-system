@@ -69,12 +69,12 @@ export default function Prescription({ pID }: PatientID) {
           <>
             <div className="container">
               <div className="row">
-                <div className="col-sm-1">
-                  <div className="btn-group" role="group">
-                    <button type="button" className="editAndDltBtn" onClick={() => onEditBtnClicked(prescription?.id as number)}>
+                <div className="col">
+                  <div className="btn-group editAndDelete" role="group">
+                    <button type="button" className="editAndDelete" onClick={() => onEditBtnClicked(prescription?.id as number)}>
                       <BiEdit size={30} />
                     </button>
-                    <button type="button" className="editAndDltBtn" onClick={() => deletePrescription(prescription?.id as number)}>
+                    <button type="button" className="editAndDelete" onClick={() => deletePrescription(prescription?.id as number)}>
                       <MdDeleteOutline size={30} />
                     </button>
                     {updatePrescBtn && <UpdatePrescriptionForm popup={setUpdatePrescBtn} pID={pID as number} prescID={editBtnValue} />}

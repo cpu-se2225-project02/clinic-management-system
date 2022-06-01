@@ -10,10 +10,11 @@ import { useMutation, useQuery } from 'urql';
 import { DeleteReferralDocument, PatientReferralsDocument } from '../../queries.generated';
 import ReferralForm from './ReferralForm';
 import UpdateReferralForm from './UpdateReferralForm';
+import './Referral.css';
 
 interface PatientID {
-    pID: undefined | number
-  }
+  pID: undefined | number
+}
 
 function Referral({ pID }: PatientID) {
   const [addReferral, setAddReferral] = useState(false);
@@ -61,19 +62,25 @@ function Referral({ pID }: PatientID) {
       <div>
         {data?.patientReferrals?.map((referral) => (
           <>
-            <div className="btn-group" role="group">
-              <button type="button" className="editAndDltBtn" onClick={() => onEditBtnClicked(referral?.id as number)}>
-                <BiEdit size={30} />
-              </button>
-              <button type="button" className="editAndDltBtn" onClick={() => deleteReferral(referral?.id as number)}>
-                <MdDeleteOutline size={30} />
-              </button>
+            <div className="container">
+              <div className="row">
+                <div className="col">
+                  <div className="btn-group editAndDelete" role="group">
+                    <button type="button" className="editAndDltBtn" onClick={() => onEditBtnClicked(referral?.id as number)}>
+                      <BiEdit size={30} />
+                    </button>
+                    <button type="button" className="editAndDltBtn" onClick={() => deleteReferral(referral?.id as number)}>
+                      <MdDeleteOutline size={30} />
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
+
             {updateReferral && <UpdateReferralForm pID={pID} popup={setUpdatReferral} refID={editBtnValue} />}
-            <div>
+            <div className="referredHospital">
               {referral?.hosp_name}
-            </div>
-            <div>
+              <br />
               {referral?.doctor?.doc_name}
             </div>
             <hr />

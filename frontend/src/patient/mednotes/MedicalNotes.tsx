@@ -6,6 +6,7 @@ import { useQuery } from 'urql';
 import { Spinner } from 'react-bootstrap';
 import { DisplayMedNotesDocument } from '../../queries.generated';
 import MedNotesForm from './MedNotesForm';
+import './MedicalNotes.css';
 
 interface PatientID {
   pId: number | undefined
@@ -34,14 +35,24 @@ export default function MedicalNotes({ pId }: PatientID) {
   return (
     <>
       <GoDiffAdded size={30} onClick={() => { setPostButton(!PostButton); }} />
-      { PostButton && <MedNotesForm payForm={PostButton} pId={pId} postButton={setPostButton} /> }
+      {PostButton && <MedNotesForm payForm={PostButton} pId={pId} postButton={setPostButton} />}
       <div>
         {data?.patientMedNotes?.map((note) => (
           <>
-            <div>{note?.title}</div>
-            <div>{ note?.date_noted}</div>
-            <div>{note?.med_notes}</div>
-            <div>{ note?.doctor?.doc_name }</div>
+            <div className="medNotes">
+              <div className="card">
+                <div className="title">{note?.title}</div>
+                <div>{note?.date_noted}</div>
+                <br />
+                <div>{note?.med_notes}</div>
+              </div>
+            </div>
+            Note by:
+            <div className="doctorSign">
+              Dr.
+              {'  '}
+              {note?.doctor?.doc_name}
+            </div>
           </>
         ))}
       </div>
