@@ -8,11 +8,7 @@
   color: white;
   display: inline-block;
 }
-.position-fixed{
-  /* position: fixed; 
-  width: 100%; */
-  z-index: 1;
-}
+
 
 .doctor-btn { 
   background-color: #d3def0;
@@ -26,5 +22,6 @@
   display: flex !important;
   justify-content: right !important;
 }
+
 
 

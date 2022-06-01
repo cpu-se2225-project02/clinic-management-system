@@ -5,7 +5,8 @@
 body {
   overflow-x: hidden;
 }
-.patientListPage{
+
+.patient-box{
   overflow-x: hidden;
   overflow-y: hidden;
   padding-top: 5% !important;
@@ -51,13 +52,17 @@ body {
 }
 
 .add-patient-btn {
-  /* background-color: #033076; */
+
   margin-top: 3px;
 }
 .PatientListBar{
-  /* background-color: #528e9c; */
+  background-color: #528e9c;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px !important;
+  padding: 13px !important;
 }
-.list-row {
+.list-row { 
   margin-top: 10px !important;
 }
 
@@ -105,8 +110,4 @@ body {
 
 .res-row {
   height: 60px !important;
-}
-.patientListPage{
-  padding-top: 5% ;
-  padding-bottom: 5%;
 }
