@@ -249,6 +249,7 @@ query Invoice($pID: Int!) {
 
 query patientMedHistory($patientId: Int!) {
   patientMedHistory(patientId: $patientId) {
+    id
     patient_id
     diagnosis
     treatment_plan
@@ -288,6 +289,10 @@ mutation DeleteMedHistory($medicalhistoryId: Int!) {
     diagnosis
     treatment_plan
     description
+  }
+}
+
+    
 query PatientReferrals($patientId: Int!) {
   patientReferrals(patientID: $patientId) {
     id
@@ -304,6 +309,7 @@ query PatientReferrals($patientId: Int!) {
     }
   }
 }
+
 
 mutation AddReferral($newReferral: ReferralInput!) {
   addReferral(newReferral: $newReferral) {
