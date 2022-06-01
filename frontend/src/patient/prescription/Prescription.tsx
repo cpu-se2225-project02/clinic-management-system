@@ -58,17 +58,17 @@ export default function Prescription({ pID }: PatientID) {
   return (
     <>
       {addPrescBtn && <PrescriptionForm popup={setAddPrescBtn} pID={pID as number} />}
+      <div className="col-sm-11">
+        <button onClick={() => { setAddPrescBtn(true); }} className="btn btn-outline-secondary">
+          <RiAddFill size={30} />
+          Add Prescription
+        </button>
+      </div>
       {data?.patientPrescriptions?.length !== 0
         ? data?.patientPrescriptions?.map((prescription) => (
           <>
             <div className="container">
               <div className="row">
-                <div className="col-sm-11">
-                  <button onClick={() => { setAddPrescBtn(true); }} className="btn btn-outline-secondary">
-                    <RiAddFill size={30} />
-                    Add Prescription
-                  </button>
-                </div>
                 <div className="col-sm-1">
                   <div className="btn-group" role="group">
                     <button type="button" className="editAndDltBtn" onClick={() => onEditBtnClicked(prescription?.id as number)}>

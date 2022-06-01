@@ -68,6 +68,11 @@ input EditPrescriptionInput {
   pres_name: String!
 }
 
+input EditReferralInput {
+  doctor_id: Int!
+  hosp_name: String!
+}
+
 input MedNotesInput {
   date_noted: String!
   doc_id: Int!
@@ -104,14 +109,17 @@ type Mutation {
   addPatient(newPatient: PatientInput!): Patient
   addPayment(newPayment: PaymentInput!): Bill
   addPrescription(newPrescription: AddPrescriptionInput!): Prescription
+  addReferral(newReferral: ReferralInput!): Referral
   deleteAppointment(appID: Int!): Appointment
   deleteMedHistory(medicalhistoryId: Int!): MedicalHistory
   deletePatient(patientId: Int!): Patient
   deletePrescription(prescriptionId: Int!): Prescription
+  deleteReferral(referralId: Int!): Referral
   editAppointment(appointmentID: Int!, editedAppointment: AppointmentInput!): Appointment
   editMedHistory(editedMedHistory: EditMedHistoryInput!, medicalhistoryId: Int!): MedicalHistory
   editPatient(editedPatient: PatientInput!, patientId: Int!): Patient
   editPrescription(editedPrescription: EditPrescriptionInput!, prescriptionId: Int!): Prescription
+  editReferral(editedReferral: EditReferralInput!, referralID: Int!): Referral
 }
 
 type Patient {
@@ -170,8 +178,22 @@ type Query {
   patientMedHistory(patientId: Int!): [MedicalHistory]
   patientMedNotes(patient_id: Int!): [MedicalNotes]
   patientPrescriptions(patientId: Int!): [Prescription]
+  patientReferrals(patientID: Int!): [Referral]
   patients(condition: String): [Patient]
   prescriptions: [Prescription]
   specificAppointment(patientID: Int!): [Appointment]
   specificPatient(patientId: Int!): Patient
+}
+
+type Referral {
+  doctor: Doctor
+  hosp_name: String!
+  id: Int!
+  patient: Patient
+}
+
+input ReferralInput {
+  doctor_id: Int!
+  hosp_name: String!
+  patient_id: Int!
 }
