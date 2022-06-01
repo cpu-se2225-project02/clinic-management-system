@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable no-multiple-empty-lines */
 import * as Types from './generated/graphql';
 
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
@@ -331,6 +333,59 @@ export type InvoiceQuery = (
   )>>> }
 );
 
+export type PatientMedHistoryQueryVariables = Types.Exact<{
+  patientId: Types.Scalars['Int'];
+}>;
+
+
+export type PatientMedHistoryQuery = (
+  { __typename?: 'Query' }
+  & { patientMedHistory?: Types.Maybe<Array<Types.Maybe<(
+    { __typename?: 'MedicalHistory' }
+    & Pick<Types.MedicalHistory, 'patient_id' | 'diagnosis' | 'treatment_plan' | 'description'>
+  )>>> }
+);
+
+export type AddMedHistoryMutationVariables = Types.Exact<{
+  newMedHistory: Types.AddMedHistoryInput;
+}>;
+
+
+export type AddMedHistoryMutation = (
+  { __typename?: 'Mutation' }
+  & { addMedHistory?: Types.Maybe<(
+    { __typename?: 'MedicalHistory' }
+    & Pick<Types.MedicalHistory, 'id' | 'diagnosis' | 'treatment_plan' | 'patient_id'>
+  )> }
+);
+
+export type EditMedHistoryMutationVariables = Types.Exact<{
+  editedMedHistory: Types.EditMedHistoryInput;
+  medicalhistoryId: Types.Scalars['Int'];
+}>;
+
+
+export type EditMedHistoryMutation = (
+  { __typename?: 'Mutation' }
+  & { editMedHistory?: Types.Maybe<(
+    { __typename?: 'MedicalHistory' }
+    & Pick<Types.MedicalHistory, 'id' | 'diagnosis' | 'treatment_plan' | 'description' | 'patient_id'>
+  )> }
+);
+
+export type DeleteMedHistoryMutationVariables = Types.Exact<{
+  medicalhistoryId: Types.Scalars['Int'];
+}>;
+
+
+export type DeleteMedHistoryMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteMedHistory?: Types.Maybe<(
+    { __typename?: 'MedicalHistory' }
+    & Pick<Types.MedicalHistory, 'id' | 'diagnosis' | 'treatment_plan' | 'description'>
+  )> }
+);
+
 
 export const AllPatientsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AllPatients"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"con"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"patients"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"condition"},"value":{"kind":"Variable","name":{"kind":"Name","value":"con"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"f_name"}},{"kind":"Field","name":{"kind":"Name","value":"l_name"}},{"kind":"Field","name":{"kind":"Name","value":"m_name"}},{"kind":"Field","name":{"kind":"Name","value":"suffix"}},{"kind":"Field","name":{"kind":"Name","value":"sex"}},{"kind":"Field","name":{"kind":"Name","value":"age"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"constactNo"}}]}}]}}]} as unknown as DocumentNode<AllPatientsQuery, AllPatientsQueryVariables>;
 export const AddPatientDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"AddPatient"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"newPatient"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PatientInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"addPatient"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"newPatient"},"value":{"kind":"Variable","name":{"kind":"Name","value":"newPatient"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"l_name"}},{"kind":"Field","name":{"kind":"Name","value":"f_name"}},{"kind":"Field","name":{"kind":"Name","value":"m_name"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"age"}},{"kind":"Field","name":{"kind":"Name","value":"suffix"}},{"kind":"Field","name":{"kind":"Name","value":"sex"}},{"kind":"Field","name":{"kind":"Name","value":"birthdate"}}]}}]}}]} as unknown as DocumentNode<AddPatientMutation, AddPatientMutationVariables>;
@@ -356,3 +411,7 @@ export const AllDoctorsDocument = {"kind":"Document","definitions":[{"kind":"Ope
 export const AllPaymentsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AllPayments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"allPayments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ammnt_paid"}}]}}]}}]} as unknown as DocumentNode<AllPaymentsQuery, AllPaymentsQueryVariables>;
 export const AddBillDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"addBill"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"bill"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"BillInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"addBill"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"newBill"},"value":{"kind":"Variable","name":{"kind":"Name","value":"bill"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ammnt_cost"}},{"kind":"Field","name":{"kind":"Name","value":"patient_id"}}]}}]}}]} as unknown as DocumentNode<AddBillMutation, AddBillMutationVariables>;
 export const InvoiceDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Invoice"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"pID"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"invoice"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"patientId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"pID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"ammnt_cost"}},{"kind":"Field","name":{"kind":"Name","value":"patient"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"l_name"}},{"kind":"Field","name":{"kind":"Name","value":"f_name"}}]}}]}}]}}]} as unknown as DocumentNode<InvoiceQuery, InvoiceQueryVariables>;
+export const PatientMedHistoryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"patientMedHistory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"patientId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"patientMedHistory"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"patientId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"patientId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"patient_id"}},{"kind":"Field","name":{"kind":"Name","value":"diagnosis"}},{"kind":"Field","name":{"kind":"Name","value":"treatment_plan"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<PatientMedHistoryQuery, PatientMedHistoryQueryVariables>;
+export const AddMedHistoryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"AddMedHistory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"newMedHistory"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"AddMedHistoryInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"addMedHistory"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"newMedHistory"},"value":{"kind":"Variable","name":{"kind":"Name","value":"newMedHistory"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"diagnosis"}},{"kind":"Field","name":{"kind":"Name","value":"treatment_plan"}},{"kind":"Field","name":{"kind":"Name","value":"patient_id"}}]}}]}}]} as unknown as DocumentNode<AddMedHistoryMutation, AddMedHistoryMutationVariables>;
+export const EditMedHistoryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"EditMedHistory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"editedMedHistory"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"EditMedHistoryInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"medicalhistoryId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"editMedHistory"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"medicalhistoryId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"medicalhistoryId"}}},{"kind":"Argument","name":{"kind":"Name","value":"editedMedHistory"},"value":{"kind":"Variable","name":{"kind":"Name","value":"editedMedHistory"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"diagnosis"}},{"kind":"Field","name":{"kind":"Name","value":"treatment_plan"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"patient_id"}}]}}]}}]} as unknown as DocumentNode<EditMedHistoryMutation, EditMedHistoryMutationVariables>;
+export const DeleteMedHistoryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteMedHistory"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"medicalhistoryId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteMedHistory"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"medicalhistoryId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"medicalhistoryId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"diagnosis"}},{"kind":"Field","name":{"kind":"Name","value":"treatment_plan"}},{"kind":"Field","name":{"kind":"Name","value":"description"}}]}}]}}]} as unknown as DocumentNode<DeleteMedHistoryMutation, DeleteMedHistoryMutationVariables>;

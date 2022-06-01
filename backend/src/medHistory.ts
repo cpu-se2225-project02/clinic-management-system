@@ -35,7 +35,7 @@ export const MedicalHistory = objectType({
 });
 
 // read
-export const medicalhistory = queryField('medical history', {
+export const medicalhistory = queryField('medicalhistory', {
   type: list(MedicalHistory),
   resolve() {
     return db.medicalHistory.findMany();
@@ -47,10 +47,10 @@ export const patientMedHistory = queryField('patientMedHistory', {
   args: {
     patientId: nonNull(intArg()),
   },
-  resolve(root, args) {
+  resolve(root, args: {patient_id: Prisma.MedicalHistoryWhereUniqueInput}) {
     return db.medicalHistory.findMany({
       where: {
-        patient_id: args.patientId,
+        patient_id: args.patient_id as any,
       },
     });
   },
