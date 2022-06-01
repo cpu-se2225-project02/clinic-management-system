@@ -7,6 +7,7 @@ import { BiEdit } from 'react-icons/bi';
 import { MdDeleteOutline } from 'react-icons/md';
 import { RiAddFill } from 'react-icons/ri';
 import { useMutation, useQuery } from 'urql';
+import ConfirmDelete from '../../common/ConfirmDelete';
 import { DeleteReferralDocument, PatientReferralsDocument } from '../../queries.generated';
 import ReferralForm from './ReferralForm';
 import UpdateReferralForm from './UpdateReferralForm';
@@ -21,6 +22,8 @@ function Referral({ pID }: PatientID) {
   const [updateReferral, setUpdatReferral] = useState(false);
   const [editBtnValue, setEditBtnValue] = useState(0);
   const [deleteRef, setDeleteRef] = useMutation(DeleteReferralDocument);
+  const [deleteConfirmation, setDeleteConfirmation] = useState(false);
+  const [id, setId] = useState(0);
   const [patientReferrals] = useQuery({
     query: PatientReferralsDocument,
     variables: {
@@ -30,15 +33,28 @@ function Referral({ pID }: PatientID) {
 
   const { data, error, fetching } = patientReferrals;
 
-  const deleteReferral = (id: number) => {
+  const deleteReferral = (value: number) => {
     setDeleteRef({
-      referralId: id,
+      referralId: value,
     });
   };
 
   const onEditBtnClicked = (value: number) => {
     setEditBtnValue(value);
     setUpdatReferral(true);
+  };
+
+  const onDeleteBtnClicked = (value: number) => {
+    setId(value);
+    setDeleteConfirmation(true);
+  };
+
+  const handleDeleteTrue = () => {
+    deleteReferral(id);
+    setDeleteConfirmation(false);
+  };
+  const handleDeleteFalse = () => {
+    setDeleteConfirmation(false);
   };
 
   if (fetching) {
@@ -62,23 +78,27 @@ function Referral({ pID }: PatientID) {
       <div>
         {data?.patientReferrals?.map((referral) => (
           <>
+
             <div className="container">
               <div className="row">
                 <div className="col">
-                  <div className="btn-group editAndDelete" role="group">
-                    <button type="button" className="editAndDltBtn" onClick={() => onEditBtnClicked(referral?.id as number)}>
-                      <BiEdit size={30} />
-                    </button>
-                    <button type="button" className="editAndDltBtn" onClick={() => deleteReferral(referral?.id as number)}>
-                      <MdDeleteOutline size={30} />
-                    </button>
+            <div className="btn-group" role="group">
+              <button type="button" className="editAndDltBtn" onClick={() => onEditBtnClicked(referral?.id as number)}>
+                <BiEdit size={30} />
+              </button>
+              <button type="button" className="editAndDltBtn" onClick={() => onDeleteBtnClicked(referral?.id as number)}>
+                <MdDeleteOutline size={30} />
+              </button>
                   </div>
                 </div>
               </div>
+
             </div>
 
             {updateReferral && <UpdateReferralForm pID={pID} popup={setUpdatReferral} refID={editBtnValue} />}
             <div className="referredHospital">
+            {deleteConfirmation && <ConfirmDelete onDeleteTrue={handleDeleteTrue} onDeleteFalse={handleDeleteFalse} />}
+            <div>
               {referral?.hosp_name}
               <br />
               {referral?.doctor?.doc_name}

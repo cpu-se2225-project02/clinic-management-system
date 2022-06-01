@@ -13,6 +13,7 @@ import { DeletePrescriptionDocument, PatientPrescriptionsDocument } from '../../
 import PrescriptionForm from './PrescriptionForm';
 import UpdatePrescriptionForm from './UpdatePrescriptionForm';
 import './Prescription.css';
+import ConfirmDelete from '../../common/ConfirmDelete';
 
 interface PatientID {
   pID: undefined | number
@@ -23,6 +24,8 @@ export default function Prescription({ pID }: PatientID) {
   const [updatePrescBtn, setUpdatePrescBtn] = useState(false);
   const [editBtnValue, setEditBtnValue] = useState(0);
   const [deletePresc, setDeletePresc] = useMutation(DeletePrescriptionDocument);
+  const [deleteConfirmation, setDeleteConfirmation] = useState(false);
+  const [id, setId] = useState(0);
 
   const [patientPrescriptions] = useQuery({
     query: PatientPrescriptionsDocument,
@@ -45,9 +48,9 @@ export default function Prescription({ pID }: PatientID) {
     console.log(error);
     return <div>Deletion unsuccessful</div>;
   }
-  const deletePrescription = (id: number) => {
+  const deletePrescription = (value: number) => {
     setDeletePresc({
-      prescId: id,
+      prescId: value,
     });
   };
 
@@ -55,6 +58,20 @@ export default function Prescription({ pID }: PatientID) {
     setEditBtnValue(value);
     setUpdatePrescBtn(true);
   };
+
+  const onDeleteBtnClicked = (value: number) => {
+    setId(value);
+    setDeleteConfirmation(true);
+  };
+
+  const handleDeleteTrue = () => {
+    deletePrescription(id);
+    setDeleteConfirmation(false);
+  };
+  const handleDeleteFalse = () => {
+    setDeleteConfirmation(false);
+  };
+
   return (
     <>
       {addPrescBtn && <PrescriptionForm popup={setAddPrescBtn} pID={pID as number} />}
@@ -74,10 +91,13 @@ export default function Prescription({ pID }: PatientID) {
                     <button type="button" className="editAndDelete" onClick={() => onEditBtnClicked(prescription?.id as number)}>
                       <BiEdit size={30} />
                     </button>
+
                     <button type="button" className="editAndDelete" onClick={() => deletePrescription(prescription?.id as number)}>
+
                       <MdDeleteOutline size={30} />
                     </button>
                     {updatePrescBtn && <UpdatePrescriptionForm popup={setUpdatePrescBtn} pID={pID as number} prescID={editBtnValue} />}
+                    {deleteConfirmation && <ConfirmDelete onDeleteTrue={handleDeleteTrue} onDeleteFalse={handleDeleteFalse} />}
                   </div>
                 </div>
               </div>
