@@ -47,10 +47,10 @@ export const patientMedHistory = queryField('patientMedHistory', {
   args: {
     patientId: nonNull(intArg()),
   },
-  resolve(root, args: {patient_id: Prisma.MedicalHistoryWhereUniqueInput}) {
+  resolve(root, args) {
     return db.medicalHistory.findMany({
       where: {
-        patient_id: args.patient_id as any,
+        patient_id: args.patientId,
       },
     });
   },
@@ -61,6 +61,7 @@ export const AddMedHistoryInput = inputObjectType({
   name: 'AddMedHistoryInput',
   definition(t) {
     t.field(MedHistoryType.diagnosis);
+    t.field(MedHistoryType.id);
     t.field(MedHistoryType.treatment_plan);
     t.field(MedHistoryType.description);
     t.field(MedHistoryType.patient_id);
@@ -82,6 +83,7 @@ export const AddMedHistory = mutationField('addMedHistory', {
 export const EditMedHistoryInput = inputObjectType({
   name: 'EditMedHistoryInput',
   definition(t) {
+    t.field(MedHistoryType.id);
     t.field(MedHistoryType.diagnosis);
     t.field(MedHistoryType.treatment_plan);
     t.field(MedHistoryType.description);

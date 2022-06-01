@@ -342,7 +342,7 @@ export type PatientMedHistoryQuery = (
   { __typename?: 'Query' }
   & { patientMedHistory?: Types.Maybe<Array<Types.Maybe<(
     { __typename?: 'MedicalHistory' }
-    & Pick<Types.MedicalHistory, 'patient_id' | 'diagnosis' | 'treatment_plan' | 'description'>
+    & Pick<Types.MedicalHistory, 'id' | 'patient_id' | 'diagnosis' | 'treatment_plan' | 'description'>
   )>>> }
 );
 

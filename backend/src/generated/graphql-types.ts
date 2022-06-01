@@ -17,6 +17,7 @@ export interface NexusGenInputs {
   AddMedHistoryInput: { // input type
     description: string; // String!
     diagnosis: string; // String!
+    id: number; // Int!
     patient_id: number; // Int!
     treatment_plan: string; // String!
   }
@@ -42,6 +43,7 @@ export interface NexusGenInputs {
   EditMedHistoryInput: { // input type
     description: string; // String!
     diagnosis: string; // String!
+    id: number; // Int!
     treatment_plan: string; // String!
   }
   EditPrescriptionInput: { // input type
