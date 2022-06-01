@@ -92,7 +92,7 @@ export default function Prescription({ pID }: PatientID) {
                       <BiEdit size={30} />
                     </button>
 
-                    <button type="button" className="editAndDelete" onClick={() => deletePrescription(prescription?.id as number)}>
+                    <button type="button" className="editAndDelete" onClick={() => onDeleteBtnClicked(prescription?.id as number)}>
 
                       <MdDeleteOutline size={30} />
                     </button>
