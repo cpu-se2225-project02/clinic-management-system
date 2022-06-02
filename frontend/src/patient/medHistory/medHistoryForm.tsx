@@ -29,7 +29,9 @@ export default function medHistoryForm(addMedHistoryFormProps: AddMedHistoryForm
     addMedHistory();
     addMedHistoryFormProps.popup(false);
   };
-  console.log(addmedHistory);
+  if (addmedHistory.error) {
+    console.log(addmedHistory.error);
+  }
   return (
     <div className="popup">
       <div className="popup-inner">

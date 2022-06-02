@@ -36,8 +36,8 @@ export default function MedicalHistory({ pID }: PatientID) {
   }
 
   if (error) {
-    console.log(error);
-    return <div>Insertion unsuccessful</div>;
+    console.log(error.message);
+    return <div>Load unsuccessful</div>;
   }
 
   if (deleteMedHistory.error) {

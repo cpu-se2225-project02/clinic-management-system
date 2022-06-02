@@ -5,7 +5,6 @@
 input AddMedHistoryInput {
   description: String!
   diagnosis: String!
-  id: Int!
   patient_id: Int!
   treatment_plan: String!
 }

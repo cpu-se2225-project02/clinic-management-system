@@ -61,7 +61,6 @@ export const AddMedHistoryInput = inputObjectType({
   name: 'AddMedHistoryInput',
   definition(t) {
     t.field(MedHistoryType.diagnosis);
-    t.field(MedHistoryType.id);
     t.field(MedHistoryType.treatment_plan);
     t.field(MedHistoryType.description);
     t.field(MedHistoryType.patient_id);
