@@ -4,13 +4,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/destructuring-assignment */
 import React, { useState } from 'react';
+import { Modal } from 'react-bootstrap';
 import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { useMutation, useQuery } from 'urql';
 import { AddReferralDocument, AllDocsDocument } from '../../queries.generated';
 
 interface AddReferralFormProps {
-    pID: undefined | number,
-    popup: React.Dispatch<React.SetStateAction<boolean>>
+  pID: undefined | number,
+  popup: React.Dispatch<React.SetStateAction<boolean>>
+  referralBtn: React.Dispatch<React.SetStateAction<boolean>>
+  referralpopup: boolean
 }
 function ReferralForm(addReferralProps: AddReferralFormProps) {
   const [addReferral, setAddReferral] = useMutation(AddReferralDocument);
@@ -38,15 +41,16 @@ function ReferralForm(addReferralProps: AddReferralFormProps) {
 
   const { data } = allDoctors;
   return (
-    <div className="popup">
-      <div className="popup-inner">
+    <Modal
+      show={addReferralProps.referralpopup}
+      onHide={() => addReferralProps.referralBtn(false)}
+      className="mt-5 mb-5"
+      backdrop="static"
+    >
+      <Modal.Header closeButton><h5>Add a Referral</h5></Modal.Header>
+      <Modal.Body>
+
         <h5>Add Referral</h5>
-        <button
-          onClick={() => addReferralProps.popup(false)}
-          className="btn close-btn float-end mt-0"
-        >
-          <AiOutlineCloseSquare size={25} />
-        </button>
         <div className="input-group mb-3">
           <span className="input-group-text" id="basic-addon1">Hospital</span>
           <input type="text" className="form-control" aria-label="Hospital" aria-describedby="basic-addon1" onChange={(e) => setHospital(e.target.value)} />
@@ -68,8 +72,9 @@ function ReferralForm(addReferralProps: AddReferralFormProps) {
         >
           Submit
         </button>
-      </div>
-    </div>
+
+      </Modal.Body>
+    </Modal>
   );
 }
 
