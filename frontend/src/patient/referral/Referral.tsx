@@ -68,7 +68,14 @@ function Referral({ pID }: PatientID) {
 
   return (
     <>
-      {addReferral && <ReferralForm pID={pID} popup={setAddReferral} />}
+      {addReferral && (
+      <ReferralForm
+        referralBtn={setAddReferral}
+        referralpopup={addReferral}
+        pID={pID}
+        popup={setAddReferral}
+      />
+      )}
       <div className="col-sm-11">
         <button className="btn btn-outline-secondary" onClick={() => setAddReferral(true)}>
           <RiAddFill size={30} />
@@ -94,7 +101,14 @@ function Referral({ pID }: PatientID) {
             </div>
 
             {updateReferral && <UpdateReferralForm pID={pID} popup={setUpdatReferral} refID={editBtnValue} />}
-            {deleteConfirmation && <ConfirmDelete onDeleteTrue={handleDeleteTrue} onDeleteFalse={handleDeleteFalse} />}
+            {deleteConfirmation && (
+            <ConfirmDelete
+              onDeleteTrue={handleDeleteTrue}
+              onDeleteFalse={handleDeleteFalse}
+              deleteModal={deleteConfirmation}
+              deleteModalBtn={setDeleteConfirmation}
+            />
+            )}
             <div className="referredHospital">
               {referral?.hosp_name}
               <br />

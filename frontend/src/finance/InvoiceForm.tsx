@@ -1,7 +1,7 @@
 /* eslint-disable radix */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'urql';
 import Footer from '../common/Footer';
@@ -20,33 +20,36 @@ export default function InvoiceForm() {
   });
   return (
     <>
-
-      <Header />
-      <h4>Generated Invoice</h4>
-      <div className="invoice-form">
-        <Table striped bordered>
-          <thead>
-            <th>Description</th>
-            <th>Amount</th>
-          </thead>
-          <tbody>
-            {theInvoice.data?.invoice?.map((inv) => (
-              <tr>
-                <td>Description</td>
-                <td>
-                  Php
-                  {' '}
-                  { inv?.ammnt_cost }
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-        <div>
-          Total:
+      <Row>
+        <Header />
+      </Row>
+      <Row style={{ marginTop: '100px' }}>
+        <h4>Generated Invoice</h4>
+        <div className="invoice-form">
+          <Table striped bordered>
+            <thead>
+              <th>Description</th>
+              <th>Amount</th>
+            </thead>
+            <tbody>
+              {theInvoice.data?.invoice?.map((inv) => (
+                <tr>
+                  <td>Description</td>
+                  <td>
+                    Php
+                    {' '}
+                    { inv?.ammnt_cost }
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+          <div>
+            Total:
+          </div>
         </div>
-      </div>
-      <Footer />
+        <Footer />
+      </Row>
     </>
   );
 }
