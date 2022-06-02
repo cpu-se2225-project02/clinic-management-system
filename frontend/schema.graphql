@@ -2,6 +2,13 @@
 ### Do not make changes to this file directly
 
 
+input AddMedHistoryInput {
+  description: String!
+  diagnosis: String!
+  patient_id: Int!
+  treatment_plan: String!
+}
+
 input AddPrescriptionInput {
   patient_id: Int!
   pres_dos: Int!
@@ -50,6 +57,13 @@ input DoctorInput {
   doc_name: String!
 }
 
+input EditMedHistoryInput {
+  description: String!
+  diagnosis: String!
+  id: Int!
+  treatment_plan: String!
+}
+
 input EditPrescriptionInput {
   pres_dos: Int!
   pres_name: String!
@@ -68,6 +82,15 @@ input MedNotesInput {
   title: String!
 }
 
+type MedicalHistory {
+  description: String!
+  diagnosis: String!
+  id: Int!
+  patient: Patient
+  patient_id: Int!
+  treatment_plan: String!
+}
+
 type MedicalNotes {
   date_noted: String!
   doc_id: Int!
@@ -82,16 +105,19 @@ type Mutation {
   addAppointment(newAppointment: AppointmentInput!): Appointment
   addBill(newBill: BillInput!): Bill
   addDoctor(newDoctor: DoctorInput!): Doctor
+  addMedHistory(newMedHistory: AddMedHistoryInput!): MedicalHistory
   addMedNotes(newMedNotes: MedNotesInput!): MedicalNotes
   addPatient(newPatient: PatientInput!): Patient
   addPayment(newPayment: PaymentInput!): Bill
   addPrescription(newPrescription: AddPrescriptionInput!): Prescription
   addReferral(newReferral: ReferralInput!): Referral
   deleteAppointment(appID: Int!): Appointment
+  deleteMedHistory(medicalhistoryId: Int!): MedicalHistory
   deletePatient(patientId: Int!): Patient
   deletePrescription(prescriptionId: Int!): Prescription
   deleteReferral(referralId: Int!): Referral
   editAppointment(appointmentID: Int!, editedAppointment: AppointmentInput!): Appointment
+  editMedHistory(editedMedHistory: EditMedHistoryInput!, medicalhistoryId: Int!): MedicalHistory
   editPatient(editedPatient: PatientInput!, patientId: Int!): Patient
   editPrescription(editedPrescription: EditPrescriptionInput!, prescriptionId: Int!): Prescription
   editReferral(editedReferral: EditReferralInput!, referralID: Int!): Referral
@@ -149,6 +175,8 @@ type Query {
   hi: String
   high: String
   invoice(patientId: Int!): [Bill]
+  medicalhistory: [MedicalHistory]
+  patientMedHistory(patientId: Int!): [MedicalHistory]
   patientMedNotes(patient_id: Int!): [MedicalNotes]
   patientPrescriptions(patientId: Int!): [Prescription]
   patientReferrals(patientID: Int!): [Referral]

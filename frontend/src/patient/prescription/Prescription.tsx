@@ -73,8 +73,16 @@ export default function Prescription({ pID }: PatientID) {
   };
 
   return (
+
     <>
-      {addPrescBtn && <PrescriptionForm popup={setAddPrescBtn} pID={pID as number} />}
+      {addPrescBtn && (
+      <PrescriptionForm
+        prescpopup={addPrescBtn}
+        prescBtn={setAddPrescBtn}
+        popup={setAddPrescBtn}
+        pID={pID as number}
+      />
+      )}
       <div className="col-sm-11">
         <button onClick={() => { setAddPrescBtn(true); }} className="btn btn-outline-secondary">
           <RiAddFill size={30} />
@@ -97,7 +105,14 @@ export default function Prescription({ pID }: PatientID) {
                       <MdDeleteOutline size={30} />
                     </button>
                     {updatePrescBtn && <UpdatePrescriptionForm popup={setUpdatePrescBtn} pID={pID as number} prescID={editBtnValue} />}
-                    {deleteConfirmation && <ConfirmDelete onDeleteTrue={handleDeleteTrue} onDeleteFalse={handleDeleteFalse} />}
+                    {deleteConfirmation && (
+                    <ConfirmDelete
+                      onDeleteTrue={handleDeleteTrue}
+                      onDeleteFalse={handleDeleteFalse}
+                      deleteModal={deleteConfirmation}
+                      deleteModalBtn={setDeleteConfirmation}
+                    />
+                    )}
                   </div>
                 </div>
               </div>

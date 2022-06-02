@@ -17,7 +17,7 @@ export default function Sidebars() {
   return (
     <Container fluid className="border-end sb">
       {/* <Col className="fixed-bottom"> */}
-      <Col className="position-fixed col-2 col-sm-2 sidebar">
+      <Col className="position-fixed col-2 col-sm-2 sidebar mt-2">
 
         <Row className="all-btns mt-3">
           <Image
