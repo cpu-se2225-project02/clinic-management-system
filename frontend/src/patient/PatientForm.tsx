@@ -57,6 +57,11 @@ export default function PatientForm({ postButton, payForm }: Popup) {
     }).then((res) => console.log(res));
   };
 
+  const handleSubmitBtn = () => {
+    insertingPatient();
+    postButton(false);
+  };
+
   return (
     <Modal show={payForm} onHide={() => postButton(false)} className="mt-5 mb-5" backdrop="static">
       <Modal.Header closeButton><h5>Add a Patient</h5></Modal.Header>
@@ -108,7 +113,7 @@ export default function PatientForm({ postButton, payForm }: Popup) {
 
         <button
           className="btn btn-primary mt-2 float-end"
-          onClick={insertingPatient}
+          onClick={handleSubmitBtn}
           type="submit"
         >
           Submit
