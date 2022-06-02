@@ -68,7 +68,14 @@ function Referral({ pID }: PatientID) {
 
   return (
     <>
-      {addReferral && <ReferralForm pID={pID} popup={setAddReferral} />}
+      {addReferral && (
+      <ReferralForm
+        referralBtn={setAddReferral}
+        referralpopup={addReferral}
+        pID={pID}
+        popup={setAddReferral}
+      />
+      )}
       <div className="col-sm-11">
         <button className="btn btn-outline-secondary" onClick={() => setAddReferral(true)}>
           <RiAddFill size={30} />
