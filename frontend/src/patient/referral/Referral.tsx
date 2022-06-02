@@ -94,7 +94,14 @@ function Referral({ pID }: PatientID) {
             </div>
 
             {updateReferral && <UpdateReferralForm pID={pID} popup={setUpdatReferral} refID={editBtnValue} />}
-            {deleteConfirmation && <ConfirmDelete onDeleteTrue={handleDeleteTrue} onDeleteFalse={handleDeleteFalse} />}
+            {deleteConfirmation && (
+            <ConfirmDelete
+              onDeleteTrue={handleDeleteTrue}
+              onDeleteFalse={handleDeleteFalse}
+              deleteModal={deleteConfirmation}
+              deleteModalBtn={setDeleteConfirmation}
+            />
+            )}
             <div className="referredHospital">
               {referral?.hosp_name}
               <br />
