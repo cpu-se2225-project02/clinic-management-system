@@ -172,40 +172,49 @@ function Dashboard() {
               </Col>
             </Row>
             <Row className="mt-5 mb-5">
-              <Col xs={12}>
-                <Table striped bordered hover size="sm" className="tb">
-                  <thead className="tb-head">
-                    <tr>
-                      <th>Appointment Title</th>
-                      <th>Patient Name</th>
-                      <th>Doctor-in-Charge</th>
-                      <th>Start</th>
-                      <th>End</th>
-                    </tr>
-                  </thead>
-                  {allAppointments.data?.appointments?.map((appointment) => (
-                    <tbody>
-                      <td>{appointment?.name}</td>
-                      <td>
-                        {appointment?.patient?.f_name}
-                        {' '}
-                        {appointment?.patient?.l_name}
-                      </td>
-                      <td>{appointment?.doctor?.doc_name}</td>
-                      <td>
-                        {new Date(appointment?.dt_start as string).toDateString()}
-                        {' '}
-                        {new Date(appointment?.dt_start as string).toLocaleTimeString()}
-                      </td>
-                      <td>
-                        {new Date(appointment?.dt_end as string).toDateString()}
-                        {' '}
-                        {new Date(appointment?.dt_end as string).toLocaleTimeString()}
-                      </td>
-                    </tbody>
-                  ))}
-                </Table>
-              </Col>
+              <Card style={{
+                width: '100rem',
+                boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)',
+                borderRadius: '10px',
+              }}
+              >
+                <Col xs={12} className="dashboardInfo">
+                  <Table className="table table-hover">
+                    <thead className="tb-head">
+                      <tr>
+                        <th scope="col">Appointment Title</th>
+                        <th scope="col">Patient Name</th>
+                        <th scope="col">Doctor-in-Charge</th>
+                        <th scope="col">Start</th>
+                        <th scope="col">End</th>
+                      </tr>
+                    </thead>
+                    {allAppointments.data?.appointments?.map((appointment) => (
+                      <tbody>
+                        <tr>
+                          <td>{appointment?.name}</td>
+                          <td>
+                            {appointment?.patient?.f_name}
+                            {' '}
+                            {appointment?.patient?.l_name}
+                          </td>
+                          <td>{appointment?.doctor?.doc_name}</td>
+                          <td>
+                            {new Date(appointment?.dt_start as string).toDateString()}
+                            {' '}
+                            {new Date(appointment?.dt_start as string).toLocaleTimeString()}
+                          </td>
+                          <td>
+                            {new Date(appointment?.dt_end as string).toDateString()}
+                            {' '}
+                            {new Date(appointment?.dt_end as string).toLocaleTimeString()}
+                          </td>
+                        </tr>
+                      </tbody>
+                    ))}
+                  </Table>
+                </Col>
+              </Card>
             </Row>
           </Col>
         </Row>

@@ -7,14 +7,18 @@
   background-color: rgb(166, 166, 166);
 }
 
-.tb {
-  border: 5px !important;
+.dashboardInfo{
+  padding-top: 10px;
+}
+.mt-5{
+  padding-left: 10px;
 }
 
 .tb-head {
-  background-color: #f9ebbe;
-  color: #051329;
-  border-color: none;
+  background-color: #feddba;
+  /* background-color: #ffd2aa; */
+  /* color: #051329; */
+  /* border-style: hidden; */
 }
 .dashboardPage {
 padding-top: 5%;
