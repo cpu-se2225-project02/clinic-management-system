@@ -75,7 +75,14 @@ export default function Prescription({ pID }: PatientID) {
   return (
 
     <>
-      {addPrescBtn && <PrescriptionForm popup={setAddPrescBtn} pID={pID as number} />}
+      {addPrescBtn && (
+      <PrescriptionForm
+        prescpopup={addPrescBtn}
+        prescBtn={setAddPrescBtn}
+        popup={setAddPrescBtn}
+        pID={pID as number}
+      />
+      )}
       <div className="col-sm-11">
         <button onClick={() => { setAddPrescBtn(true); }} className="btn btn-outline-secondary">
           <RiAddFill size={30} />
