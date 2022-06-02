@@ -44,6 +44,15 @@ export default function PatientRecord({ accountToggle = false } : OpProps) {
     },
   });
 
+  const handleBtnClick = (handler: React.Dispatch<React.SetStateAction<boolean>>, state: boolean) => {
+    setPrescBtn(false);
+    setAccBtn(false);
+    setMedNotesBtn(false);
+    setAppointmentBtn(false);
+    setReferralBtn(false);
+    setMedHist(false);
+    handler(!state);
+  };
   const { data } = allPatients;
 
   return (
@@ -74,7 +83,7 @@ export default function PatientRecord({ accountToggle = false } : OpProps) {
             <Button
               variant="primary"
               className="patient-btns"
-              onClick={() => setPrescBtn(!PrescriptionBtn)}
+              onClick={() => handleBtnClick(setPrescBtn, PrescriptionBtn)}
             >
               Prescriptions
             </Button>
@@ -84,7 +93,7 @@ export default function PatientRecord({ accountToggle = false } : OpProps) {
             <Button
               variant="primary"
               className="patient-btns"
-              onClick={() => setReferralBtn(!ReferralBtn)}
+              onClick={() => handleBtnClick(setReferralBtn, ReferralBtn)}
             >
               Referrals
             </Button>
@@ -94,7 +103,7 @@ export default function PatientRecord({ accountToggle = false } : OpProps) {
             <Button
               variant="primary"
               className="patient-btns"
-              onClick={() => setMedHist(!MedHist)}
+              onClick={() => handleBtnClick(setMedHist, MedHist)}
             >
               Medical History
             </Button>
@@ -104,7 +113,7 @@ export default function PatientRecord({ accountToggle = false } : OpProps) {
             <Button
               variant="primary"
               className="patient-btns"
-              onClick={() => setAccBtn(!AccountBtn)}
+              onClick={() => handleBtnClick(setAccBtn, AccountBtn)}
             >
               Accounts
             </Button>
@@ -115,7 +124,7 @@ export default function PatientRecord({ accountToggle = false } : OpProps) {
             <Button
               variant="primary"
               className="patient-btns"
-              onClick={() => setMedNotesBtn(!MedNotesBtn)}
+              onClick={() => handleBtnClick(setMedNotesBtn, MedNotesBtn)}
             >
               Medical Notes
             </Button>
@@ -125,7 +134,7 @@ export default function PatientRecord({ accountToggle = false } : OpProps) {
             <Button
               variant="primary"
               className="patient-btns"
-              onClick={() => setAppointmentBtn(!AppointmentBtn)}
+              onClick={() => handleBtnClick(setAppointmentBtn, AppointmentBtn)}
             >
               Appointments
             </Button>
