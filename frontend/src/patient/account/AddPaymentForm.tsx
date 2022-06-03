@@ -3,7 +3,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/button-has-type */
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Spinner, Modal } from 'react-bootstrap';
 import { useMutation, useQuery } from 'urql';
 import { AddPaymentDocument, AllPatientsDocument } from '../../queries.generated';
@@ -12,9 +12,12 @@ interface Popup {
   addPaymentBtn: React.Dispatch<React.SetStateAction<boolean>>
   payForm: boolean
   patId?: number
+  disabledSelect?: boolean
 }
 
-function AddPaymentForm({ addPaymentBtn, payForm, patId = 0 }: Popup) {
+function AddPaymentForm({
+  addPaymentBtn, payForm, patId = 0, disabledSelect = false,
+}: Popup) {
   const [addPayment, setAddPayment] = useMutation(AddPaymentDocument);
   const [date, setDate] = useState('');
   const [ammtCost, setAmmtCost] = useState(0);
@@ -60,15 +63,25 @@ function AddPaymentForm({ addPaymentBtn, payForm, patId = 0 }: Popup) {
           <div className="input-group-prepend">
             <label className="input-group-text" htmlFor="inputGroupSelect01">Patient</label>
           </div>
-          <select className="custom-select" id="inputGroupSelect01" onChange={(e) => setId(parseInt(e.target.value))} required>
-            <option selected>Select a patient</option>
-            {data?.patients?.map((patient) => (
-              <option value={patient?.id}>
-                {patient?.f_name}
-                {' '}
-                {patient?.l_name}
-              </option>
-            ))}
+          <select disabled={disabledSelect} className="custom-select" id="inputGroupSelect01" onChange={(e) => setId(parseInt(e.target.value))} required>
+            {data?.patients?.map((patient) => {
+              if (patient?.id === id) {
+                return (
+                  <option selected value={patient?.id}>
+                    {patient?.f_name}
+                    {' '}
+                    {patient?.l_name}
+                  </option>
+                );
+              }
+              return (
+                <option value={patient?.id}>
+                  {patient?.f_name}
+                  {' '}
+                  {patient?.l_name}
+                </option>
+              );
+            }) as any as ReactNode}
           </select>
         </div>
         <div className="input-group mb-3">

@@ -104,7 +104,15 @@ export default function Prescription({ pID }: PatientID) {
 
                       <MdDeleteOutline size={30} />
                     </button>
-                    {updatePrescBtn && <UpdatePrescriptionForm popup={setUpdatePrescBtn} pID={pID as number} prescID={editBtnValue} />}
+                    {updatePrescBtn && (
+                    <UpdatePrescriptionForm
+                      popup={setUpdatePrescBtn}
+                      pID={pID as number}
+                      prescID={editBtnValue}
+                      updatePresc={updatePrescBtn}
+                      updatePrescBtn={setUpdatePrescBtn}
+                    />
+                    )}
                     {deleteConfirmation && (
                     <ConfirmDelete
                       onDeleteTrue={handleDeleteTrue}

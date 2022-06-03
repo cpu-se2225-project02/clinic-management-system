@@ -80,6 +80,7 @@ function PatientAccount({ pID }: PatientId) {
                     <AddPaymentForm
                       patId={pID}
                       payForm={addPayment}
+                      disabledSelect
                       addPaymentBtn={setAddPayment}
                     />
                   )}

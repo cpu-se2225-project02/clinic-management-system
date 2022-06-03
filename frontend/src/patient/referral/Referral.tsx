@@ -100,7 +100,15 @@ function Referral({ pID }: PatientID) {
               </div>
             </div>
 
-            {updateReferral && <UpdateReferralForm pID={pID} popup={setUpdatReferral} refID={editBtnValue} />}
+            {updateReferral && (
+            <UpdateReferralForm
+              pID={pID}
+              popup={setUpdatReferral}
+              refID={editBtnValue}
+              updateReferral={updateReferral}
+              updateReferralBtn={setUpdatReferral}
+            />
+            )}
             {deleteConfirmation && (
             <ConfirmDelete
               onDeleteTrue={handleDeleteTrue}

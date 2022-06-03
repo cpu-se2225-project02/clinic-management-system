@@ -53,7 +53,7 @@ export default function PrescriptionForm(addPrescFormProps: AddPrescFormProps) {
       className="mt-5 mb-5"
       backdrop="static"
     >
-      <Modal.Header closeButton><h5>Add a Referral</h5></Modal.Header>
+      <Modal.Header closeButton><h5>Add a Prescription</h5></Modal.Header>
       <Modal.Body>
 
         <div className="AddPrescriptionForm">

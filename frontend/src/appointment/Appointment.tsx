@@ -146,12 +146,10 @@ function Appointment() {
                   events={
                     allAppointments.data?.appointments?.map((appointment) => ({
                       event_id: appointment?.id,
-                      title: appointment?.name,
-
+                      title: `${appointment?.name} - ${appointment?.doctor?.doc_name}`,
                       start: new Date(appointment?.dt_start as string),
                       end: new Date(appointment?.dt_end as string),
                     }) as any as ProcessedEvent)
-
                   }
                   fields={[
                     {
@@ -194,7 +192,6 @@ function Appointment() {
                         <tr>
                           <td>
                             {appointment?.patient?.f_name}
-                            {' '}
                             {' '}
                             {appointment?.patient?.l_name}
                           </td>
