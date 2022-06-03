@@ -69,12 +69,12 @@ function Referral({ pID }: PatientID) {
   return (
     <>
       {addReferral && (
-      <ReferralForm
-        referralBtn={setAddReferral}
-        referralpopup={addReferral}
-        pID={pID}
-        popup={setAddReferral}
-      />
+        <ReferralForm
+          referralBtn={setAddReferral}
+          referralpopup={addReferral}
+          pID={pID}
+          popup={setAddReferral}
+        />
       )}
       <div className="col-sm-11">
         <button className="btn btn-outline-secondary" onClick={() => setAddReferral(true)}>
@@ -85,42 +85,43 @@ function Referral({ pID }: PatientID) {
       <div>
         {data?.patientReferrals?.map((referral) => (
           <>
-            <div className="container">
-              <div className="row">
-                <div className="col">
-                  <div className="btn-group editAndDelete" role="group">
-                    <button type="button" className="editAndDltBtn" onClick={() => onEditBtnClicked(referral?.id as number)}>
-                      <BiEdit size={30} />
-                    </button>
-                    <button type="button" className="editAndDltBtn" onClick={() => onDeleteBtnClicked(referral?.id as number)}>
-                      <MdDeleteOutline size={30} />
-                    </button>
-                  </div>
-                </div>
-              </div>
+            <div className="btn-group editAndDelete" role="group">
+              <button type="button" className="editAndDltBtn" onClick={() => onEditBtnClicked(referral?.id as number)}>
+                <BiEdit size={30} />
+              </button>
+              <button type="button" className="editAndDltBtn" onClick={() => onDeleteBtnClicked(referral?.id as number)}>
+                <MdDeleteOutline size={30} />
+              </button>
             </div>
-
             {updateReferral && (
-            <UpdateReferralForm
-              pID={pID}
-              popup={setUpdatReferral}
-              refID={editBtnValue}
-              updateReferral={updateReferral}
-              updateReferralBtn={setUpdatReferral}
-            />
+              <UpdateReferralForm
+                pID={pID}
+                popup={setUpdatReferral}
+                refID={editBtnValue}
+                updateReferral={updateReferral}
+                updateReferralBtn={setUpdatReferral}
+              />
             )}
             {deleteConfirmation && (
-            <ConfirmDelete
-              onDeleteTrue={handleDeleteTrue}
-              onDeleteFalse={handleDeleteFalse}
-              deleteModal={deleteConfirmation}
-              deleteModalBtn={setDeleteConfirmation}
-            />
+              <ConfirmDelete
+                onDeleteTrue={handleDeleteTrue}
+                onDeleteFalse={handleDeleteFalse}
+                deleteModal={deleteConfirmation}
+                deleteModalBtn={setDeleteConfirmation}
+              />
             )}
-            <div className="referredHospital">
-              {referral?.hosp_name}
-              <br />
-              {referral?.doctor?.doc_name}
+            <div className="row g-0 referredHospital">
+              <div className="col-sm-6 col-md-8">
+                <b>{referral?.hosp_name}</b>
+              </div>
+              <div className="col-6 col-md-4">
+                {' '}
+                Referred by:
+                {' '}
+                Dr.
+                {' '}
+                {referral?.doctor?.doc_name}
+              </div>
             </div>
             <hr />
           </>

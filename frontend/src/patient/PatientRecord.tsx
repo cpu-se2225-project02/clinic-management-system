@@ -28,7 +28,7 @@ interface OpProps {
   accountToggle?: boolean
 }
 
-export default function PatientRecord({ accountToggle = false } : OpProps) {
+export default function PatientRecord({ accountToggle = false }: OpProps) {
   const params = useParams() as any;
   const patiendID = parseInt(params.id);
   const [PrescriptionBtn, setPrescBtn] = useState(false);
@@ -70,7 +70,7 @@ export default function PatientRecord({ accountToggle = false } : OpProps) {
           <Row>
             <Col xs={12}>
               <h5 className="h5">
-                <MdInfoOutline className="appointment-icon" />
+                <MdInfoOutline size={20} className="appointment-icon" />
                 Patient Record
               </h5>
             </Col>

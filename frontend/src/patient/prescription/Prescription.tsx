@@ -5,7 +5,7 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'urql';
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Table } from 'react-bootstrap';
 import { RiAddFill } from 'react-icons/ri';
 import { BiEdit } from 'react-icons/bi';
 import { MdDeleteOutline } from 'react-icons/md';
@@ -76,12 +76,12 @@ export default function Prescription({ pID }: PatientID) {
 
     <>
       {addPrescBtn && (
-      <PrescriptionForm
-        prescpopup={addPrescBtn}
-        prescBtn={setAddPrescBtn}
-        popup={setAddPrescBtn}
-        pID={pID as number}
-      />
+        <PrescriptionForm
+          prescpopup={addPrescBtn}
+          prescBtn={setAddPrescBtn}
+          popup={setAddPrescBtn}
+          pID={pID as number}
+        />
       )}
       <div className="col-sm-11">
         <button onClick={() => { setAddPrescBtn(true); }} className="btn btn-outline-secondary">
@@ -92,55 +92,51 @@ export default function Prescription({ pID }: PatientID) {
       {data?.patientPrescriptions?.length !== 0
         ? data?.patientPrescriptions?.map((prescription) => (
           <>
-            <div className="container">
-              <div className="row">
-                <div className="col">
-                  <div className="btn-group editAndDelete" role="group">
-                    <button type="button" className="editAndDelete" onClick={() => onEditBtnClicked(prescription?.id as number)}>
-                      <BiEdit size={30} />
-                    </button>
-
-                    <button type="button" className="editAndDelete" onClick={() => onDeleteBtnClicked(prescription?.id as number)}>
-
-                      <MdDeleteOutline size={30} />
-                    </button>
-                    {updatePrescBtn && (
-                    <UpdatePrescriptionForm
-                      popup={setUpdatePrescBtn}
-                      pID={pID as number}
-                      prescID={editBtnValue}
-                      updatePresc={updatePrescBtn}
-                      updatePrescBtn={setUpdatePrescBtn}
-                    />
-                    )}
-                    {deleteConfirmation && (
-                    <ConfirmDelete
-                      onDeleteTrue={handleDeleteTrue}
-                      onDeleteFalse={handleDeleteFalse}
-                      deleteModal={deleteConfirmation}
-                      deleteModalBtn={setDeleteConfirmation}
-                    />
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <div className="prescriptions">
-                <div className="medicine">
-                  {prescription?.pres_name}
-                </div>
-                Dosage:
-                {' '}
-                {prescription?.pres_dos}
-                {' '}
-                <br />
-                Number of times a day/ week
-                <br />
-              </div>
-              <hr />
-            </div>
+            <Table className="table table-striped">
+              <tbody>
+                <tr>
+                  <td>
+                    <b>{prescription?.pres_name}</b>
+                  </td>
+                  <td>
+                    Dosage:
+                    {' '}
+                    {prescription?.pres_dos}
+                    {' '}
+                  </td>
+                  <td>
+                    Number of times a day/ week
+                  </td>
+                  <td>
+                    <div className="btn-group editAndDelete" role="group">
+                      <button type="button" className="editAndDelete" onClick={() => onEditBtnClicked(prescription?.id as number)}>
+                        <BiEdit size={30} />
+                      </button>
+                      <button type="button" className="editAndDelete" onClick={() => onDeleteBtnClicked(prescription?.id as number)}>
+                        <MdDeleteOutline size={30} />
+                      </button>
+                      {updatePrescBtn && (
+                        <UpdatePrescriptionForm
+                          popup={setUpdatePrescBtn}
+                          pID={pID as number}
+                          prescID={editBtnValue}
+                          updatePresc={updatePrescBtn}
+                          updatePrescBtn={setUpdatePrescBtn}
+                        />
+                      )}
+                      {deleteConfirmation && (
+                        <ConfirmDelete
+                          onDeleteTrue={handleDeleteTrue}
+                          onDeleteFalse={handleDeleteFalse}
+                          deleteModal={deleteConfirmation}
+                          deleteModalBtn={setDeleteConfirmation}
+                        />
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
           </>
         ))
         : <div>No prescription given to patient.</div>}
