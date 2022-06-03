@@ -63,104 +63,66 @@ export default function UpdatePatientForm({ postButton, patientID, payForm }: Po
     });
   };
 
+  const handleSubmitBtn = () => {
+    updatePatientInfo();
+    postButton(false);
+  };
+
   return (
     <Modal show={payForm} onHide={() => postButton(false)} className="mt-5 mb-5" backdrop="static">
-      <Modal.Header closeButton><h5>Add a Patient</h5></Modal.Header>
+      <Modal.Header closeButton><h5>Edit Patient Info</h5></Modal.Header>
       <Modal.Body>
 
-        <label>Last name:</label>
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Last name"
-          onChange={(e) => { setLastName(e.target.value); }}
-          value={lastName}
-        />
-
-        <label>First name:</label>
-        <input
-          className="form-control"
-          type="text"
-          placeholder="First name"
-          onChange={(e) => { setFirstName(e.target.value); }}
-          value={firstName}
-        />
-
-        <label>Middle Name:</label>
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Middle Initial"
-          onChange={(e) => { setMiddleName(e.target.value); }}
-          value={middleName}
-        />
-
-        <label>Suffix:</label>
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Suffix"
-          onChange={(e) => { setSuffix(e.target.value); }}
-          value={suffix !== 'null' ? suffix : ''}
-        />
-
-        <label>Age:</label>
-        <input
-          className="form-control"
-          type="number"
-          placeholder="Age"
-          onChange={(e) => { setAge(parseInt(e.target.value)); }}
-          value={age}
-        />
-
-        <label>Sex:</label>
-        <select className="form-control" onChange={(e) => { setSex(e.target.value); }} value={sex}>
-          <option value="Female">Female</option>
-          <option value="Male">Male</option>
-        </select>
-
-        <label>Date of Birth:</label>
-        <input
-          className="form-control"
-          type="date"
-          placeholder="Date of Birth"
-          onChange={(e) => { setDob(e.target.value); }}
-          value={dob}
-        />
-
-        <label>Address:</label>
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Address"
-          onChange={(e) => { setAddress(e.target.value); }}
-          value={address}
-        />
-
-        <label>Contact Number:</label>
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Contact number"
-          onChange={(e) => { setContNo(e.target.value); }}
-          value={contNo}
-        />
-
-        <label>Email address:</label>
-        <input
-          className="form-control"
-          type="text"
-          placeholder="Email address"
-          onChange={(e) => { setEmail(e.target.value); }}
-          value={email}
-        />
+        <div className="input-group input-group-sm mb-3">
+          <span className="input-group-text">Last Name</span>
+          <input type="text" className="form-control" value={lastName} onChange={(e) => { setLastName(e.target.value); }} />
+        </div>
+        <div className="input-group input-group-sm mb-3">
+          <span className="input-group-text">First Name</span>
+          <input type="text" className="form-control" value={firstName} onChange={(e) => { setFirstName(e.target.value); }} />
+        </div>
+        <div className="input-group input-group-sm mb-3">
+          <span className="input-group-text">Middle Name</span>
+          <input type="text" className="form-control" value={middleName} onChange={(e) => { setMiddleName(e.target.value); }} />
+        </div>
+        <div className="input-group input-group-sm mb-3">
+          <span className="input-group-text">Suffix</span>
+          <input type="text" className="form-control" value={suffix} onChange={(e) => { setSuffix(e.target.value); }} />
+        </div>
+        <div className="input-group input-group-sm mb-3">
+          <span className="input-group-text">Age</span>
+          <input type="number" className="form-control" value={age} onChange={(e) => { setAge(parseInt(e.target.value)); }} />
+        </div>
+        <div className="input-group input-group-sm mb-3">
+          <span className="input-group-text">Sex</span>
+          <select className="form-control" value={sex} onChange={(e) => { setSex(e.target.value); }}>
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+          </select>
+        </div>
+        <div className="input-group input-group-sm mb-3">
+          <span className="input-group-text">Date of Birth</span>
+          <input type="date" className="form-control" value={dob} onChange={(e) => { setDob(e.target.value); }} />
+        </div>
+        <div className="input-group input-group-sm mb-3">
+          <span className="input-group-text">Address</span>
+          <input type="text" className="form-control" value={address} onChange={(e) => { setAddress(e.target.value); }} />
+        </div>
+        <div className="input-group input-group-sm mb-3">
+          <span className="input-group-text">Email Address</span>
+          <input type="text" className="form-control" value={email} onChange={(e) => { setEmail(e.target.value); }} />
+        </div>
+        <div className="input-group input-group-sm mb-3">
+          <span className="input-group-text">Phone Number</span>
+          <input type="number" className="form-control" value={contNo} onChange={(e) => { setContNo(e.target.value); }} />
+        </div>
 
         <button
           className="btn btn-primary mt-2 float-end"
-          onClick={() => { updatePatientInfo(); postButton(false); }}
+          onClick={() => { handleSubmitBtn(); postButton(false); }}
           type="submit"
         >
-          Update
+          Submit
         </button>
 
       </Modal.Body>

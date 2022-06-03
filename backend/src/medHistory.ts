@@ -82,7 +82,6 @@ export const AddMedHistory = mutationField('addMedHistory', {
 export const EditMedHistoryInput = inputObjectType({
   name: 'EditMedHistoryInput',
   definition(t) {
-    t.field(MedHistoryType.id);
     t.field(MedHistoryType.diagnosis);
     t.field(MedHistoryType.treatment_plan);
     t.field(MedHistoryType.description);

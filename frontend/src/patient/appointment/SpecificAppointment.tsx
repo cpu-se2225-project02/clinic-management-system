@@ -18,12 +18,16 @@ export default function SpecificAppointment({ pId }: Popup) {
   return (
     <>
       {data?.specificAppointment?.map((appointment) => (
-        <div>
-          {appointment?.name}
+        <div className="border-bottom">
+          <b>{appointment?.name}</b>
           {' '}
-          {appointment?.dt_start}
+          {new Date(appointment?.dt_start as string).toDateString()}
           {' '}
-          {appointment?.dt_end}
+          {new Date(appointment?.dt_start as string).toLocaleTimeString()}
+          {' '}
+          {' - '}
+          {' '}
+          {new Date(appointment?.dt_end as string).toLocaleTimeString()}
         </div>
       ))}
     </>
