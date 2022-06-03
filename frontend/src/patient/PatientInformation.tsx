@@ -2,7 +2,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import { Form, FormControl, Button } from 'react-bootstrap';
+import {
+  Form, FormControl, Button, Table,
+} from 'react-bootstrap';
 import { useQuery, useMutation } from 'urql';
 import { BiEdit } from 'react-icons/bi';
 import { MdDeleteOutline } from 'react-icons/md';
@@ -53,19 +55,19 @@ export default function PatientInformation({ pId }: PatientId) {
               {data?.specificPatient?.l_name}
               <br />
             </div>
-            Sex:
+            <b>Sex:</b>
             {' '}
             {data?.specificPatient?.sex}
             <br />
-            Age:
+            <b>Age:</b>
             {' '}
             {data?.specificPatient?.age}
             <br />
-            Birthdate:
+            <b>Birthdate:</b>
             {' '}
             {data?.specificPatient?.birthdate}
             <br />
-            Address:
+            <b>Address:</b>
             {' '}
             {data?.specificPatient?.address}
           </div>
@@ -80,6 +82,29 @@ export default function PatientInformation({ pId }: PatientId) {
               {editBtn && <UpdatePatientForm payForm={editBtn} postButton={setEditBtn} patientID={pId} />}
             </div>
           </div>
+        </div>
+        <div className="patientInfo">
+          <Table className="table table-sm">
+            <tbody>
+              <tr>
+                {/* <th>
+                  Email:
+                  {' '}
+                  chloebelle@gmail.com
+                </th> */}
+                <td>Email:</td>
+                <td>Gender:</td>
+              </tr>
+              <tr>
+                <td>Address:</td>
+                <td>Birthdate:</td>
+                <td>Age:</td>
+              </tr>
+              <td>{' '}</td>
+              <td>Blood Type:</td>
+            </tbody>
+          </Table>
+
         </div>
       </div>
     </>
