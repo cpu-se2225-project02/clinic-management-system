@@ -5,7 +5,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/button-has-type */
 import React, { useState } from 'react';
-import { Spinner } from 'react-bootstrap';
+import { Modal, Spinner } from 'react-bootstrap';
 import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { useMutation, useQuery } from 'urql';
 import { EditPrescriptionDocument, PatientPrescriptionsDocument } from '../../queries.generated';
@@ -13,6 +13,8 @@ import { EditPrescriptionDocument, PatientPrescriptionsDocument } from '../../qu
 interface UpdatePrescFormProps {
   prescID: number | undefined
   pID: number | undefined
+  updatePrescBtn: React.Dispatch<React.SetStateAction<boolean>>
+  updatePresc: boolean
   popup: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -56,33 +58,37 @@ export default function UpdatePrescriptionForm(updatePrescFormProps: UpdatePresc
   }
 
   return (
-    <div className="popup">
-      <div className="popup-inner">
-        <h5>Update Prescription</h5>
-        <button
-          className="btn close-btn float-end mt-0"
-        >
-          <AiOutlineCloseSquare size={25} onClick={() => updatePrescFormProps.popup(false)} />
-        </button>
-        Prescription Name:
-        <div>
-          <input
-            type="text"
-            placeholder="Prescription name"
-            value={prescName}
-            onChange={(e) => setPrescName(e.target.value)}
-          />
+    <Modal show={updatePrescFormProps.updatePresc} onHide={() => updatePrescFormProps.updatePrescBtn(false)} className="mt-5" backdrop="static">
+      <Modal.Header closeButton><h5>Edit Prescription</h5></Modal.Header>
+      <Modal.Body>
+        <div className="input-group mb-3">
+          <div className="input-group-prepend">
+            <label className="input-group-text" htmlFor="inputGroupSelect01">Prescription Name</label>
+          </div>
+          <div>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Prescription name"
+              value={prescName}
+              onChange={(e) => setPrescName(e.target.value)}
+            />
+          </div>
         </div>
-        Prescription Dosage:
-        <div>
-          <input
-            type="number"
-            placeholder="Prescription dosage"
-            value={prescDos}
-            onChange={(e) => setPrescDos(parseInt(e.target.value))}
-          />
+        <div className="input-group mb-3">
+          <div className="input-group-prepend">
+            <label className="input-group-text" htmlFor="inputGroupSelect01">Prescription Dosage</label>
+          </div>
+          <div>
+            <input
+              type="number"
+              className="form-control"
+              placeholder="Prescription dosage"
+              value={prescDos}
+              onChange={(e) => setPrescDos(parseInt(e.target.value))}
+            />
+          </div>
         </div>
-
         <button
           className="btn btn-primary mt-2 float-end"
           type="submit"
@@ -91,7 +97,7 @@ export default function UpdatePrescriptionForm(updatePrescFormProps: UpdatePresc
           Submit
         </button>
 
-      </div>
-    </div>
+      </Modal.Body>
+    </Modal>
   );
 }
