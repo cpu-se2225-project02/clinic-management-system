@@ -157,7 +157,7 @@ export default function UpdatePatientForm({ postButton, patientID, payForm }: Po
 
         <button
           className="btn btn-primary mt-2 float-end"
-          onClick={updatePatientInfo}
+          onClick={() => { updatePatientInfo(); postButton(false); }}
           type="submit"
         >
           Update

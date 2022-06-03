@@ -143,7 +143,7 @@ export default function PatientForm({ postButton, payForm }: Popup) {
 
         <button
           className="btn btn-primary mt-2 float-end"
-          onClick={insertingPatient}
+          onClick={() => { insertingPatient(); postButton(false); }}
           type="submit"
         >
           Submit
