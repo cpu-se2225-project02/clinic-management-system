@@ -195,11 +195,10 @@ function Appointment() {
                           <td>
                             {appointment?.patient?.f_name}
                             {' '}
-                            {' '}
                             {appointment?.patient?.l_name}
                           </td>
                           <td>
-                            {allDoctors.data?.allDoctors?.find(((doc) => doc?.id === appointment?.doctor!.id))?.doc_name}
+                            {appointment?.doctor?.doc_name}
                           </td>
                           <td>
                             {new Date(appointment?.dt_start as string).toDateString()}
