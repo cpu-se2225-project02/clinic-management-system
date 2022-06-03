@@ -60,7 +60,7 @@ function AddPaymentForm({ addPaymentBtn, payForm, patId = 0 }: Popup) {
           <div className="input-group-prepend">
             <label className="input-group-text" htmlFor="inputGroupSelect01">Patient</label>
           </div>
-          <select disabled className="custom-select" id="inputGroupSelect01" onChange={(e) => setId(parseInt(e.target.value))} required>
+          <select className="custom-select" id="inputGroupSelect01" onChange={(e) => setId(parseInt(e.target.value))} required>
             {data?.patients?.map((patient) => {
               if (patient?.id === id) {
                 return (
