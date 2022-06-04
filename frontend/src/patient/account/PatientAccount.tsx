@@ -1,6 +1,6 @@
 /* eslint-disable no-unsafe-optional-chaining */
 import React, { useState } from 'react';
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Table } from 'react-bootstrap';
 import { useQuery } from 'urql';
 import { MdAddCircleOutline } from 'react-icons/md';
 import { BiEdit } from 'react-icons/bi';
@@ -34,41 +34,15 @@ function PatientAccount({ pID }: PatientId) {
 
   return (
     <div>
-      <div className="container">
-        <div className="row">
-          <div className="col">
-            {data?.account?.map((acc) => (
-              <div>
-                <div className="card">
-                  <div className="card-header">
-                    {Number(data.account?.indexOf(acc)) + 1}
-                  </div>
-                  <ul className="list-group list-group-flush">
-                    <li className="list-group-item">
-                      Date:
-                      {' '}
-                      {acc?.paymnt_dt}
-                    </li>
-                    <li className="list-group-item">
-                      Ammount Cost:
-                      {' ₱'}
-                      {acc?.ammnt_cost}
-                    </li>
-                    <li className="list-group-item">
-                      Ammount Paid:
-                      {' ₱'}
-                      {acc?.ammnt_paid}
-                    </li>
-                  </ul>
-
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="col">
-            <div className="col">
-              <div className="right">
+      {data?.account?.map((acc) => (
+        <Table className="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Date</th>
+              <th scope="col">Amount Cost</th>
+              <th scope="col">Amount Paid</th>
+              <th scope="col">
                 <div className="btn-group" role="group">
                   <button type="button" className="editAndAdd">
                     <BiEdit size={30} />
@@ -85,39 +59,32 @@ function PatientAccount({ pID }: PatientId) {
                     />
                   )}
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* {data?.account?.map((acc) => (
-        <div>
-          <div className="card">
-            <div className="card-header">
-              {Number(data.account?.indexOf(acc)) + 1}
-            </div>
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item">
-                Date:
-                {' '}
-                {acc?.paymnt_dt}
-              </li>
-              <li className="list-group-item">
-                Ammount Cost:
-                {' ₱'}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">
+                {Number(data.account?.indexOf(acc)) + 1}
+              </th>
+              <td>
+                {new Date(acc?.paymnt_dt as string).toDateString()}
+                {/* {acc?.paymnt_dt} */}
+              </td>
+              <td>
+                {'₱ '}
                 {acc?.ammnt_cost}
-              </li>
-              <li className="list-group-item">
-                Ammount Paid:
-                {' ₱'}
+                .00
+              </td>
+              <td>
+                {'₱ '}
                 {acc?.ammnt_paid}
-              </li>
-            </ul>
-            <hr />
-          </div>
-        </div>
-      ))} */}
+                .00
+              </td>
+            </tr>
+          </tbody>
+        </Table>
+      ))}
     </div>
   );
 }
