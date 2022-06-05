@@ -5,7 +5,9 @@
 /* eslint-disable react/jsx-tag-spacing */
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'urql';
-import { Spinner } from 'react-bootstrap';
+import {
+  Spinner, Table, Row, Col,
+} from 'react-bootstrap';
 import { RiAddFill } from 'react-icons/ri';
 import { BiEdit } from 'react-icons/bi';
 import { MdDeleteOutline } from 'react-icons/md';
@@ -15,7 +17,7 @@ import { DeleteMedHistoryDocument, PatientMedHistoryDocument } from '../../queri
 import ConfirmDelete from '../../common/ConfirmDelete';
 
 interface PatientID {
-    pID: undefined | number
+  pID: undefined | number
 }
 
 export default function MedicalHistory({ pID }: PatientID) {
