@@ -1,9 +1,7 @@
-.card{
-    width: 18rem;
-}
+
 .editAndAdd {
     transition-duration: 0.4s;
-    float: left;
+    float: right;
     border-color: transparent;
     border-radius: 4px;;
     background-color: white;
@@ -13,6 +11,4 @@
     background-color: #f9ebbe;
     color: #051329;
 }
-.right{
-    float:right;
-}
+
