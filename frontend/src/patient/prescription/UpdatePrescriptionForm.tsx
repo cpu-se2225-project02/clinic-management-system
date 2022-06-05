@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import { Modal, Spinner } from 'react-bootstrap';
 import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { useMutation, useQuery } from 'urql';
+import ConfirmEdit from '../../common/ConfirmEdit';
 import { EditPrescriptionDocument, PatientPrescriptionsDocument } from '../../queries.generated';
 
 interface UpdatePrescFormProps {
@@ -20,6 +21,7 @@ interface UpdatePrescFormProps {
 
 export default function UpdatePrescriptionForm(updatePrescFormProps: UpdatePrescFormProps) {
   const [editPrescription, setEditPrescription] = useMutation(EditPrescriptionDocument);
+  const [editConfirmation, setEditConfirmation] = useState(false);
 
   const [patientPrescriptions] = useQuery({
     query: PatientPrescriptionsDocument,
@@ -45,8 +47,17 @@ export default function UpdatePrescriptionForm(updatePrescFormProps: UpdatePresc
   };
 
   const onSubmitBtnClicked = () => {
+    setEditConfirmation(true);
+  };
+
+  const handleEditTrue = () => {
     updatePrescription();
     updatePrescFormProps.popup(false);
+    setEditConfirmation(false);
+  };
+
+  const handleEditFalse = () => {
+    setEditConfirmation(false);
   };
 
   if (fetching) {
@@ -96,6 +107,7 @@ export default function UpdatePrescriptionForm(updatePrescFormProps: UpdatePresc
         >
           Submit
         </button>
+        {editConfirmation && (<ConfirmEdit onEditTrue={handleEditTrue} onEditFalse={handleEditFalse} editModal={editConfirmation} setEditModal={setEditConfirmation} />)}
 
       </Modal.Body>
     </Modal>
