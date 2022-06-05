@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Spinner, Table } from 'react-bootstrap';
 import { useQuery } from 'urql';
 import { MdAddCircleOutline } from 'react-icons/md';
-import { BiEdit } from 'react-icons/bi';
+// import { BiEdit } from 'react-icons/bi';
 import { GetPatientAccountDocument } from '../../queries.generated';
 import AddPaymentForm from './AddPaymentForm';
 import './PatientAccount.css';
@@ -34,35 +34,36 @@ function PatientAccount({ pID }: PatientId) {
 
   return (
     <div>
-      {data?.account?.map((acc) => (
-        <Table className="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Date</th>
-              <th scope="col">Amount Cost</th>
-              <th scope="col">Amount Paid</th>
-              <th scope="col">
-                <div className="btn-group" role="group">
-                  <button type="button" className="editAndAdd">
-                    <BiEdit size={30} />
-                  </button>
-                  <button type="button" className="editAndAdd" onClick={() => { setAddPayment(true); }}>
-                    <MdAddCircleOutline size={30} />
-                  </button>
-                  {addPayment && (
-                    <AddPaymentForm
-                      patId={pID}
-                      payForm={addPayment}
-                      disabledSelect
-                      addPaymentBtn={setAddPayment}
-                    />
-                  )}
-                </div>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
+
+      <Table className="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">Amount Cost</th>
+            <th scope="col">Amount Paid</th>
+            <th scope="col">
+              {/* <div className="btn-group" role="group"> */}
+              {/* <button type="button" className="editAndAdd">
+                  <BiEdit size={30} />
+                </button> */}
+              <button type="button" className="editAndAdd" onClick={() => { setAddPayment(true); }}>
+                <MdAddCircleOutline size={30} />
+              </button>
+              {addPayment && (
+                <AddPaymentForm
+                  patId={pID}
+                  payForm={addPayment}
+                  disabledSelect
+                  addPaymentBtn={setAddPayment}
+                />
+              )}
+              {/* </div> */}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {data?.account?.map((acc) => (
             <tr>
               <th scope="row">
                 {Number(data.account?.indexOf(acc)) + 1}
@@ -82,9 +83,9 @@ function PatientAccount({ pID }: PatientId) {
                 .00
               </td>
             </tr>
-          </tbody>
-        </Table>
-      ))}
+          ))}
+        </tbody>
+      </Table>
     </div>
   );
 }
