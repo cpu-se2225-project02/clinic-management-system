@@ -80,7 +80,7 @@ body {
 }
 
 .patientInfo:hover {
-  background-color: #f9ebbe;
+  background-color: #f9ebbe; /* Green */
   color: black;
 }
 
