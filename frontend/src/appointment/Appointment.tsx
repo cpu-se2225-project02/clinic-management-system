@@ -108,8 +108,8 @@ function Appointment() {
           <Row>
             <Col xs={12}>
               <h5 className="appointmentBar">
-                <FaCalendarAlt className="appointment-icon" />
-                Appointments
+                <FaCalendarAlt size={20} className="appointment-icon" />
+                APPOINTMENTS
               </h5>
             </Col>
           </Row>
