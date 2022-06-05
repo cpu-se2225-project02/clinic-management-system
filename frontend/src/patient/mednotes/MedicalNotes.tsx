@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable array-callback-return */
 import React, { useState } from 'react';
-import { GoDiffAdded } from 'react-icons/go';
+import { MdNoteAdd } from 'react-icons/md';
 import { useQuery } from 'urql';
 import { Spinner } from 'react-bootstrap';
 import { DisplayMedNotesDocument } from '../../queries.generated';
@@ -34,28 +34,31 @@ export default function MedicalNotes({ pId }: PatientID) {
 
   return (
     <>
-      <GoDiffAdded size={30} onClick={() => { setPostButton(!PostButton); }} />
-      {PostButton && <MedNotesForm payForm={PostButton} pId={pId} postButton={setPostButton} />}
       <div>
-        {data?.patientMedNotes?.map((note) => (
-          <>
-            <div className="medNotes">
-              <div className="card">
-                <div className="title">{note?.title}</div>
-                <div>{note?.date_noted}</div>
-                <br />
-                <div>{note?.med_notes}</div>
-              </div>
-            </div>
-            Note by:
-            <div className="doctorSign">
-              Dr.
-              {'  '}
-              {note?.doctor?.doc_name}
-            </div>
-          </>
-        ))}
+        <button type="button" onClick={() => { setPostButton(!PostButton); }} className="btn btn-outline-secondary">
+          <MdNoteAdd size={25} />
+          {' '}
+          Add Note
+          {PostButton && <MedNotesForm payForm={PostButton} pId={pId} postButton={setPostButton} />}
+        </button>
       </div>
+      <table className="table">
+        <tbody>
+          {data?.patientMedNotes?.map((note) => (
+            // <>
+            <tr>
+              <th scope="row">{note?.title}</th>
+              <td>{note?.date_noted}</td>
+              <td>{note?.med_notes}</td>
+              <td>
+                Dr.
+                {'  '}
+                {note?.doctor?.doc_name}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 }
