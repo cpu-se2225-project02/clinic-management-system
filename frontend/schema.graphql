@@ -60,7 +60,6 @@ input DoctorInput {
 input EditMedHistoryInput {
   description: String!
   diagnosis: String!
-  id: Int!
   treatment_plan: String!
 }
 

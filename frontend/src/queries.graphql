@@ -289,6 +289,7 @@ mutation DeleteMedHistory($medicalhistoryId: Int!) {
     diagnosis
     treatment_plan
     description
+    patient_id
   }
 }
 

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-undef */
@@ -5,15 +6,17 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/destructuring-assignment */
 import React, { useState } from 'react';
-import { Spinner } from 'react-bootstrap';
+import { Modal, Spinner } from 'react-bootstrap';
 import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { useMutation, useQuery } from 'urql';
 import { EditMedHistoryDocument, PatientMedHistoryDocument } from '../../queries.generated';
 
 interface UpdateMedHistoryFormProps {
-    medHistoryID: number | undefined
-    pID: number | undefined
-    popup: React.Dispatch<React.SetStateAction<boolean>>
+  medHistoryID: number | undefined
+  pID: number | undefined
+  updateMedHistoryBtn: React.Dispatch<React.SetStateAction<boolean>>
+  updateMedHistory: boolean
+  popup: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function UpdateMedHistoryForm(updateMedHistoryFormProps: UpdateMedHistoryFormProps) {
@@ -59,50 +62,63 @@ export default function UpdateMedHistoryForm(updateMedHistoryFormProps: UpdateMe
 
   return (
     <div className="popup">
-      <div className="popup-inner">
-        <h5>Update Prescription</h5>
-        <button
-          className="btn close-btn float-end mt-0"
-        >
-          <AiOutlineCloseSquare size={25} onClick={() => updateMedHistoryFormProps.popup(false)} />
-        </button>
-        Diagnosis
-        <div>
-          <input
-            type="text"
-            placeholder="Diagnosis"
-            value={Diagnosis}
-            onChange={(e) => setdiagnosis(e.target.value)}
-          />
-        </div>
-        Treatment Plan: 
-        <div>
-          <input
-            type="text"
-            placeholder="Treatment Plan"
-            value={Treatmentplan}
-            onChange={(e) => settreatmentplan(e.target.value)}
-          />
-        </div>
-        Description:
-        <div>
-          <input
-            type="text"
-            placeholder="Description"
-            value={Description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
 
-        <button
-          className="btn btn-primary mt-2 float-end"
-          type="submit"
-          onClick={onSubmitBtnClicked}
-        >
-          Submit
-        </button>
+      <Modal show={updateMedHistoryFormProps.updateMedHistory} onHide={() => updateMedHistoryFormProps.updateMedHistoryBtn(false)} className="mt-5" backdrop="static"> 
+        <Modal.Header closeButton><h5>Edit Medical History</h5></Modal.Header>
+        <Modal.Body>
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <label className="input-group-text" htmlFor="inputGroupSelect01">Diagnosis</label>
+            </div>
+            <div>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Diagnosis"
+                value={Diagnosis}
+                onChange={(e) => setdiagnosis(e.target.value)}
+              />
+            </div>
+          </div>
 
-      </div>
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <label className="input-group-text" htmlFor="inputGroupSelect01">Treatment Plan</label>
+            </div>
+            <div>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Diagnosis"
+                value={Treatmentplan}
+                onChange={(e) => settreatmentplan(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <label className="input-group-text" htmlFor="inputGroupSelect01">Description</label>
+            </div>
+            <div>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Description"
+                value={Description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
+          </div>
+          <button
+            className="btn btn-primary mt-2 float-end"
+            type="submit"
+            onClick={onSubmitBtnClicked}
+          >
+            Submit
+          </button>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }

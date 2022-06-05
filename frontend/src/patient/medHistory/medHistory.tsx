@@ -12,6 +12,7 @@ import { MdDeleteOutline } from 'react-icons/md';
 import MedHistoryForm from './medHistoryForm';
 import UpdateMedHistoryForm from './updateMedHistory';
 import { DeleteMedHistoryDocument, PatientMedHistoryDocument } from '../../queries.generated';
+import ConfirmDelete from '../../common/ConfirmDelete';
 
 interface PatientID {
     pID: undefined | number
@@ -22,6 +23,8 @@ export default function MedicalHistory({ pID }: PatientID) {
   const [updateMedHistoryBtn, setUpdateMedHistoryBtn] = useState(false);
   const [editBtnValue, setEditBtnValue] = useState(0);
   const [deleteMedHistory, setDeleteMedHistory] = useMutation(DeleteMedHistoryDocument);
+  const [deleteConfirmation, setDeleteConfirmation] = useState(false);
+  const [id, setId] = useState(0);
 
   const [patientMedHistory] = useQuery({
     query: PatientMedHistoryDocument,
@@ -44,9 +47,9 @@ export default function MedicalHistory({ pID }: PatientID) {
     console.log(error);
     return <div>Deletion unsuccessful</div>;
   }
-  const deletemedHistory = (id: number) => {
+  const deletemedHistory = (value: number) => {
     setDeleteMedHistory({
-      medicalhistoryId: id,
+      medicalhistoryId: value,
     });
   };
 
@@ -54,12 +57,33 @@ export default function MedicalHistory({ pID }: PatientID) {
     setEditBtnValue(value);
     setUpdateMedHistoryBtn(true);
   };
+
+  const onDeleteBtnClicked = (value: number) => {
+    setId(value);
+    setDeleteConfirmation(true);
+  };
+
+  const handleDeleteTrue = () => {
+    deletemedHistory(id);
+    setDeleteConfirmation(false);
+  };
+  const handleDeleteFalse = () => {
+    setDeleteConfirmation(false);
+  };
+
   return (
     <>
-      {addMedHistoryBtn && <MedHistoryForm popup={setAddMedHistoryBtn} pID={pID as number}/>}
+      {addMedHistoryBtn && (
+      <MedHistoryForm
+        medHistorypopup={addMedHistoryBtn}
+        medHistoryBtn={setAddMedHistoryBtn}
+        popup={setAddMedHistoryBtn}
+        pID={pID as number}
+      />
+      )}
       <div className="col-sm-11">
         <button onClick={() => { setAddMedHistoryBtn(true); }} className="btn btn-outline-secondary">
-          <RiAddFill size={30}/>
+          <RiAddFill size={30} />
           Add Medical History
         </button>
       </div>
@@ -69,31 +93,48 @@ export default function MedicalHistory({ pID }: PatientID) {
           <>
             <div className="container">
               <div className="row">
-                <div className="col-sm-1">
-                  <div className="btn-group" role="group">
-                    <button type="button" className="editAndDltBtn" onClick={() => onEditBtnClicked(MedicalHistory?.id as number)}>
+                <div className="col">
+                  <div className="btn-group editAndDelete" role="group">
+                    <button type="button" className="editAndDelete" onClick={() => onEditBtnClicked(MedicalHistory?.id as number)}>
                       <BiEdit size={30} />
                     </button>
-                    <button type="button" className="editAndDltBtn" onClick={() => deletemedHistory(MedicalHistory?.id as number)}>
+
+                    <button type="button" className="editAndDelete" onClick={() => onDeleteBtnClicked(MedicalHistory?.id as number)}>
+
                       <MdDeleteOutline size={30} />
                     </button>
-                    {updateMedHistoryBtn && <UpdateMedHistoryForm popup={setUpdateMedHistoryBtn} pID={pID as number} medHistoryID={editBtnValue} />}
+
+                    {updateMedHistoryBtn && (
+                    <UpdateMedHistoryForm
+                      popup={setUpdateMedHistoryBtn}
+                      pID={pID as number}
+                      medHistoryID={editBtnValue}
+                      updateMedHistory={updateMedHistoryBtn}
+                      updateMedHistoryBtn={setUpdateMedHistoryBtn}
+                    />
+                    )}
+                    {deleteConfirmation && (
+                    <ConfirmDelete
+                      onDeleteTrue={handleDeleteTrue}
+                      onDeleteFalse={handleDeleteFalse}
+                      deleteModal={deleteConfirmation}
+                      deleteModalBtn={setDeleteConfirmation}
+                    />
+                    )}
                   </div>
                 </div>
               </div>
             </div>
 
             <div>
-              <div className="medicalhistory">
-                <div className="history">
+              <div className="Medical History">
+                <div className="History">
                   {MedicalHistory?.diagnosis}
                 </div>
-                Diagnosis
+                Diagnosis:
                 {' '}
-                Treatment Plan:
                 {MedicalHistory?.treatment_plan}
                 {' '}
-                Description
                 {MedicalHistory?.description}
                 {' '}
               </div>
