@@ -17,11 +17,10 @@ import * as medNotesTypes from './medNotes';
 import * as medHistoryTypes from './medHistory';
 import * as referralType from './referral';
 
+import { createContext } from './context'
+
 const app = express();
 const PORT = 8001;
-const db = new PrismaClient({
-  log: ['query', 'info', 'warn', 'error'],
-});
 
 const schema = makeSchema({
   // eslint-disable-next-line max-len
@@ -39,9 +38,7 @@ app
     graphqlHTTP({
       schema,
       graphiql: !process.env.NODE_ENV?.startsWith('prod'),
-      context: {
-        db,
-      },
+      context: createContext
     }),
   )
   .listen(PORT, () => {
