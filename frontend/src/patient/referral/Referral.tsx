@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import { Spinner, Table } from 'react-bootstrap';
 import { BiEdit } from 'react-icons/bi';
-import { MdDeleteOutline } from 'react-icons/md';
+import { MdDeleteOutline, MdNearMe } from 'react-icons/md';
 import { RiAddFill } from 'react-icons/ri';
 import { useMutation, useQuery } from 'urql';
 import ConfirmDelete from '../../common/ConfirmDelete';
@@ -84,14 +84,24 @@ function Referral({ pID }: PatientID) {
       </div>
       <div>
         {/* <> */}
-        <Table className="table">
+        <Table className="table table-striped referrals">
+          <thead>
+            <tr>
+              <th className="referralTitle" scope="col">
+                <MdNearMe size={20} />
+              </th>
+              <th className="referralTitle" scope="col">REFERRED TO</th>
+              <th className="referralTitle" scope="col">REFERRED BY</th>
+            </tr>
+          </thead>
           <tbody>
             {data?.patientReferrals?.map((referral) => (
               <tr>
-                <th scope="row">{referral?.hosp_name}</th>
+                <th scope="row">
+                  <MdNearMe size={20} />
+                </th>
                 <td>
-                  Referred by:
-                  {' '}
+                  {referral?.hosp_name}
                 </td>
                 <td>
                   Dr.
