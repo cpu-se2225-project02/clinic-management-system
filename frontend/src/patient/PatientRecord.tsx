@@ -6,10 +6,10 @@ import React, { useState } from 'react';
 import {
   Container, Row, Col, Button,
 } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './PatientRecord.css';
 import { useQuery } from 'urql';
-import { MdInfoOutline } from 'react-icons/md';
+import { MdInfoOutline, MdArrowBackIos } from 'react-icons/md';
 import { GetPatientDocument } from '../queries.generated';
 import PatientInformation from './PatientInformation';
 // eslint-disable-next-line no-unused-vars
@@ -29,6 +29,7 @@ interface OpProps {
 }
 
 export default function PatientRecord({ accountToggle = false }: OpProps) {
+  const navigate = useNavigate();
   const params = useParams() as any;
   const patiendID = parseInt(params.id);
   const [PrescriptionBtn, setPrescBtn] = useState(false);
@@ -69,7 +70,11 @@ export default function PatientRecord({ accountToggle = false }: OpProps) {
         <Col xs={10} className="patientRecordPage mt-3">
           <Row>
             <Col xs={12}>
+
               <h5 className="h5">
+                <button type="button" className="backPLBtn" onClick={() => navigate('/patients')}>
+                  <MdArrowBackIos size={20} />
+                </button>
                 <MdInfoOutline size={20} className="appointment-icon" />
                 Patient Record
               </h5>
