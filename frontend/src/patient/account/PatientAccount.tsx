@@ -2,11 +2,12 @@
 import React, { useState } from 'react';
 import { Spinner, Table } from 'react-bootstrap';
 import { useQuery } from 'urql';
-import { MdAddCircleOutline } from 'react-icons/md';
+import { MdReceiptLong, MdPayment } from 'react-icons/md';
 // import { BiEdit } from 'react-icons/bi';
 import { GetPatientAccountDocument } from '../../queries.generated';
 import AddPaymentForm from './AddPaymentForm';
 import './PatientAccount.css';
+import BillForm from '../../finance/BillForm';
 
 interface PatientId {
   pID: number | undefined
@@ -14,6 +15,7 @@ interface PatientId {
 
 function PatientAccount({ pID }: PatientId) {
   const [addPayment, setAddPayment] = useState(false);
+  const [addBill, setAddBill] = useState(false);
   const [patientAccount] = useQuery({
     query: GetPatientAccountDocument,
     variables: {
@@ -48,7 +50,8 @@ function PatientAccount({ pID }: PatientId) {
                   <BiEdit size={30} />
                 </button> */}
               <button type="button" className="editAndAdd" onClick={() => { setAddPayment(true); }}>
-                <MdAddCircleOutline size={30} />
+                <MdPayment size={30} />
+                PAYMENT
               </button>
               {addPayment && (
                 <AddPaymentForm
@@ -56,6 +59,18 @@ function PatientAccount({ pID }: PatientId) {
                   payForm={addPayment}
                   disabledSelect
                   addPaymentBtn={setAddPayment}
+                />
+              )}
+              <button type="button" className="editAndAdd" onClick={() => { setAddBill(true); }}>
+                <MdReceiptLong size={30} />
+                BILL
+              </button>
+              {addBill && (
+                <BillForm
+                  payForm={addBill}
+                  disabledSelect
+                  addPaymentBtn={setAddBill}
+                  patId={pID}
                 />
               )}
               {/* </div> */}

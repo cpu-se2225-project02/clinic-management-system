@@ -62,8 +62,8 @@ export default function PatientList() {
           <Row>
             <Col xs={12}>
               <h5 className="PatientListBar">
-                <MdAccountBox className="patient-icon" />
-                Patient List
+                <MdAccountBox size={20} className="patient-icon" />
+                PATIENT LIST
               </h5>
             </Col>
           </Row>

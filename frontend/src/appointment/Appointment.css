@@ -1,5 +1,5 @@
 .appointment-box {
-  /* display: inline-block !important; */
+  display: inline-block !important;
   overflow-x: hidden;
   overflow-y: hidden;
   padding-top: 5% !important;
@@ -10,13 +10,14 @@
   font-weight: bold; 
 }
 
-
 .appointmentBar {
   background-color: #528e9c;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px !important;
+  font-size: small !important;
   padding: 13px !important;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
 .appointment-toggle-btn {

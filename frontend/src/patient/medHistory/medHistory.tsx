@@ -6,7 +6,7 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'urql';
 import {
-  Spinner, Table, Row, Col,
+  Spinner, Table,
 } from 'react-bootstrap';
 import { RiAddFill } from 'react-icons/ri';
 import { BiEdit } from 'react-icons/bi';
@@ -75,30 +75,27 @@ export default function MedicalHistory({ pID }: PatientID) {
 
   return (
     <>
-      <Row>
-        <Col>
-          {addMedHistoryBtn && (
-          <MedHistoryForm
-            medHistorypopup={addMedHistoryBtn}
-            medHistoryBtn={setAddMedHistoryBtn}
-            popup={setAddMedHistoryBtn}
-            pID={pID as number}
-          />
-          )}
-          <div className="col-sm-11">
-            <button onClick={() => { setAddMedHistoryBtn(true); }} className="btn btn-outline-secondary">
-              <RiAddFill size={30} />
-              Add Medical History
-            </button>
-          </div>
-        </Col>
-      </Row>
+      {addMedHistoryBtn && (
+        <MedHistoryForm
+          medHistorypopup={addMedHistoryBtn}
+          medHistoryBtn={setAddMedHistoryBtn}
+          popup={setAddMedHistoryBtn}
+          pID={pID as number}
+        />
+      )}
+
       <Table className="table">
         <thead>
           <tr>
             <th scope="col">Diagnosis</th>
             <th scope="col">Treatment Plan</th>
             <th scope="col">Description</th>
+            <th scope="col">
+              <button onClick={() => { setAddMedHistoryBtn(true); }} className="btn btn-outline-secondary">
+                <RiAddFill size={30} />
+                Add Medical History
+              </button>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -109,15 +106,15 @@ export default function MedicalHistory({ pID }: PatientID) {
                 <td>{MedicalHistory?.treatment_plan}</td>
                 <td>{MedicalHistory?.description}</td>
                 <td>
-                  <Col>
-                    <div className="btn-group editAndDltBtn" role="group">
-                      <button type="button" className="editAndDltBtn" onClick={() => onEditBtnClicked(MedicalHistory?.id as number)}>
-                        <BiEdit size={30} />
-                      </button>
-                      <button type="button" className="editAndDltBtn" onClick={() => onDeleteBtnClicked(MedicalHistory?.id as number)}>
-                        <MdDeleteOutline size={30} />
-                      </button>
-                      {updateMedHistoryBtn && (
+                  <div className="btn-group editAndDelete" role="group">
+                    <button type="button" className="editAndDelete" onClick={() => onEditBtnClicked(MedicalHistory?.id as number)}>
+                      <BiEdit size={30} />
+                    </button>
+                    <button type="button" className="editAndDelete" onClick={() => onDeleteBtnClicked(MedicalHistory?.id as number)}>
+                      <MdDeleteOutline size={30} />
+                    </button>
+
+                    {updateMedHistoryBtn && (
                       <UpdateMedHistoryForm
                         popup={setUpdateMedHistoryBtn}
                         pID={pID as number}
@@ -125,17 +122,16 @@ export default function MedicalHistory({ pID }: PatientID) {
                         updateMedHistory={updateMedHistoryBtn}
                         updateMedHistoryBtn={setUpdateMedHistoryBtn}
                       />
-                      )}
-                      {deleteConfirmation && (
+                    )}
+                    {deleteConfirmation && (
                       <ConfirmDelete
                         onDeleteTrue={handleDeleteTrue}
                         onDeleteFalse={handleDeleteFalse}
                         deleteModal={deleteConfirmation}
                         deleteModalBtn={setDeleteConfirmation}
                       />
-                      )}
-                    </div>
-                  </Col>
+                    )}
+                  </div>
                 </td>
               </tr>
             ))
