@@ -16,7 +16,8 @@ import { BiClinic } from 'react-icons/bi';
 export default function Sidebars() {
   return (
     <Container fluid className="border-end sb">
-      <Col className="sidebar">
+      {/* <Col className="fixed-bottom"> */}
+      <Col className="position-fixed col-2 col-sm-2 sidebar mt-2">
 
         <Row className="all-btns mt-3">
           <Image
@@ -78,6 +79,7 @@ export default function Sidebars() {
           </Link>
         </Row>
       </Col>
+      {/* </Col> */}
     </Container>
   );
 }

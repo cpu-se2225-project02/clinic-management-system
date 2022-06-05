@@ -9,7 +9,7 @@ import { AddDoctorDocument } from '../queries.generated';
 interface Popup {
   addDoctorBtn: React.Dispatch<React.SetStateAction<boolean>>
   payForm: boolean
-  }
+}
 function AddDoctorForm({ addDoctorBtn, payForm }: Popup) {
   const [docName, setDocName] = useState('');
   const [addDoctor, setAddDoctor] = useMutation(AddDoctorDocument);

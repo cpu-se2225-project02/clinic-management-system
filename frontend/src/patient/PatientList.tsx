@@ -58,10 +58,10 @@ export default function PatientList() {
           <Sidebars />
         </Col>
 
-        <Col xs={10} className="patientListPage">
+        <Col xs={10} className="patient-box mt-3">
           <Row>
             <Col xs={12}>
-              <h5 className="h5">
+              <h5 className="PatientListBar">
                 <MdAccountBox className="patient-icon" />
                 Patient List
               </h5>

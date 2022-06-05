@@ -104,7 +104,7 @@ function Appointment() {
           <Sidebars />
         </Col>
 
-        <Col xs={10} className="appointment-box">
+        <Col xs={10} className="appointment-box mt-3">
           <Row>
             <Col xs={12}>
               <h5 className="appointmentBar">
@@ -146,12 +146,10 @@ function Appointment() {
                   events={
                     allAppointments.data?.appointments?.map((appointment) => ({
                       event_id: appointment?.id,
-                      title: appointment?.name,
-
+                      title: `${appointment?.name} - ${appointment?.doctor?.doc_name}`,
                       start: new Date(appointment?.dt_start as string),
                       end: new Date(appointment?.dt_end as string),
                     }) as any as ProcessedEvent)
-
                   }
                   fields={[
                     {
@@ -178,7 +176,6 @@ function Appointment() {
                 />
               ) : (
                 // eslint-disable-next-line react/jsx-no-useless-fragment
-
                 <Row className="m-auto">
                   <table className="table ">
                     <thead>
@@ -196,20 +193,27 @@ function Appointment() {
                           <td>
                             {appointment?.patient?.f_name}
                             {' '}
-                            {' '}
                             {appointment?.patient?.l_name}
                           </td>
                           <td>
-                            {allDoctors.data?.allDoctors?.find(((doc) => doc?.id === appointment?.doctor!.id))?.doc_name}
+                            {appointment?.doctor?.doc_name}
                           </td>
-                          <td>{appointment?.dt_start}</td>
-                          <td>{appointment?.dt_end}</td>
+                          <td>
+                            {new Date(appointment?.dt_start as string).toDateString()}
+                            {' '}
+                            {new Date(appointment?.dt_start as string).toLocaleTimeString()}
+                          </td>
+                          <td>
+                            {' '}
+                            {new Date(appointment?.dt_end as string).toDateString()}
+                            {' '}
+                            {new Date(appointment?.dt_end as string).toLocaleTimeString()}
+                          </td>
                         </tr>
                       ))}
 
                     </tbody>
                   </table>
-
                 </Row>
               )}
             </Col>

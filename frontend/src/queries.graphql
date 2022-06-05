@@ -216,6 +216,7 @@ mutation DeletePrescription($prescId: Int!) {
     patient_id
   }
 }
+
 query AllDoctors {
   allDoctors {
     doc_name
@@ -245,6 +246,54 @@ query Invoice($pID: Int!) {
   }
 }
 
+
+query patientMedHistory($patientId: Int!) {
+  patientMedHistory(patientId: $patientId) {
+    id
+    patient_id
+    diagnosis
+    treatment_plan
+    description
+  }
+}
+
+
+mutation AddMedHistory($newMedHistory: AddMedHistoryInput!) {
+  addMedHistory(newMedHistory: $newMedHistory) {
+    id
+    diagnosis
+    treatment_plan
+    patient_id
+  }
+}
+
+mutation EditMedHistory(
+  $editedMedHistory: EditMedHistoryInput!
+  $medicalhistoryId: Int!
+) {
+  editMedHistory(
+    medicalhistoryId: $medicalhistoryId
+    editedMedHistory: $editedMedHistory
+  ) {
+    id
+    diagnosis
+    treatment_plan
+    description
+    patient_id
+  }
+}
+
+mutation DeleteMedHistory($medicalhistoryId: Int!) {
+  deleteMedHistory(medicalhistoryId: $medicalhistoryId) {
+    id
+    diagnosis
+    treatment_plan
+    description
+    patient_id
+  }
+}
+
+    
 query PatientReferrals($patientId: Int!) {
   patientReferrals(patientID: $patientId) {
     id
@@ -261,6 +310,7 @@ query PatientReferrals($patientId: Int!) {
     }
   }
 }
+
 
 mutation AddReferral($newReferral: ReferralInput!) {
   addReferral(newReferral: $newReferral) {

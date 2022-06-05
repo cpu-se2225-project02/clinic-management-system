@@ -16,23 +16,24 @@ generator nexus {
 
 //from here: we define models || entities inside our db
 model Patient {
-  id            Int            @id @default(autoincrement())
-  f_name        String
-  l_name        String
-  m_name        String?
-  suffix        String?
-  sex           String
-  age           Int
-  address       String
-  birthdate     String
-  constactNo    String
-  email         String?
-  medicalNotes  MedicalNotes[]
-  appointments  Appointment[]
-  payments      Bill[]
-  prescriptions Prescription[]
-  referral      Referral[]
-  doctors       Doctor[]
+  id             Int              @id @default(autoincrement())
+  f_name         String
+  l_name         String
+  m_name         String?
+  suffix         String?
+  sex            String
+  age            Int
+  address        String
+  birthdate      String
+  constactNo     String
+  email          String?
+  medicalNotes   MedicalNotes[]
+  appointments   Appointment[]
+  payments       Bill[]
+  prescriptions  Prescription[]
+  MedicalHistory MedicalHistory[]
+  referral       Referral[]
+  doctors        Doctor[]
 }
 
 model Appointment {
@@ -41,9 +42,9 @@ model Appointment {
   dt_start   String
   dt_end     String
   patient_id Int
-  patient    Patient @relation(fields: [patient_id], references: [id])
+  patient    Patient @relation(fields: [patient_id], references: [id], onDelete: Cascade)
   doc_id     Int
-  doctors    Doctor  @relation(fields: [doc_id], references: [id])
+  doctors    Doctor  @relation(fields: [doc_id], references: [id], onDelete: Cascade)
 }
 
 model Doctor {
@@ -75,18 +76,27 @@ model MedicalNotes {
   med_notes  String
   title      String
   patient_id Int
-  patient    Patient @relation(fields: [patient_id], references: [id])
+  patient    Patient @relation(fields: [patient_id], references: [id], onDelete: Cascade)
   doc_id     Int
-  doctor     Doctor  @relation(fields: [doc_id], references: [id])
+  doctor     Doctor  @relation(fields: [doc_id], references: [id], onDelete: Cascade)
 
+}
+
+model MedicalHistory {
+  id             Int     @id @default(autoincrement())
+  diagnosis      String
+  treatment_plan String
+  description    String
+  patient_id     Int
+  patient        Patient @relation(fields: [patient_id], references: [id], onDelete: Cascade)
 }
 
 model Referral {
   id         Int     @id @default(autoincrement())
   patient_id Int
-  patient    Patient @relation(fields: [patient_id], references: [id])
+  patient    Patient @relation(fields: [patient_id], references: [id], onDelete: Cascade)
   doctor_id  Int
-  doctor     Doctor  @relation(fields: [doctor_id], references: [id])
+  doctor     Doctor  @relation(fields: [doctor_id], references: [id], onDelete: Cascade)
   hosp_name  String
 }
 
@@ -95,7 +105,7 @@ model Prescription {
   pres_name  String
   pres_dos   Int
   patient_id Int
-  patient    Patient @relation(fields: [patient_id], references: [id])
+  patient    Patient @relation(fields: [patient_id], references: [id], onDelete: Cascade)
 }
 
 // medical practioner

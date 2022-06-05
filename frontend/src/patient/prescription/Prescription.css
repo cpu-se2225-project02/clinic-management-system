@@ -7,13 +7,27 @@
 
 .editAndDltBtn {
     transition-duration: 0.4s;
-    float: left;
+    float: right;
     border-color: transparent;
-    border-radius: 4px;;
+    border-radius: 4px;
     background-color: white;
 }
 
 .editAndDltBtn:hover {
     background-color: #f9ebbe;
     color: #051329;
+}
+.editAndDelete{
+    transition-duration: 0.4s;
+    float: right;
+    border-color: transparent;
+    border-radius: 4px;
+    background-color: white;
+}
+.editAndDelete:hover{
+    background-color: #f9ebbe;
+    color: #051329;
+}
+.btn-outline-secondary{
+    float: right;
 }

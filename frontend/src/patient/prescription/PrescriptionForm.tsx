@@ -5,7 +5,7 @@
 import React, { useState } from 'react';
 import { useMutation } from 'urql';
 // import { Spinner } from 'react-bootstrap';
-import { AiOutlineCloseSquare } from 'react-icons/ai';
+import { Modal } from 'react-bootstrap';
 import { AddPrescriptionDocument } from '../../queries.generated';
 import './PrescriptionForm.css';
 // import UpdatePrescription from './UpdatePrescription';
@@ -13,6 +13,8 @@ import './PrescriptionForm.css';
 interface AddPrescFormProps {
   pID: number | undefined
   popup: React.Dispatch<React.SetStateAction<boolean>>
+  prescBtn: React.Dispatch<React.SetStateAction<boolean>>
+  prescpopup: boolean
 }
 
 export default function PrescriptionForm(addPrescFormProps: AddPrescFormProps) {
@@ -45,28 +47,33 @@ export default function PrescriptionForm(addPrescFormProps: AddPrescFormProps) {
   };
   console.log(addPresc);
   return (
-    <div className="popup">
-      <div className="popup-inner">
+    <Modal
+      show={addPrescFormProps.prescpopup}
+      onHide={() => addPrescFormProps.prescBtn(false)}
+      className="mt-5 mb-5"
+      backdrop="static"
+    >
+      <Modal.Header closeButton><h5>Add a Prescription</h5></Modal.Header>
+      <Modal.Body>
+
         <div className="AddPrescriptionForm">
-          <h5>Add Prescription</h5>
-          <button
-            onClick={() => addPrescFormProps.popup(false)}
-            className="btn close-btn float-end mt-0"
-          >
-            <AiOutlineCloseSquare size={25} />
-          </button>
+
           <div className="col">
-            <div>
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">Prescription Name</span>
               <input
                 type="text"
                 placeholder="Enter Prescription"
+                className="form-control"
                 onChange={(e) => setPrescName(e.target.value)}
               />
             </div>
-            <div>
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">Dosage</span>
               <input
                 type="number"
                 placeholder="Enter Dosage"
+                className="form-control"
                 onChange={(e) => setDosage(parseInt(e.target.value))}
               />
             </div>
@@ -80,7 +87,8 @@ export default function PrescriptionForm(addPrescFormProps: AddPrescFormProps) {
             </button>
           </div>
         </div>
-      </div>
-    </div>
+
+      </Modal.Body>
+    </Modal>
   );
 }
