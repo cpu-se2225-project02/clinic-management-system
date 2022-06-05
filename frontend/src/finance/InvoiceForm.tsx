@@ -33,7 +33,7 @@ export default function InvoiceForm() {
         </Col>
         <Col xs={10} className="GeneratedInvPage">
           <Row style={{ marginTop: '100px' }}>
-            <h4>Generated Invoice</h4>
+            <h4>Generated Invoice</h4> 
             <div className="invoice-form">
               <Table striped bordered>
                 <thead>

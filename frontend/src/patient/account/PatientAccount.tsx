@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Spinner, Table } from 'react-bootstrap';
 import { useQuery } from 'urql';
-import { MdAddCircleOutline } from 'react-icons/md';
+import { MdReceiptLong, MdPayment } from 'react-icons/md';
 // import { BiEdit } from 'react-icons/bi';
 import { GetPatientAccountDocument } from '../../queries.generated';
 import AddPaymentForm from './AddPaymentForm';
@@ -50,7 +50,8 @@ function PatientAccount({ pID }: PatientId) {
                   <BiEdit size={30} />
                 </button> */}
               <button type="button" className="editAndAdd" onClick={() => { setAddPayment(true); }}>
-                <MdAddCircleOutline size={30} />
+                <MdPayment size={30} />
+                PAYMENT
               </button>
               {addPayment && (
                 <AddPaymentForm
@@ -61,15 +62,16 @@ function PatientAccount({ pID }: PatientId) {
                 />
               )}
               <button type="button" className="editAndAdd" onClick={() => { setAddBill(true); }}>
-                <MdAddCircleOutline size={30} />
+                <MdReceiptLong size={30} />
+                BILL
               </button>
               {addBill && (
-              <BillForm
-                payForm={addBill}
-                disabledSelect
-                addPaymentBtn={setAddBill}
-                patId={pID}
-              />
+                <BillForm
+                  payForm={addBill}
+                  disabledSelect
+                  addPaymentBtn={setAddBill}
+                  patId={pID}
+                />
               )}
               {/* </div> */}
             </th>

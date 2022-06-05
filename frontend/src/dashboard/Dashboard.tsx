@@ -189,13 +189,16 @@ function Dashboard() {
               >
                 <Col xs={12} className="dashboardInfo">
                   <Table className="table table-hover">
+
                     <thead className="tb-head">
+                      <th colSpan={5} className="upcomingAppointments">UPCOMING APPOINTMENTS</th>
+                      {/* <caption>Upcoming Appointments</caption> */}
                       <tr>
-                        <th scope="col">Appointment Title</th>
-                        <th scope="col">Patient Name</th>
-                        <th scope="col">Doctor-in-Charge</th>
-                        <th scope="col">Start</th>
-                        <th scope="col">End</th>
+                        <th className="dashTitle" scope="col">APPOINTMENT TITLE</th>
+                        <th className="dashTitle" scope="col">PATIENT NAME</th>
+                        <th className="dashTitle" scope="col">DOCTOR-IN-CHARGE</th>
+                        <th className="dashTitle" scope="col">START</th>
+                        <th className="dashTitle" scope="col">END</th>
                       </tr>
                     </thead>
                     {allAppointments.data?.appointments?.map((appointment) => {
@@ -203,19 +206,19 @@ function Dashboard() {
                         return (
                           <tbody>
                             <tr>
-                              <td>{appointment?.name}</td>
-                              <td>
+                              <td className="dashboardList">{appointment?.name}</td>
+                              <td className="dashboardList">
                                 {appointment?.patient?.f_name}
                                 {' '}
                                 {appointment?.patient?.l_name}
                               </td>
-                              <td>{appointment?.doctor?.doc_name}</td>
-                              <td>
+                              <td className="dashboardList">{appointment?.doctor?.doc_name}</td>
+                              <td className="dashboardList">
                                 {new Date(appointment?.dt_start as string).toDateString()}
                                 {' '}
                                 {new Date(appointment?.dt_start as string).toLocaleTimeString()}
                               </td>
-                              <td>
+                              <td className="dashboardList">
                                 {new Date(appointment?.dt_end as string).toDateString()}
                                 {' '}
                                 {new Date(appointment?.dt_end as string).toLocaleTimeString()}

@@ -90,7 +90,7 @@ export default function PatientRecord({ accountToggle = false }: OpProps) {
               className="patient-btns"
               onClick={() => handleBtnClick(setPrescBtn, PrescriptionBtn)}
             >
-              Prescriptions
+              PRESCRIPTIONS
             </Button>
             {PrescriptionBtn && <Prescription pID={data?.specificPatient?.id} />}
           </Col>
@@ -100,7 +100,7 @@ export default function PatientRecord({ accountToggle = false }: OpProps) {
               className="patient-btns"
               onClick={() => handleBtnClick(setReferralBtn, ReferralBtn)}
             >
-              Referrals
+              REFERRALS
             </Button>
             {ReferralBtn && <Referral pID={data?.specificPatient?.id} />}
           </Col>
@@ -110,7 +110,7 @@ export default function PatientRecord({ accountToggle = false }: OpProps) {
               className="patient-btns"
               onClick={() => handleBtnClick(setMedHist, MedHist)}
             >
-              Medical History
+              MEDICAL HISTORY
             </Button>
             {MedHist && <MedicalHistory pID={data?.specificPatient?.id} />}
           </Col>
@@ -120,7 +120,7 @@ export default function PatientRecord({ accountToggle = false }: OpProps) {
               className="patient-btns"
               onClick={() => handleBtnClick(setAccBtn, AccountBtn)}
             >
-              Accounts
+              ACCOUNTS
             </Button>
             {AccountBtn && <PatientAccount pID={data?.specificPatient?.id} />}
           </Col>
@@ -131,7 +131,7 @@ export default function PatientRecord({ accountToggle = false }: OpProps) {
               className="patient-btns"
               onClick={() => handleBtnClick(setMedNotesBtn, MedNotesBtn)}
             >
-              Medical Notes
+              MEDICAL NOTES
             </Button>
             {MedNotesBtn && <MedicalNotes pId={data?.specificPatient?.id} />}
           </Col>
@@ -141,7 +141,7 @@ export default function PatientRecord({ accountToggle = false }: OpProps) {
               className="patient-btns"
               onClick={() => handleBtnClick(setAppointmentBtn, AppointmentBtn)}
             >
-              Appointments
+              APPOINTMENTS
             </Button>
             {AppointmentBtn && <SpecificAppointment pId={data?.specificPatient?.id} />}
           </Col>
