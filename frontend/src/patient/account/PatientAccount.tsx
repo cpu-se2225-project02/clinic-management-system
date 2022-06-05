@@ -7,6 +7,7 @@ import { MdAddCircleOutline } from 'react-icons/md';
 import { GetPatientAccountDocument } from '../../queries.generated';
 import AddPaymentForm from './AddPaymentForm';
 import './PatientAccount.css';
+import BillForm from '../../finance/BillForm';
 
 interface PatientId {
   pID: number | undefined
@@ -14,6 +15,7 @@ interface PatientId {
 
 function PatientAccount({ pID }: PatientId) {
   const [addPayment, setAddPayment] = useState(false);
+  const [addBill, setAddBill] = useState(false);
   const [patientAccount] = useQuery({
     query: GetPatientAccountDocument,
     variables: {
@@ -57,6 +59,17 @@ function PatientAccount({ pID }: PatientId) {
                   disabledSelect
                   addPaymentBtn={setAddPayment}
                 />
+              )}
+              <button type="button" className="editAndAdd" onClick={() => { setAddBill(true); }}>
+                <MdAddCircleOutline size={30} />
+              </button>
+              {addBill && (
+              <BillForm
+                payForm={addBill}
+                disabledSelect
+                addPaymentBtn={setAddBill}
+                patId={pID}
+              />
               )}
               {/* </div> */}
             </th>
