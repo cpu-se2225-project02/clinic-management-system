@@ -83,17 +83,17 @@ export default function Prescription({ pID }: PatientID) {
           pID={pID as number}
         />
       )}
-      <div className="col-sm-11">
+      <div className="AddPrescBtn">
         <button onClick={() => { setAddPrescBtn(true); }} className="btn btn-outline-secondary">
           <RiAddFill size={30} />
           Add Prescription
         </button>
       </div>
-      {data?.patientPrescriptions?.length !== 0
-        ? data?.patientPrescriptions?.map((prescription) => (
-          <>
-            <Table className="table table-striped">
-              <tbody>
+      <>
+        <Table className="table table-striped">
+          <tbody>
+            {data?.patientPrescriptions?.length !== 0
+              ? data?.patientPrescriptions?.map((prescription) => (
                 <tr>
                   <td>
                     <b>{prescription?.pres_name}</b>
@@ -135,11 +135,11 @@ export default function Prescription({ pID }: PatientID) {
                     </div>
                   </td>
                 </tr>
-              </tbody>
-            </Table>
-          </>
-        ))
-        : <div>No prescription given to patient.</div>}
+              ))
+              : <div>No prescription given to patient.</div>}
+          </tbody>
+        </Table>
+      </>
     </>
   );
 }
