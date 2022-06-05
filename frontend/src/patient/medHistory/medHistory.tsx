@@ -5,7 +5,9 @@
 /* eslint-disable react/jsx-tag-spacing */
 import React, { useState } from 'react';
 import { useMutation, useQuery } from 'urql';
-import { Spinner } from 'react-bootstrap';
+import {
+  Spinner, Table, Row, Col,
+} from 'react-bootstrap';
 import { RiAddFill } from 'react-icons/ri';
 import { BiEdit } from 'react-icons/bi';
 import { MdDeleteOutline } from 'react-icons/md';
@@ -14,7 +16,7 @@ import UpdateMedHistoryForm from './updateMedHistory';
 import { DeleteMedHistoryDocument, PatientMedHistoryDocument } from '../../queries.generated';
 
 interface PatientID {
-    pID: undefined | number
+  pID: undefined | number
 }
 
 export default function MedicalHistory({ pID }: PatientID) {
@@ -56,49 +58,45 @@ export default function MedicalHistory({ pID }: PatientID) {
   };
   return (
     <>
-      {addMedHistoryBtn && <MedHistoryForm popup={setAddMedHistoryBtn} pID={pID as number}/>}
-      <div className="col-sm-11">
-        <button onClick={() => { setAddMedHistoryBtn(true); }} className="btn btn-outline-secondary">
-          <RiAddFill size={30}/>
-          Add Medical History
-        </button>
-      </div>
-
       {data?.patientMedHistory?.length !== 0
         ? data?.patientMedHistory?.map((MedicalHistory) => (
           <>
-            <div className="container">
-              <div className="row">
-                <div className="col-sm-1">
-                  <div className="btn-group" role="group">
-                    <button type="button" className="editAndDltBtn" onClick={() => onEditBtnClicked(MedicalHistory?.id as number)}>
-                      <BiEdit size={30} />
-                    </button>
-                    <button type="button" className="editAndDltBtn" onClick={() => deletemedHistory(MedicalHistory?.id as number)}>
-                      <MdDeleteOutline size={30} />
-                    </button>
-                    {updateMedHistoryBtn && <UpdateMedHistoryForm popup={setUpdateMedHistoryBtn} pID={pID as number} medHistoryID={editBtnValue} />}
-                  </div>
+            <Row>
+              <Col>
+                {addMedHistoryBtn && <MedHistoryForm popup={setAddMedHistoryBtn} pID={pID as number} />}
+                <button onClick={() => { setAddMedHistoryBtn(true); }} className="btn btn-outline-secondary">
+                  <RiAddFill size={30} />
+                  Add Medical History
+                </button>
+              </Col>
+              <Col>
+                <div className="btn-group editAndDltBtn" role="group">
+                  <button type="button" className="editAndDltBtn" onClick={() => onEditBtnClicked(MedicalHistory?.id as number)}>
+                    <BiEdit size={30} />
+                  </button>
+                  <button type="button" className="editAndDltBtn" onClick={() => deletemedHistory(MedicalHistory?.id as number)}>
+                    <MdDeleteOutline size={30} />
+                  </button>
+                  {updateMedHistoryBtn && <UpdateMedHistoryForm popup={setUpdateMedHistoryBtn} pID={pID as number} medHistoryID={editBtnValue} />}
                 </div>
-              </div>
-            </div>
-
-            <div>
-              <div className="medicalhistory">
-                <div className="history">
-                  {MedicalHistory?.diagnosis}
-                </div>
-                Diagnosis
-                {' '}
-                Treatment Plan:
-                {MedicalHistory?.treatment_plan}
-                {' '}
-                Description
-                {MedicalHistory?.description}
-                {' '}
-              </div>
-              <hr />
-            </div>
+              </Col>
+            </Row>
+            <Table className="table">
+              <thead>
+                <tr>
+                  <th scope="col">Diagnosis</th>
+                  <th scope="col">Treatment Plan</th>
+                  <th scope="col">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{MedicalHistory?.diagnosis}</td>
+                  <td>{MedicalHistory?.treatment_plan}</td>
+                  <td>{MedicalHistory?.description}</td>
+                </tr>
+              </tbody>
+            </Table>
           </>
         ))
         : <div>No Medical History given to patient.</div>}
