@@ -39,8 +39,8 @@ export default function MedicalNotes({ pId }: PatientID) {
           <MdNoteAdd size={25} />
           {' '}
           Add Note
-          {PostButton && <MedNotesForm payForm={PostButton} pId={pId} postButton={setPostButton} />}
         </button>
+        {PostButton && <MedNotesForm payForm={PostButton} pId={pId} postButton={setPostButton} />}
       </div>
       <table className="table">
         <tbody>
