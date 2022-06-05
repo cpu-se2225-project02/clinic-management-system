@@ -1,12 +1,15 @@
 /* eslint-disable react/button-has-type */
 import React, { useState } from 'react';
 import { useMutation } from 'urql';
-import { AiOutlineCloseSquare } from 'react-icons/ai';
+import { Modal } from 'react-bootstrap';
+// import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { AddMedHistoryDocument } from '../../queries.generated';
 
 interface AddMedHistoryFormProps {
     pID: number | undefined
     popup: React.Dispatch<React.SetStateAction<boolean>>
+    medHistoryBtn: React.Dispatch<React.SetStateAction<boolean>>
+    medHistorypopup: boolean
 }
 
 export default function medHistoryForm(addMedHistoryFormProps: AddMedHistoryFormProps) {
@@ -29,44 +32,49 @@ export default function medHistoryForm(addMedHistoryFormProps: AddMedHistoryForm
     addMedHistory();
     addMedHistoryFormProps.popup(false);
   };
-  if (addmedHistory.error) {
-    console.log(addmedHistory.error);
-  }
+  console.log(addmedHistory);
   return (
-    <div className="popup">
-      <div className="popup-inner">
-        <div className="AddPrescriptionForm">
-          <h5>Add Medical History</h5>
+    <Modal
+      show={addMedHistoryFormProps.medHistorypopup}
+      onHite={() => addMedHistoryFormProps.medHistoryBtn(false)}
+      className="mt-5 mb-5"
+      backdrop="static"
+    >
 
-          <button
-            onClick={() => addMedHistoryFormProps.popup(false)}
-            className="btn close-btn float-end mt-0"
-          >
-            <AiOutlineCloseSquare size={25} />
-          </button>
-
+      <Modal.Header closeButton><h5>Add Medical History</h5></Modal.Header>
+      <Modal.Body>
+        <div className="AddMedHistoryForm">
           <div className="col">
-            <div>
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">Diagnosis</span>
               <input
                 type="text"
                 placeholder="Enter Diagnosis"
+                className="form-control"
                 onChange={(e) => setdiagnosis(e.target.value)}
               />
             </div>
-            <div>
+
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">Treatment Plan</span>
               <input
                 type="text"
                 placeholder="Enter Treatment Plan"
+                className="form-control"
                 onChange={(e) => settreatmentplan(e.target.value)}
               />
             </div>
-            <div>
+
+            <div className="input-group mb-3">
+              <span className="input-group-text" id="basic-addon1">Description</span>
               <input
                 type="text"
                 placeholder="Enter Description"
+                className="form-control"
                 onChange={(e) => setdescription(e.target.value)}
               />
             </div>
+
             <button
               className="btn btn-primary mt-2 float-end"
               onClick={onSubmitBtnClicked}
@@ -74,9 +82,10 @@ export default function medHistoryForm(addMedHistoryFormProps: AddMedHistoryForm
             >
               Submit
             </button>
+
           </div>
         </div>
-      </div>
-    </div>
+      </Modal.Body>
+    </Modal>
   );
 }
