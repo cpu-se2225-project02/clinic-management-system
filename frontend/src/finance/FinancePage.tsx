@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable no-return-assign */
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable max-len */
@@ -63,7 +64,9 @@ export default function FinancePage() {
               >
                 <Card.Body>
                   <div>
-                    Php 00.00
+                    Php {allPayments.data?.allPayments?.length === 0
+                    ? (0.00)
+                    : allPayments.data?.allPayments?.map((payment) => payment?.ammnt_paid).reduce((prev, curr) => prev! + curr!)?.toFixed(2)}
                   </div>
                 </Card.Body>
                 <Card.Footer>
