@@ -11,7 +11,7 @@ import Dashboard from './dashboard/Dashboard';
 import FinancePage from './finance/FinancePage';
 import PatientList from './patient/PatientList';
 import InvoiceForm from './finance/InvoiceForm';
-import LoginPage from './login/LoginPage';
+// import LoginPage from './login/LoginPage';
 import PatientRecord from './patient/PatientRecord';
 import SingUpPage from './signup/SignupPage';
 
