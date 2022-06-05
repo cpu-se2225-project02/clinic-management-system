@@ -77,12 +77,6 @@ function Referral({ pID }: PatientID) {
         />
       )}
       <div>
-        <button className="btn btn-outline-secondary" onClick={() => setAddReferral(true)}>
-          <RiAddFill size={30} />
-          Add Referral
-        </button>
-      </div>
-      <div>
         {/* <> */}
         <Table className="table table-striped referrals">
           <thead>
@@ -92,6 +86,12 @@ function Referral({ pID }: PatientID) {
               </th>
               <th className="referralTitle" scope="col">REFERRED TO</th>
               <th className="referralTitle" scope="col">REFERRED BY</th>
+              <th className="referralTitle" scope="col">
+                <button className="btn btn-outline-secondary" onClick={() => setAddReferral(true)}>
+                  <RiAddFill size={30} />
+                  Add Referral
+                </button>
+              </th>
             </tr>
           </thead>
           <tbody>
