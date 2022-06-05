@@ -32,4 +32,5 @@ letter-spacing: 1px;
 .patient-btns:hover {
   background-color: #f9ebbe !important;
   color: #051329 !important;
+  font-size: large !important;
 }
