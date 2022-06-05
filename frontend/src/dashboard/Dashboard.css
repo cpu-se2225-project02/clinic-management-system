@@ -7,20 +7,44 @@
   background-color: rgb(166, 166, 166);
 }
 
-.dashboardInfo{
+.dashboardInfo {
   padding-top: 10px;
 }
-.mt-5{
+
+.mt-5 {
   padding-left: 10px;
 }
 
 .tb-head {
   background-color: #feddba;
-  /* background-color: #ffd2aa; */
-  /* color: #051329; */
-  /* border-style: hidden; */
 }
+
 .dashboardPage {
-padding-top: 5%;
-padding-bottom: 5%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.upcomingAppointments {
+  text-align: center;
+  padding: 1rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  letter-spacing: 2px;
+  color: rgb(65, 65, 65);
+}
+
+.table {
+  color: rgb(65, 65, 65);
+
+}
+
+.dashTitle {
+  color: rgb(65, 65, 65);
+  font-size: small;
+  /* padding-left: 2px; */
+  text-align: center;
+}
+
+.dashboardList {
+  text-align: center;
 }
