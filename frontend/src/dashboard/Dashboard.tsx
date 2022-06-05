@@ -195,19 +195,19 @@ function Dashboard() {
                     {allAppointments.data?.appointments?.map((appointment) => (
                       <tbody>
                         <tr>
-                          <td>{appointment?.name}</td>
-                          <td>
+                          <td className="dashboardList">{appointment?.name}</td>
+                          <td className="dashboardList">
                             {appointment?.patient?.f_name}
                             {' '}
                             {appointment?.patient?.l_name}
                           </td>
-                          <td>{appointment?.doctor?.doc_name}</td>
-                          <td>
+                          <td className="dashboardList">{appointment?.doctor?.doc_name}</td>
+                          <td className="dashboardList">
                             {new Date(appointment?.dt_start as string).toDateString()}
                             {' '}
                             {new Date(appointment?.dt_start as string).toLocaleTimeString()}
                           </td>
-                          <td>
+                          <td className="dashboardList">
                             {new Date(appointment?.dt_end as string).toDateString()}
                             {' '}
                             {new Date(appointment?.dt_end as string).toLocaleTimeString()}

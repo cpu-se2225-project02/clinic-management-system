@@ -35,14 +35,16 @@
 
 .table {
   color: rgb(65, 65, 65);
-  
+
 }
-.dashTitle{
+
+.dashTitle {
   color: rgb(65, 65, 65);
   font-size: small;
   /* padding-left: 2px; */
   text-align: center;
 }
-td{
+
+.dashboardList {
   text-align: center;
 }
