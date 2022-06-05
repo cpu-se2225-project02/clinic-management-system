@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/button-has-type */
 import React, { useState } from 'react';
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Table } from 'react-bootstrap';
 import { BiEdit } from 'react-icons/bi';
 import { MdDeleteOutline } from 'react-icons/md';
 import { RiAddFill } from 'react-icons/ri';
@@ -69,25 +69,36 @@ function Referral({ pID }: PatientID) {
   return (
     <>
       {addReferral && (
-      <ReferralForm
-        referralBtn={setAddReferral}
-        referralpopup={addReferral}
-        pID={pID}
-        popup={setAddReferral}
-      />
+        <ReferralForm
+          referralBtn={setAddReferral}
+          referralpopup={addReferral}
+          pID={pID}
+          popup={setAddReferral}
+        />
       )}
-      <div className="col-sm-11">
+      <div>
         <button className="btn btn-outline-secondary" onClick={() => setAddReferral(true)}>
           <RiAddFill size={30} />
           Add Referral
         </button>
       </div>
       <div>
-        {data?.patientReferrals?.map((referral) => (
-          <>
-            <div className="container">
-              <div className="row">
-                <div className="col">
+        {/* <> */}
+        <Table className="table">
+          <tbody>
+            {data?.patientReferrals?.map((referral) => (
+              <tr>
+                <th scope="row">{referral?.hosp_name}</th>
+                <td>
+                  Referred by:
+                  {' '}
+                </td>
+                <td>
+                  Dr.
+                  {' '}
+                  {referral?.doctor?.doc_name}
+                </td>
+                <td>
                   <div className="btn-group editAndDelete" role="group">
                     <button type="button" className="editAndDltBtn" onClick={() => onEditBtnClicked(referral?.id as number)}>
                       <BiEdit size={30} />
@@ -96,38 +107,30 @@ function Referral({ pID }: PatientID) {
                       <MdDeleteOutline size={30} />
                     </button>
                   </div>
-                </div>
-              </div>
-            </div>
-
-            {updateReferral && (
-            <UpdateReferralForm
-              pID={pID}
-              popup={setUpdatReferral}
-              refID={editBtnValue}
-              updateReferral={updateReferral}
-              updateReferralBtn={setUpdatReferral}
-            />
-            )}
-            {deleteConfirmation && (
-            <ConfirmDelete
-              onDeleteTrue={handleDeleteTrue}
-              onDeleteFalse={handleDeleteFalse}
-              deleteModal={deleteConfirmation}
-              deleteModalBtn={setDeleteConfirmation}
-            />
-            )}
-            <div className="referredHospital">
-              {referral?.hosp_name}
-              <br />
-              {referral?.doctor?.doc_name}
-            </div>
-            <hr />
-          </>
-        ))}
+                  {updateReferral && (
+                    <UpdateReferralForm
+                      pID={pID}
+                      popup={setUpdatReferral}
+                      refID={editBtnValue}
+                      updateReferral={updateReferral}
+                      updateReferralBtn={setUpdatReferral}
+                    />
+                  )}
+                  {deleteConfirmation && (
+                    <ConfirmDelete
+                      onDeleteTrue={handleDeleteTrue}
+                      onDeleteFalse={handleDeleteFalse}
+                      deleteModal={deleteConfirmation}
+                      deleteModalBtn={setDeleteConfirmation}
+                    />
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
       </div>
     </>
   );
 }
-
 export default Referral;

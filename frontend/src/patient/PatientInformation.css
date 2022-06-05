@@ -5,13 +5,18 @@
 }
 .PatientIcon{
   block-size: 2in;
-  margin-left: 10%;
+  margin-left: 10%; 
 }
 .editAndDelete{
   float: right;
 }
 
 .patientFullName{
-  font-size: 23px;
+  font-size: 23px; 
 }
-
+.PatientInfo{
+  font-family: Georgia, 'Times New Roman', Times, serif
+}
+.patientInformationtTable{
+  padding: 10px;
+}
