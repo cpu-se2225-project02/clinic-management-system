@@ -33,6 +33,11 @@ input AppointmentInput {
   patient_id: Int!
 }
 
+type AuthPayload {
+  token: String
+  user: User
+}
+
 type Bill {
   ammnt_cost: Float!
   ammnt_paid: Float
@@ -46,6 +51,11 @@ input BillInput {
   ammnt_cost: Float!
   patient_id: Int!
 }
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
 
 type Doctor {
   appointments: [Appointment]
@@ -120,6 +130,7 @@ type Mutation {
   editPatient(editedPatient: PatientInput!, patientId: Int!): Patient
   editPrescription(editedPrescription: EditPrescriptionInput!, prescriptionId: Int!): Prescription
   editReferral(editedReferral: EditReferralInput!, referralID: Int!): Referral
+  signup(email: String!, f_name: String, l_name: String, password: String!): AuthPayload
 }
 
 type Patient {
@@ -169,6 +180,7 @@ type Query {
   account(patientId: Int!): [Bill]
   allDoctors: [Doctor]
   allPayments: [Bill]
+  allUsers: [User]
   appointments: [Appointment]
   helloWorld: String
   hi: String
@@ -196,4 +208,11 @@ input ReferralInput {
   doctor_id: Int!
   hosp_name: String!
   patient_id: Int!
+}
+
+type User {
+  email: String!
+  f_name: String!
+  l_name: String!
+  password: String!
 }

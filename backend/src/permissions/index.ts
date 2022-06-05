@@ -3,7 +3,7 @@
 /* eslint-disable linebreak-style */
 import { rule, shield } from 'graphql-shield';
 import { getUserId } from '../utils';
-import { Context } from '../user';
+import { Context } from '../context';
 
 const rules = {
   isAuthenticatedUser: rule()((_parent, _args, context: Context) => {
@@ -25,14 +25,9 @@ const rules = {
 
 export const permissions = shield({
   Query: {
-    me: rules.isAuthenticatedUser,
-    draftsByUser: rules.isAuthenticatedUser,
-    postById: rules.isAuthenticatedUser,
+
   },
   Mutation: {
-    createDraft: rules.isAuthenticatedUser,
-    deletePost: rules.isPostOwner,
-    incrementPostViewCount: rules.isAuthenticatedUser,
-    togglePublishPost: rules.isPostOwner,
+
   },
 });

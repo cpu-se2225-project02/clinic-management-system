@@ -13,6 +13,8 @@ import Sidebars from '../common/Sidebars';
 import './LoginPage.css';
 
 export default function LoginPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <Container fluid>
       <Container className="Login">
@@ -26,6 +28,7 @@ export default function LoginPage() {
                 type="text"
                 placeholder="Enter email address"
                 className="email"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Col>
           </Form.Group>
@@ -39,6 +42,7 @@ export default function LoginPage() {
                 type="password"
                 placeholder="Enter password"
                 className="password"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </Col>
           </Form.Group>

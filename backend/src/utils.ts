@@ -3,7 +3,7 @@
 /* eslint-disable import/prefer-default-export */
 
 import { verify } from 'jsonwebtoken';
-import { Context } from './user';
+import { Context } from './context';
 
 export const APP_SECRET = 'appsecret321';
 

@@ -10,14 +10,41 @@ import { BiSearchAlt2 } from 'react-icons/bi';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
 
-import './LoginPage.css';
-
-export default function LoginPage() {
+export default function SignUpPage() {
+  const [fName, setFName] = useState('');
+  const [lName, setLName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <Container fluid>
       <Container className="Login">
         <h3>Sign In</h3>
-
+        <Form>
+          <Form.Group as={Row}>
+            <Form.Label>First Name</Form.Label>
+            <Col sm={20}>
+              <Form.Control
+                type="text"
+                placeholder="Enter first Name"
+                className="fName"
+                onChange={(e) => setFName(e.target.value)}
+              />
+            </Col>
+          </Form.Group>
+        </Form>
+        <Form>
+          <Form.Group as={Row}>
+            <Form.Label>Last Name</Form.Label>
+            <Col sm={20}>
+              <Form.Control
+                type="text"
+                placeholder="Enter last name"
+                className="lName"
+                onChange={(e) => setLName(e.target.value)}
+              />
+            </Col>
+          </Form.Group>
+        </Form>
         <Form>
           <Form.Group as={Row}>
             <Form.Label>Email Address</Form.Label>
@@ -26,11 +53,11 @@ export default function LoginPage() {
                 type="text"
                 placeholder="Enter email address"
                 className="email"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Col>
           </Form.Group>
         </Form>
-
         <Form>
           <Form.Group as={Row}>
             <Form.Label>Password</Form.Label>
@@ -39,34 +66,16 @@ export default function LoginPage() {
                 type="password"
                 placeholder="Enter password"
                 className="password"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </Col>
           </Form.Group>
         </Form>
-
-        <div className="mb-3">
-          <div className="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              className="custom-control-input"
-              id="customCheck1"
-            />
-            <label className="custom-control-label" htmlFor="customCheck1">
-              Remember me
-            </label>
-          </div>
-        </div>
-
         <div className="d-grid">
           <button type="submit" className="btn btn-primary">
-            Submit
+            Sign Up
           </button>
         </div>
-        <p className="forgot-password text-right">
-          Forgot
-          {' '}
-          <a href="foo">password?</a>
-        </p>
       </Container>
     </Container>
   );

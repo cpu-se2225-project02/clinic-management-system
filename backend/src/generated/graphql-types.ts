@@ -4,9 +4,23 @@
  */
 
 
-
-
-
+import type { core } from "nexus"
+declare global {
+  interface NexusGenCustomInputMethods<TypeName extends string> {
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    date<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "DateTime";
+  }
+}
+declare global {
+  interface NexusGenCustomOutputMethods<TypeName extends string> {
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    date<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "DateTime";
+  }
+}
 
 
 declare global {
@@ -93,6 +107,7 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  DateTime: any
 }
 
 export interface NexusGenObjects {
@@ -102,6 +117,10 @@ export interface NexusGenObjects {
     dt_start: string; // String!
     id: number; // Int!
     name: string; // String!
+  }
+  AuthPayload: { // root type
+    token?: string | null; // String
+    user?: NexusGenRootTypes['User'] | null; // User
   }
   Bill: { // root type
     ammnt_cost: number; // Float!
@@ -153,6 +172,12 @@ export interface NexusGenObjects {
     hosp_name: string; // String!
     id: number; // Int!
   }
+  User: { // root type
+    email: string; // String!
+    f_name: string; // String!
+    l_name: string; // String!
+    password: string; // String!
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -174,6 +199,10 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     name: string; // String!
     patient: NexusGenRootTypes['Patient'] | null; // Patient
+  }
+  AuthPayload: { // field return type
+    token: string | null; // String
+    user: NexusGenRootTypes['User'] | null; // User
   }
   Bill: { // field return type
     ammnt_cost: number; // Float!
@@ -225,6 +254,7 @@ export interface NexusGenFieldTypes {
     editPatient: NexusGenRootTypes['Patient'] | null; // Patient
     editPrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
     editReferral: NexusGenRootTypes['Referral'] | null; // Referral
+    signup: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
   }
   Patient: { // field return type
     address: string; // String!
@@ -251,6 +281,7 @@ export interface NexusGenFieldTypes {
     account: Array<NexusGenRootTypes['Bill'] | null> | null; // [Bill]
     allDoctors: Array<NexusGenRootTypes['Doctor'] | null> | null; // [Doctor]
     allPayments: Array<NexusGenRootTypes['Bill'] | null> | null; // [Bill]
+    allUsers: Array<NexusGenRootTypes['User'] | null> | null; // [User]
     appointments: Array<NexusGenRootTypes['Appointment'] | null> | null; // [Appointment]
     helloWorld: string | null; // String
     hi: string | null; // String
@@ -272,6 +303,12 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     patient: NexusGenRootTypes['Patient'] | null; // Patient
   }
+  User: { // field return type
+    email: string; // String!
+    f_name: string; // String!
+    l_name: string; // String!
+    password: string; // String!
+  }
 }
 
 export interface NexusGenFieldTypeNames {
@@ -283,6 +320,10 @@ export interface NexusGenFieldTypeNames {
     id: 'Int'
     name: 'String'
     patient: 'Patient'
+  }
+  AuthPayload: { // field return type name
+    token: 'String'
+    user: 'User'
   }
   Bill: { // field return type name
     ammnt_cost: 'Float'
@@ -334,6 +375,7 @@ export interface NexusGenFieldTypeNames {
     editPatient: 'Patient'
     editPrescription: 'Prescription'
     editReferral: 'Referral'
+    signup: 'AuthPayload'
   }
   Patient: { // field return type name
     address: 'String'
@@ -360,6 +402,7 @@ export interface NexusGenFieldTypeNames {
     account: 'Bill'
     allDoctors: 'Doctor'
     allPayments: 'Bill'
+    allUsers: 'User'
     appointments: 'Appointment'
     helloWorld: 'String'
     hi: 'String'
@@ -380,6 +423,12 @@ export interface NexusGenFieldTypeNames {
     hosp_name: 'String'
     id: 'Int'
     patient: 'Patient'
+  }
+  User: { // field return type name
+    email: 'String'
+    f_name: 'String'
+    l_name: 'String'
+    password: 'String'
   }
 }
 
@@ -446,6 +495,12 @@ export interface NexusGenArgTypes {
     editReferral: { // args
       editedReferral: NexusGenInputs['EditReferralInput']; // EditReferralInput!
       referralID: number; // Int!
+    }
+    signup: { // args
+      email: string; // String!
+      f_name?: string | null; // String
+      l_name?: string | null; // String
+      password: string; // String!
     }
   }
   Query: {
