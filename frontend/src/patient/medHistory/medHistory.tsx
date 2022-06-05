@@ -58,48 +58,50 @@ export default function MedicalHistory({ pID }: PatientID) {
   };
   return (
     <>
-      {data?.patientMedHistory?.length !== 0
-        ? data?.patientMedHistory?.map((MedicalHistory) => (
-          <>
-            <Row>
-              <Col>
-                {addMedHistoryBtn && <MedHistoryForm popup={setAddMedHistoryBtn} pID={pID as number} />}
-                <button onClick={() => { setAddMedHistoryBtn(true); }} className="btn btn-outline-secondary">
-                  <RiAddFill size={30} />
-                  Add Medical History
-                </button>
-              </Col>
-              <Col>
-                <div className="btn-group editAndDltBtn" role="group">
-                  <button type="button" className="editAndDltBtn" onClick={() => onEditBtnClicked(MedicalHistory?.id as number)}>
-                    <BiEdit size={30} />
-                  </button>
-                  <button type="button" className="editAndDltBtn" onClick={() => deletemedHistory(MedicalHistory?.id as number)}>
-                    <MdDeleteOutline size={30} />
-                  </button>
-                  {updateMedHistoryBtn && <UpdateMedHistoryForm popup={setUpdateMedHistoryBtn} pID={pID as number} medHistoryID={editBtnValue} />}
-                </div>
-              </Col>
-            </Row>
-            <Table className="table">
-              <thead>
-                <tr>
-                  <th scope="col">Diagnosis</th>
-                  <th scope="col">Treatment Plan</th>
-                  <th scope="col">Description</th>
-                </tr>
-              </thead>
-              <tbody>
+      <>
+        <Row>
+          <Col>
+            {addMedHistoryBtn && <MedHistoryForm popup={setAddMedHistoryBtn} pID={pID as number} />}
+            <button onClick={() => { setAddMedHistoryBtn(true); }} className="btn btn-outline-secondary">
+              <RiAddFill size={30} />
+              Add Medical History
+            </button>
+          </Col>
+        </Row>
+        <Table className="table">
+          <thead>
+            <tr>
+              <th scope="col">Diagnosis</th>
+              <th scope="col">Treatment Plan</th>
+              <th scope="col">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data?.patientMedHistory?.length !== 0
+              ? data?.patientMedHistory?.map((MedicalHistory) => (
                 <tr>
                   <td>{MedicalHistory?.diagnosis}</td>
                   <td>{MedicalHistory?.treatment_plan}</td>
                   <td>{MedicalHistory?.description}</td>
+                  <td>
+                    <Col>
+                      <div className="btn-group editAndDltBtn" role="group">
+                        <button type="button" className="editAndDltBtn" onClick={() => onEditBtnClicked(MedicalHistory?.id as number)}>
+                          <BiEdit size={30} />
+                        </button>
+                        <button type="button" className="editAndDltBtn" onClick={() => deletemedHistory(MedicalHistory?.id as number)}>
+                          <MdDeleteOutline size={30} />
+                        </button>
+                        {updateMedHistoryBtn && <UpdateMedHistoryForm popup={setUpdateMedHistoryBtn} pID={pID as number} medHistoryID={editBtnValue} />}
+                      </div>
+                    </Col>
+                  </td>
                 </tr>
-              </tbody>
-            </Table>
-          </>
-        ))
-        : <div>No Medical History given to patient.</div>}
+              ))
+              : <div>No Medical History given to patient.</div>}
+          </tbody>
+        </Table>
+      </>
     </>
   );
 }
