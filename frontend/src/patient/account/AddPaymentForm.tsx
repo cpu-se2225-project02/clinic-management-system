@@ -64,6 +64,7 @@ function AddPaymentForm({
             <label className="input-group-text" htmlFor="inputGroupSelect01">Patient</label>
           </div>
           <select disabled={disabledSelect} className="custom-select" id="inputGroupSelect01" onChange={(e) => setId(parseInt(e.target.value))} required>
+            <option selected>Select a patient</option>
             {data?.patients?.map((patient) => {
               if (patient?.id === id) {
                 return (
