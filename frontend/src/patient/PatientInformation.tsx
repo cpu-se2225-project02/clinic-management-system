@@ -8,6 +8,7 @@ import {
 import { useQuery, useMutation } from 'urql';
 import { BiEdit } from 'react-icons/bi';
 import { MdDeleteOutline, MdPhone } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 import { GetPatientDocument, DeleteAPatientDocument } from '../queries.generated';
 import './PatientInformation.css';
 import UpdatePatientForm from './UpdatePatientForm';
@@ -18,6 +19,7 @@ interface PatientId {
 }
 
 export default function PatientInformation({ pId }: PatientId) {
+  const navigate = useNavigate();
   const [editBtn, setEditBtn] = useState(false);
   const [deletPatientResult, deletePatient] = useMutation(DeleteAPatientDocument);
   const [allPatients] = useQuery({
@@ -66,7 +68,11 @@ export default function PatientInformation({ pId }: PatientId) {
                 <BiEdit size={30} />
                 {/* Edit */}
               </button>
-              <button type="button" className="editAndDltBtn" onClick={patientDeletion}>
+              <button
+                type="button"
+                className="editAndDltBtn"
+                onClick={() => { patientDeletion(); navigate('/patients/'); }}
+              >
                 <MdDeleteOutline size={30} />
                 {/* Delete */}
               </button>
