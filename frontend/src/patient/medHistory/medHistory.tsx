@@ -75,76 +75,73 @@ export default function MedicalHistory({ pID }: PatientID) {
 
   return (
     <>
-      {addMedHistoryBtn && (
-      <MedHistoryForm
-        medHistorypopup={addMedHistoryBtn}
-        medHistoryBtn={setAddMedHistoryBtn}
-        popup={setAddMedHistoryBtn}
-        pID={pID as number}
-      />
-      )}
-      <div className="col-sm-11">
-        <button onClick={() => { setAddMedHistoryBtn(true); }} className="btn btn-outline-secondary">
-          <RiAddFill size={30} />
-          Add Medical History
-        </button>
-      </div>
-
-      {data?.patientMedHistory?.length !== 0
-        ? data?.patientMedHistory?.map((MedicalHistory) => (
-          <>
-            <div className="container">
-              <div className="row">
-                <div className="col">
-                  <div className="btn-group editAndDelete" role="group">
-                    <button type="button" className="editAndDelete" onClick={() => onEditBtnClicked(MedicalHistory?.id as number)}>
-                      <BiEdit size={30} />
-                    </button>
-
-                    <button type="button" className="editAndDelete" onClick={() => onDeleteBtnClicked(MedicalHistory?.id as number)}>
-
-                      <MdDeleteOutline size={30} />
-                    </button>
-
-                    {updateMedHistoryBtn && (
-                    <UpdateMedHistoryForm
-                      popup={setUpdateMedHistoryBtn}
-                      pID={pID as number}
-                      medHistoryID={editBtnValue}
-                      updateMedHistory={updateMedHistoryBtn}
-                      updateMedHistoryBtn={setUpdateMedHistoryBtn}
-                    />
-                    )}
-                    {deleteConfirmation && (
-                    <ConfirmDelete
-                      onDeleteTrue={handleDeleteTrue}
-                      onDeleteFalse={handleDeleteFalse}
-                      deleteModal={deleteConfirmation}
-                      deleteModalBtn={setDeleteConfirmation}
-                    />
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <div className="Medical History">
-                <div className="History">
-                  {MedicalHistory?.diagnosis}
-                </div>
-                Diagnosis:
-                {' '}
-                {MedicalHistory?.treatment_plan}
-                {' '}
-                {MedicalHistory?.description}
-                {' '}
-              </div>
-              <hr />
-            </div>
-          </>
-        ))
-        : <div>No Medical History given to patient.</div>}
+      <Row>
+        <Col>
+          {addMedHistoryBtn && (
+          <MedHistoryForm
+            medHistorypopup={addMedHistoryBtn}
+            medHistoryBtn={setAddMedHistoryBtn}
+            popup={setAddMedHistoryBtn}
+            pID={pID as number}
+          />
+          )}
+          <div className="col-sm-11">
+            <button onClick={() => { setAddMedHistoryBtn(true); }} className="btn btn-outline-secondary">
+              <RiAddFill size={30} />
+              Add Medical History
+            </button>
+          </div>
+        </Col>
+      </Row>
+      <Table className="table">
+        <thead>
+          <tr>
+            <th scope="col">Diagnosis</th>
+            <th scope="col">Treatment Plan</th>
+            <th scope="col">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data?.patientMedHistory?.length !== 0
+            ? data?.patientMedHistory?.map((MedicalHistory) => (
+              <tr>
+                <td>{MedicalHistory?.diagnosis}</td>
+                <td>{MedicalHistory?.treatment_plan}</td>
+                <td>{MedicalHistory?.description}</td>
+                <td>
+                  <Col>
+                    <div className="btn-group editAndDltBtn" role="group">
+                      <button type="button" className="editAndDltBtn" onClick={() => onEditBtnClicked(MedicalHistory?.id as number)}>
+                        <BiEdit size={30} />
+                      </button>
+                      <button type="button" className="editAndDltBtn" onClick={() => onDeleteBtnClicked(MedicalHistory?.id as number)}>
+                        <MdDeleteOutline size={30} />
+                      </button>
+                      {updateMedHistoryBtn && (
+                      <UpdateMedHistoryForm
+                        popup={setUpdateMedHistoryBtn}
+                        pID={pID as number}
+                        medHistoryID={editBtnValue}
+                        updateMedHistory={updateMedHistoryBtn}
+                        updateMedHistoryBtn={setUpdateMedHistoryBtn}
+                      />
+                      )}
+                      {deleteConfirmation && (
+                      <ConfirmDelete
+                        onDeleteTrue={handleDeleteTrue}
+                        onDeleteFalse={handleDeleteFalse}
+                        deleteModal={deleteConfirmation}
+                        deleteModalBtn={setDeleteConfirmation}
+                      />
+                      )}
+                    </div>
+                  </Col>
+                </td>
+              </tr>
+            ))
+            : <div>No Medical History given to patient.</div>}
+        </tbody>
+      </Table>
     </>
   );
 }
