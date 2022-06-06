@@ -9,8 +9,11 @@ import {
   asNexusMethod,
 } from 'nexus';
 import { DateTimeResolver } from 'graphql-scalars';
+import { PrismaClient } from '@prisma/client';
 import { APP_SECRET, getUserId } from './utils';
 import { Context } from './context';
+
+const db = new PrismaClient();
 
 const DateTime = asNexusMethod(DateTimeResolver, 'date');
 

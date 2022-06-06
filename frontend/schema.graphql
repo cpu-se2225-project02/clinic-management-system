@@ -212,14 +212,3 @@ type User {
   id: Int!
   l_name: String!
 }
-
-input UserCreateInput {
-  email: String!
-  f_name: String!
-  l_name: String!
-}
-
-input UserUniqueInput {
-  email: String
-  id: Int
-}

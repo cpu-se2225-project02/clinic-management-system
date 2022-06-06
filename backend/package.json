@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/graphql.ts"
+    "dev": "ts-node-dev --no-notify --respawn --transpile-only src/graphql.ts",
+    "start": "nodemon src/graphql.ts",
+    "generate": "npm -s run generate:prisma && npm -s run generate:nexus",
+    "generate:prisma": "prisma generate",
+    "generate:nexus": "ts-node --transpile-only src/auth/user.ts"
   },
   "keywords": [],
   "author": "",
@@ -31,7 +35,7 @@
     "@types/body-parser": "^1.19.2",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
-    "apollo-server-express": "^3.6.7",
+    "apollo-server-express": "^3.8.2",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",

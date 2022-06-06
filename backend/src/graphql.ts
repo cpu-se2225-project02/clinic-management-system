@@ -3,12 +3,11 @@
 /* eslint-disable no-unused-vars */
 
 import { makeSchema } from 'nexus';
-import express from 'express';
+import express, { query } from 'express';
 import path from 'path';
-import { graphqlHTTP } from 'express-graphql';
+import { ApolloServer } from 'apollo-server-express';
 import { applyMiddleware } from 'graphql-middleware';
 import { PrismaClient } from '@prisma/client';
-import cors from 'cors';
 import * as prescriptionType from './prescription';
 import * as patientTypes from './patient';
 import * as appointmentTypes from './appointment';
@@ -17,15 +16,21 @@ import * as paymentTypes from './payment';
 import * as medNotesTypes from './medNotes';
 import * as medHistoryTypes from './medHistory';
 import * as referralType from './referral';
-import * as userTypes from './auth/user';
-import { createContext } from './auth/context';
+import {
+  Query, Mutation, AuthPayload, User,
+} from './auth/user';
 import { permissions } from './auth/permissions/index';
+import { createContext } from './context';
 
 const app = express();
 const PORT = 8001;
 
 const schemaWithoutPermissions = makeSchema({
   types: [
+    Query,
+    Mutation,
+    User,
+    AuthPayload,
     patientTypes,
     appointmentTypes,
     doctorTypes,
@@ -34,14 +39,13 @@ const schemaWithoutPermissions = makeSchema({
     prescriptionType,
     medHistoryTypes,
     referralType,
-    userTypes,
   ],
   outputs: {
     typegen: path.join(__dirname, 'generated/graphql-types.ts'),
     schema: path.join(__dirname, '../../frontend/schema.graphql'),
   },
   contextType: {
-    module: require.resolve('./auth/context'),
+    module: require.resolve('./context.ts'),
     export: 'Context',
   },
   sourceTypes: {
@@ -56,18 +60,16 @@ const schemaWithoutPermissions = makeSchema({
 
 const schema = applyMiddleware(schemaWithoutPermissions, permissions);
 
-app
-  .use(cors())
-  .use(
-    '/graphql',
-    graphqlHTTP({
-      schema,
-      graphiql: !process.env.NODE_ENV?.startsWith('prod'),
-      context: createContext,
-    }),
-  )
-  .listen(PORT, () => {
-    console.log(
-      `Express Graphql server started at http://localhost:${PORT}/graphql`,
-    );
+const server = new ApolloServer({
+  schema,
+  context: createContext,
+});
+
+server
+  .start()
+  .then(() => {
+    server.applyMiddleware({ app });
+    app.listen(PORT, () => {
+      console.log(`Appolo server has started at http://localhost:${PORT}`);
+    });
   });

@@ -4,7 +4,7 @@
  */
 
 
-import type { Context } from "./../auth/context"
+import type { Context } from "./../context"
 
 
 
@@ -81,15 +81,6 @@ export interface NexusGenInputs {
     doctor_id: number; // Int!
     hosp_name: string; // String!
     patient_id: number; // Int!
-  }
-  UserCreateInput: { // input type
-    email: string; // String!
-    f_name: string; // String!
-    l_name: string; // String!
-  }
-  UserUniqueInput: { // input type
-    email?: string | null; // String
-    id?: number | null; // Int
   }
 }
 
