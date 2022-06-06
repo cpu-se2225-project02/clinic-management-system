@@ -1,7 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable consistent-return */
-/* eslint-disable import/prefer-default-export */
-
 import { verify } from 'jsonwebtoken';
 import { Context } from './context';
 
@@ -11,6 +7,7 @@ interface Token {
   userId: string
 }
 
+// eslint-disable-next-line consistent-return
 export function getUserId(context: Context) {
   const authHeader = context.req.get('Authorization');
   if (authHeader) {
