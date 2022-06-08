@@ -4,7 +4,7 @@
  */
 
 
-
+import type { Context } from "./../context"
 
 
 
@@ -103,6 +103,10 @@ export interface NexusGenObjects {
     id: number; // Int!
     name: string; // String!
   }
+  AuthPayload: { // root type
+    token?: string | null; // String
+    user?: NexusGenRootTypes['User'] | null; // User
+  }
   Bill: { // root type
     ammnt_cost: number; // Float!
     ammnt_paid?: number | null; // Float
@@ -153,6 +157,12 @@ export interface NexusGenObjects {
     hosp_name: string; // String!
     id: number; // Int!
   }
+  User: { // root type
+    email: string; // String!
+    f_name: string; // String!
+    id: number; // Int!
+    l_name: string; // String!
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -174,6 +184,10 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     name: string; // String!
     patient: NexusGenRootTypes['Patient'] | null; // Patient
+  }
+  AuthPayload: { // field return type
+    token: string | null; // String
+    user: NexusGenRootTypes['User'] | null; // User
   }
   Bill: { // field return type
     ammnt_cost: number; // Float!
@@ -225,6 +239,8 @@ export interface NexusGenFieldTypes {
     editPatient: NexusGenRootTypes['Patient'] | null; // Patient
     editPrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
     editReferral: NexusGenRootTypes['Referral'] | null; // Referral
+    login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
+    signup: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
   }
   Patient: { // field return type
     address: string; // String!
@@ -256,6 +272,7 @@ export interface NexusGenFieldTypes {
     hi: string | null; // String
     high: string | null; // String
     invoice: Array<NexusGenRootTypes['Bill'] | null> | null; // [Bill]
+    me: NexusGenRootTypes['User'] | null; // User
     medicalhistory: Array<NexusGenRootTypes['MedicalHistory'] | null> | null; // [MedicalHistory]
     patientMedHistory: Array<NexusGenRootTypes['MedicalHistory'] | null> | null; // [MedicalHistory]
     patientMedNotes: Array<NexusGenRootTypes['MedicalNotes'] | null> | null; // [MedicalNotes]
@@ -272,6 +289,12 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     patient: NexusGenRootTypes['Patient'] | null; // Patient
   }
+  User: { // field return type
+    email: string; // String!
+    f_name: string; // String!
+    id: number; // Int!
+    l_name: string; // String!
+  }
 }
 
 export interface NexusGenFieldTypeNames {
@@ -283,6 +306,10 @@ export interface NexusGenFieldTypeNames {
     id: 'Int'
     name: 'String'
     patient: 'Patient'
+  }
+  AuthPayload: { // field return type name
+    token: 'String'
+    user: 'User'
   }
   Bill: { // field return type name
     ammnt_cost: 'Float'
@@ -334,6 +361,8 @@ export interface NexusGenFieldTypeNames {
     editPatient: 'Patient'
     editPrescription: 'Prescription'
     editReferral: 'Referral'
+    login: 'AuthPayload'
+    signup: 'AuthPayload'
   }
   Patient: { // field return type name
     address: 'String'
@@ -365,6 +394,7 @@ export interface NexusGenFieldTypeNames {
     hi: 'String'
     high: 'String'
     invoice: 'Bill'
+    me: 'User'
     medicalhistory: 'MedicalHistory'
     patientMedHistory: 'MedicalHistory'
     patientMedNotes: 'MedicalNotes'
@@ -380,6 +410,12 @@ export interface NexusGenFieldTypeNames {
     hosp_name: 'String'
     id: 'Int'
     patient: 'Patient'
+  }
+  User: { // field return type name
+    email: 'String'
+    f_name: 'String'
+    id: 'Int'
+    l_name: 'String'
   }
 }
 
@@ -447,6 +483,16 @@ export interface NexusGenArgTypes {
       editedReferral: NexusGenInputs['EditReferralInput']; // EditReferralInput!
       referralID: number; // Int!
     }
+    login: { // args
+      email: string; // String!
+      password: string; // String!
+    }
+    signup: { // args
+      email: string; // String!
+      f_name: string; // String!
+      l_name: string; // String!
+      password: string; // String!
+    }
   }
   Query: {
     account: { // args
@@ -510,7 +556,7 @@ export type NexusGenFeaturesConfig = {
 }
 
 export interface NexusGenTypes {
-  context: any;
+  context: Context;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;

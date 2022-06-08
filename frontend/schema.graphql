@@ -33,6 +33,11 @@ input AppointmentInput {
   patient_id: Int!
 }
 
+type AuthPayload {
+  token: String
+  user: User
+}
+
 type Bill {
   ammnt_cost: Float!
   ammnt_paid: Float
@@ -120,6 +125,8 @@ type Mutation {
   editPatient(editedPatient: PatientInput!, patientId: Int!): Patient
   editPrescription(editedPrescription: EditPrescriptionInput!, prescriptionId: Int!): Prescription
   editReferral(editedReferral: EditReferralInput!, referralID: Int!): Referral
+  login(email: String!, password: String!): AuthPayload
+  signup(email: String!, f_name: String!, l_name: String!, password: String!): AuthPayload
 }
 
 type Patient {
@@ -174,6 +181,7 @@ type Query {
   hi: String
   high: String
   invoice(patientId: Int!): [Bill]
+  me: User
   medicalhistory: [MedicalHistory]
   patientMedHistory(patientId: Int!): [MedicalHistory]
   patientMedNotes(patient_id: Int!): [MedicalNotes]
@@ -196,4 +204,11 @@ input ReferralInput {
   doctor_id: Int!
   hosp_name: String!
   patient_id: Int!
+}
+
+type User {
+  email: String!
+  f_name: String!
+  id: Int!
+  l_name: String!
 }
