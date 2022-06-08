@@ -35,7 +35,7 @@ export default function InvoiceForm() {
           <Row style={{ marginTop: '100px' }}>
             <h4>Generated Invoice</h4>
             <div className="invoice-form">
-              <Table striped bordered> 
+              <Table striped bordered>
                 <thead>
                   <th>Description</th>
                   <th>Amount</th>
