@@ -1,5 +1,10 @@
-.referredHospital {
+.referrals {
     padding-left: 6px;
+    text-align: center;
+    font-size: 0.9rem;
+}
 
-
+.referralTitle {
+    font-size: small;
+    color: rgb(65, 65, 65);
 }

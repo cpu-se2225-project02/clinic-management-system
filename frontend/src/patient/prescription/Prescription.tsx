@@ -105,9 +105,6 @@ export default function Prescription({ pID }: PatientID) {
                     {' '}
                   </td>
                   <td>
-                    Number of times a day/ week
-                  </td>
-                  <td>
                     <div className="btn-group editAndDelete" role="group">
                       <button type="button" className="editAndDelete" onClick={() => onEditBtnClicked(prescription?.id as number)}>
                         <BiEdit size={30} />

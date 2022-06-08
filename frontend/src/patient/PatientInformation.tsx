@@ -13,6 +13,7 @@ import { GetPatientDocument, DeleteAPatientDocument } from '../queries.generated
 import './PatientInformation.css';
 import UpdatePatientForm from './UpdatePatientForm';
 import PatientIcon from './assets/images.png';
+import ConfirmDelete from '../common/ConfirmDelete';
 
 interface PatientId {
   pId: number | undefined
@@ -22,13 +23,13 @@ export default function PatientInformation({ pId }: PatientId) {
   const navigate = useNavigate();
   const [editBtn, setEditBtn] = useState(false);
   const [deletPatientResult, deletePatient] = useMutation(DeleteAPatientDocument);
+  const [deleteConfirmation, setDeleteConfirmation] = useState(false);
   const [allPatients] = useQuery({
     query: GetPatientDocument,
     variables: {
       id: pId as number,
     },
   });
-
   const { error, fetching } = deletPatientResult;
   const { data } = allPatients;
 
@@ -36,6 +37,16 @@ export default function PatientInformation({ pId }: PatientId) {
     deletePatient({
       patientID: pId as number,
     });
+  };
+
+  const handleDeleteTrue = () => {
+    patientDeletion();
+    setDeleteConfirmation(false);
+    navigate('/patients/');
+  };
+
+  const handleDeleteFalse = () => {
+    setDeleteConfirmation(false);
   };
 
   return (
@@ -71,12 +82,13 @@ export default function PatientInformation({ pId }: PatientId) {
               <button
                 type="button"
                 className="editAndDltBtn"
-                onClick={() => { patientDeletion(); navigate('/patients/'); }}
+                onClick={() => setDeleteConfirmation(true)}
               >
                 <MdDeleteOutline size={30} />
                 {/* Delete */}
               </button>
               {editBtn && <UpdatePatientForm payForm={editBtn} postButton={setEditBtn} patientID={pId} />}
+              {deleteConfirmation && (<ConfirmDelete onDeleteTrue={handleDeleteTrue} onDeleteFalse={handleDeleteFalse} deleteModal={deleteConfirmation} deleteModalBtn={setDeleteConfirmation} />)}
             </div>
           </div>
         </div>
@@ -112,10 +124,6 @@ export default function PatientInformation({ pId }: PatientId) {
                   {data?.specificPatient?.age}
                 </td>
               </tr>
-              <td>
-                <b>Blood Type : </b>
-                {' '}
-              </td>
             </tbody>
           </Table>
 

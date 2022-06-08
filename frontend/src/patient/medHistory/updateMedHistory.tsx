@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import { Modal, Spinner } from 'react-bootstrap';
 import { AiOutlineCloseSquare } from 'react-icons/ai';
 import { useMutation, useQuery } from 'urql';
+import ConfirmEdit from '../../common/ConfirmEdit';
 import { EditMedHistoryDocument, PatientMedHistoryDocument } from '../../queries.generated';
 
 interface UpdateMedHistoryFormProps {
@@ -21,6 +22,7 @@ interface UpdateMedHistoryFormProps {
 
 export default function UpdateMedHistoryForm(updateMedHistoryFormProps: UpdateMedHistoryFormProps) {
   const [editMedHistory, setEditMedHistory] = useMutation(EditMedHistoryDocument);
+  const [editConfirmation, setEditConfirmation] = useState(false);
 
   const [patientMedHistory] = useQuery({
     query: PatientMedHistoryDocument,
@@ -48,8 +50,17 @@ export default function UpdateMedHistoryForm(updateMedHistoryFormProps: UpdateMe
   };
 
   const onSubmitBtnClicked = () => {
+    setEditConfirmation(true);
+  };
+
+  const handleEditTrue = () => {
     updateMedHistory();
     updateMedHistoryFormProps.popup(false);
+    setEditConfirmation(false);
+  };
+
+  const handleEditFalse = () => {
+    setEditConfirmation(false);
   };
 
   if (fetching) {
@@ -117,6 +128,7 @@ export default function UpdateMedHistoryForm(updateMedHistoryFormProps: UpdateMe
           >
             Submit
           </button>
+          {editConfirmation && (<ConfirmEdit onEditTrue={handleEditTrue} onEditFalse={handleEditFalse} editModal={editConfirmation} setEditModal={setEditConfirmation} />)}
         </Modal.Body>
       </Modal>
     </div>

@@ -108,8 +108,8 @@ function Appointment() {
           <Row>
             <Col xs={12}>
               <h5 className="appointmentBar">
-                <FaCalendarAlt className="appointment-icon" />
-                Appointments
+                <FaCalendarAlt size={20} className="appointment-icon" />
+                APPOINTMENTS
               </h5>
             </Col>
           </Row>
@@ -136,6 +136,11 @@ function Appointment() {
                   week={{
                     weekDays: [0, 1, 2, 3, 4, 5, 6],
                     weekStartOn: 0,
+                    startHour: 7,
+                    endHour: 16,
+                    step: 60,
+                  }}
+                  day={{
                     startHour: 7,
                     endHour: 16,
                     step: 60,

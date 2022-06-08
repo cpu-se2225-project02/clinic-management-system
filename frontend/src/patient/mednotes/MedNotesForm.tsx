@@ -80,7 +80,7 @@ export default function MedNotesForm({ pId, postButton, payForm }: PatientID) {
 
         <button
           className="btn btn-primary mt-2 float-end"
-          onClick={addingMedNote}
+          onClick={() => { addingMedNote(); postButton(false); }}
           type="submit"
         >
           Submit

@@ -31,3 +31,15 @@ it('should test adding an appointment', async () => {
     patient_id: 1,
   });
 });
+<<<<<<< HEAD
+=======
+
+function beforeEach(arg0: () => void) {
+  throw new Error('Function not implemented.');
+}
+
+
+function expect(arg0: any) {
+  throw new Error('Function not implemented.');
+}
+>>>>>>> main

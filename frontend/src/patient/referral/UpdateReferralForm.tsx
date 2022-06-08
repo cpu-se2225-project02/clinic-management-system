@@ -6,6 +6,7 @@
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useMutation, useQuery } from 'urql';
+import ConfirmEdit from '../../common/ConfirmEdit';
 import { AllDocsDocument, EditReferralDocument, PatientReferralsDocument } from '../../queries.generated';
 
 interface UpdateRefFormProps {
@@ -18,6 +19,7 @@ interface UpdateRefFormProps {
 function UpdateReferralForm(props: UpdateRefFormProps) {
   // eslint-disable-next-line no-unused-vars
   const [editRef, setEditRef] = useMutation(EditReferralDocument);
+  const [editConfirmation, setEditConfirmation] = useState(false);
   const [allDoctors] = useQuery({
     query: AllDocsDocument,
   });
@@ -44,8 +46,17 @@ function UpdateReferralForm(props: UpdateRefFormProps) {
   };
 
   const onSubmitBtnClicked = () => {
+    setEditConfirmation(true);
+  };
+
+  const handleEditTrue = () => {
     updateReferral();
     props.popup(false);
+    setEditConfirmation(false);
+  };
+
+  const handleEditFalse = () => {
+    setEditConfirmation(false);
   };
 
   return (
@@ -74,6 +85,7 @@ function UpdateReferralForm(props: UpdateRefFormProps) {
         >
           Submit
         </button>
+        {editConfirmation && (<ConfirmEdit onEditTrue={handleEditTrue} onEditFalse={handleEditFalse} editModal={editConfirmation} setEditModal={setEditConfirmation} />)}
 
       </Modal.Body>
     </Modal>
