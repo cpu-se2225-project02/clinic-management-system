@@ -9,7 +9,10 @@ import {
 import { useParams, useNavigate } from 'react-router-dom';
 import './PatientRecord.css';
 import { useQuery } from 'urql';
-import { MdInfoOutline, MdArrowBackIos } from 'react-icons/md';
+import { MdInfoOutline, MdArrowBackIos, MdAccountBalanceWallet } from 'react-icons/md';
+import { FaFilePrescription, FaHospitalAlt, FaNotesMedical } from 'react-icons/fa';
+import { AiFillSchedule } from 'react-icons/ai';
+import { RiFolderHistoryFill } from 'react-icons/ri';
 import { GetPatientDocument } from '../queries.generated';
 import PatientInformation from './PatientInformation';
 // eslint-disable-next-line no-unused-vars
@@ -90,6 +93,8 @@ export default function PatientRecord({ accountToggle = false }: OpProps) {
               className="patient-btns"
               onClick={() => handleBtnClick(setPrescBtn, PrescriptionBtn)}
             >
+              <FaFilePrescription size={30} />
+              {' '}
               PRESCRIPTIONS
             </Button>
             {PrescriptionBtn && <Prescription pID={data?.specificPatient?.id} />}
@@ -100,6 +105,8 @@ export default function PatientRecord({ accountToggle = false }: OpProps) {
               className="patient-btns"
               onClick={() => handleBtnClick(setReferralBtn, ReferralBtn)}
             >
+              <FaHospitalAlt size={30} />
+              {' '}
               REFERRALS
             </Button>
             {ReferralBtn && <Referral pID={data?.specificPatient?.id} />}
@@ -110,6 +117,8 @@ export default function PatientRecord({ accountToggle = false }: OpProps) {
               className="patient-btns"
               onClick={() => handleBtnClick(setMedHist, MedHist)}
             >
+              <RiFolderHistoryFill size={30} />
+              {' '}
               MEDICAL HISTORY
             </Button>
             {MedHist && <MedicalHistory pID={data?.specificPatient?.id} />}
@@ -120,6 +129,8 @@ export default function PatientRecord({ accountToggle = false }: OpProps) {
               className="patient-btns"
               onClick={() => handleBtnClick(setAccBtn, AccountBtn)}
             >
+              <MdAccountBalanceWallet size={30} />
+              {' '}
               ACCOUNTS
             </Button>
             {AccountBtn && <PatientAccount pID={data?.specificPatient?.id} />}
@@ -131,6 +142,8 @@ export default function PatientRecord({ accountToggle = false }: OpProps) {
               className="patient-btns"
               onClick={() => handleBtnClick(setMedNotesBtn, MedNotesBtn)}
             >
+              <FaNotesMedical size={30} />
+              {' '}
               MEDICAL NOTES
             </Button>
             {MedNotesBtn && <MedicalNotes pId={data?.specificPatient?.id} />}
@@ -141,6 +154,8 @@ export default function PatientRecord({ accountToggle = false }: OpProps) {
               className="patient-btns"
               onClick={() => handleBtnClick(setAppointmentBtn, AppointmentBtn)}
             >
+              <AiFillSchedule size={30} />
+              {' '}
               APPOINTMENTS
             </Button>
             {AppointmentBtn && <SpecificAppointment pId={data?.specificPatient?.id} />}

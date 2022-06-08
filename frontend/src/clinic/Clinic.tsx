@@ -2,10 +2,10 @@
 /* eslint-disable linebreak-style */
 import React, { useState } from 'react';
 import {
-  Container, Col, Row, Table, Button,
+  Container, Col, Row, Table,
 } from 'react-bootstrap';
 import { IoPersonAddOutline } from 'react-icons/io5';
-import { AiOutlineEdit } from 'react-icons/ai';
+// import { AiOutlineEdit } from 'react-icons/ai';
 import { useQuery } from 'urql';
 import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
@@ -33,11 +33,11 @@ function Clinic() {
         <Col xs={10} className="clinicPage">
           <Row className="mt-3 border-bottom">
             <Col xs={2}>
-              <button type="button" className="btn btn-primary">
+              {/* <button type="button" className="btn btn-primary">
                 <AiOutlineEdit size={20} />
                 {' '}
                 Update
-              </button>
+              </button> */}
             </Col>
             <Col>
               <h4>About</h4>
@@ -89,11 +89,11 @@ function Clinic() {
                       <td>
                         {doc?.doc_name}
                       </td>
-                      <td>
+                      {/* <td>
                         <Button variant="warning">Patients</Button>
                         {' '}
                         <Button variant="warning">Appointments</Button>
-                      </td>
+                      </td> */}
                     </tr>
                   ))}
                 </tbody>
