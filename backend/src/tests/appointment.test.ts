@@ -34,6 +34,8 @@ it('should test adding an appointment', async () => {
     patient_id: 1,
   });
 });
+<<<<<<< HEAD
+=======
 
 // async/await can be used.
 // it('works with async/await', async () => {
@@ -55,3 +57,4 @@ function beforeEach(arg0: () => void) {
 function expect(arg0: Prisma.Prisma__AppointmentClient<Appointment>) {
   throw new Error('Function not implemented.');
 }
+>>>>>>> main
