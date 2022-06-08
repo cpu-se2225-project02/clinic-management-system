@@ -13,8 +13,12 @@ import {
 } from 'nexus';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { Appointment as AppointmentType } from 'nexus-prisma';
+import { NexusGenInputs } from './generated/graphql-types';
+import { Context } from './context';
 import { Patient } from './patient';
 import { Doctor } from './doctor';
+
+export type CreateAppointmentType = NexusGenInputs['AppointmentInput'];
 
 const db = new PrismaClient();
 
@@ -68,14 +72,21 @@ export const AppointmentInput = inputObjectType({
   },
 });
 
+export function createAppointment(newAppointment: CreateAppointmentType, ctx: Context) {
+  return ctx.prisma.appointment.create({
+    data: {
+      ...newAppointment,
+      name: newAppointment.name.toUpperCase(),
+    },
+  });
+}
+
 export const addAppointment = mutationField('addAppointment', {
   type: Appointment,
   args: {
     newAppointment: nonNull(AppointmentInput),
   },
-  resolve(root, args: { newAppointment: Prisma.AppointmentCreateInput }) {
-    return db.appointment.create({ data: args.newAppointment });
-  },
+  resolve: (root, args: { newAppointment: CreateAppointmentType}, ctx) => createAppointment(args.newAppointment, ctx),
 });
 
 export const editAppointment = mutationField('editAppointment', {

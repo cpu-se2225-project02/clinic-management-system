@@ -1,5 +1,5 @@
 import { verify } from 'jsonwebtoken';
-import { Context } from './context';
+import { Context } from '../context';
 
 export const APP_SECRET = 'appsecret321';
 
