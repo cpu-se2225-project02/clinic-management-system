@@ -140,6 +140,11 @@ function Appointment() {
                     endHour: 16,
                     step: 60,
                   }}
+                  day={{
+                    startHour: 7,
+                    endHour: 16,
+                    step: 60,
+                  }}
                   view="month"
                   onConfirm={handleConfirm}
                   onDelete={handleDelete}

@@ -124,10 +124,6 @@ export default function PatientInformation({ pId }: PatientId) {
                   {data?.specificPatient?.age}
                 </td>
               </tr>
-              <td>
-                <b>Blood Type : </b>
-                {' '}
-              </td>
             </tbody>
           </Table>
 

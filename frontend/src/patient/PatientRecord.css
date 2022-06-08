@@ -28,8 +28,10 @@ background-color: #feddba !important;
 border-color: rgb(65, 65, 65)!important;
 color: rgb(65, 65, 65) !important;
 letter-spacing: 1px;
+text-align: left !important;
 }
 .patient-btns:hover {
   background-color: #f9ebbe !important;
   color: #051329 !important;
+  font-size: large !important;
 }
