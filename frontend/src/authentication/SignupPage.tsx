@@ -11,6 +11,10 @@ import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
 
 export default function SignUpPage() {
+  const [fName, setFName] = useState('');
+  const [lName, setLName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <Container fluid>
       <Container className="Login">
@@ -23,6 +27,7 @@ export default function SignUpPage() {
                 type="text"
                 placeholder="Enter first Name"
                 className="fName"
+                onChange={(e) => setFName(e.target.value)}
               />
             </Col>
           </Form.Group>
@@ -35,6 +40,7 @@ export default function SignUpPage() {
                 type="text"
                 placeholder="Enter last name"
                 className="lName"
+                onChange={(e) => setLName(e.target.value)}
               />
             </Col>
           </Form.Group>
@@ -47,6 +53,7 @@ export default function SignUpPage() {
                 type="text"
                 placeholder="Enter email address"
                 className="email"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Col>
           </Form.Group>
@@ -59,6 +66,7 @@ export default function SignUpPage() {
                 type="password"
                 placeholder="Enter password"
                 className="password"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </Col>
           </Form.Group>
