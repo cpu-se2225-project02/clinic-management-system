@@ -86,6 +86,26 @@ export default function FinancePage() {
               }}
               >
                 <Card.Body className="c-body">
+                  <Card.Title><MdOutlinePayment size={80} /></Card.Title>
+                  <Button
+                    variant="secondary"
+                    style={{ width: '100%' }}
+                    onClick={handleBIllForm}
+                  >
+                    Add Bill
+                  </Button>
+                </Card.Body>
+                {BillForm && <BillForm payForm={BillingForm} addPaymentBtn={setBillForm} />}
+              </Card>
+            </Col>
+            {/* <Col xs={4} className="mt-2">
+              <Card style={{
+                width: '18rem',
+                boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)',
+                borderRadius: '20px',
+              }}
+              >
+                <Card.Body className="c-body">
                   <Card.Title><FaFileInvoice size={80} /></Card.Title>
                   <Button
                     variant="secondary"
@@ -97,7 +117,7 @@ export default function FinancePage() {
                 </Card.Body>
                 {InvPop && <InvoicePopup invForm={InvPop} invPop={setInvPop} />}
               </Card>
-            </Col>
+            </Col> */}
             <Col xs={4} className="mt-2">
               <Card style={{
                 width: '18rem',
@@ -139,28 +159,9 @@ export default function FinancePage() {
               </Card>
             </Col>
           </Row>
-          <Row className="mt-3 mb-3">
-            <Col xs={4} className="mt-2">
-              <Card style={{
-                width: '18rem',
-                boxShadow: '10px 10px 5px 0px rgba(186,186,186,0.75)',
-                borderRadius: '20px',
-              }}
-              >
-                <Card.Body className="c-body">
-                  <Card.Title><MdOutlinePayment size={80} /></Card.Title>
-                  <Button
-                    variant="secondary"
-                    style={{ width: '100%' }}
-                    onClick={handleBIllForm}
-                  >
-                    Add Bill
-                  </Button>
-                </Card.Body>
-                {BillForm && <BillForm payForm={BillingForm} addPaymentBtn={setBillForm} />}
-              </Card>
-            </Col>
-          </Row>
+          {/* <Row className="mt-3 mb-3">
+
+          </Row> */}
 
         </Col>
       </Row>
