@@ -15,6 +15,8 @@ import {
 import { Prisma, PrismaClient } from '@prisma/client';
 import { Patient as PatientType } from 'nexus-prisma';
 import { Appointment } from './appointment';
+import { NexusGenInputs } from './generated/graphql-types';
+import { Context } from './context';
 
 const db = new PrismaClient();
 
@@ -104,14 +106,21 @@ export const PatientInput = inputObjectType({
   },
 });
 
+export type CreatePatientType = NexusGenInputs['PatientInput'];
+export function createPatient(newPatient: CreatePatientType, ctx: Context) {
+  return ctx.prisma.patient.create({
+    data: {
+      ...newPatient,
+    },
+  });
+}
+
 export const AddPatient = mutationField('addPatient', {
   type: 'Patient',
   args: {
     newPatient: nonNull(PatientInput),
   },
-  resolve(root, args: { newPatient: Prisma.PatientCreateInput }) {
-    return db.patient.create({ data: args.newPatient });
-  },
+  resolve: (root, args: { newPatient: Prisma.PatientCreateInput }, ctx) => createPatient(args.newPatient, ctx),
 });
 
 export const EditPatient = mutationField('editPatient', {
