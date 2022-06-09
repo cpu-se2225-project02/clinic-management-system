@@ -85,14 +85,21 @@ export const BillInput = inputObjectType({
   },
 });
 
+export type CreateBillType = NexusGenInputs['BillInput'];
+export function createBill(newBill: CreateBillType, ctx: Context) {
+  return ctx.prisma.bill.create({
+    data: {
+      ...newBill,
+    },
+  });
+}
 export const AddBill = mutationField('addBill', {
   type: Bill,
   args: {
     newBill: nonNull(BillInput),
   },
-  resolve(root, args: { newBill: Prisma.BillCreateInput }) {
-    return db.bill.create({ data: args.newBill });
-  },
+  resolve: (root, args:
+    { newBill: Prisma.BillCreateInput }, ctx) => createBill(args.newBill, ctx),
 });
 
 export const Invoice = queryField('invoice', {
