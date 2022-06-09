@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { Prisma, Referral } from '@prisma/client';
 import { Context, createMockContext, MockContext } from '../context';
-import { deleteAReferral } from '../referral';
+import { createPatientReferral, deleteAReferral } from '../referral';
 
 let ctx: Context;
 let mockCtx: MockContext;
@@ -25,6 +25,16 @@ it('should test deleting a referral', async () => {
     id: 1,
   };
   await expect(deleteAReferral(refId, ctx)).resolves.toEqual({
+    id: 1,
+    hosp_name: 'Iloilo Mission Hospital',
+    doctor_id: 1,
+    patient_id: 1,
+  });
+});
+it('should test adding of referral', async () => {
+  mockCtx.prisma.referral.create.mockResolvedValue(referral);
+
+  await expect(createPatientReferral(referral, ctx)).resolves.toEqual({
     id: 1,
     hosp_name: 'Iloilo Mission Hospital',
     doctor_id: 1,
