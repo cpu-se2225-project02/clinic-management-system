@@ -5,13 +5,13 @@ import { MockContext, Context, createMockContext } from '../context';
 import {
   createPatient, deleteAPatient, editAPatient, getAPatient, getAllPatients,
 } from '../patient';
- 
+
 let mockCtx: MockContext;
 let ctx: Context;
 const patient1: Patient = {
   id: 1,
   f_name: 'Glenn Rose',
-  l_name: 'Suelan', 
+  l_name: 'Suelan',
   m_name: 'Manimbayan',
   email: 'glennrosesuelan@gmail.com',
   constactNo: '09636261878',

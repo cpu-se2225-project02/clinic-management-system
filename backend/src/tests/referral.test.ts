@@ -44,7 +44,7 @@ it('should test adding of referral', async () => {
 });
 
 it('should test editing a referral', async () => {
-  mockCtx.prisma.referral.edit.mockResolvedValue(referral);
+  mockCtx.prisma.referral.update.mockResolvedValue(referral);
 
   await expect(editAReferral(referral, ctx)).resolves.toEqual({
     id: 1,

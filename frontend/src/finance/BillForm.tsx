@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable react/require-default-props */
 /* eslint-disable radix */
 /* eslint-disable no-unused-vars */
