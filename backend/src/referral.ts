@@ -6,6 +6,7 @@ import {
   inputObjectType, intArg, list, mutationField, nonNull, objectType, queryField,
 } from 'nexus';
 import { Referral as ReferralType } from 'nexus-prisma';
+import { Context } from './context';
 import { Doctor } from './doctor';
 import { Patient } from './patient';
 
@@ -70,16 +71,19 @@ export const AddReferral = mutationField('addReferral', {
   },
 });
 
+export function deleteAReferral(referalId: Prisma.ReferralWhereUniqueInput, ctx: Context) {
+  return ctx.prisma.referral.delete({
+    where: {
+      id: referalId.id,
+    },
+  });
+}
 export const DeleteReferral = mutationField('deleteReferral', {
   type: Referral,
   args: {
     referralId: nonNull(intArg()),
   },
-  resolve(root, args: {referralId: Prisma.ReferralWhereUniqueInput}) {
-    return db.referral.delete({
-      where: { id: args.referralId as any },
-    });
-  },
+  resolve: (root, args: {referralId: Prisma.ReferralWhereUniqueInput}, ctx) => deleteAReferral(args.referralId, ctx),
 });
 
 export const EditReferral = mutationField('editReferral', {
