@@ -55,7 +55,5 @@ export function createDoctor(newDoctor: CreateDoctorType, ctx: Context) {
 export const addDoctor = mutationField('addDoctor', {
   type: Doctor,
   args: { newDoctor: nonNull(DoctorInput) },
-  resolve(root, args : { newDoctor: Prisma.DoctorCreateInput}) {
-    return db.doctor.create({ data: args.newDoctor });
-  },
+  resolve: (root, args: { newDoctor: CreateDoctorType }, ctx) => createDoctor(args.newDoctor, ctx),
 });
