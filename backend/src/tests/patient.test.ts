@@ -5,7 +5,7 @@ import { MockContext, Context, createMockContext } from '../context';
 import {
   createPatient, deleteAPatient, editAPatient, getAPatient, getAllPatients,
 } from '../patient';
-
+ 
 let mockCtx: MockContext;
 let ctx: Context;
 const patient1: Patient = {

@@ -8,7 +8,7 @@ import {
   mutationField,
   nonNull,
   objectType,
-  queryField,
+  queryField, 
   stringArg,
 } from 'nexus';
 
