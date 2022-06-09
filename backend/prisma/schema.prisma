@@ -122,3 +122,4 @@ model User {
   createdAt          DateTime
   updatedAt          DateTime
 }
+
