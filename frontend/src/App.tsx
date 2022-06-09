@@ -11,8 +11,9 @@ import Dashboard from './dashboard/Dashboard';
 import FinancePage from './finance/FinancePage';
 import PatientList from './patient/PatientList';
 import InvoiceForm from './finance/InvoiceForm';
-import LoginPage from './login/LoginPage';
+import LoginPage from './authentication/LoginPage';
 import PatientRecord from './patient/PatientRecord';
+import SingUpPage from './authentication/SignupPage';
 
 const client = createClient({
   url: 'http://localhost:8001/graphql',
@@ -30,6 +31,7 @@ function App() {
           <Route path="/patients/*" element={<PatientList />} />
           <Route path="/finance" element={<FinancePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<SingUpPage />} />
           <Route path="/patient_record/:id" element={<PatientRecord />} />
           <Route path="/invoice/:id" element={<InvoiceForm />} />
         </Routes>

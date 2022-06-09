@@ -32,8 +32,8 @@ model Patient {
   payments       Bill[]
   prescriptions  Prescription[]
   MedicalHistory MedicalHistory[]
-  referral      Referral[]
-  doctors       Doctor[]
+  referral       Referral[]
+  doctors        Doctor[]
 }
 
 model Appointment {
@@ -42,9 +42,9 @@ model Appointment {
   dt_start   String
   dt_end     String
   patient_id Int
-  patient    Patient @relation(fields: [patient_id], references: [id])
+  patient    Patient @relation(fields: [patient_id], references: [id], onDelete: Cascade)
   doc_id     Int
-  doctors    Doctor  @relation(fields: [doc_id], references: [id])
+  doctors    Doctor  @relation(fields: [doc_id], references: [id], onDelete: Cascade)
 }
 
 model Doctor {
@@ -76,9 +76,9 @@ model MedicalNotes {
   med_notes  String
   title      String
   patient_id Int
-  patient    Patient @relation(fields: [patient_id], references: [id])
+  patient    Patient @relation(fields: [patient_id], references: [id], onDelete: Cascade)
   doc_id     Int
-  doctor     Doctor  @relation(fields: [doc_id], references: [id])
+  doctor     Doctor  @relation(fields: [doc_id], references: [id], onDelete: Cascade)
 
 }
 
@@ -88,15 +88,15 @@ model MedicalHistory {
   treatment_plan String
   description    String
   patient_id     Int
-  patient        Patient @relation(fields: [patient_id], references: [id])
+  patient        Patient @relation(fields: [patient_id], references: [id], onDelete: Cascade)
 }
 
 model Referral {
   id         Int     @id @default(autoincrement())
   patient_id Int
-  patient    Patient @relation(fields: [patient_id], references: [id])
+  patient    Patient @relation(fields: [patient_id], references: [id], onDelete: Cascade)
   doctor_id  Int
-  doctor     Doctor  @relation(fields: [doctor_id], references: [id])
+  doctor     Doctor  @relation(fields: [doctor_id], references: [id], onDelete: Cascade)
   hosp_name  String
 }
 
@@ -105,21 +105,18 @@ model Prescription {
   pres_name  String
   pres_dos   Int
   patient_id Int
-  patient    Patient @relation(fields: [patient_id], references: [id])
+  patient    Patient @relation(fields: [patient_id], references: [id], onDelete: Cascade)
 }
 
 // medical practioner
 model User {
   id                 Int      @id @default(autoincrement())
-  given_name         String
-  last_name          String
-  employee_role      String
-  license_number     String
+  f_name             String
+  l_name             String
   email              String   @unique
   password           String
   isAdmin            Boolean  @default(value: false)
   resetPasswordToken String   @default(value: "")
-  createdAt          DateTime
-  updatedAt          DateTime
+  createdAt          DateTime @default(value: now())
 }
 

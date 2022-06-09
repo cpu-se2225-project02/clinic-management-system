@@ -36,11 +36,10 @@ export default function medHistoryForm(addMedHistoryFormProps: AddMedHistoryForm
   return (
     <Modal
       show={addMedHistoryFormProps.medHistorypopup}
-      onHite={() => addMedHistoryFormProps.medHistoryBtn(false)}
+      onHide={() => addMedHistoryFormProps.medHistoryBtn(false)}
       className="mt-5 mb-5"
       backdrop="static"
     >
-
       <Modal.Header closeButton><h5>Add Medical History</h5></Modal.Header>
       <Modal.Body>
         <div className="AddMedHistoryForm">

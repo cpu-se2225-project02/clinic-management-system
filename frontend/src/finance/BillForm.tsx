@@ -1,8 +1,9 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable radix */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/button-has-type */
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { Spinner, Modal } from 'react-bootstrap';
 import { useMutation, useQuery } from 'urql';
 import { AddBillDocument, AllPatientsDocument } from '../queries.generated';
@@ -10,14 +11,18 @@ import { AddBillDocument, AllPatientsDocument } from '../queries.generated';
 interface Popup {
   addPaymentBtn: React.Dispatch<React.SetStateAction<boolean>>
   payForm: boolean
+  patId?: number
+  disabledSelect?: boolean
 }
 
-function BillForm({ addPaymentBtn, payForm }: Popup) {
+function BillForm({
+  addPaymentBtn, payForm, patId = 0, disabledSelect = false,
+}: Popup) {
   const [addPayment, setAddPayment] = useMutation(AddBillDocument);
   const [date, setDate] = useState('');
   const [ammtCost, setAmmtCost] = useState(0);
   const [ammtPd, setAmmtPd] = useState(0);
-  const [id, setId] = useState(0);
+  const [id, setId] = useState(patId);
 
   const [allPatients] = useQuery({
     query: AllPatientsDocument,
@@ -56,15 +61,26 @@ function BillForm({ addPaymentBtn, payForm }: Popup) {
           <div className="input-group-prepend">
             <label className="input-group-text" htmlFor="inputGroupSelect01">Patient</label>
           </div>
-          <select className="custom-select" id="inputGroupSelect01" onChange={(e) => setId(parseInt(e.target.value))} required>
+          <select disabled={disabledSelect} className="custom-select" id="inputGroupSelect01" onChange={(e) => setId(parseInt(e.target.value))} required>
             <option selected>Select a patient</option>
-            {data?.patients?.map((patient) => (
-              <option value={patient?.id}>
-                {patient?.f_name}
-                {' '}
-                {patient?.l_name}
-              </option>
-            ))}
+            {data?.patients?.map((patient) => {
+              if (patient?.id === id) {
+                return (
+                  <option selected value={patient?.id}>
+                    {patient?.f_name}
+                    {' '}
+                    {patient?.l_name}
+                  </option>
+                );
+              }
+              return (
+                <option value={patient?.id}>
+                  {patient?.f_name}
+                  {' '}
+                  {patient?.l_name}
+                </option>
+              );
+            }) as any as ReactNode}
           </select>
         </div>
 

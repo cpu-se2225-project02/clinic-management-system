@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable radix */
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -6,6 +7,7 @@ import './UpdatePatientForm.css';
 import { Spinner, Modal } from 'react-bootstrap';
 import { useMutation, useQuery } from 'urql';
 import { EditAPatientDocument, GetPatientDocument } from '../queries.generated';
+import ConfirmEdit from '../common/ConfirmEdit';
 
 interface Popup {
   postButton: React.Dispatch<React.SetStateAction<boolean>>
@@ -15,6 +17,7 @@ interface Popup {
 
 export default function UpdatePatientForm({ postButton, patientID, payForm }: Popup) {
   const [editPatientResult, editPatient] = useMutation(EditAPatientDocument);
+  const [editConfirmation, setEditConfirmation] = useState(false);
 
   const [allPatients] = useQuery({
     query: GetPatientDocument,
@@ -63,9 +66,18 @@ export default function UpdatePatientForm({ postButton, patientID, payForm }: Po
     });
   };
 
-  const handleSubmitBtn = () => {
+  const onSubmitBtnClicked = () => {
+    setEditConfirmation(true);
+  };
+
+  const handleEditTrue = () => {
     updatePatientInfo();
     postButton(false);
+    setEditConfirmation(false);
+  };
+
+  const handleEditFalse = () => {
+    setEditConfirmation(false);
   };
 
   return (
@@ -119,11 +131,12 @@ export default function UpdatePatientForm({ postButton, patientID, payForm }: Po
 
         <button
           className="btn btn-primary mt-2 float-end"
-          onClick={() => { handleSubmitBtn(); postButton(false); }}
+          onClick={onSubmitBtnClicked}
           type="submit"
         >
           Submit
         </button>
+        {editConfirmation && (<ConfirmEdit onEditTrue={handleEditTrue} onEditFalse={handleEditFalse} editModal={editConfirmation} setEditModal={setEditConfirmation} />)}
 
       </Modal.Body>
     </Modal>

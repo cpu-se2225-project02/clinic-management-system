@@ -62,8 +62,8 @@ export default function PatientList() {
           <Row>
             <Col xs={12}>
               <h5 className="PatientListBar">
-                <MdAccountBox className="patient-icon" />
-                Patient List
+                <MdAccountBox size={20} className="patient-icon" />
+                PATIENT LIST
               </h5>
             </Col>
           </Row>
@@ -78,7 +78,7 @@ export default function PatientList() {
             </Col>
             <Col xs={3}>
               <Form>
-                <Form.Group as={Row}>
+                {/* <Form.Group as={Row}>
                   <Form.Label column sm={2}>
                     <BiSearchAlt2 size={30} />
                   </Form.Label>
@@ -89,7 +89,7 @@ export default function PatientList() {
                       className="search"
                     />
                   </Col>
-                </Form.Group>
+                </Form.Group> */}
               </Form>
             </Col>
             <Col xs={2}>
