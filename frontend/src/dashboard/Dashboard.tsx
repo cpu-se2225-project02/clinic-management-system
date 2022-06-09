@@ -39,7 +39,7 @@ function getCurrentDate() {
   return date;
 }
 
-function Dashboard() {
+export default function Dashboard() {
   const navigate = useNavigate();
   const [PForm, setPForm] = useState(false);
   const [PayForm, setPayForm] = useState(false);
@@ -240,4 +240,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+// export default Dashboard;

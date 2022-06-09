@@ -13,7 +13,7 @@ import { Context } from './context';
 const db = new PrismaClient();
 
 export const Doctor = objectType({
-  name: 'Doctor',
+  name: 'Doctor', 
   definition(t) {
     t.field(DoctorType.id);
     t.field(DoctorType.doc_name);

@@ -62,6 +62,7 @@ export const EditReferralInput = inputObjectType({
     t.field(ReferralType.hosp_name);
   },
 });
+
 export type CreatePatientReferralType = NexusGenInputs['ReferralInput'];
 export function createPatientReferral(newReferral: CreatePatientReferralType, ctx: Context) {
   return ctx.prisma.referral.create({

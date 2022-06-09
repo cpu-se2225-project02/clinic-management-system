@@ -72,18 +72,32 @@ export const AddMedHistoryInput = inputObjectType({
     t.field(MedHistoryType.patient_id);
   },
 });
+export type CreateMedHistory = NexusGenInputs['AddMedHistoryInput'];
+export function createMedHistory(newMedHistory: CreateMedHistory, ctx: Context) {
+  return ctx.prisma.medicalHistory.create({
+    data: {
+      ...newMedHistory,
+    },
+  });
+}
 
 export const AddMedHistory = mutationField('addMedHistory', {
   type: MedicalHistory,
   args: {
     newMedHistory: nonNull(AddMedHistoryInput),
   },
-  resolve(root, args: { newMedHistory: Prisma.MedicalHistoryCreateInput }) {
-    return db.medicalHistory.create({ data: args.newMedHistory });
+  resolve: (root, args: { newMedHistory: Prisma.MedicalHistoryCreateInput }, ctx) => createMedHistory(args.newMedHistory, ctx),
+});
+
+export const EditMedHistoryInput = inputObjectType({
+  name: 'EditMedHistoryInput',
+  definition(t) {
+    t.field(MedHistoryType.diagnosis);
+    t.field(MedHistoryType.treatment_plan);
+    t.field(MedHistoryType.description);
   },
 });
 
-// edit
 export function editMedHistory(theMedHistory: Prisma.MedicalHistoryUpdateInput, medicalhistoryId: Prisma.MedicalHistoryWhereUniqueInput, ctx: Context) {
   return ctx.prisma.medicalHistory.update({
     data: {
@@ -94,36 +108,15 @@ export function editMedHistory(theMedHistory: Prisma.MedicalHistoryUpdateInput, 
     },
   });
 }
-export const EditMedHistoryInput = inputObjectType({
-  name: 'EditMedHistoryInput',
-  definition(t) {
-    t.field(MedHistoryType.diagnosis);
-    t.field(MedHistoryType.treatment_plan);
-    t.field(MedHistoryType.description);
-  },
-});
 export const EditMedHistory = mutationField('editMedHistory', {
   type: MedicalHistory,
   args: {
     medicalhistoryId: nonNull(intArg()),
     editedMedHistory: nonNull(EditMedHistoryInput),
   },
-  resolve: (
-    root,
-    args:
-      { editedMedHistory: Prisma.MedicalHistoryUpdateInput, medicalhistoryId: Prisma.MedicalHistoryWhereUniqueInput },
-    ctx,
-  ) => editMedHistory(args.editedMedHistory, args.medicalhistoryId, ctx),
+  resolve: (root, args: { editedMedHistory: Prisma.MedicalHistoryUpdateInput }, ctx) => editMedHistory(args.editedMedHistory, ctx),
 });
-//     {
-//     return db.medicalHistory.update({
-//       where: { id: args.medicalhistoryId as any },
-//       data: args.editedMedHistory,
-//     });
-//   },
-// });
 
-// delete
 export const DeleteMedHistory = mutationField('deleteMedHistory', {
   type: MedicalHistory,
   args: {
