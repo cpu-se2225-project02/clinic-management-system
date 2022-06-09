@@ -124,12 +124,16 @@ mutation addAnAppointment($appointment: AppointmentInput!) {
   }
 }
 
-mutation ediAnAppointment($theAppointment: AppointmentInput!, $aId: Int!) {
-  editAppointment(editedAppointment: $theAppointment, appointmentID: $aId) {
+mutation EditAppointment($editedAppointment: UpdateAppointmentInput!) {
+  editAppointment(editedAppointment: $editedAppointment) {
+    id
     name
-    dt_start
-    dt_end
-    doc_id
+    doctor {
+      id
+    }
+    patient {
+      id
+    }
   }
 }
 
@@ -246,7 +250,6 @@ query Invoice($pID: Int!) {
   }
 }
 
-
 query patientMedHistory($patientId: Int!) {
   patientMedHistory(patientId: $patientId) {
     id
@@ -256,7 +259,6 @@ query patientMedHistory($patientId: Int!) {
     description
   }
 }
-
 
 mutation AddMedHistory($newMedHistory: AddMedHistoryInput!) {
   addMedHistory(newMedHistory: $newMedHistory) {
@@ -293,7 +295,6 @@ mutation DeleteMedHistory($medicalhistoryId: Int!) {
   }
 }
 
-    
 query PatientReferrals($patientId: Int!) {
   patientReferrals(patientID: $patientId) {
     id
@@ -310,7 +311,6 @@ query PatientReferrals($patientId: Int!) {
     }
   }
 }
-
 
 mutation AddReferral($newReferral: ReferralInput!) {
   addReferral(newReferral: $newReferral) {
