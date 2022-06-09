@@ -34,6 +34,7 @@ export interface Appointment {
   readonly id: Scalars['Int'];
   readonly name: Scalars['String'];
   readonly patient?: Maybe<Patient>;
+  readonly patient_id: Scalars['Int'];
 }
 
 export interface AppointmentInput {
@@ -42,6 +43,12 @@ export interface AppointmentInput {
   readonly dt_start: Scalars['String'];
   readonly name: Scalars['String'];
   readonly patient_id: Scalars['Int'];
+}
+
+export interface AuthPayload {
+  readonly __typename?: 'AuthPayload';
+  readonly token?: Maybe<Scalars['String']>;
+  readonly user?: Maybe<User>;
 }
 
 export interface Bill {
@@ -136,6 +143,8 @@ export interface Mutation {
   readonly editPatient?: Maybe<Patient>;
   readonly editPrescription?: Maybe<Prescription>;
   readonly editReferral?: Maybe<Referral>;
+  readonly login?: Maybe<AuthPayload>;
+  readonly signup?: Maybe<AuthPayload>;
 }
 
 
@@ -210,8 +219,7 @@ export interface MutationDeleteReferralArgs {
 
 
 export interface MutationEditAppointmentArgs {
-  appointmentID: Scalars['Int'];
-  editedAppointment: AppointmentInput;
+  editedAppointment: UpdateAppointmentInput;
 }
 
 
@@ -236,6 +244,20 @@ export interface MutationEditPrescriptionArgs {
 export interface MutationEditReferralArgs {
   editedReferral: EditReferralInput;
   referralID: Scalars['Int'];
+}
+
+
+export interface MutationLoginArgs {
+  email: Scalars['String'];
+  password: Scalars['String'];
+}
+
+
+export interface MutationSignupArgs {
+  email: Scalars['String'];
+  f_name: Scalars['String'];
+  l_name: Scalars['String'];
+  password: Scalars['String'];
 }
 
 export interface Patient {
@@ -293,6 +315,7 @@ export interface Query {
   readonly hi?: Maybe<Scalars['String']>;
   readonly high?: Maybe<Scalars['String']>;
   readonly invoice?: Maybe<ReadonlyArray<Maybe<Bill>>>;
+  readonly me?: Maybe<User>;
   readonly medicalhistory?: Maybe<ReadonlyArray<Maybe<MedicalHistory>>>;
   readonly patientMedHistory?: Maybe<ReadonlyArray<Maybe<MedicalHistory>>>;
   readonly patientMedNotes?: Maybe<ReadonlyArray<Maybe<MedicalNotes>>>;
@@ -361,4 +384,21 @@ export interface ReferralInput {
   readonly doctor_id: Scalars['Int'];
   readonly hosp_name: Scalars['String'];
   readonly patient_id: Scalars['Int'];
+}
+
+export interface UpdateAppointmentInput {
+  readonly doc_id: Scalars['Int'];
+  readonly dt_end: Scalars['String'];
+  readonly dt_start: Scalars['String'];
+  readonly id: Scalars['Int'];
+  readonly name: Scalars['String'];
+  readonly patient_id: Scalars['Int'];
+}
+
+export interface User {
+  readonly __typename?: 'User';
+  readonly email: Scalars['String'];
+  readonly f_name: Scalars['String'];
+  readonly id: Scalars['Int'];
+  readonly l_name: Scalars['String'];
 }
