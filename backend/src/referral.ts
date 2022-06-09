@@ -93,6 +93,14 @@ export const DeleteReferral = mutationField('deleteReferral', {
   resolve: (root, args: { referralId: Prisma.ReferralWhereUniqueInput }, ctx) => deleteAReferral(args.referralId, ctx),
 });
 
+export function editAReferral(referalId: Prisma.ReferralWhereUniqueInput, ctx: Context) {
+  return ctx.prisma.referral.edit({
+    where: {
+      id: referalId.id,
+    },
+  });
+}
+
 export const EditReferral = mutationField('editReferral', {
   type: Referral,
   args: {

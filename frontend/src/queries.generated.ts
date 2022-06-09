@@ -129,16 +129,22 @@ export type AddAnAppointmentMutation = (
   )> }
 );
 
-export type EdiAnAppointmentMutationVariables = Types.Exact<{
-  theAppointment: Types.AppointmentInput;
-  aId: Types.Scalars['Int'];
+export type EditAppointmentMutationVariables = Types.Exact<{
+  editedAppointment: Types.UpdateAppointmentInput;
 }>;
 
-export type EdiAnAppointmentMutation = (
+export type EditAppointmentMutation = (
   { __typename?: 'Mutation' }
   & { editAppointment?: Types.Maybe<(
     { __typename?: 'Appointment' }
-    & Pick<Types.Appointment, 'name' | 'dt_start' | 'dt_end' | 'doc_id'>
+    & Pick<Types.Appointment, 'id' | 'name'>
+    & { doctor?: Types.Maybe<(
+      { __typename?: 'Doctor' }
+      & Pick<Types.Doctor, 'id'>
+    )>, patient?: Types.Maybe<(
+      { __typename?: 'Patient' }
+      & Pick<Types.Patient, 'id'>
+    )> }
   )> }
 );
 
@@ -565,21 +571,21 @@ export const AddAnAppointmentDocument = {
     },
   }],
 } as unknown as DocumentNode<AddAnAppointmentMutation, AddAnAppointmentMutationVariables>;
-export const EdiAnAppointmentDocument = {
+export const EditAppointmentDocument = {
   kind: 'Document',
   definitions: [{
     kind: 'OperationDefinition',
     operation: 'mutation',
-    name: { kind: 'Name', value: 'ediAnAppointment' },
-    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'theAppointment' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'AppointmentInput' } } } }, { kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'aId' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'Int' } } } }],
+    name: { kind: 'Name', value: 'EditAppointment' },
+    variableDefinitions: [{ kind: 'VariableDefinition', variable: { kind: 'Variable', name: { kind: 'Name', value: 'editedAppointment' } }, type: { kind: 'NonNullType', type: { kind: 'NamedType', name: { kind: 'Name', value: 'UpdateAppointmentInput' } } } }],
     selectionSet: {
       kind: 'SelectionSet',
       selections: [{
-        kind: 'Field', name: { kind: 'Name', value: 'editAppointment' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'editedAppointment' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'theAppointment' } } }, { kind: 'Argument', name: { kind: 'Name', value: 'appointmentID' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'aId' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'name' } }, { kind: 'Field', name: { kind: 'Name', value: 'dt_start' } }, { kind: 'Field', name: { kind: 'Name', value: 'dt_end' } }, { kind: 'Field', name: { kind: 'Name', value: 'doc_id' } }] },
+        kind: 'Field', name: { kind: 'Name', value: 'editAppointment' }, arguments: [{ kind: 'Argument', name: { kind: 'Name', value: 'editedAppointment' }, value: { kind: 'Variable', name: { kind: 'Name', value: 'editedAppointment' } } }], selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }, { kind: 'Field', name: { kind: 'Name', value: 'name' } }, { kind: 'Field', name: { kind: 'Name', value: 'doctor' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }] } }, { kind: 'Field', name: { kind: 'Name', value: 'patient' }, selectionSet: { kind: 'SelectionSet', selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }] } }] },
       }],
     },
   }],
-} as unknown as DocumentNode<EdiAnAppointmentMutation, EdiAnAppointmentMutationVariables>;
+} as unknown as DocumentNode<EditAppointmentMutation, EditAppointmentMutationVariables>;
 export const DeleteAnAppointmentDocument = {
   kind: 'Document',
   definitions: [{
