@@ -3,7 +3,7 @@
 import { Patient, Prisma } from '@prisma/client';
 import { MockContext, Context, createMockContext } from '../context';
 import {
-  createPatient, deleteAPatient, editAPatient, getAPatient,
+  createPatient, deleteAPatient, editAPatient, getAPatient, getAllPatients,
 } from '../patient';
 
 let mockCtx: MockContext;
@@ -122,4 +122,34 @@ it('should test getting specific patient', async () => {
     suffix: null,
     sex: 'Female',
   });
+});
+
+it('should test getting all patients', async () => {
+  mockCtx.prisma.patient.findMany.mockResolvedValue([patient2, patient1]);
+
+  await expect(getAllPatients(ctx)).resolves.toEqual([{
+    id: 1,
+    f_name: 'Jenny Rose',
+    l_name: 'Suelan',
+    m_name: 'Manimbayan',
+    email: 'jennyrosesuelan@gmail.com',
+    constactNo: '09636261878',
+    age: 20,
+    birthdate: '2001-07-09',
+    address: 'Cabatuan, Iloilo',
+    suffix: null,
+    sex: 'Female',
+  }, {
+    id: 1,
+    f_name: 'Glenn Rose',
+    l_name: 'Suelan',
+    m_name: 'Manimbayan',
+    email: 'glennrosesuelan@gmail.com',
+    constactNo: '09636261878',
+    age: 20,
+    birthdate: '2001-07-09',
+    address: 'Cabatuan, Iloilo',
+    suffix: null,
+    sex: 'Female',
+  }]);
 });

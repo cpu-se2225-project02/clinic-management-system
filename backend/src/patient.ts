@@ -51,6 +51,9 @@ export const Patient = objectType({
 });
 
 // R = read
+export function getAllPatients(ctx: Context) {
+  return ctx.prisma.patient.findMany();
+}
 export const patients = queryField('patients', {
   type: list(Patient),
   args: {
