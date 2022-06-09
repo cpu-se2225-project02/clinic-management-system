@@ -17,7 +17,7 @@ import * as medNotesTypes from './medNotes';
 import * as medHistoryTypes from './medHistory';
 import * as referralType from './referral';
 import {
-  Query, Mutation, AuthPayload, User,
+  WhoAmI, Mutation, AuthPayload, User,
 } from './auth/user';
 import { permissions } from './auth/permissions/index';
 import { createContext } from './context';
@@ -27,7 +27,7 @@ const PORT = 8001;
 
 const schemaWithoutPermissions = makeSchema({
   types: [
-    Query,
+    WhoAmI,
     Mutation,
     User,
     AuthPayload,
