@@ -78,16 +78,19 @@ export const patients = queryField('patients', {
   },
 });
 
+export function getAPatient(patientId: Prisma.PatientWhereUniqueInput, ctx: Context) {
+  return ctx.prisma.patient.findUnique({
+    where: {
+      id: patientId.id,
+    },
+  });
+}
 export const specificPatient = queryField('specificPatient', {
   type: Patient,
   args: {
     patientId: nonNull(intArg()),
   },
-  resolve(root, args) {
-    return db.patient.findUnique({
-      where: { id: args.patientId },
-    });
-  },
+  resolve: (root, args: {patientId: Prisma.PatientWhereUniqueInput}, ctx) => getAPatient(args.patientId, ctx),
 });
 
 export const PatientInput = inputObjectType({
