@@ -6,7 +6,7 @@ import {
   list,
   objectType,
   queryField,
-  mutationField, 
+  mutationField,
   nonNull,
   inputObjectType,
   intArg,
