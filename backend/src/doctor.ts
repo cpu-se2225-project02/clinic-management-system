@@ -7,6 +7,8 @@ import {
   inputObjectType, list, mutationField, nonNull, objectType, queryField,
 } from 'nexus';
 import { Appointment } from './appointment';
+import { NexusGenInputs } from './generated/graphql-types';
+import { Context } from './context';
 
 const db = new PrismaClient();
 
@@ -23,6 +25,9 @@ export const Doctor = objectType({
     });
   },
 });
+export function getAllDoctors(ctx: Context) {
+  return ctx.prisma.doctor.findMany();
+}
 
 export const allDoctors = queryField('allDoctors', {
   type: list(Doctor),
@@ -37,6 +42,15 @@ export const DoctorInput = inputObjectType({
     t.field(DoctorType.doc_name);
   },
 });
+
+export type CreateDoctorType = NexusGenInputs['DoctorInput'];
+export function createDoctor(newDoctor: CreateDoctorType, ctx: Context) {
+  return ctx.prisma.doctor.create({
+    data: {
+      ...newDoctor,
+    },
+  });
+}
 
 export const addDoctor = mutationField('addDoctor', {
   type: Doctor,

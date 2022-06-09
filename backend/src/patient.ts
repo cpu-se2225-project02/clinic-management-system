@@ -54,6 +54,7 @@ export const Patient = objectType({
 export function getAllPatients(ctx: Context) {
   return ctx.prisma.patient.findMany();
 }
+// Above ^^^
 export const patients = queryField('patients', {
   type: list(Patient),
   args: {
@@ -88,6 +89,7 @@ export function getAPatient(patientId: Prisma.PatientWhereUniqueInput, ctx: Cont
     },
   });
 }
+// above ^^
 export const specificPatient = queryField('specificPatient', {
   type: Patient,
   args: {
@@ -120,7 +122,7 @@ export function createPatient(newPatient: CreatePatientType, ctx: Context) {
     },
   });
 }
-
+// above ^^
 export const AddPatient = mutationField('addPatient', {
   type: 'Patient',
   args: {
@@ -139,7 +141,7 @@ export function editAPatient(thePatient: Prisma.PatientUpdateInput, patientId: P
     },
   });
 }
-
+// above ^^^
 export const EditPatient = mutationField('editPatient', {
   type: Patient,
   args: {
@@ -153,7 +155,7 @@ export const EditPatient = mutationField('editPatient', {
     ctx,
   ) => editAPatient(args.editedPatient, args.patientId, ctx),
 });
-
+// edit resolve part
 export function deleteAPatient(patientId: Prisma.PatientWhereUniqueInput, ctx: Context) {
   return ctx.prisma.patient.delete({
     where: {
@@ -161,6 +163,7 @@ export function deleteAPatient(patientId: Prisma.PatientWhereUniqueInput, ctx: C
     },
   });
 }
+// above
 export const DeletePatient = mutationField('deletePatient', {
   type: Patient,
   args: {
