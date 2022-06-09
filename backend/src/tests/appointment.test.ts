@@ -1,19 +1,30 @@
+/* eslint-disable max-len */
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-undef */
 import { Appointment, Prisma } from '@prisma/client';
 import { MockContext, Context, createMockContext } from '../context';
-import { createAppointment, deleteAppointment, updateAppointment } from '../appointment';
+import {
+  createAppointment, deleteAppointment, getAllAppointments, getPatientAppointments, updateAppointment,
+} from '../appointment';
 
 let mockCtx: MockContext;
 let ctx: Context;
 
-const appointment: Appointment = {
+const appointment1: Appointment = {
   id: 1,
   doc_id: 1,
   dt_end: 'Jan 1, 2022',
   dt_start: 'Jan 2, 2022',
   name: 'First Appointment',
   patient_id: 1,
+};
+const appointment2: Appointment = {
+  id: 2,
+  doc_id: 1,
+  dt_end: 'Dec 1, 2022',
+  dt_start: 'Dec 2, 2022',
+  name: 'Second Appointment',
+  patient_id: 3,
 };
 
 // function beforeEach(arg0: () => void) {
@@ -29,10 +40,51 @@ beforeEach(() => {
   ctx = mockCtx as unknown as Context;
 });
 
-it('should test adding an appointment', async () => {
-  mockCtx.prisma.appointment.create.mockResolvedValue(appointment);
+it('should test getting all appointments', async () => {
+  mockCtx.prisma.appointment.findMany.mockResolvedValue([appointment1, appointment2]);
+  await expect(getAllAppointments(ctx)).resolves.toEqual([{
+    id: 1,
+    doc_id: 1,
+    dt_end: 'Jan 1, 2022',
+    dt_start: 'Jan 2, 2022',
+    name: 'First Appointment',
+    patient_id: 1,
+  }, {
+    id: 2,
+    doc_id: 1,
+    dt_end: 'Dec 1, 2022',
+    dt_start: 'Dec 2, 2022',
+    name: 'Second Appointment',
+    patient_id: 3,
+  },
+  ]);
+});
 
-  await expect(createAppointment(appointment, ctx)).resolves.toEqual({
+it("should test getting a patient's appointments", async () => {
+  const patientId: number = 1;
+  mockCtx.prisma.appointment.findMany.mockResolvedValue([appointment1, appointment2]);
+  await expect(getPatientAppointments(patientId, ctx)).resolves.toEqual([{
+    id: 1,
+    doc_id: 1,
+    dt_end: 'Jan 1, 2022',
+    dt_start: 'Jan 2, 2022',
+    name: 'First Appointment',
+    patient_id: 1,
+  }, {
+    id: 2,
+    doc_id: 1,
+    dt_end: 'Dec 1, 2022',
+    dt_start: 'Dec 2, 2022',
+    name: 'Second Appointment',
+    patient_id: 3,
+  },
+  ]);
+});
+
+it('should test adding an appointment', async () => {
+  mockCtx.prisma.appointment.create.mockResolvedValue(appointment1);
+
+  await expect(createAppointment(appointment1, ctx)).resolves.toEqual({
     id: 1,
     doc_id: 1,
     dt_end: 'Jan 1, 2022',
@@ -43,9 +95,9 @@ it('should test adding an appointment', async () => {
 });
 
 it('should test updating an appointment', async () => {
-  mockCtx.prisma.appointment.update.mockResolvedValue(appointment);
+  mockCtx.prisma.appointment.update.mockResolvedValue(appointment1);
 
-  await expect(updateAppointment(appointment, ctx)).resolves.toEqual({
+  await expect(updateAppointment(appointment1, ctx)).resolves.toEqual({
     id: 1,
     doc_id: 1,
     dt_end: 'Jan 1, 2022',
@@ -57,7 +109,7 @@ it('should test updating an appointment', async () => {
 
 it('should test deleting an appointment', async () => {
   const id: number = 1;
-  mockCtx.prisma.appointment.delete.mockResolvedValue(appointment);
+  mockCtx.prisma.appointment.delete.mockResolvedValue(appointment1);
 
   await expect(deleteAppointment(id, ctx)).resolves.toEqual({
     id: 1,
