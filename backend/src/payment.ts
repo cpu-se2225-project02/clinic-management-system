@@ -5,6 +5,8 @@ import {
 import { Prisma, PrismaClient } from '@prisma/client';
 import { Bill as BillType } from 'nexus-prisma';
 import { Patient } from './patient';
+import { NexusGenInputs } from './generated/graphql-types';
+import { Context } from './context';
 
 const db = new PrismaClient();
 
@@ -57,14 +59,22 @@ export const PaymentInput = inputObjectType({
   },
 });
 
+export type CreatePaymentType = NexusGenInputs['PaymentInput'];
+export function createPayment(newPayment: CreatePaymentType, ctx: Context) {
+  return ctx.prisma.bill.create({
+    data: {
+      ...newPayment,
+    },
+  });
+}
+
 export const addPayment = mutationField('addPayment', {
   type: Bill,
   args: {
     newPayment: nonNull(PaymentInput),
   },
-  resolve(root, args: { newPayment: Prisma.BillCreateInput }) {
-    return db.bill.create({ data: args.newPayment });
-  },
+  resolve: (root, args:
+    { newPayment: Prisma.BillCreateInput }, ctx) => createPayment(args.newPayment, ctx),
 });
 
 export const BillInput = inputObjectType({
@@ -75,14 +85,21 @@ export const BillInput = inputObjectType({
   },
 });
 
+export type CreateBillType = NexusGenInputs['BillInput'];
+export function createBill(newBill: CreateBillType, ctx: Context) {
+  return ctx.prisma.bill.create({
+    data: {
+      ...newBill,
+    },
+  });
+}
 export const AddBill = mutationField('addBill', {
   type: Bill,
   args: {
     newBill: nonNull(BillInput),
   },
-  resolve(root, args: { newBill: Prisma.BillCreateInput }) {
-    return db.bill.create({ data: args.newBill });
-  },
+  resolve: (root, args:
+    { newBill: Prisma.BillCreateInput }, ctx) => createBill(args.newBill, ctx),
 });
 
 export const Invoice = queryField('invoice', {

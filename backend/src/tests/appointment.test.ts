@@ -1,5 +1,6 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-undef */
-import { Appointment } from '@prisma/client';
+import { Appointment, Prisma } from '@prisma/client';
 import { MockContext, Context, createMockContext } from '../context';
 import { createAppointment, deleteAppointment, updateAppointment } from '../appointment';
 
