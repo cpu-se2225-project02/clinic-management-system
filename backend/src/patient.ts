@@ -137,14 +137,18 @@ export const EditPatient = mutationField('editPatient', {
   },
 });
 
+export function deleteAPatient(patientId: Prisma.PatientWhereUniqueInput, ctx: Context) {
+  return ctx.prisma.patient.delete({
+    where: {
+      id: patientId as number,
+    },
+  });
+}
 export const DeletePatient = mutationField('deletePatient', {
   type: Patient,
   args: {
     patientId: nonNull(intArg()),
   },
-  resolve(root, args: { patientId: Prisma.PatientWhereUniqueInput }) {
-    return db.patient.delete({
-      where: { id: args.patientId as any },
-    });
-  },
+  resolve: (root, args:
+    { patientId: Prisma.PatientWhereUniqueInput }, ctx) => deleteAPatient(args.patientId, ctx),
 });
