@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable linebreak-style */
 /* eslint-disable max-len */
 /* eslint-disable import/prefer-default-export */
@@ -72,10 +73,9 @@ export function createPatientReferral(newReferral: CreatePatientReferralType, ct
 export const AddReferral = mutationField('addReferral', {
   type: 'Referral',
   args: { newReferral: nonNull(ReferralInput) },
-  resolve(root, args : { newReferral: Prisma.PatientReferralCreate }) {
-    return db.referral.create({ data: args.newReferral });
-  },
+  resolve: (root, args: { newReferral: PatientReferralCreate }, ctx) => createPatientReferral(args.newReferral, ctx),
 });
+// resolve: (root, args: { newReferral: PatientReferralCreate}, ctx) => createPatientReferral(args.newReferral, ctx),
 
 export function deleteAReferral(referalId: Prisma.ReferralWhereUniqueInput, ctx: Context) {
   return ctx.prisma.referral.delete({
