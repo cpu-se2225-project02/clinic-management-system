@@ -34,16 +34,18 @@ export const Referral = objectType({
   },
 });
 
+export function getPatientReferrals(patientId: number, ctx: Context) {
+  return ctx.prisma.referral.findMany({
+    where: { patient_id: patientId },
+  });
+}
+
 export const PatientReferrals = queryField('patientReferrals', {
   type: list(Referral),
   args: {
     patientID: nonNull(intArg()),
   },
-  resolve(root, args: { patientID: Prisma.ReferralWhereUniqueInput }) {
-    return db.referral.findMany({
-      where: { patient_id: args.patientID as any },
-    });
-  },
+  resolve: (root, args: { patientID: number }, ctx) => getPatientReferrals(args.patientID, ctx),
 });
 
 export const ReferralInput = inputObjectType({
@@ -93,10 +95,13 @@ export const DeleteReferral = mutationField('deleteReferral', {
   resolve: (root, args: { referralId: Prisma.ReferralWhereUniqueInput }, ctx) => deleteAReferral(args.referralId, ctx),
 });
 
-export function editAReferral(referalId: Prisma.ReferralWhereUniqueInput, ctx: Context) {
-  return ctx.prisma.referral.edit({
+export function editAReferral(referalId: number, editedReferral: Prisma.ReferralUpdateInput, ctx: Context) {
+  return ctx.prisma.referral.update({
     where: {
-      id: referalId.id,
+      id: referalId,
+    },
+    data: {
+      ...editedReferral,
     },
   });
 }
@@ -107,10 +112,5 @@ export const EditReferral = mutationField('editReferral', {
     referralID: nonNull(intArg()),
     editedReferral: nonNull(EditReferralInput),
   },
-  resolve(root, args: { referralID: Prisma.ReferralWhereUniqueInput, editedReferral: Prisma.ReferralUpdateInput }) {
-    return db.referral.update({
-      where: { id: args.referralID as any },
-      data: args.editedReferral,
-    });
-  },
+  resolve: (root, args: { referralID: number, editedReferral: Prisma.ReferralUpdateInput }, ctx) => editAReferral(args.referralID, args.editedReferral, ctx),
 });
