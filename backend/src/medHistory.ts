@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable linebreak-style */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */
@@ -14,6 +15,8 @@ import {
 import { Prisma, PrismaClient } from '@prisma/client';
 import { MedicalHistory as MedHistoryType } from 'nexus-prisma';
 import { Patient } from './patient';
+import { NexusGenInputs } from './generated/graphql-types';
+import { Context } from './context';
 
 const db = new PrismaClient();
 
@@ -35,6 +38,9 @@ export const MedicalHistory = objectType({
 });
 
 // read
+export function getMedHistory(ctx: Context) {
+  return ctx.prisma.medicalHistory.findMany();
+}
 export const medicalhistory = queryField('medicalhistory', {
   type: list(MedicalHistory),
   resolve() {
@@ -72,13 +78,22 @@ export const AddMedHistory = mutationField('addMedHistory', {
   args: {
     newMedHistory: nonNull(AddMedHistoryInput),
   },
-  resolve(root, args: {newMedHistory: Prisma.MedicalHistoryCreateInput }) {
+  resolve(root, args: { newMedHistory: Prisma.MedicalHistoryCreateInput }) {
     return db.medicalHistory.create({ data: args.newMedHistory });
   },
 });
 
 // edit
-
+export function editMedHistory(theMedHistory: Prisma.MedicalHistoryUpdateInput, medicalhistoryId: Prisma.MedicalHistoryWhereUniqueInput, ctx: Context) {
+  return ctx.prisma.medicalHistory.update({
+    data: {
+      ...theMedHistory,
+    },
+    where: {
+      id: medicalhistoryId as any,
+    },
+  });
+}
 export const EditMedHistoryInput = inputObjectType({
   name: 'EditMedHistoryInput',
   definition(t) {
@@ -87,22 +102,26 @@ export const EditMedHistoryInput = inputObjectType({
     t.field(MedHistoryType.description);
   },
 });
-
 export const EditMedHistory = mutationField('editMedHistory', {
   type: MedicalHistory,
   args: {
     medicalhistoryId: nonNull(intArg()),
     editedMedHistory: nonNull(EditMedHistoryInput),
   },
-
-  // eslint-disable-next-line max-len
-  resolve(root, args: { editedMedHistory: Prisma.MedicalHistoryUpdateInput, medicalhistoryId: Prisma.MedicalHistoryWhereUniqueInput }) {
-    return db.medicalHistory.update({
-      where: { id: args.medicalhistoryId as any },
-      data: args.editedMedHistory,
-    });
-  },
+  resolve: (
+    root,
+    args:
+      { editedMedHistory: Prisma.MedicalHistoryUpdateInput, medicalhistoryId: Prisma.MedicalHistoryWhereUniqueInput },
+    ctx,
+  ) => editMedHistory(args.editedMedHistory, args.medicalhistoryId, ctx),
 });
+//     {
+//     return db.medicalHistory.update({
+//       where: { id: args.medicalhistoryId as any },
+//       data: args.editedMedHistory,
+//     });
+//   },
+// });
 
 // delete
 export const DeleteMedHistory = mutationField('deleteMedHistory', {

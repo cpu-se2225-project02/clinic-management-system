@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable linebreak-style */
 /* eslint-disable max-len */
 /* eslint-disable import/prefer-default-export */
@@ -6,8 +7,10 @@ import {
   inputObjectType, intArg, list, mutationField, nonNull, objectType, queryField,
 } from 'nexus';
 import { Referral as ReferralType } from 'nexus-prisma';
+import { Context } from './context';
 import { Doctor } from './doctor';
 import { Patient } from './patient';
+import { NexusGenInputs } from './generated/graphql-types';
 
 const db = new PrismaClient();
 
@@ -36,7 +39,7 @@ export const PatientReferrals = queryField('patientReferrals', {
   args: {
     patientID: nonNull(intArg()),
   },
-  resolve(root, args: { patientID: Prisma.ReferralWhereUniqueInput}) {
+  resolve(root, args: { patientID: Prisma.ReferralWhereUniqueInput }) {
     return db.referral.findMany({
       where: { patient_id: args.patientID as any },
     });
@@ -59,28 +62,43 @@ export const EditReferralInput = inputObjectType({
     t.field(ReferralType.hosp_name);
   },
 });
-
+export type CreatePatientReferralType = NexusGenInputs['ReferralInput'];
+export function createPatientReferral(newReferral: CreatePatientReferralType, ctx: Context) {
+  return ctx.prisma.referral.create({
+    data: {
+      ...newReferral,
+    },
+  });
+}
 export const AddReferral = mutationField('addReferral', {
-  type: Referral,
-  args: {
-    newReferral: nonNull(ReferralInput),
-  },
-  resolve(root, args: {newReferral: Prisma.ReferralCreateInput}) {
-    return db.referral.create({ data: args.newReferral });
-  },
+  type: 'Referral',
+  args: { newReferral: nonNull(ReferralInput) },
+  resolve: (root, args: { newReferral: PatientReferralCreate }, ctx) => createPatientReferral(args.newReferral, ctx),
 });
+// resolve: (root, args: { newReferral: PatientReferralCreate}, ctx) => createPatientReferral(args.newReferral, ctx),
 
+export function deleteAReferral(referalId: Prisma.ReferralWhereUniqueInput, ctx: Context) {
+  return ctx.prisma.referral.delete({
+    where: {
+      id: referalId.id,
+    },
+  });
+}
 export const DeleteReferral = mutationField('deleteReferral', {
   type: Referral,
   args: {
     referralId: nonNull(intArg()),
   },
-  resolve(root, args: {referralId: Prisma.ReferralWhereUniqueInput}) {
-    return db.referral.delete({
-      where: { id: args.referralId as any },
-    });
-  },
+  resolve: (root, args: { referralId: Prisma.ReferralWhereUniqueInput }, ctx) => deleteAReferral(args.referralId, ctx),
 });
+
+export function editAReferral(referalId: Prisma.ReferralWhereUniqueInput, ctx: Context) {
+  return ctx.prisma.referral.edit({
+    where: {
+      id: referalId.id,
+    },
+  });
+}
 
 export const EditReferral = mutationField('editReferral', {
   type: Referral,
@@ -88,7 +106,7 @@ export const EditReferral = mutationField('editReferral', {
     referralID: nonNull(intArg()),
     editedReferral: nonNull(EditReferralInput),
   },
-  resolve(root, args: {referralID: Prisma.ReferralWhereUniqueInput, editedReferral: Prisma.ReferralUpdateInput}) {
+  resolve(root, args: { referralID: Prisma.ReferralWhereUniqueInput, editedReferral: Prisma.ReferralUpdateInput }) {
     return db.referral.update({
       where: { id: args.referralID as any },
       data: args.editedReferral,

@@ -17,7 +17,7 @@ import Header from '../common/Header';
 import Sidebars from '../common/Sidebars';
 import {
   AllPatientsDocument, AllDocsDocument, GetAllAppointmentsDocument,
-  AddAnAppointmentDocument, EdiAnAppointmentDocument, DeleteAnAppointmentDocument,
+  AddAnAppointmentDocument, EditAppointmentDocument, DeleteAnAppointmentDocument,
 } from '../queries.generated';
 import Footer from '../common/Footer';
 
@@ -39,7 +39,7 @@ function Appointment() {
 
   const [deletAppointmentResult, deleteAnAppointment] = useMutation(DeleteAnAppointmentDocument);
 
-  const [editAppointmentResult, editAppointment] = useMutation(EdiAnAppointmentDocument);
+  const [editAppointmentResult, editAppointment] = useMutation(EditAppointmentDocument);
 
   const [addAppointmentResult, addAppointment] = useMutation(AddAnAppointmentDocument);
 
@@ -81,14 +81,14 @@ function Appointment() {
       console.log(event);
     } else if (action === 'edit') {
       editAppointment({
-        theAppointment: {
+        editedAppointment: {
+          id: event.event_id as number,
           patient_id: event.patient_id,
           doc_id: event.doctor_in_charge,
           dt_start: new Date(event.start) as any as string,
           dt_end: new Date(event.end) as any as string,
           name: event.title,
         },
-        aId: event.event_id as number,
       });
       console.log(event);
     }
