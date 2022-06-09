@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable eol-last */
 import { Patient } from '@prisma/client';
 import { MockContext, Context, createMockContext } from '../context';
