@@ -8,6 +8,8 @@ import path from 'path';
 import { ApolloServer } from 'apollo-server-express';
 import { applyMiddleware } from 'graphql-middleware';
 import { PrismaClient } from '@prisma/client';
+import cors from 'cors';
+import { graphqlHTTP } from 'express-graphql';
 import * as prescriptionType from './prescription';
 import * as patientTypes from './patient';
 import * as appointmentTypes from './appointment';
@@ -60,16 +62,18 @@ const schemaWithoutPermissions = makeSchema({
 
 const schema = applyMiddleware(schemaWithoutPermissions, permissions);
 
-const server = new ApolloServer({
-  schema,
-  context: createContext,
-});
-
-server
-  .start()
-  .then(() => {
-    server.applyMiddleware({ app });
-    app.listen(PORT, () => {
-      console.log(`Appolo server has started at http://localhost:${PORT}`);
-    });
+app
+  .use(cors())
+  .use(
+    '/graphql',
+    graphqlHTTP({
+      schema,
+      graphiql: !process.env.NODE_ENV?.startsWith('prod'),
+      context: createContext,
+    }),
+  )
+  .listen(PORT, () => {
+    console.log(
+      `Express Graphql server started at http://localhost:${PORT}/graphql`,
+    );
   });
