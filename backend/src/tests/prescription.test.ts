@@ -3,7 +3,7 @@
 import { Prescription, Prisma } from '@prisma/client';
 import { MockContext, Context, createMockContext } from '../context';
 import {
-  createPrescription, deletePrescription, editPrescription, getPrescriptions, getPatientPrescription,
+  createPrescription, deletePrescription, editPrescription, getPrescriptions,
 } from '../prescription';
 
 let mockCtx: MockContext;

@@ -43,7 +43,7 @@ export function getPrescriptions(ctx: Context) {
 
 export const prescriptions = queryField('prescriptions', {
   type: list(Prescription),
-  resolve: (root, args, ctx) => getPrescriptions(ctx)
+  resolve: (root, args, ctx) => getPrescriptions(ctx),
 });
 
 export function getPatientPrescription(patientId: number, ctx: Context) {
