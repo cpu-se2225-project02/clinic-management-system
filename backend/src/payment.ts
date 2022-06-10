@@ -6,7 +6,7 @@ import { Prisma, PrismaClient } from '@prisma/client';
 import { Bill as BillType } from 'nexus-prisma';
 import { Patient } from './patient';
 import { NexusGenInputs } from './generated/graphql-types';
-import { Context } from './context';
+import { Context, context } from './context';
 
 const db = new PrismaClient();
 
@@ -28,12 +28,12 @@ export const Bill = objectType({
 });
 
 export function getAllPayments(ctx: Context) {
-  return ctx.prisma.bill.findMany({ orderBy: { patient_id: 'asc' });
+  return ctx.db.bill.findMany({ orderBy: { patient_id: 'asc' } });
 }
 
 export const allPayments = queryField('allPayments', {
   type: list(Bill),
-  resolve: (root, args, ctx) => getAllPayments(ctx),
+  resolve: (root, args, ctx) => getAllPayments(context),
 });
 
 export const account = queryField('account', {
@@ -68,8 +68,7 @@ export const addPayment = mutationField('addPayment', {
   args: {
     newPayment: nonNull(PaymentInput),
   },
-  resolve: (root, args:
-    { newPayment: Prisma.BillCreateInput }, ctx) => createPayment(args.newPayment, ctx),
+  resolve: (root, args, ctx) => createPayment(args.newPayment, context),
 });
 
 export const BillInput = inputObjectType({
@@ -93,8 +92,7 @@ export const AddBill = mutationField('addBill', {
   args: {
     newBill: nonNull(BillInput),
   },
-  resolve: (root, args:
-    { newBill: Prisma.BillCreateInput }, ctx) => createBill(args.newBill, ctx),
+  resolve: (root, args, ctx) => createBill(args.newBill, context),
 });
 
 export const getInvoices = (args: any, _ctx: Context) => db.bill.findMany({
@@ -103,5 +101,5 @@ export const getInvoices = (args: any, _ctx: Context) => db.bill.findMany({
 export const Invoice = queryField('invoice', {
   type: list(Bill),
   args: { patientId: nonNull(intArg()) },
-  resolve: (root, args, ctx) => getInvoices(args.patientId, ctx),
+  resolve: (root, args, ctx) => getInvoices(args.patientId, context),
 });
