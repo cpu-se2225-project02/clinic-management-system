@@ -23,6 +23,7 @@ type Appointment {
   id: Int!
   name: String!
   patient: Patient
+  patient_id: Int!
 }
 
 input AppointmentInput {
@@ -121,7 +122,7 @@ type Mutation {
   deletePatient(patientId: Int!): Patient
   deletePrescription(prescriptionId: Int!): Prescription
   deleteReferral(referralId: Int!): Referral
-  editAppointment(appointmentID: Int!, editedAppointment: AppointmentInput!): Appointment
+  editAppointment(editedAppointment: UpdateAppointmentInput!): Appointment
   editMedHistory(editedMedHistory: EditMedHistoryInput!, medicalhistoryId: Int!): MedicalHistory
   editPatient(editedPatient: PatientInput!, patientId: Int!): Patient
   editPrescription(editedPrescription: EditPrescriptionInput!, prescriptionId: Int!): Prescription
@@ -204,6 +205,15 @@ type Referral {
 input ReferralInput {
   doctor_id: Int!
   hosp_name: String!
+  patient_id: Int!
+}
+
+input UpdateAppointmentInput {
+  doc_id: Int!
+  dt_end: String!
+  dt_start: String!
+  id: Int!
+  name: String!
   patient_id: Int!
 }
 

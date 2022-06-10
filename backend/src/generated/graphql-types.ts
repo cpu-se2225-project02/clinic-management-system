@@ -82,6 +82,14 @@ export interface NexusGenInputs {
     hosp_name: string; // String!
     patient_id: number; // Int!
   }
+  UpdateAppointmentInput: { // input type
+    doc_id: number; // Int!
+    dt_end: string; // String!
+    dt_start: string; // String!
+    id: number; // Int!
+    name: string; // String!
+    patient_id: number; // Int!
+  }
 }
 
 export interface NexusGenEnums {
@@ -102,6 +110,7 @@ export interface NexusGenObjects {
     dt_start: string; // String!
     id: number; // Int!
     name: string; // String!
+    patient_id: number; // Int!
   }
   AuthPayload: { // root type
     token?: string | null; // String
@@ -185,6 +194,7 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     name: string; // String!
     patient: NexusGenRootTypes['Patient'] | null; // Patient
+    patient_id: number; // Int!
   }
   AuthPayload: { // field return type
     token: string | null; // String
@@ -308,6 +318,7 @@ export interface NexusGenFieldTypeNames {
     id: 'Int'
     name: 'String'
     patient: 'Patient'
+    patient_id: 'Int'
   }
   AuthPayload: { // field return type name
     token: 'String'
@@ -467,8 +478,7 @@ export interface NexusGenArgTypes {
       referralId: number; // Int!
     }
     editAppointment: { // args
-      appointmentID: number; // Int!
-      editedAppointment: NexusGenInputs['AppointmentInput']; // AppointmentInput!
+      editedAppointment: NexusGenInputs['UpdateAppointmentInput']; // UpdateAppointmentInput!
     }
     editMedHistory: { // args
       editedMedHistory: NexusGenInputs['EditMedHistoryInput']; // EditMedHistoryInput!
