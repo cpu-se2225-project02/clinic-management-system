@@ -6,6 +6,6 @@ import Dashboard from './Dashboard';
 it('renders correctly', () => {
   const { queryByTestId } = render(<Dashboard />);
 
+  expect(queryByTestId('dashboardPage')).toBeTruthy();
   expect(queryByTestId('hdr-banner')).toBeTruthy();
-//   expect(queryByTestId('banner-text')).toBeTruthy();
 });
