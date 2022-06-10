@@ -10,13 +10,6 @@ import { Context } from './context';
 
 const db = new PrismaClient();
 
-export const hii = queryField('high', {
-  type: 'String',
-  resolve() {
-    return 'Hiiiiiigh';
-  },
-});
-
 export const Bill = objectType({
   name: 'Bill',
   definition(t) {
@@ -102,12 +95,11 @@ export const AddBill = mutationField('addBill', {
     { newBill: Prisma.BillCreateInput }, ctx) => createBill(args.newBill, ctx),
 });
 
+export const getInvoices = (args: any, _ctx: Context) => db.bill.findMany({
+  where: { patient_id: args.patientId, ammnt_paid: null },
+});
 export const Invoice = queryField('invoice', {
   type: list(Bill),
   args: { patientId: nonNull(intArg()) },
-  resolve(root, args) {
-    return db.bill.findMany({
-      where: { patient_id: args.patientId, ammnt_paid: null },
-    });
-  },
+  resolve: (root, args, ctx) => getInvoices(args.patientId, ctx),
 });

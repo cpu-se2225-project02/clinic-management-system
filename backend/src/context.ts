@@ -15,9 +15,7 @@ export const createMockContext = (): MockContext => ({
   prisma: mockDeep<PrismaClient>(),
 });
 
-export function createContext(req: any) {
-  return {
-    ...req,
-    prisma,
-  };
-}
+export const createContext = (req: any) => ({
+  ...req,
+  prisma,
+});

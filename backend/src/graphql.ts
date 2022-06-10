@@ -8,6 +8,8 @@ import path from 'path';
 import { ApolloServer } from 'apollo-server-express';
 import { applyMiddleware } from 'graphql-middleware';
 import { PrismaClient } from '@prisma/client';
+import cors from 'cors';
+import { graphqlHTTP } from 'express-graphql';
 import * as prescriptionType from './prescription';
 import * as patientTypes from './patient';
 import * as appointmentTypes from './appointment';
@@ -17,7 +19,7 @@ import * as medNotesTypes from './medNotes';
 import * as medHistoryTypes from './medHistory';
 import * as referralType from './referral';
 import {
-  Query, Mutation, AuthPayload, User,
+  WhoAmI, Mutation, AuthPayload, User,
 } from './auth/user';
 import { permissions } from './auth/permissions/index';
 import { createContext } from './context';
@@ -27,7 +29,7 @@ const PORT = 8001;
 
 const schemaWithoutPermissions = makeSchema({
   types: [
-    Query,
+    WhoAmI,
     Mutation,
     User,
     AuthPayload,
@@ -60,16 +62,18 @@ const schemaWithoutPermissions = makeSchema({
 
 const schema = applyMiddleware(schemaWithoutPermissions, permissions);
 
-const server = new ApolloServer({
-  schema,
-  context: createContext,
-});
-
-server
-  .start()
-  .then(() => {
-    server.applyMiddleware({ app });
-    app.listen(PORT, () => {
-      console.log(`Appolo server has started at http://localhost:${PORT}`);
-    });
+app
+  .use(cors())
+  .use(
+    '/graphql',
+    graphqlHTTP({
+      schema: schemaWithoutPermissions,
+      graphiql: !process.env.NODE_ENV?.startsWith('prod'),
+      context: createContext,
+    }),
+  )
+  .listen(PORT, () => {
+    console.log(
+      `Express Graphql server started at http://localhost:${PORT}/graphql`,
+    );
   });

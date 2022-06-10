@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable prefer-template */
 /* eslint-disable array-callback-return */
 /* eslint-disable consistent-return */
@@ -39,7 +40,7 @@ function getCurrentDate() {
   return date;
 }
 
-function Dashboard() {
+export default function Dashboard() {
   const navigate = useNavigate();
   const [PForm, setPForm] = useState(false);
   const [PayForm, setPayForm] = useState(false);
@@ -65,7 +66,7 @@ function Dashboard() {
 
       <Row>
         <Row>
-          <Col xs={2} className="sidebar-box p-0">
+          <Col xs={2} className="sidebar-box p-0" data-testId="dashboardPage">
             <Sidebars />
           </Col>
 
@@ -239,5 +240,3 @@ function Dashboard() {
     </Container>
   );
 }
-
-export default Dashboard;

@@ -1,7 +1,9 @@
 /* eslint-disable no-undef */
 import { Bill } from '@prisma/client';
 import { Context, createMockContext, MockContext } from '../context';
-import { createBill, CreateBillType, createPayment } from '../payment';
+import {
+  createBill, CreateBillType, createPayment, Invoice, allPayments,
+} from '../payment';
 
 let mockCtx: MockContext;
 let ctx: Context;
@@ -44,3 +46,10 @@ it('shoudl test adding a bill', async () => {
     ammnt_cost: 200,
   });
 });
+
+it('should test getting invoice'), async () => {
+  const unpaid: CreateBillType = {
+    patient_id: 1,
+    ammnt_cost: 200,
+  };
+};
