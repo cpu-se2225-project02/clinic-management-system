@@ -33,7 +33,7 @@ export function getAllDoctors(ctx: Context) {
 
 export const allDoctors = queryField('allDoctors', {
   type: list(Doctor),
-  resolve: (root, args, ctx) => getAllDoctors(ctx),
+  resolve: (root, args, ctx) => getAllDoctors(context),
 });
 
 export const DoctorInput = inputObjectType({
