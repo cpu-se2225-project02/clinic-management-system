@@ -39,7 +39,7 @@ export const MedicalHistory = objectType({
 
 // read
 export function getMedHistory(ctx: Context) {
-  return ctx.prisma.medicalHistory.findMany();
+  return ctx.db.medicalHistory.findMany();
 }
 export const medicalhistory = queryField('medicalhistory', {
   type: list(MedicalHistory),
@@ -85,7 +85,7 @@ export const AddMedHistory = mutationField('addMedHistory', {
 
 // edit
 export function editMedHistory(theMedHistory: Prisma.MedicalHistoryUpdateInput, medicalhistoryId: Prisma.MedicalHistoryWhereUniqueInput, ctx: Context) {
-  return ctx.prisma.medicalHistory.update({
+  return ctx.db.medicalHistory.update({
     data: {
       ...theMedHistory,
     },

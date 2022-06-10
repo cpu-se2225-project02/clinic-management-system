@@ -22,10 +22,14 @@ import {
   WhoAmI, Mutation, AuthPayload, User,
 } from './auth/user';
 import { permissions } from './auth/permissions/index';
-import { createContext } from './context';
+import { createContext, Context } from './context';
 
 const app = express();
 const PORT = 8001;
+
+const db = new PrismaClient({
+  log: ['query', 'info', 'warn', 'error'],
+});
 
 const schemaWithoutPermissions = makeSchema({
   types: [
@@ -69,7 +73,9 @@ app
     graphqlHTTP({
       schema: schemaWithoutPermissions,
       graphiql: !process.env.NODE_ENV?.startsWith('prod'),
-      context: createContext,
+      context: {
+        createContext,
+      },
     }),
   )
   .listen(PORT, () => {

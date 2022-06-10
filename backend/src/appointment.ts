@@ -57,7 +57,7 @@ export const Appointment = objectType({
 });
 
 export function getAllAppointments(ctx: Context) {
-  return ctx.prisma.appointment.findMany();
+  return ctx.db.appointment.findMany();
 }
 
 export const appointments = queryField('appointments', {
@@ -88,7 +88,7 @@ export const UpdateAppointmentInput = inputObjectType({
 });
 
 export function createAppointment(newAppointment: CreateAppointmentType, ctx: Context) {
-  return ctx.prisma.appointment.create({
+  return ctx.db.appointment.create({
     data: {
       ...newAppointment,
       name: newAppointment.name.toUpperCase(),
@@ -105,7 +105,7 @@ export const addAppointment = mutationField('addAppointment', {
 });
 
 export function updateAppointment(updatedAppointment: UpdateAppointmentType, ctx: Context) {
-  return ctx.prisma.appointment.update({
+  return ctx.db.appointment.update({
     where: { id: updatedAppointment.id },
     data: {
       ...updatedAppointment,
@@ -121,7 +121,7 @@ export const editAppointment = mutationField('editAppointment', {
 });
 
 export function deleteAppointment(appointmentId: number, ctx: Context) {
-  return ctx.prisma.appointment.delete({
+  return ctx.db.appointment.delete({
     where: { id: appointmentId },
   });
 }
@@ -135,7 +135,7 @@ export const DeleteAppointment = mutationField('deleteAppointment', {
 });
 
 export function getPatientAppointments(patientID: number, ctx: Context) {
-  return ctx.prisma.appointment.findMany({
+  return ctx.db.appointment.findMany({
     where: { patient_id: patientID as any },
   });
 }

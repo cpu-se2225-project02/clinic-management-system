@@ -35,7 +35,7 @@ export const Referral = objectType({
 });
 
 export function getPatientReferrals(patientId: number, ctx: Context) {
-  return ctx.prisma.referral.findMany({
+  return ctx.db.referral.findMany({
     where: { patient_id: patientId },
   });
 }
@@ -66,7 +66,7 @@ export const EditReferralInput = inputObjectType({
 });
 export type CreatePatientReferralType = NexusGenInputs['ReferralInput'];
 export function createPatientReferral(newReferral: CreatePatientReferralType, ctx: Context) {
-  return ctx.prisma.referral.create({
+  return ctx.db.referral.create({
     data: {
       ...newReferral,
     },
@@ -80,7 +80,7 @@ export const AddReferral = mutationField('addReferral', {
 // resolve: (root, args: { newReferral: PatientReferralCreate}, ctx) => createPatientReferral(args.newReferral, ctx),
 
 export function deleteAReferral(referalId: Prisma.ReferralWhereUniqueInput, ctx: Context) {
-  return ctx.prisma.referral.delete({
+  return ctx.db.referral.delete({
     where: {
       id: referalId.id,
     },
@@ -95,7 +95,7 @@ export const DeleteReferral = mutationField('deleteReferral', {
 });
 
 export function editAReferral(referalId: number, editedReferral: Prisma.ReferralUpdateInput, ctx: Context) {
-  return ctx.prisma.referral.update({
+  return ctx.db.referral.update({
     where: {
       id: referalId,
     },

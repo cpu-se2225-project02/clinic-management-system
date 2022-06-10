@@ -54,7 +54,7 @@ export const PaymentInput = inputObjectType({
 
 export type CreatePaymentType = NexusGenInputs['PaymentInput'];
 export function createPayment(newPayment: CreatePaymentType, ctx: Context) {
-  return ctx.prisma.bill.create({
+  return ctx.db.bill.create({
     data: {
       ...newPayment,
     },
@@ -80,7 +80,7 @@ export const BillInput = inputObjectType({
 
 export type CreateBillType = NexusGenInputs['BillInput'];
 export function createBill(newBill: CreateBillType, ctx: Context) {
-  return ctx.prisma.bill.create({
+  return ctx.db.bill.create({
     data: {
       ...newBill,
     },

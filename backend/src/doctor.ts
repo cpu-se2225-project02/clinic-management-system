@@ -27,7 +27,7 @@ export const Doctor = objectType({
 });
 
 export function getAllDoctors(ctx: Context) {
-  return ctx.prisma.doctor.findMany();
+  return ctx.db.doctor.findMany();
 }
 
 export const allDoctors = queryField('allDoctors', {
@@ -44,7 +44,7 @@ export const DoctorInput = inputObjectType({
 
 export type CreateDoctorType = NexusGenInputs['DoctorInput'];
 export function createDoctor(newDoctor: CreateDoctorType, ctx: Context) {
-  return ctx.prisma.doctor.create({
+  return ctx.db.doctor.create({
     data: {
       ...newDoctor,
     },

@@ -74,7 +74,7 @@ export const AddPrescription = mutationField('addPrescription', {
   args: {
     newPrescription: nonNull(AddPrescriptionInput),
   },
-  resolve(root, args: { newPrescription: Prisma.PrescriptionCreateInput }) {
+  resolve(root, args) {
     return db.prescription.create({ data: args.newPrescription });
   },
 });
@@ -87,7 +87,7 @@ export const EditPrescription = mutationField('editPrescription', {
   },
 
   // eslint-disable-next-line max-len
-  resolve(root, args: { editedPrescription: Prisma.PrescriptionUpdateInput, prescriptionId: Prisma.PrescriptionWhereUniqueInput }) {
+  resolve(root, args) {
     return db.prescription.update({
       where: { id: args.prescriptionId as any },
       data: args.editedPrescription,
@@ -100,7 +100,7 @@ export const DeletePrescription = mutationField('deletePrescription', {
   args: {
     prescriptionId: nonNull(intArg()),
   },
-  resolve(root, args: { prescriptionId: Prisma.PrescriptionWhereUniqueInput }) {
+  resolve(root, args) {
     return db.prescription.delete({
       where: { id: args.prescriptionId as any },
     });
