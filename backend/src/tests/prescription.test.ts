@@ -53,24 +53,6 @@ it('should test editing a prescription', async () => {
   });
 });
 
-it('should test getting all prescriptions', async () => {
-  mockCtx.prisma.prescription.findMany.mockResolvedValue([prescription1, prescription2]);
-
-  await expect(getPrescriptions(ctx)).resolves.toEqual([{
-    id: 1,
-    patient_id: 1,
-    pres_name: 'Citirezin',
-    pres_dos: 10,
-
-  }, {
-    id: 1,
-    patient_id: 1,
-    pres_name: 'Biogesic',
-    pres_dos: 4,
-
-  }]);
-});
-
 it('should test deleting a prescription', async () => {
   const prescriptionId: Prisma.PrescriptionWhereUniqueInput = {
     id: 1,
