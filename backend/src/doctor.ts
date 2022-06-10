@@ -25,15 +25,14 @@ export const Doctor = objectType({
     });
   },
 });
+
 export function getAllDoctors(ctx: Context) {
   return ctx.prisma.doctor.findMany();
 }
 
 export const allDoctors = queryField('allDoctors', {
   type: list(Doctor),
-  resolve() {
-    return db.doctor.findMany();
-  },
+  resolve: (root, args, ctx) => getAllDoctors(ctx),
 });
 
 export const DoctorInput = inputObjectType({
