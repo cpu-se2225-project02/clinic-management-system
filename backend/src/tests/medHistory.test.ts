@@ -41,4 +41,3 @@ it('should test deleting a medical history', async () => {
     patient_id: 1,
   });
 });
-
