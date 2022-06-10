@@ -12,7 +12,7 @@ export type MockContext = {
   db: DeepMockProxy<PrismaClient>
 }
 
-export const createMockContext = () => ({
+export const createMockContext = (): MockContext => ({
   db: mockDeep<PrismaClient>(),
 });
 
