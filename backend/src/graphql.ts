@@ -67,7 +67,7 @@ app
   .use(
     '/graphql',
     graphqlHTTP({
-      schema,
+      schema: schemaWithoutPermissions,
       graphiql: !process.env.NODE_ENV?.startsWith('prod'),
       context: createContext,
     }),
