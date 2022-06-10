@@ -69,7 +69,7 @@ export default function Dashboard() {
             <Sidebars />
           </Col>
 
-          <Col xs={10} className="dashboardPage">
+          <Col xs={10} className="dashboardPage" data-testid="hdr-banner">
             <Row className="mt-3 pb-2">
               <Col xs={4}>
                 <Card style={{

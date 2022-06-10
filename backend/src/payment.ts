@@ -102,6 +102,13 @@ export const AddBill = mutationField('addBill', {
     { newBill: Prisma.BillCreateInput }, ctx) => createBill(args.newBill, ctx),
 });
 
+export function getInvoice(patientId: Prisma.PatientWhereUniqueInput, ctx: Context) {
+  return ctx.prisma.patient.findUnique({
+    where: {
+      id: patientId.id,
+    },
+  });
+}
 export const Invoice = queryField('invoice', {
   type: list(Bill),
   args: { patientId: nonNull(intArg()) },
@@ -111,3 +118,4 @@ export const Invoice = queryField('invoice', {
     });
   },
 });
+ 

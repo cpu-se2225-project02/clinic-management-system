@@ -98,13 +98,13 @@ export const EditMedHistoryInput = inputObjectType({
   },
 });
 
-export function editMedHistory(theMedHistory: Prisma.MedicalHistoryUpdateInput, medicalhistoryId: Prisma.MedicalHistoryWhereUniqueInput, ctx: Context) {
+export function editMedHistory(editedMedHistory: UpdateMedicalHistory, ctx: Context) {
   return ctx.prisma.medicalHistory.update({
     data: {
-      ...theMedHistory,
+      ...editedMedHistory,
     },
     where: {
-      id: medicalhistoryId as any,
+      id: editedMedHistory.id,
     },
   });
 }
@@ -114,7 +114,7 @@ export const EditMedHistory = mutationField('editMedHistory', {
     medicalhistoryId: nonNull(intArg()),
     editedMedHistory: nonNull(EditMedHistoryInput),
   },
-  resolve: (root, args: { editedMedHistory: Prisma.MedicalHistoryUpdateInput }, ctx) => editMedHistory(args.editedMedHistory, ctx),
+  resolve: (root, args: { editedMedHistory: UpdateMedicalHistory }, ctx) => editMedHistory(args.editedMedHistory, ctx),
 });
 
 export const DeleteMedHistory = mutationField('deleteMedHistory', {
