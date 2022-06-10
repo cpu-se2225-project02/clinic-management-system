@@ -7,9 +7,13 @@ import express, { query } from 'express';
 import path from 'path';
 import { ApolloServer } from 'apollo-server-express';
 import { applyMiddleware } from 'graphql-middleware';
+import { graphqlHTTP } from 'express-graphql';
 import { PrismaClient } from '@prisma/client';
 import cors from 'cors';
+<<<<<<< HEAD
 import { graphqlHTTP } from 'express-graphql';
+=======
+>>>>>>> 34f14f9777662d3d1251c9bb29e754b2d4734712
 import * as prescriptionType from './prescription';
 import * as patientTypes from './patient';
 import * as appointmentTypes from './appointment';
