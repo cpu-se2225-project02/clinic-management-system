@@ -28,7 +28,7 @@ beforeEach(() => {
 
 it("should test getting patient's referrrals", async () => {
   const patientId: number = 1;
-  mockCtx.prisma.referral.findMany.mockResolvedValue([referral1, referral2]);
+  mockCtx.db.referral.findMany.mockResolvedValue([referral1, referral2]);
 
   await expect(getPatientReferrals(patientId, ctx)).resolves.toEqual([{
     id: 1,
@@ -44,11 +44,9 @@ it("should test getting patient's referrrals", async () => {
   }]);
 });
 it('should test deleting a referral', async () => {
-  mockCtx.prisma.referral.delete.mockResolvedValue(referral1);
+  mockCtx.db.referral.delete.mockResolvedValue(referral1);
 
-  const refId: Prisma.ReferralWhereUniqueInput = {
-    id: 1,
-  };
+  const refId = 1;
   await expect(deleteAReferral(refId, ctx)).resolves.toEqual({
     id: 1,
     hosp_name: 'Iloilo Mission Hospital',
@@ -58,7 +56,7 @@ it('should test deleting a referral', async () => {
 });
 
 it('should test adding of referral', async () => {
-  mockCtx.prisma.referral.create.mockResolvedValue(referral1);
+  mockCtx.db.referral.create.mockResolvedValue(referral1);
 
   await expect(createPatientReferral(referral1, ctx)).resolves.toEqual({
     id: 1,
@@ -70,7 +68,7 @@ it('should test adding of referral', async () => {
 
 it('should test editing a referral', async () => {
   const referrralId: number = 1;
-  mockCtx.prisma.referral.update.mockResolvedValue(referral1);
+  mockCtx.db.referral.update.mockResolvedValue(referral1);
 
   await expect(editAReferral(referrralId, referral1, ctx)).resolves.toEqual({
     id: 1,
