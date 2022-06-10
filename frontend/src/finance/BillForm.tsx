@@ -56,9 +56,9 @@ function BillForm({
   return (
     <Modal show={payForm} onHide={() => addPaymentBtn(false)} className="mt-5" backdrop="static">
       <Modal.Header closeButton><h5>Add Bill</h5></Modal.Header>
-      <Modal.Body>
+      <Modal.Body data-testid="modal-body">
 
-        <div className="input-group mb-3">
+        <div className="input-group mb-3" data-testId="label">
           <div className="input-group-prepend">
             <label className="input-group-text" htmlFor="inputGroupSelect01">Patient</label>
           </div>
