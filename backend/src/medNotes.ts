@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable linebreak-style */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable linebreak-style */
@@ -61,19 +62,13 @@ export const AddMedNotes = mutationField('addMedNotes', {
   args: {
     newMedNotes: nonNull(MedNotesInput),
   },
-  resolve(root, args: { newMedNotes: Prisma.MedicalNotesCreateInput }) {
-    return db.medicalNotes.create({ data: args.newMedNotes });
-  },
+  resolve: (root, args: { newMedNote: Prisma.MedicalNotesCreateInput }, ctx) => createMedNote(args.newMedNote, ctx),
 });
 
-export function getMedNotes(ctx: Context) {
-  return ctx.prisma.medicalNotes.findMany();
-}
-
-export function getAMedNote(patientId: Prisma.MedicalNotesWhereInput, ctx: Context) {
+export function getAMedNote(patientId: Prisma.MedicalNotesWhereUniqueInput, ctx: Context) {
   return ctx.prisma.medicalNotes.findUnique({
     where: {
-      id: patientId as any,
+      id: patientId.id,
     },
   });
 }
@@ -83,9 +78,6 @@ export const PatientMedNotes = queryField('patientMedNotes', {
   args: {
     patient_id: nonNull(intArg()),
   },
-  resolve(root, args: {patient_id: Prisma.MedicalNotesWhereUniqueInput}) {
-    return db.medicalNotes.findMany({
-      where: { patient_id: args.patient_id as any },
-    });
-  },
+  resolve: (root, args: {patientId: Prisma.MedicalNotesWhereUniqueInput}, ctx) => getAMedNote(args.patientId, ctx),
+
 });

@@ -46,9 +46,11 @@ export const prescriptions = queryField('prescriptions', {
   resolve: (root, args, ctx) => getPrescriptions(ctx),
 });
 
-export function getPatientPrescription(patientId: number, ctx: Context) {
-  return ctx.prisma.referral.findMany({
-    where: { patient_id: patientId },
+export function getAPrescription(prescriptionId: Prisma.PrescriptionWhereUniqueInput, ctx: Context) {
+  return ctx.prisma.prescription.findUnique({
+    where: {
+      id: prescriptionId.id,
+    },
   });
 }
 
@@ -57,15 +59,10 @@ export const patientPrescriptions = queryField('patientPrescriptions', {
   args: {
     patientId: nonNull(intArg()),
   },
-  resolve(root, args) {
-    return db.prescription.findMany({
-      where: {
-        patient_id: args.patientId,
-      },
-    });
-  },
+  resolve: (root, args: {prescriptionId: Prisma.PrescriptionWhereUniqueInput}, ctx) => getAPrescription(args.prescriptionId, ctx),
 });
 
+//
 export type CreatePrescriptionType = NexusGenInputs['PrescriptionInput'];
 export function createPrescription(newPrescription: CreatePrescriptionType, ctx: Context) {
   return ctx.prisma.prescription.create({
@@ -83,13 +80,6 @@ export const AddPrescriptionInput = inputObjectType({
     t.field(PrescriptionType.patient_id);
   },
 });
-export const EditPrescriptionInput = inputObjectType({
-  name: 'EditPrescriptionInput',
-  definition(t) {
-    t.field(PrescriptionType.pres_name);
-    t.field(PrescriptionType.pres_dos);
-  },
-});
 
 export const AddPrescription = mutationField('addPrescription', {
   type: Prescription,
@@ -99,13 +89,21 @@ export const AddPrescription = mutationField('addPrescription', {
   resolve: (root, args: { newPrescription: Prisma.PrescriptionCreateInput }, ctx) => createPrescription(args.newPrescription, ctx),
 });
 
-export function editPrescription(thePrescription: Prisma.PrescriptionUpdateInput, prescriptionId: Prisma.PrescriptionWhereUniqueInput, ctx: Contex) {
+export const EditPrescriptionInput = inputObjectType({
+  name: 'EditPrescriptionInput',
+  definition(t) {
+    t.field(PrescriptionType.pres_name);
+    t.field(PrescriptionType.pres_dos);
+  },
+});
+
+export function editPrescription(thePrescription: Prisma.PrescriptionUpdateInput, prescriptionId: Prisma.PrescriptionWhereUniqueInput, ctx: Context) {
   return ctx.prisma.prescription.update({
     data: {
       ...thePrescription,
     },
     where: {
-      id: prescriptionId as any,
+      id: prescriptionId as number,
     },
   });
 }
@@ -118,12 +116,13 @@ export const EditPrescription = mutationField('editPrescription', {
   },
 
   // eslint-disable-next-line max-len
-  resolve(root, args: { editedPrescription: Prisma.PrescriptionUpdateInput, prescriptionId: Prisma.PrescriptionWhereUniqueInput }) {
-    return db.prescription.update({
-      where: { id: args.prescriptionId as any },
-      data: args.editedPrescription,
-    });
-  },
+  resolve: (
+    root,
+    args:
+     { editedPrescription: Prisma.PrescriptionUpdateInput, prescriptionId: Prisma.PrescriptionWhereUniqueInput },
+    ctx,
+  ) => editPrescription(args.editedPrescription, args.prescriptionId, ctx),
+
 });
 
 export function deletePrescription(prescriptionId: Prisma.PrescriptionWhereUniqueInput, ctx:Context) {
@@ -139,9 +138,6 @@ export const DeletePrescription = mutationField('deletePrescription', {
   args: {
     prescriptionId: nonNull(intArg()),
   },
-  resolve(root, args: { prescriptionId: Prisma.PrescriptionWhereUniqueInput }) {
-    return db.prescription.delete({
-      where: { id: args.prescriptionId as any },
-    });
-  },
+  resolve: (root, args:
+    { prescriptionId: Prisma.PrescriptionWhereUniqueInput }, ctx) => deletePrescription(args.prescriptionId, ctx),
 });

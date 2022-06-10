@@ -3,7 +3,7 @@
 import { Prescription, Prisma } from '@prisma/client';
 import { MockContext, Context, createMockContext } from '../context';
 import {
-  createPrescription, deletePrescription, editPrescription, getPrescriptions,
+  createPrescription, deletePrescription, editPrescription, getPrescriptions, getAPrescription,
 } from '../prescription';
 
 let mockCtx: MockContext;
@@ -82,4 +82,19 @@ it('should test getting prescriptions', async () => {
     pres_name: 'Biogesic',
     pres_dos: 4,
   }]);
+});
+
+it('should test getting specific prescription', async () => {
+  mockCtx.prisma.prescription.findUnique.mockResolvedValue(prescription2);
+
+  const prescriptionId: Prisma.PrescriptionWhereUniqueInput = {
+    id: 1,
+  };
+
+  await expect(getAPrescription(prescriptionId, ctx)).resolves.toEqual({
+    id: 1,
+    patient_id: 1,
+    pres_name: 'Biogesic',
+    pres_dos: 4,
+  });
 });
