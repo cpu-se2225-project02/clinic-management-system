@@ -16,7 +16,7 @@ import { Prisma, PrismaClient } from '@prisma/client';
 import { Prescription as PrescriptionType } from 'nexus-prisma';
 import { Patient } from './patient';
 import { NexusGenInputs } from './generated/graphql-types';
-import { Context } from './context';
+import { context, Context } from './context';
 
 const db = new PrismaClient();
 
@@ -38,16 +38,16 @@ export const Prescription = objectType({
 
 // read
 export function getPrescriptions(ctx: Context) {
-  return ctx.prisma.prescription.findMany();
+  return ctx.db.prescription.findMany();
 }
 
 export const prescriptions = queryField('prescriptions', {
   type: list(Prescription),
-  resolve: (root, args, ctx) => getPrescriptions(ctx)
+  resolve: (root, args, ctx) => getPrescriptions(context),
 });
 
 export function getPatientPrescription(patientId: number, ctx: Context) {
-  return ctx.prisma.referral.findMany({
+  return ctx.db.referral.findMany({
     where: { patient_id: patientId },
   });
 }
@@ -66,9 +66,9 @@ export const patientPrescriptions = queryField('patientPrescriptions', {
   },
 });
 
-export type CreatePrescriptionType = NexusGenInputs['PrescriptionInput'];
-export function createPrescription(newPrescription: CreatePrescriptionType, ctx: Context) {
-  return ctx.prisma.prescription.create({
+export type AddPrescInput = NexusGenInputs['AddPrescriptionInput']
+export function createPrescription(newPrescription: AddPrescInput, ctx: Context) {
+  return ctx.db.prescription.create({
     data: {
       ...newPrescription,
     },
@@ -96,11 +96,11 @@ export const AddPrescription = mutationField('addPrescription', {
   args: {
     newPrescription: nonNull(AddPrescriptionInput),
   },
-  resolve: (root, args: { newPrescription: Prisma.PrescriptionCreateInput }, ctx) => createPrescription(args.newPrescription, ctx),
+  resolve: (root, args, ctx) => createPrescription(args.newPrescription, context),
 });
 
-export function editPrescription(thePrescription: Prisma.PrescriptionUpdateInput, prescriptionId: Prisma.PrescriptionWhereUniqueInput, ctx: Contex) {
-  return ctx.prisma.prescription.update({
+export function editPrescription(thePrescription: Prisma.PrescriptionUpdateInput, prescriptionId: Prisma.PrescriptionWhereUniqueInput, ctx: Context) {
+  return ctx.db.prescription.update({
     data: {
       ...thePrescription,
     },
@@ -117,7 +117,6 @@ export const EditPrescription = mutationField('editPrescription', {
     editedPrescription: nonNull(EditPrescriptionInput),
   },
 
-  // eslint-disable-next-line max-len
   resolve(root, args) {
     return db.prescription.update({
       where: { id: args.prescriptionId as any },
@@ -127,7 +126,7 @@ export const EditPrescription = mutationField('editPrescription', {
 });
 
 export function deletePrescription(prescriptionId: Prisma.PrescriptionWhereUniqueInput, ctx:Context) {
-  return ctx.prisma.prescription.delete({
+  return ctx.db.prescription.delete({
     where: {
       id: prescriptionId as number,
     },
@@ -139,7 +138,7 @@ export const DeletePrescription = mutationField('deletePrescription', {
   args: {
     prescriptionId: nonNull(intArg()),
   },
-  resolve(root, args) {
+  resolve(root, args, ctx) {
     return db.prescription.delete({
       where: { id: args.prescriptionId as any },
     });
