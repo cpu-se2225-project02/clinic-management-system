@@ -44,10 +44,6 @@ export interface NexusGenInputs {
     diagnosis: string; // String!
     treatment_plan: string; // String!
   }
-  EditPrescriptionInput: { // input type
-    pres_dos: number; // Int!
-    pres_name: string; // String!
-  }
   EditReferralInput: { // input type
     doctor_id: number; // Int!
     hosp_name: string; // String!
@@ -264,7 +260,6 @@ export interface NexusGenFieldTypes {
     editAppointment: NexusGenRootTypes['Appointment'] | null; // Appointment
     editMedHistory: NexusGenRootTypes['MedicalHistory'] | null; // MedicalHistory
     editPatient: NexusGenRootTypes['Patient'] | null; // Patient
-    editPrescription: NexusGenRootTypes['Prescription'] | null; // Prescription
     editReferral: NexusGenRootTypes['Referral'] | null; // Referral
     login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
     signup: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
@@ -302,7 +297,6 @@ export interface NexusGenFieldTypes {
     medicalhistory: Array<NexusGenRootTypes['MedicalHistory'] | null> | null; // [MedicalHistory]
     patientMedHistory: Array<NexusGenRootTypes['MedicalHistory'] | null> | null; // [MedicalHistory]
     patientMedNotes: Array<NexusGenRootTypes['MedicalNotes'] | null> | null; // [MedicalNotes]
-    patientPrescriptions: Array<NexusGenRootTypes['Prescription'] | null> | null; // [Prescription]
     patientReferrals: Array<NexusGenRootTypes['Referral'] | null> | null; // [Referral]
     patients: Array<NexusGenRootTypes['Patient'] | null> | null; // [Patient]
     prescriptions: Array<NexusGenRootTypes['Prescription'] | null> | null; // [Prescription]
@@ -389,7 +383,6 @@ export interface NexusGenFieldTypeNames {
     editAppointment: 'Appointment'
     editMedHistory: 'MedicalHistory'
     editPatient: 'Patient'
-    editPrescription: 'Prescription'
     editReferral: 'Referral'
     login: 'AuthPayload'
     signup: 'AuthPayload'
@@ -427,7 +420,6 @@ export interface NexusGenFieldTypeNames {
     medicalhistory: 'MedicalHistory'
     patientMedHistory: 'MedicalHistory'
     patientMedNotes: 'MedicalNotes'
-    patientPrescriptions: 'Prescription'
     patientReferrals: 'Referral'
     patients: 'Patient'
     prescriptions: 'Prescription'
@@ -504,10 +496,6 @@ export interface NexusGenArgTypes {
     editPatient: { // args
       editedPatient: NexusGenInputs['UpdatePatientInput']; // UpdatePatientInput!
     }
-    editPrescription: { // args
-      editedPrescription: NexusGenInputs['EditPrescriptionInput']; // EditPrescriptionInput!
-      prescriptionId: number; // Int!
-    }
     editReferral: { // args
       editedReferral: NexusGenInputs['EditReferralInput']; // EditReferralInput!
       referralID: number; // Int!
@@ -535,9 +523,6 @@ export interface NexusGenArgTypes {
     }
     patientMedNotes: { // args
       patient_id: number; // Int!
-    }
-    patientPrescriptions: { // args
-      patientId: number; // Int!
     }
     patientReferrals: { // args
       patientID: number; // Int!
