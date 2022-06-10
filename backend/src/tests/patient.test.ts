@@ -60,9 +60,7 @@ it('should test adding of a patient', async () => {
 });
 
 it('should test deleting a patient', async () => {
-  const patientId: Prisma.PatientWhereUniqueInput = {
-    id: 1,
-  };
+  const patientId = 1;
   mockCtx.db.patient.delete.mockResolvedValue(patient2);
 
   await expect(deleteAPatient(patientId, ctx)).resolves.toEqual({
@@ -87,7 +85,7 @@ it('should test editing a patient', async () => {
 
   mockCtx.db.patient.update.mockResolvedValue(patient1);
 
-  await expect(editAPatient(patient1, patientId, ctx)).resolves.toEqual({
+  await expect(editAPatient(patient1, ctx)).resolves.toEqual({
     id: 1,
     f_name: 'Glenn Rose',
     l_name: 'Suelan',
@@ -105,9 +103,7 @@ it('should test editing a patient', async () => {
 it('should test getting specific patient', async () => {
   mockCtx.db.patient.findUnique.mockResolvedValue(patient2);
 
-  const patientId: Prisma.PatientWhereUniqueInput = {
-    id: 1,
-  };
+  const patientId = 1;
 
   await expect(getAPatient(patientId, ctx)).resolves.toEqual({
     id: 1,
