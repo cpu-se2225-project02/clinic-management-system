@@ -6,8 +6,10 @@ import { Prisma, PrismaClient } from '@prisma/client';
 import {
   inputObjectType, intArg, list, mutationField, nonNull, objectType, queryField,
 } from 'nexus';
+import { NexusGenInputs } from './generated/graphql-types';
 import { Patient } from './patient';
 import { Doctor } from './doctor';
+import { Context } from './context';
 
 const db = new PrismaClient();
 
@@ -46,6 +48,14 @@ export const MedNotesInput = inputObjectType({
   },
 });
 
+export type CreateMedNoteType = NexusGenInputs['MedNotesInput'];
+export function createMedNote(newMedNote: CreateMedNoteType, ctx: Context) {
+  return ctx.prisma.medicalNotes.create({
+    data: {
+      ...newMedNote,
+    },
+  });
+}
 export const AddMedNotes = mutationField('addMedNotes', {
   type: MedicalNotes,
   args: {
@@ -55,6 +65,18 @@ export const AddMedNotes = mutationField('addMedNotes', {
     return db.medicalNotes.create({ data: args.newMedNotes });
   },
 });
+
+export function getMedNotes(ctx: Context) {
+  return ctx.prisma.medicalNotes.findMany();
+}
+
+export function getAMedNote(patientId: Prisma.MedicalNotesWhereInput, ctx: Context) {
+  return ctx.prisma.medicalNotes.findUnique({
+    where: {
+      id: patientId as any,
+    },
+  });
+}
 
 export const PatientMedNotes = queryField('patientMedNotes', {
   type: list(MedicalNotes),
