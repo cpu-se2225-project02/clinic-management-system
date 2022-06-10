@@ -2,7 +2,7 @@
 /* eslint-disable eol-last */
 import { MedicalHistory, Prisma } from '@prisma/client';
 import { MockContext, Context, createMockContext } from '../context';
-import { getMedHistory, createMedHistory, deleteMedicalHistory } from '../medHistory';
+import { getMedHistory, createMedHistory, deleteMedicalHistory, editMedicalHistory } from '../medHistory';
 
 let mockCtx: MockContext;
 let ctx: Context;
@@ -29,6 +29,19 @@ it('should test creating of medical history', async () => {
   });
 });
 
+it('should test editing a medical history', async () => {
+  const medicalHistoryId: number = 1;
+  mockCtx.prisma.medicalHistory.update.mockResolvedValue(medicalHistory1);
+
+  await expect(editMedicalHistory(medicalHistoryId, medicalHistory1, ctx)).resolves.toEqual({
+    diagnosis: 'fever',
+    treatment_plan: 'cough syrup',
+    description: 'Solmux syrup',
+    id: 1,
+    patient_id: 1,
+  });
+});
+
 it('should test deleting a medical history', async () => {
   const id: number = 1;
   mockCtx.prisma.medicalHistory.delete.mockResolvedValue(medicalHistory1);
@@ -41,4 +54,3 @@ it('should test deleting a medical history', async () => {
     patient_id: 1,
   });
 });
-
