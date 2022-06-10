@@ -7,7 +7,7 @@ import {
   inputObjectType, intArg, list, mutationField, nonNull, objectType, queryField,
 } from 'nexus';
 import { Referral as ReferralType } from 'nexus-prisma';
-import { Context } from './context';
+import { Context, context } from './context';
 import { Doctor } from './doctor';
 import { Patient } from './patient';
 import { NexusGenInputs } from './generated/graphql-types';
@@ -19,6 +19,8 @@ export const Referral = objectType({
   definition(t) {
     t.field(ReferralType.id);
     t.field(ReferralType.hosp_name);
+    t.field(ReferralType.doctor_id);
+    t.field(ReferralType.patient_id);
     t.field('doctor', {
       type: Doctor,
       resolve(referral) {
@@ -45,7 +47,7 @@ export const PatientReferrals = queryField('patientReferrals', {
   args: {
     patientID: nonNull(intArg()),
   },
-  resolve: (root, args: { patientID: number }, ctx) => getPatientReferrals(args.patientID, ctx),
+  resolve: (root, args: { patientID: number }, ctx) => getPatientReferrals(args.patientID, context),
 });
 
 export const ReferralInput = inputObjectType({
@@ -74,16 +76,15 @@ export function createPatientReferral(newReferral: CreatePatientReferralType, ct
   });
 }
 export const AddReferral = mutationField('addReferral', {
-  type: 'Referral',
+  type: Referral,
   args: { newReferral: nonNull(ReferralInput) },
-  resolve: (root, args: { newReferral: PatientReferralCreate }, ctx) => createPatientReferral(args.newReferral, ctx),
+  resolve: (root, args, ctx) => createPatientReferral(args.newReferral, context),
 });
-// resolve: (root, args: { newReferral: PatientReferralCreate}, ctx) => createPatientReferral(args.newReferral, ctx),
 
-export function deleteAReferral(referalId: Prisma.ReferralWhereUniqueInput, ctx: Context) {
+export function deleteAReferral(referalId: number, ctx: Context) {
   return ctx.db.referral.delete({
     where: {
-      id: referalId.id,
+      id: referalId,
     },
   });
 }
@@ -92,7 +93,7 @@ export const DeleteReferral = mutationField('deleteReferral', {
   args: {
     referralId: nonNull(intArg()),
   },
-  resolve: (root, args: { referralId: Prisma.ReferralWhereUniqueInput }, ctx) => deleteAReferral(args.referralId, ctx),
+  resolve: (root, args, ctx) => deleteAReferral(args.referralId, ctx),
 });
 
 export function editAReferral(referalId: number, editedReferral: Prisma.ReferralUpdateInput, ctx: Context) {
