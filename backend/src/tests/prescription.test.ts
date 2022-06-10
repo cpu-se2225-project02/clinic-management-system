@@ -83,3 +83,16 @@ it('should test getting prescriptions', async () => {
     pres_dos: 4,
   }]);
 });
+
+it('should test getting specific prescription', async () => {
+  mockCtx.db.prescription.findUnique.mockResolvedValue(prescription2);
+
+  const prescriptionId = 1;
+
+  await expect(getPatientPrescription(prescriptionId, ctx)).resolves.toEqual({
+    id: 1,
+    patient_id: 1,
+    pres_name: 'Biogesic',
+    pres_dos: 4,
+  });
+});

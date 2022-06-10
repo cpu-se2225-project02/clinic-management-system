@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable linebreak-style */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable linebreak-style */
@@ -71,10 +72,10 @@ export function getMedNotes(ctx: Context) {
   return ctx.db.medicalNotes.findMany();
 }
 
-export function getAMedNote(patientId: Prisma.MedicalNotesWhereInput, ctx: Context) {
+export function getAMedNote(patientId: number, ctx: Context) {
   return ctx.db.medicalNotes.findUnique({
     where: {
-      id: patientId as any,
+      id: patientId,
     },
   });
 }
