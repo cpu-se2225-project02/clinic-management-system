@@ -82,10 +82,10 @@ export const patients = queryField('patients', {
   },
 });
 
-export function getAPatient(patientId: Prisma.PatientWhereUniqueInput, ctx: Context) {
+export function getAPatient(patientId: number, ctx: Context) {
   return ctx.db.patient.findUnique({
     where: {
-      id: patientId.id,
+      id: patientId,
     },
   });
 }
@@ -114,6 +114,23 @@ export const PatientInput = inputObjectType({
   },
 });
 
+export const UpdatePatientInput = inputObjectType({
+  name: 'UpdatePatientInput',
+  definition(t) {
+    t.field(PatientType.id);
+    t.field(PatientType.l_name);
+    t.field(PatientType.f_name);
+    t.field(PatientType.m_name);
+    t.field(PatientType.address);
+    t.field(PatientType.age);
+    t.field(PatientType.suffix);
+    t.field(PatientType.sex);
+    t.field(PatientType.birthdate);
+    t.field(PatientType.constactNo);
+    t.field(PatientType.email);
+  },
+});
+
 export type CreatePatientType = NexusGenInputs['PatientInput'];
 export function createPatient(newPatient: CreatePatientType, ctx: Context) {
   return ctx.db.patient.create({
@@ -124,20 +141,21 @@ export function createPatient(newPatient: CreatePatientType, ctx: Context) {
 }
 // above ^^
 export const AddPatient = mutationField('addPatient', {
-  type: 'Patient',
+  type: Patient,
   args: {
     newPatient: nonNull(PatientInput),
   },
   resolve: (root, args, ctx) => createPatient(args.newPatient, context),
 });
 
-export function editAPatient(thePatient: Prisma.PatientUpdateInput, patientId: Prisma.PatientWhereUniqueInput, ctx: Context) {
+export type UPdatePatientInputType = NexusGenInputs['UpdatePatientInput'];
+export function editAPatient(thePatient: UPdatePatientInputType, ctx: Context) {
   return ctx.db.patient.update({
     data: {
       ...thePatient,
     },
     where: {
-      id: patientId as number,
+      id: thePatient.id as number,
     },
   });
 }
@@ -145,20 +163,19 @@ export function editAPatient(thePatient: Prisma.PatientUpdateInput, patientId: P
 export const EditPatient = mutationField('editPatient', {
   type: Patient,
   args: {
-    patientId: nonNull(intArg()),
-    editedPatient: nonNull(PatientInput),
+    editedPatient: nonNull(UpdatePatientInput),
   },
   resolve: (
     root,
     args,
     ctx,
-  ) => editAPatient(args.editedPatient, args.patientId, context),
+  ) => editAPatient(args.editedPatient, context),
 });
 // edit resolve part
-export function deleteAPatient(patientId: Prisma.PatientWhereUniqueInput, ctx: Context) {
+export function deleteAPatient(patientId: number, ctx: Context) {
   return ctx.db.patient.delete({
     where: {
-      id: patientId as number,
+      id: patientId,
     },
   });
 }
