@@ -18,6 +18,7 @@ export const MedicalNotes = objectType({
     t.field(MedNotesType.title);
     t.field(MedNotesType.date_noted);
     t.field(MedNotesType.med_notes);
+    t.field(MedNotesType.patient_id);
     t.field(MedNotesType.doc_id);
     t.field('doctor', {
       type: Doctor,

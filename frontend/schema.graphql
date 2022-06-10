@@ -102,6 +102,7 @@ type MedicalNotes {
   id: Int!
   med_notes: String!
   patient: Patient
+  patient_id: Int!
   title: String!
 }
 
