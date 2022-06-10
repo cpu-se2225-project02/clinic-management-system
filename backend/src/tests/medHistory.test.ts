@@ -2,7 +2,9 @@
 /* eslint-disable eol-last */
 import { MedicalHistory, Prisma } from '@prisma/client';
 import { MockContext, Context, createMockContext } from '../context';
-import { getMedHistory, createMedHistory, deleteMedicalHistory, editMedicalHistory } from '../medHistory';
+import {
+  getMedHistory, createMedHistory, deleteMedicalHistory, editMedicalHistory,
+} from '../medHistory';
 
 let mockCtx: MockContext;
 let ctx: Context;
@@ -18,7 +20,7 @@ beforeEach(() => {
   ctx = mockCtx as unknown as Context;
 });
 it('should test creating of medical history', async () => {
-  mockCtx.prisma.medicalHistory.create.mockResolvedValue(medicalHistory1);
+  mockCtx.db.medicalHistory.create.mockResolvedValue(medicalHistory1);
 
   await expect(createMedHistory(medicalHistory1, ctx)).resolves.toEqual({
     diagnosis: 'fever',
@@ -31,7 +33,7 @@ it('should test creating of medical history', async () => {
 
 it('should test editing a medical history', async () => {
   const medicalHistoryId: number = 1;
-  mockCtx.prisma.medicalHistory.update.mockResolvedValue(medicalHistory1);
+  mockCtx.db.medicalHistory.update.mockResolvedValue(medicalHistory1);
 
   await expect(editMedicalHistory(medicalHistoryId, medicalHistory1, ctx)).resolves.toEqual({
     diagnosis: 'fever',
@@ -44,7 +46,7 @@ it('should test editing a medical history', async () => {
 
 it('should test deleting a medical history', async () => {
   const id: number = 1;
-  mockCtx.prisma.medicalHistory.delete.mockResolvedValue(medicalHistory1);
+  mockCtx.db.medicalHistory.delete.mockResolvedValue(medicalHistory1);
 
   await expect(deleteMedicalHistory(id, ctx)).resolves.toEqual({
     diagnosis: 'fever',
