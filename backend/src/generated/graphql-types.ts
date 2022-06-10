@@ -14,8 +14,7 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  AddMedHistoryInput: {
-    id: any; // input type
+  AddMedHistoryInput: { // input type
     description: string; // String!
     diagnosis: string; // String!
     patient_id: number; // Int!
@@ -91,6 +90,19 @@ export interface NexusGenInputs {
     name: string; // String!
     patient_id: number; // Int!
   }
+  UpdatePatientInput: { // input type
+    address: string; // String!
+    age: number; // Int!
+    birthdate: string; // String!
+    constactNo: string; // String!
+    email?: string | null; // String
+    f_name: string; // String!
+    id: number; // Int!
+    l_name: string; // String!
+    m_name?: string | null; // String
+    sex: string; // String!
+    suffix?: string | null; // String
+  }
 }
 
 export interface NexusGenEnums {
@@ -165,8 +177,10 @@ export interface NexusGenObjects {
   }
   Query: {};
   Referral: { // root type
+    doctor_id: number; // Int!
     hosp_name: string; // String!
     id: number; // Int!
+    patient_id: number; // Int!
   }
   User: { // root type
     email: string; // String!
@@ -297,9 +311,11 @@ export interface NexusGenFieldTypes {
   }
   Referral: { // field return type
     doctor: NexusGenRootTypes['Doctor'] | null; // Doctor
+    doctor_id: number; // Int!
     hosp_name: string; // String!
     id: number; // Int!
     patient: NexusGenRootTypes['Patient'] | null; // Patient
+    patient_id: number; // Int!
   }
   User: { // field return type
     email: string; // String!
@@ -420,9 +436,11 @@ export interface NexusGenFieldTypeNames {
   }
   Referral: { // field return type name
     doctor: 'Doctor'
+    doctor_id: 'Int'
     hosp_name: 'String'
     id: 'Int'
     patient: 'Patient'
+    patient_id: 'Int'
   }
   User: { // field return type name
     email: 'String'
@@ -484,8 +502,7 @@ export interface NexusGenArgTypes {
       medicalhistoryId: number; // Int!
     }
     editPatient: { // args
-      editedPatient: NexusGenInputs['PatientInput']; // PatientInput!
-      patientId: number; // Int!
+      editedPatient: NexusGenInputs['UpdatePatientInput']; // UpdatePatientInput!
     }
     editPrescription: { // args
       editedPrescription: NexusGenInputs['EditPrescriptionInput']; // EditPrescriptionInput!
