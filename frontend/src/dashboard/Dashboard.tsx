@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable prefer-template */
 /* eslint-disable array-callback-return */
 /* eslint-disable consistent-return */
@@ -65,7 +66,7 @@ export default function Dashboard() {
 
       <Row>
         <Row>
-          <Col xs={2} className="sidebar-box p-0">
+          <Col xs={2} className="sidebar-box p-0" data-testId="dashboardPage">
             <Sidebars />
           </Col>
 

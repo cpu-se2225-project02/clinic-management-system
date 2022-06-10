@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable no-undef */
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';

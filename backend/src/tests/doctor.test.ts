@@ -2,13 +2,18 @@
 /* eslint-disable eol-last */
 import { Doctor, Patient, Prisma } from '@prisma/client';
 import { MockContext, Context, createMockContext } from '../context';
-import { addDoctor, createDoctor } from '../doctor';
+import { addDoctor, createDoctor, getAllDoctors } from '../doctor';
 
 let mockCtx: MockContext;
 let ctx: Context;
 const doctor1: Doctor = {
   id: 1,
   doc_name: 'Chloe Belle Estilo',
+};
+
+const doctor2: Doctor = {
+  id: 2,
+  doc_name: 'Shem Jehro Jondanero',
 };
 
 beforeEach(() => {
@@ -23,4 +28,17 @@ it('should test adding of a doctor', async () => {
     id: 1,
     doc_name: 'Chloe Belle Estilo',
   });
+});
+
+it('should test getting all doctors', async () => {
+  mockCtx.prisma.doctor.findMany.mockResolvedValue([doctor1, doctor2]);
+
+  await expect(getAllDoctors(ctx)).resolves.toEqual([{
+    id: 1,
+    doc_name: 'Chloe Belle Estilo',
+  },
+  {
+    id: 2,
+    doc_name: 'Shem Jehro Jondanero',
+  }]);
 });

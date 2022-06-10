@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { RiErrorWarningLine } from 'react-icons/ri';

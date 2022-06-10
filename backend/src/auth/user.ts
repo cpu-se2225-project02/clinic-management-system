@@ -17,7 +17,7 @@ const db = new PrismaClient();
 
 const DateTime = asNexusMethod(DateTimeResolver, 'date');
 
-export const Query = objectType({
+export const WhoAmI = objectType({
   name: 'Query',
   definition(t) {
     t.nullable.field('me', {
