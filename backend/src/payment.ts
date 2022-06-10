@@ -103,3 +103,4 @@ export const Invoice = queryField('invoice', {
   args: { patientId: nonNull(intArg()) },
   resolve: (root, args, ctx) => getInvoices(args.patientId, ctx),
 });
+ 
