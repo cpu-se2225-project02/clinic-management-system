@@ -180,7 +180,6 @@ type Query {
   appointments: [Appointment]
   helloWorld: String
   hi: String
-  high: String
   invoice(patientId: Int!): [Bill]
   me: User
   medicalhistory: [MedicalHistory]

@@ -280,7 +280,6 @@ export interface NexusGenFieldTypes {
     appointments: Array<NexusGenRootTypes['Appointment'] | null> | null; // [Appointment]
     helloWorld: string | null; // String
     hi: string | null; // String
-    high: string | null; // String
     invoice: Array<NexusGenRootTypes['Bill'] | null> | null; // [Bill]
     me: NexusGenRootTypes['User'] | null; // User
     medicalhistory: Array<NexusGenRootTypes['MedicalHistory'] | null> | null; // [MedicalHistory]
@@ -403,7 +402,6 @@ export interface NexusGenFieldTypeNames {
     appointments: 'Appointment'
     helloWorld: 'String'
     hi: 'String'
-    high: 'String'
     invoice: 'Bill'
     me: 'User'
     medicalhistory: 'MedicalHistory'
