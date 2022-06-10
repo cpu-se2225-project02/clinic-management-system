@@ -14,7 +14,8 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  AddMedHistoryInput: { // input type
+  AddMedHistoryInput: {
+    id: any; // input type
     description: string; // String!
     diagnosis: string; // String!
     patient_id: number; // Int!
@@ -139,6 +140,7 @@ export interface NexusGenObjects {
     doc_id: number; // Int!
     id: number; // Int!
     med_notes: string; // String!
+    patient_id: number; // Int!
     title: string; // String!
   }
   Mutation: {};
@@ -227,6 +229,7 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     med_notes: string; // String!
     patient: NexusGenRootTypes['Patient'] | null; // Patient
+    patient_id: number; // Int!
     title: string; // String!
   }
   Mutation: { // field return type
@@ -349,6 +352,7 @@ export interface NexusGenFieldTypeNames {
     id: 'Int'
     med_notes: 'String'
     patient: 'Patient'
+    patient_id: 'Int'
     title: 'String'
   }
   Mutation: { // field return type name

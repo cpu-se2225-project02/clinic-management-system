@@ -119,3 +119,4 @@ model User {
   resetPasswordToken String   @default(value: "")
   createdAt          DateTime @default(value: now())
 }
+

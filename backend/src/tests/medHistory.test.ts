@@ -2,7 +2,7 @@
 /* eslint-disable eol-last */
 import { MedicalHistory, Prisma } from '@prisma/client';
 import { MockContext, Context, createMockContext } from '../context';
-import { getMedHistory, editMedHistory } from '../medHistory';
+import { getMedHistory, createMedHistory, deleteMedicalHistory, editMedicalHistory } from '../medHistory';
 
 let mockCtx: MockContext;
 let ctx: Context;
@@ -13,15 +13,40 @@ const medicalHistory1: MedicalHistory = {
   id: 1,
   patient_id: 1,
 };
+beforeEach(() => {
+  mockCtx = createMockContext();
+  ctx = mockCtx as unknown as Context;
+});
+it('should test creating of medical history', async () => {
+  mockCtx.prisma.medicalHistory.create.mockResolvedValue(medicalHistory1);
 
-it('should test editing a medical History', async () => {
-  const medicalhistoryId: Prisma.MedicalHistoryWhereUniqueInput = {
+  await expect(createMedHistory(medicalHistory1, ctx)).resolves.toEqual({
+    diagnosis: 'fever',
+    treatment_plan: 'cough syrup',
+    description: 'Solmux syrup',
     id: 1,
-  };
+    patient_id: 1,
+  });
+});
 
+it('should test editing a medical history', async () => {
+  const medicalHistoryId: number = 1;
   mockCtx.prisma.medicalHistory.update.mockResolvedValue(medicalHistory1);
 
-  await expect(editMedHistory(medicalHistory1, medicalhistoryId, ctx)).resolves.toEqual({
+  await expect(editMedicalHistory(medicalHistoryId, medicalHistory1, ctx)).resolves.toEqual({
+    diagnosis: 'fever',
+    treatment_plan: 'cough syrup',
+    description: 'Solmux syrup',
+    id: 1,
+    patient_id: 1,
+  });
+});
+
+it('should test deleting a medical history', async () => {
+  const id: number = 1;
+  mockCtx.prisma.medicalHistory.delete.mockResolvedValue(medicalHistory1);
+
+  await expect(deleteMedicalHistory(id, ctx)).resolves.toEqual({
     diagnosis: 'fever',
     treatment_plan: 'cough syrup',
     description: 'Solmux syrup',
