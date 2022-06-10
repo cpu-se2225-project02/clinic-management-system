@@ -1,8 +1,9 @@
+/* eslint-disable max-len */
 /* eslint-disable no-undef */
 import { Prescription, Prisma } from '@prisma/client';
 import { MockContext, Context, createMockContext } from '../context';
 import {
-  createPrescription, deletePrescription, editPrescription, getPrescriptions,
+  createPrescription, deletePrescription, editPrescription, getPrescriptions, getPatientPrescription,
 } from '../prescription';
 
 let mockCtx: MockContext;
@@ -82,4 +83,21 @@ it('should test deleting a prescription', async () => {
     pres_name: 'Biogesic',
     pres_dos: 4,
   });
+});
+
+it('should test getting prescriptions', async () => {
+  mockCtx.prisma.prescription.findMany.mockResolvedValue([prescription1, prescription2]);
+
+  await expect(getPrescriptions(ctx)).resolves.toEqual([{
+    id: 1,
+    patient_id: 1,
+    pres_name: 'Citirezin',
+    pres_dos: 10,
+  },
+  {
+    id: 1,
+    patient_id: 1,
+    pres_name: 'Biogesic',
+    pres_dos: 4,
+  }]);
 });

@@ -37,15 +37,20 @@ export const Prescription = objectType({
 });
 
 // read
-export function getPrescriptions(ctx: Context){
+export function getPrescriptions(ctx: Context) {
   return ctx.prisma.prescription.findMany();
 }
+
 export const prescriptions = queryField('prescriptions', {
   type: list(Prescription),
-  resolve() {
-    return db.prescription.findMany();
-  },
+  resolve: (root, args, ctx) => getPrescriptions(ctx)
 });
+
+export function getPatientPrescription(patientId: number, ctx: Context) {
+  return ctx.prisma.referral.findMany({
+    where: { patient_id: patientId },
+  });
+}
 
 export const patientPrescriptions = queryField('patientPrescriptions', {
   type: list(Prescription),
