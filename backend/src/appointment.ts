@@ -4,7 +4,7 @@
 /* eslint-disable linebreak-style */
 import {
   list,
-  objectType, 
+  objectType,
   queryField,
   mutationField,
   nonNull,

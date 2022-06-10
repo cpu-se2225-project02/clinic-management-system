@@ -14,7 +14,8 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  AddMedHistoryInput: { // input type
+  AddMedHistoryInput: {
+    id: any; // input type
     description: string; // String!
     diagnosis: string; // String!
     patient_id: number; // Int!
