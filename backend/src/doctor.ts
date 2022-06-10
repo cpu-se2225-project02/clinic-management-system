@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable linebreak-style */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable linebreak-style */
@@ -8,12 +9,12 @@ import {
 } from 'nexus';
 import { Appointment } from './appointment';
 import { NexusGenInputs } from './generated/graphql-types';
-import { Context } from './context';
+import { Context, context } from './context';
 
 const db = new PrismaClient();
 
 export const Doctor = objectType({
-  name: 'Doctor', 
+  name: 'Doctor',
   definition(t) {
     t.field(DoctorType.id);
     t.field(DoctorType.doc_name);
@@ -54,5 +55,5 @@ export function createDoctor(newDoctor: CreateDoctorType, ctx: Context) {
 export const addDoctor = mutationField('addDoctor', {
   type: Doctor,
   args: { newDoctor: nonNull(DoctorInput) },
-  resolve: (root, args: { newDoctor: CreateDoctorType }, ctx) => createDoctor(args.newDoctor, ctx),
+  resolve: (root, args: { newDoctor: CreateDoctorType }, ctx) => createDoctor(args.newDoctor, context),
 });
