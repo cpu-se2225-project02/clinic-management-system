@@ -28,7 +28,7 @@ export const Bill = objectType({
 });
 
 export function getAllPayments(ctx: Context) {
-  return ctx.prisma.bill.findMany();
+  return ctx.prisma.bill.findMany({ orderBy: { patient_id: 'asc' });
 }
 
 export const allPayments = queryField('allPayments', {
