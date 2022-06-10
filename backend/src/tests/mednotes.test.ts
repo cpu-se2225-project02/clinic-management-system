@@ -23,7 +23,7 @@ beforeEach(() => {
 });
 
 it('should test adding of a medical note', async () => {
-  mockCtx.prisma.medicalNotes.create.mockResolvedValue(NoteA);
+  mockCtx.db.medicalNotes.create.mockResolvedValue(NoteA);
 
   await expect(createMedNote(NoteA, ctx)).resolves.toEqual({
     id: 1,
@@ -36,7 +36,7 @@ it('should test adding of a medical note', async () => {
 });
 
 it('should test getting a specific medical note', async () => {
-  mockCtx.prisma.medicalNotes.findUnique.mockResolvedValue(NoteA);
+  mockCtx.db.medicalNotes.findUnique.mockResolvedValue(NoteA);
 
   const patientId: Prisma.MedicalNotesWhereUniqueInput = {
     id: 1,
