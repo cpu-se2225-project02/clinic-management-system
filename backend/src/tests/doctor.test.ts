@@ -22,7 +22,7 @@ beforeEach(() => {
 });
 
 it('should test adding of a doctor', async () => {
-  mockCtx.prisma.doctor.create.mockResolvedValue(doctor1);
+  mockCtx.db.doctor.create.mockResolvedValue(doctor1);
 
   await expect(createDoctor(doctor1, ctx)).resolves.toEqual({
     id: 1,
@@ -31,7 +31,7 @@ it('should test adding of a doctor', async () => {
 });
 
 it('should test getting all doctors', async () => {
-  mockCtx.prisma.doctor.findMany.mockResolvedValue([doctor1, doctor2]);
+  mockCtx.db.doctor.findMany.mockResolvedValue([doctor1, doctor2]);
 
   await expect(getAllDoctors(ctx)).resolves.toEqual([{
     id: 1,

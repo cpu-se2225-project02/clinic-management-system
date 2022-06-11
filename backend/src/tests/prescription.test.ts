@@ -3,7 +3,7 @@
 import { Prescription, Prisma } from '@prisma/client';
 import { MockContext, Context, createMockContext } from '../context';
 import {
-  createPrescription, deletePrescription, editPrescription, getPrescriptions, getAPrescription,
+  createPrescription, deletePrescription, editPrescription, getPrescriptions, getPatientPrescription,
 } from '../prescription';
 
 let mockCtx: MockContext;
@@ -28,7 +28,7 @@ beforeEach(() => {
 });
 
 it('should test adding of a prescription', async () => {
-  mockCtx.prisma.prescription.create.mockResolvedValue(prescription1);
+  mockCtx.db.prescription.create.mockResolvedValue(prescription1);
 
   await expect(createPrescription(prescription1, ctx)).resolves.toEqual({
     id: 1,
@@ -43,7 +43,7 @@ it('should test editing a prescription', async () => {
     id: 1,
   };
 
-  mockCtx.prisma.prescription.update.mockResolvedValue(prescription2);
+  mockCtx.db.prescription.update.mockResolvedValue(prescription2);
 
   await expect(editPrescription(prescription2, prescriptionId, ctx)).resolves.toEqual({
     id: 1,
@@ -57,7 +57,7 @@ it('should test deleting a prescription', async () => {
   const prescriptionId: Prisma.PrescriptionWhereUniqueInput = {
     id: 1,
   };
-  mockCtx.prisma.prescription.delete.mockResolvedValue(prescription2);
+  mockCtx.db.prescription.delete.mockResolvedValue(prescription2);
 
   await expect(deletePrescription(prescriptionId, ctx)).resolves.toEqual({
     id: 1,
@@ -68,7 +68,7 @@ it('should test deleting a prescription', async () => {
 });
 
 it('should test getting prescriptions', async () => {
-  mockCtx.prisma.prescription.findMany.mockResolvedValue([prescription1, prescription2]);
+  mockCtx.db.prescription.findMany.mockResolvedValue([prescription1, prescription2]);
 
   await expect(getPrescriptions(ctx)).resolves.toEqual([{
     id: 1,
@@ -85,13 +85,11 @@ it('should test getting prescriptions', async () => {
 });
 
 it('should test getting specific prescription', async () => {
-  mockCtx.prisma.prescription.findUnique.mockResolvedValue(prescription2);
+  mockCtx.db.prescription.findUnique.mockResolvedValue(prescription2);
 
-  const prescriptionId: Prisma.PrescriptionWhereUniqueInput = {
-    id: 1,
-  };
+  const prescriptionId = 1;
 
-  await expect(getAPrescription(prescriptionId, ctx)).resolves.toEqual({
+  await expect(getPatientPrescription(prescriptionId, ctx)).resolves.toEqual({
     id: 1,
     patient_id: 1,
     pres_name: 'Biogesic',

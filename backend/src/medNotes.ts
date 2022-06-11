@@ -10,7 +10,7 @@ import {
 import { NexusGenInputs } from './generated/graphql-types';
 import { Patient } from './patient';
 import { Doctor } from './doctor';
-import { Context } from './context';
+import { Context, context } from './context';
 
 const db = new PrismaClient();
 
@@ -51,24 +51,33 @@ export const MedNotesInput = inputObjectType({
 
 export type CreateMedNoteType = NexusGenInputs['MedNotesInput'];
 export function createMedNote(newMedNote: CreateMedNoteType, ctx: Context) {
-  return ctx.prisma.medicalNotes.create({
+  return ctx.db.medicalNotes.create({
     data: {
       ...newMedNote,
     },
   });
 }
+
 export const AddMedNotes = mutationField('addMedNotes', {
   type: MedicalNotes,
   args: {
     newMedNotes: nonNull(MedNotesInput),
   },
-  resolve: (root, args: { newMedNote: Prisma.MedicalNotesCreateInput }, ctx) => createMedNote(args.newMedNote, ctx),
+  resolve: (root, args, ctx) => createMedNote(args.newMedNotes, context),
 });
 
-export function getAMedNote(patientId: Prisma.MedicalNotesWhereUniqueInput, ctx: Context) {
-  return ctx.prisma.medicalNotes.findUnique({
+export function getAMedNote(patientId: number, ctx: Context) {
+  return ctx.db.medicalNotes.findUnique({
     where: {
-      id: patientId.id,
+      id: patientId,
+    },
+  });
+}
+
+export function getPatientMedicalNotes(patientId: number, ctx: Context) {
+  return ctx.db.medicalNotes.findMany({
+    where: {
+      patient_id: patientId,
     },
   });
 }
@@ -78,6 +87,5 @@ export const PatientMedNotes = queryField('patientMedNotes', {
   args: {
     patient_id: nonNull(intArg()),
   },
-  resolve: (root, args: {patientId: Prisma.MedicalNotesWhereUniqueInput}, ctx) => getAMedNote(args.patientId, ctx),
-
+  resolve: (root, args, ctx) => getPatientMedicalNotes(args.patient_id, context),
 });

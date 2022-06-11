@@ -84,6 +84,8 @@ export interface EditMedHistoryInput {
 }
 
 export interface EditPrescriptionInput {
+  readonly id: Scalars['Int'];
+  readonly patient_id: Scalars['Int'];
   readonly pres_dos: Scalars['Int'];
   readonly pres_name: Scalars['String'];
 }
@@ -119,6 +121,7 @@ export interface MedicalNotes {
   readonly id: Scalars['Int'];
   readonly med_notes: Scalars['String'];
   readonly patient?: Maybe<Patient>;
+  readonly patient_id: Scalars['Int'];
   readonly title: Scalars['String'];
 }
 
@@ -230,14 +233,12 @@ export interface MutationEditMedHistoryArgs {
 
 
 export interface MutationEditPatientArgs {
-  editedPatient: PatientInput;
-  patientId: Scalars['Int'];
+  editedPatient: UpdatePatientInput;
 }
 
 
 export interface MutationEditPrescriptionArgs {
   editedPrescription: EditPrescriptionInput;
-  prescriptionId: Scalars['Int'];
 }
 
 
@@ -313,7 +314,6 @@ export interface Query {
   readonly appointments?: Maybe<ReadonlyArray<Maybe<Appointment>>>;
   readonly helloWorld?: Maybe<Scalars['String']>;
   readonly hi?: Maybe<Scalars['String']>;
-  readonly high?: Maybe<Scalars['String']>;
   readonly invoice?: Maybe<ReadonlyArray<Maybe<Bill>>>;
   readonly me?: Maybe<User>;
   readonly medicalhistory?: Maybe<ReadonlyArray<Maybe<MedicalHistory>>>;
@@ -375,9 +375,11 @@ export interface QuerySpecificPatientArgs {
 export interface Referral {
   readonly __typename?: 'Referral';
   readonly doctor?: Maybe<Doctor>;
+  readonly doctor_id: Scalars['Int'];
   readonly hosp_name: Scalars['String'];
   readonly id: Scalars['Int'];
   readonly patient?: Maybe<Patient>;
+  readonly patient_id: Scalars['Int'];
 }
 
 export interface ReferralInput {
@@ -393,6 +395,20 @@ export interface UpdateAppointmentInput {
   readonly id: Scalars['Int'];
   readonly name: Scalars['String'];
   readonly patient_id: Scalars['Int'];
+}
+
+export interface UpdatePatientInput {
+  readonly address: Scalars['String'];
+  readonly age: Scalars['Int'];
+  readonly birthdate: Scalars['String'];
+  readonly constactNo: Scalars['String'];
+  readonly email?: InputMaybe<Scalars['String']>;
+  readonly f_name: Scalars['String'];
+  readonly id: Scalars['Int'];
+  readonly l_name: Scalars['String'];
+  readonly m_name?: InputMaybe<Scalars['String']>;
+  readonly sex: Scalars['String'];
+  readonly suffix?: InputMaybe<Scalars['String']>;
 }
 
 export interface User {

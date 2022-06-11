@@ -41,7 +41,7 @@ beforeEach(() => {
 });
 
 it('should test getting all appointments', async () => {
-  mockCtx.prisma.appointment.findMany.mockResolvedValue([appointment1, appointment2]);
+  mockCtx.db.appointment.findMany.mockResolvedValue([appointment1, appointment2]);
   await expect(getAllAppointments(ctx)).resolves.toEqual([{
     id: 1,
     doc_id: 1,
@@ -62,7 +62,7 @@ it('should test getting all appointments', async () => {
 
 it("should test getting a patient's appointments", async () => {
   const patientId: number = 1;
-  mockCtx.prisma.appointment.findMany.mockResolvedValue([appointment1, appointment2]);
+  mockCtx.db.appointment.findMany.mockResolvedValue([appointment1, appointment2]);
   await expect(getPatientAppointments(patientId, ctx)).resolves.toEqual([{
     id: 1,
     doc_id: 1,
@@ -82,7 +82,7 @@ it("should test getting a patient's appointments", async () => {
 });
 
 it('should test adding an appointment', async () => {
-  mockCtx.prisma.appointment.create.mockResolvedValue(appointment1);
+  mockCtx.db.appointment.create.mockResolvedValue(appointment1);
 
   await expect(createAppointment(appointment1, ctx)).resolves.toEqual({
     id: 1,
@@ -95,7 +95,7 @@ it('should test adding an appointment', async () => {
 });
 
 it('should test updating an appointment', async () => {
-  mockCtx.prisma.appointment.update.mockResolvedValue(appointment1);
+  mockCtx.db.appointment.update.mockResolvedValue(appointment1);
 
   await expect(updateAppointment(appointment1, ctx)).resolves.toEqual({
     id: 1,
@@ -109,7 +109,7 @@ it('should test updating an appointment', async () => {
 
 it('should test deleting an appointment', async () => {
   const id: number = 1;
-  mockCtx.prisma.appointment.delete.mockResolvedValue(appointment1);
+  mockCtx.db.appointment.delete.mockResolvedValue(appointment1);
 
   await expect(deleteAppointment(id, ctx)).resolves.toEqual({
     id: 1,

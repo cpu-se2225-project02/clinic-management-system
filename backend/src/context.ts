@@ -1,21 +1,27 @@
 import { PrismaClient } from '@prisma/client';
 import { mockDeep, DeepMockProxy } from 'jest-mock-extended';
 
-const prisma = new PrismaClient();
+const db = new PrismaClient();
+
 export interface Context {
-  prisma: PrismaClient
+  db: PrismaClient
   req: any // HTTP request carrying the `Authorization` header
 }
 
 export type MockContext = {
-  prisma: DeepMockProxy<PrismaClient>
+  db: DeepMockProxy<PrismaClient>
 }
 
 export const createMockContext = (): MockContext => ({
-  prisma: mockDeep<PrismaClient>(),
+  db: mockDeep<PrismaClient>(),
 });
 
 export const createContext = (req: any) => ({
   ...req,
-  prisma,
+  db,
 });
+
+export const context: Context = {
+  db,
+  req: {},
+};

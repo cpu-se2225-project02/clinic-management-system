@@ -70,6 +70,8 @@ input EditMedHistoryInput {
 }
 
 input EditPrescriptionInput {
+  id: Int!
+  patient_id: Int!
   pres_dos: Int!
   pres_name: String!
 }
@@ -124,8 +126,8 @@ type Mutation {
   deleteReferral(referralId: Int!): Referral
   editAppointment(editedAppointment: UpdateAppointmentInput!): Appointment
   editMedHistory(editedMedHistory: EditMedHistoryInput!, medicalhistoryId: Int!): MedicalHistory
-  editPatient(editedPatient: PatientInput!, patientId: Int!): Patient
-  editPrescription(editedPrescription: EditPrescriptionInput!, prescriptionId: Int!): Prescription
+  editPatient(editedPatient: UpdatePatientInput!): Patient
+  editPrescription(editedPrescription: EditPrescriptionInput!): Prescription
   editReferral(editedReferral: EditReferralInput!, referralID: Int!): Referral
   login(email: String!, password: String!): AuthPayload
   signup(email: String!, f_name: String!, l_name: String!, password: String!): AuthPayload
@@ -196,9 +198,11 @@ type Query {
 
 type Referral {
   doctor: Doctor
+  doctor_id: Int!
   hosp_name: String!
   id: Int!
   patient: Patient
+  patient_id: Int!
 }
 
 input ReferralInput {
@@ -214,6 +218,20 @@ input UpdateAppointmentInput {
   id: Int!
   name: String!
   patient_id: Int!
+}
+
+input UpdatePatientInput {
+  address: String!
+  age: Int!
+  birthdate: String!
+  constactNo: String!
+  email: String
+  f_name: String!
+  id: Int!
+  l_name: String!
+  m_name: String
+  sex: String!
+  suffix: String
 }
 
 type User {
