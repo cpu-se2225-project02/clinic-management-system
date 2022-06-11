@@ -46,18 +46,19 @@ export const medicalHistory = queryField('medicalhistory', {
   resolve: (root, args, ctx) => getMedHistory(ctx),
 });
 
+export function getPatientMedHistories(patientId: number, ctx: Context) {
+  return ctx.db.medicalHistory.findMany({
+    where: {
+      id: patientId,
+    },
+  });
+}
 export const patientMedHistory = queryField('patientMedHistory', {
   type: list(MedicalHistory),
   args: {
     patientId: nonNull(intArg()),
   },
-  resolve(root, args) {
-    return db.medicalHistory.findMany({
-      where: {
-        patient_id: args.patientId,
-      },
-    });
-  },
+  resolve: (root, args, ctx) => getPatientMedHistories(args.patientId, context),
 });
 
 export type CreateMedHistory = NexusGenInputs['AddMedHistoryInput'];
