@@ -113,5 +113,5 @@ export const EditReferral = mutationField('editReferral', {
     referralID: nonNull(intArg()),
     editedReferral: nonNull(EditReferralInput),
   },
-  resolve: (root, args: { referralID: number, editedReferral: Prisma.ReferralUpdateInput }, ctx) => editAReferral(args.referralID, args.editedReferral, ctx),
+  resolve: (root, args: { referralID: number, editedReferral: Prisma.ReferralUpdateInput }, ctx) => editAReferral(args.referralID, args.editedReferral, context),
 });

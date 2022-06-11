@@ -43,7 +43,7 @@ export function getMedHistory(ctx: Context) {
 }
 export const medicalHistory = queryField('medicalhistory', {
   type: list(MedicalHistory),
-  resolve: (root, args, ctx) => getMedHistory(ctx),
+  resolve: (root, args, ctx) => getMedHistory(context),
 });
 
 export function getPatientMedHistories(patientId: number, ctx: Context) {
