@@ -2,7 +2,7 @@
 import { Bill } from '@prisma/client';
 import { Context, createMockContext, MockContext } from '../context';
 import {
-  createBill, CreateBillType, createPayment, Invoice, allPayments, getAllPayments,
+  createBill, CreateBillType, createPayment, Invoice, allPayments, getAllPayments, getInvoicesOf,
 } from '../payment';
 
 let mockCtx: MockContext;
@@ -47,25 +47,6 @@ it('should test adding of payment', async () => {
   });
 });
 
-// it('shoudl test adding a bill', async () => {
-//   const bill: CreateBillType = {
-//     patient_id: 1,
-//     ammnt_cost: 200,
-//   };
-
-//   mockCtx.db.bill.create.mockResolvedValue(bill);
-
-//   expect(createBill(bill, ctx)).resolves.toEqual({
-//     patient_id: 1,
-//     ammnt_cost: 200,
-//   });
-// });
-// it('should test getting invoice'), async () => {
-//   const unpaid: CreateBillType = {
-//     patient_id: 1,
-//     ammnt_cost: 200,
-//   };
-// };
 it('should test getting all payments', async () => {
   mockCtx.db.bill.findMany.mockResolvedValue([payment1, payment2]);
   await expect(getAllPayments(ctx)).resolves.toEqual([{
@@ -82,4 +63,38 @@ it('should test getting all payments', async () => {
     patient_id: 2,
   },
   ]);
+});
+
+const unpaid1: Bill = {
+  id: 1,
+  ammnt_cost: 200,
+  ammnt_paid: null,
+  paymnt_dt: null,
+  patient_id: 1,
+};
+const unpaid2: Bill = {
+  id: 2,
+  ammnt_cost: 300,
+  ammnt_paid: null,
+  paymnt_dt: null,
+  patient_id: 1,
+};
+const unpaid3: Bill = {
+  id: 3,
+  ammnt_cost: 400,
+  ammnt_paid: null,
+  paymnt_dt: null,
+  patient_id: 1,
+};
+
+it('should test getting all invoices', async () => {
+  mockCtx.db.bill.findMany.mockResolvedValue([unpaid1, unpaid2, unpaid3]);
+
+  await expect(getInvoicesOf({ patientId: 1 }, ctx)).resolves.toEqual([{
+    ...unpaid1,
+  }, {
+    ...unpaid2,
+  }, {
+    ...unpaid3,
+  }]);
 });

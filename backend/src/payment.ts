@@ -95,11 +95,15 @@ export const AddBill = mutationField('addBill', {
   resolve: (root, args, ctx) => createBill(args.newBill, context),
 });
 
-export const getInvoices = (args: any, _ctx: Context) => db.bill.findMany({
-  where: { patient_id: args.patientId, ammnt_paid: null },
+export const getInvoicesOf = (args: any, ctx: Context) => ctx.db.bill.findMany({
+  where: {
+    patient_id: args.patientId,
+    ammnt_paid: null,
+    paymnt_dt: null,
+  },
 });
 export const Invoice = queryField('invoice', {
   type: list(Bill),
   args: { patientId: nonNull(intArg()) },
-  resolve: (root, args, ctx) => getInvoices(args.patientId, context),
+  resolve: (root, args, ctx) => getInvoicesOf(args, context),
 });
