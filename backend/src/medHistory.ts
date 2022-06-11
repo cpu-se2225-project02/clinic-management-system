@@ -49,7 +49,7 @@ export const medicalHistory = queryField('medicalhistory', {
 export function getPatientMedHistories(patientId: number, ctx: Context) {
   return ctx.db.medicalHistory.findMany({
     where: {
-      id: patientId,
+      patient_id: patientId,
     },
   });
 }
