@@ -3,7 +3,7 @@
 import { MedicalHistory, Prisma } from '@prisma/client';
 import { MockContext, Context, createMockContext } from '../context';
 import {
-  getMedHistory, createMedHistory, deleteMedicalHistory, editMedicalHistory,
+  getPatientMedHistories, createMedHistory, deleteMedicalHistory, editMedicalHistory,
 } from '../medHistory';
 
 let mockCtx: MockContext;
@@ -55,4 +55,40 @@ it('should test deleting a medical history', async () => {
     id: 1,
     patient_id: 1,
   });
+});
+
+const medHis1 = {
+  diagnosis: 'fever',
+  treatment_plan: 'cough syrup',
+  description: 'Solmux syrup',
+  id: 1,
+  patient_id: 1,
+};
+
+const medHis2 = {
+  diagnosis: 'tachycardia',
+  treatment_plan: 'cough syrup',
+  description: 'Solmux syrup',
+  id: 1,
+  patient_id: 1,
+};
+
+it('should test getting a patient medical history', async () => {
+  const patientId: number = 1;
+
+  mockCtx.db.medicalHistory.findMany.mockResolvedValue([medHis1, medHis2]);
+
+  await expect(getPatientMedHistories(patientId, ctx)).resolves.toEqual([{
+    diagnosis: 'fever',
+    treatment_plan: 'cough syrup',
+    description: 'Solmux syrup',
+    id: 1,
+    patient_id: 1,
+  }, {
+    diagnosis: 'tachycardia',
+    treatment_plan: 'cough syrup',
+    description: 'Solmux syrup',
+    id: 1,
+    patient_id: 1,
+  }]);
 });
