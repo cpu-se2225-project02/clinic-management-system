@@ -61,8 +61,8 @@ export default function UpdatePatientForm({ postButton, patientID, payForm }: Po
         address,
         constactNo: contNo,
         email,
+        id: patientID as number,
       },
-      pid: patientID as number,
     });
   };
 

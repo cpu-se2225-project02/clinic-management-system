@@ -41,8 +41,9 @@ export default function UpdatePrescriptionForm(updatePrescFormProps: UpdatePresc
       editedPrescription: {
         pres_name: prescName as string,
         pres_dos: prescDos as number,
+        patient_id: updatePrescFormProps.pID as number,
+        id: updatePrescFormProps.prescID as number,
       },
-      prescriptionId: updatePrescFormProps.prescID as number,
     });
   };
 
