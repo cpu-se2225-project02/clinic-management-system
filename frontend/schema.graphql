@@ -69,6 +69,13 @@ input EditMedHistoryInput {
   treatment_plan: String!
 }
 
+input EditPrescriptionInput {
+  id: Int!
+  patient_id: Int!
+  pres_dos: Int!
+  pres_name: String!
+}
+
 input EditReferralInput {
   doctor_id: Int!
   hosp_name: String!
@@ -120,6 +127,7 @@ type Mutation {
   editAppointment(editedAppointment: UpdateAppointmentInput!): Appointment
   editMedHistory(editedMedHistory: EditMedHistoryInput!, medicalhistoryId: Int!): MedicalHistory
   editPatient(editedPatient: UpdatePatientInput!): Patient
+  editPrescription(editedPrescription: EditPrescriptionInput!): Prescription
   editReferral(editedReferral: EditReferralInput!, referralID: Int!): Referral
   login(email: String!, password: String!): AuthPayload
   signup(email: String!, f_name: String!, l_name: String!, password: String!): AuthPayload
@@ -180,6 +188,7 @@ type Query {
   medicalhistory: [MedicalHistory]
   patientMedHistory(patientId: Int!): [MedicalHistory]
   patientMedNotes(patient_id: Int!): [MedicalNotes]
+  patientPrescriptions(patientId: Int!): [Prescription]
   patientReferrals(patientID: Int!): [Referral]
   patients(condition: String): [Patient]
   prescriptions: [Prescription]
