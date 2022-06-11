@@ -42,8 +42,8 @@ query GetPatient($id: Int!) {
   }
 }
 
-mutation editAPatient($thePatient: PatientInput!, $pid: Int!) {
-  editPatient(editedPatient: $thePatient, patientId: $pid) {
+mutation editAPatient($thePatient: UpdatePatientInput!) {
+  editPatient(editedPatient: $thePatient) {
     suffix
     f_name
     l_name
@@ -182,14 +182,8 @@ mutation AddPrescription($newPrescription: AddPrescriptionInput!) {
   }
 }
 
-mutation EditPrescription(
-  $editedPrescription: EditPrescriptionInput!
-  $prescriptionId: Int!
-) {
-  editPrescription(
-    prescriptionId: $prescriptionId
-    editedPrescription: $editedPrescription
-  ) {
+mutation EditPrescription($editedPrescription: EditPrescriptionInput!) {
+  editPrescription(editedPrescription: $editedPrescription) {
     id
     pres_name
     pres_dos
