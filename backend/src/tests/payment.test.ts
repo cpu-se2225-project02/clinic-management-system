@@ -99,7 +99,7 @@ it('should test getting all invoices', async () => {
   }]);
 });
 
-it('should test the account of the patient', async () => {
+it('should test getting the account of the patient', async () => {
   ctx.db.bill.findMany.mockResolvedValue([unpaid1, unpaid2, unpaid3, payment1]);
 
   await expect(getAccountOf({ patientId: 1 }, ctx)).resolves.toEqual([{
