@@ -51,8 +51,25 @@ export const Patient = objectType({
 });
 
 // R = read
-export function getAllPatients(ctx: Context) {
-  return ctx.db.patient.findMany();
+export function getAllPatients(condition: string, ctx: Context) {
+  if (condition === 'a-z') {
+    return db.patient.findMany({
+      orderBy: [
+        {
+          l_name: 'asc',
+        },
+      ],
+    });
+  } if (condition === 'z-a') {
+    return db.patient.findMany({
+      orderBy: [
+        {
+          l_name: 'desc',
+        },
+      ],
+    });
+  }
+  return db.patient.findMany();
 }
 // Above ^^^
 export const patients = queryField('patients', {
@@ -60,26 +77,7 @@ export const patients = queryField('patients', {
   args: {
     condition: stringArg(),
   },
-  resolve(root, args) {
-    if (args.condition === 'a-z') {
-      return db.patient.findMany({
-        orderBy: [
-          {
-            l_name: 'asc',
-          },
-        ],
-      });
-    } if (args.condition === 'z-a') {
-      return db.patient.findMany({
-        orderBy: [
-          {
-            l_name: 'desc',
-          },
-        ],
-      });
-    }
-    return db.patient.findMany();
-  },
+  resolve: (root, args, ctx) => getAllPatients(args.condition as string, context),
 });
 
 export function getAPatient(patientId: number, ctx: Context) {
