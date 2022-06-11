@@ -100,6 +100,10 @@ export const AddBill = mutationField('addBill', {
 export const getInvoices = (args: any, _ctx: Context) => db.bill.findMany({
   where: { patient_id: args.patientId, ammnt_paid: null },
 });
+
+// export function getInvoices(ctx: Context) {
+//   return ctx.prisma.bill.findMany();
+// }
 export const Invoice = queryField('invoice', {
   type: list(Bill),
   args: { patientId: nonNull(intArg()) },
