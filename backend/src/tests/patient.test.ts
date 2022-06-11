@@ -120,6 +120,8 @@ it('should test getting specific patient', async () => {
   });
 });
 
+
+
 it('should test getting all patients', async () => {
   const con: string = 'a-z';
   mockCtx.db.patient.findMany.mockResolvedValue([patient2, patient1]);

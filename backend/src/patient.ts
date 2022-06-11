@@ -69,7 +69,7 @@ export function getAllPatients(condition: string, ctx: Context) {
       ],
     });
   }
-  return db.patient.findMany();
+  return ctx.db.patient.findMany();
 }
 // Above ^^^
 export const patients = queryField('patients', {
