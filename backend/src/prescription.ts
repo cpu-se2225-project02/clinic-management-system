@@ -47,18 +47,18 @@ export const prescriptions = queryField('prescriptions', {
 });
 
 export function getPatientPrescription(patientId: number, ctx: Context) {
-  return ctx.db.referral.findMany({
+  return ctx.db.prescription.findMany({
     where: { patient_id: patientId },
   });
 }
-// NOTE: Where is getAPrescription? You mean getPatientPrescription? Pls fix
-// export const patientPrescriptions = queryField('patientPrescriptions', {
-//   type: list(Prescription),
-//   args: {
-//     patientId: nonNull(intArg()),
-//   },
-//   resolve: (root, args: {prescriptionId: Prisma.PrescriptionWhereUniqueInput}, ctx) => getAPrescription(args.prescriptionId, ctx),
-// });
+
+export const patientPrescriptions = queryField('patientPrescriptions', {
+  type: list(Prescription),
+  args: {
+    patientId: nonNull(intArg()),
+  },
+  resolve: (root, args, ctx) => getPatientPrescription(args.patientId, context),
+});
 
 export type AddPrescInput = NexusGenInputs['AddPrescriptionInput']
 export function createPrescription(newPrescription: AddPrescInput, ctx: Context) {
@@ -86,32 +86,36 @@ export const AddPrescription = mutationField('addPrescription', {
   resolve: (root, args, ctx) => createPrescription(args.newPrescription, context),
 });
 
-export function editPrescription(thePrescription: Prisma.PrescriptionUpdateInput, prescriptionId: Prisma.PrescriptionWhereUniqueInput, ctx: Context) {
+export type UpdatePrescriptionInput = NexusGenInputs['EditPrescriptionInput'];
+export function editPrescription(thePrescription: UpdatePrescriptionInput, ctx: Context) {
   return ctx.db.prescription.update({
     data: {
       ...thePrescription,
     },
     where: {
-      id: prescriptionId as number,
+      id: thePrescription.id,
     },
   });
 }
 
-// NOTE: No EditPrescriptionInput
-// export const EditPrescription = mutationField('editPrescription', {
-//   type: Prescription,
-//   args: {
-//     prescriptionId: nonNull(intArg()),
-//     editedPrescription: nonNull(EditPrescriptionInput),
-//   },
+export const EditPrescriptionInput = inputObjectType({
+  name: 'EditPrescriptionInput',
+  definition(t) {
+    t.field(PrescriptionType.id);
+    t.field(PrescriptionType.pres_name);
+    t.field(PrescriptionType.pres_dos);
+    t.field(PrescriptionType.patient_id);
+  },
+});
 
-//   resolve(root, args) {
-//     return db.prescription.update({
-//       where: { id: args.prescriptionId as any },
-//       data: args.editedPrescription,
-//     });
-//   },
-// });
+export const EditPrescription = mutationField('editPrescription', {
+  type: Prescription,
+  args: {
+    editedPrescription: nonNull(EditPrescriptionInput),
+  },
+
+  resolve: (root, args, ctx) => editPrescription(args.editedPrescription, context),
+});
 
 export function deletePrescription(prescriptionId: Prisma.PrescriptionWhereUniqueInput, ctx:Context) {
   return ctx.db.prescription.delete({
