@@ -63,14 +63,8 @@ export const AddMedNotes = mutationField('addMedNotes', {
   args: {
     newMedNotes: nonNull(MedNotesInput),
   },
-  resolve(root, args) {
-    return db.medicalNotes.create({ data: args.newMedNotes });
-  },
+  resolve: (root, args, ctx) => createMedNote(args.newMedNotes, context),
 });
-
-export function getMedNotes(ctx: Context) {
-  return ctx.db.medicalNotes.findMany();
-}
 
 export function getAMedNote(patientId: number, ctx: Context) {
   return ctx.db.medicalNotes.findUnique({
@@ -80,14 +74,18 @@ export function getAMedNote(patientId: number, ctx: Context) {
   });
 }
 
+export function getPatientMedicalNotes(patientId: number, ctx: Context) {
+  return ctx.db.medicalNotes.findMany({
+    where: {
+      patient_id: patientId,
+    },
+  });
+}
+
 export const PatientMedNotes = queryField('patientMedNotes', {
   type: list(MedicalNotes),
   args: {
     patient_id: nonNull(intArg()),
   },
-  resolve(root, args) {
-    return db.medicalNotes.findMany({
-      where: { patient_id: args.patient_id as any },
-    });
-  },
+  resolve: (root, args, ctx) => getPatientMedicalNotes(args.patient_id, context),
 });
