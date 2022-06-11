@@ -14,7 +14,7 @@ import {
 import { Prisma, PrismaClient } from '@prisma/client';
 import { Appointment as AppointmentType } from 'nexus-prisma';
 import { NexusGenInputs } from './generated/graphql-types';
-import { Context } from './context';
+import { Context, context } from './context';
 import { Patient } from './patient';
 import { Doctor } from './doctor';
 
@@ -57,12 +57,12 @@ export const Appointment = objectType({
 });
 
 export function getAllAppointments(ctx: Context) {
-  return ctx.prisma.appointment.findMany();
+  return ctx.db.appointment.findMany();
 }
 
 export const appointments = queryField('appointments', {
   type: list(Appointment),
-  resolve: (root, args, ctx) => getAllAppointments(ctx),
+  resolve: (root, args, ctx) => getAllAppointments(context),
 });
 
 export const AppointmentInput = inputObjectType({
@@ -88,7 +88,7 @@ export const UpdateAppointmentInput = inputObjectType({
 });
 
 export function createAppointment(newAppointment: CreateAppointmentType, ctx: Context) {
-  return ctx.prisma.appointment.create({
+  return ctx.db.appointment.create({
     data: {
       ...newAppointment,
       name: newAppointment.name.toUpperCase(),
@@ -101,27 +101,28 @@ export const addAppointment = mutationField('addAppointment', {
   args: {
     newAppointment: nonNull(AppointmentInput),
   },
-  resolve: (root, args: { newAppointment: CreateAppointmentType}, ctx) => createAppointment(args.newAppointment, ctx),
+  resolve: (root, args: { newAppointment: CreateAppointmentType}, ctx) => createAppointment(args.newAppointment, context),
 });
 
 export function updateAppointment(updatedAppointment: UpdateAppointmentType, ctx: Context) {
-  return ctx.prisma.appointment.update({
+  return ctx.db.appointment.update({
     where: { id: updatedAppointment.id },
     data: {
       ...updatedAppointment,
     },
   });
 }
+
 export const editAppointment = mutationField('editAppointment', {
   type: Appointment,
   args: {
     editedAppointment: nonNull(UpdateAppointmentInput),
   },
-  resolve: (root, args: { editedAppointment: UpdateAppointmentType}, ctx) => updateAppointment(args.editedAppointment, ctx),
+  resolve: (root, args: { editedAppointment: UpdateAppointmentType}, ctx) => updateAppointment(args.editedAppointment, context),
 });
 
 export function deleteAppointment(appointmentId: number, ctx: Context) {
-  return ctx.prisma.appointment.delete({
+  return ctx.db.appointment.delete({
     where: { id: appointmentId },
   });
 }
@@ -131,11 +132,11 @@ export const DeleteAppointment = mutationField('deleteAppointment', {
   args: {
     appID: nonNull(intArg()),
   },
-  resolve: (root, args: { appID: number }, ctx) => deleteAppointment(args.appID, ctx),
+  resolve: (root, args: { appID: number }, ctx) => deleteAppointment(args.appID, context),
 });
 
 export function getPatientAppointments(patientID: number, ctx: Context) {
-  return ctx.prisma.appointment.findMany({
+  return ctx.db.appointment.findMany({
     where: { patient_id: patientID as any },
   });
 }
@@ -144,5 +145,5 @@ export const SpecificAppointment = queryField('specificAppointment', {
   args: {
     patientID: nonNull(intArg()),
   },
-  resolve: (root, args: { patientID: number }, ctx) => getPatientAppointments(args.patientID, ctx),
+  resolve: (root, args: { patientID: number }, ctx) => getPatientAppointments(args.patientID, context),
 });

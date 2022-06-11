@@ -24,7 +24,7 @@ export const WhoAmI = objectType({
       type: 'User',
       resolve: (parent, args, context: Context) => {
         const userId = getUserId(context);
-        return context.prisma.user.findUnique({
+        return context.db.user.findUnique({
           where: {
             id: Number(userId),
           },
@@ -47,7 +47,7 @@ export const Mutation = objectType({
       },
       resolve: async (_parent, args, context: Context) => {
         const hashedPassword = await hash(args.password, 10);
-        const user = await context.prisma.user.create({
+        const user = await context.db.user.create({
           data: {
             f_name: args.f_name,
             l_name: args.l_name,
@@ -69,7 +69,7 @@ export const Mutation = objectType({
         password: nonNull(stringArg()),
       },
       resolve: async (_parent, { email, password }, context: Context) => {
-        const user = await context.prisma.user.findUnique({
+        const user = await context.db.user.findUnique({
           where: {
             email,
           },
