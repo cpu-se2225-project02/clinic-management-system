@@ -2,7 +2,7 @@
 import { Bill } from '@prisma/client';
 import { Context, createMockContext, MockContext } from '../context';
 import {
-  createBill, CreateBillType, createPayment, Invoice, allPayments, getAllPayments, getInvoicesOf,
+  createBill, CreateBillType, createPayment, Invoice, allPayments, getAllPayments, getInvoicesOf, getAccountOf,
 } from '../payment';
 
 let mockCtx: MockContext;
@@ -88,7 +88,7 @@ const unpaid3: Bill = {
 };
 
 it('should test getting all invoices', async () => {
-  mockCtx.db.bill.findMany.mockResolvedValue([unpaid1, unpaid2, unpaid3]);
+  ctx.db.bill.findMany.mockResolvedValue([unpaid1, unpaid2, unpaid3]);
 
   await expect(getInvoicesOf({ patientId: 1 }, ctx)).resolves.toEqual([{
     ...unpaid1,
@@ -96,5 +96,19 @@ it('should test getting all invoices', async () => {
     ...unpaid2,
   }, {
     ...unpaid3,
+  }]);
+});
+
+it('should test the account of the patient', async () => {
+  ctx.db.bill.findMany.mockResolvedValue([unpaid1, unpaid2, unpaid3, payment1]);
+
+  await expect(getAccountOf({ patientId: 1 }, ctx)).resolves.toEqual([{
+    ...unpaid1,
+  }, {
+    ...unpaid2,
+  }, {
+    ...unpaid3,
+  }, {
+    ...payment1,
   }]);
 });

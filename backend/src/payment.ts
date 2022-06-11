@@ -36,12 +36,14 @@ export const allPayments = queryField('allPayments', {
   resolve: (root, args, ctx) => getAllPayments(context),
 });
 
+export const getAccountOf = (args: any, ctx: Context) => {
+  const result = ctx.db.bill.findMany({ where: { patient_id: args.patientId } });
+  return result;
+};
 export const account = queryField('account', {
   type: list(Bill),
   args: { patientId: nonNull(intArg()) },
-  resolve(root, args) {
-    return db.bill.findMany({ where: { patient_id: args.patientId } });
-  },
+  resolve: (root, args, ctx) => getAccountOf(args.patientId, ctx),
 });
 
 export const PaymentInput = inputObjectType({
@@ -95,9 +97,9 @@ export const AddBill = mutationField('addBill', {
   resolve: (root, args, ctx) => createBill(args.newBill, context),
 });
 
-export const getInvoicesOf = (args: any, ctx: Context) => ctx.db.bill.findMany({
+export const getInvoicesOf = (patientId: intArg, ctx: Context) => ctx.db.bill.findMany({
   where: {
-    patient_id: args.patientId,
+    patient_id: patientId,
     ammnt_paid: null,
     paymnt_dt: null,
   },
@@ -105,5 +107,5 @@ export const getInvoicesOf = (args: any, ctx: Context) => ctx.db.bill.findMany({
 export const Invoice = queryField('invoice', {
   type: list(Bill),
   args: { patientId: nonNull(intArg()) },
-  resolve: (root, args, ctx) => getInvoicesOf(args, context),
+  resolve: (root, args, ctx) => getInvoicesOf(args.patientId, ctx),
 });
