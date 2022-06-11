@@ -86,7 +86,7 @@ export const AddMedHistory = mutationField('addMedHistory', {
   args: {
     newMedHistory: nonNull(AddMedHistoryInput),
   },
-  resolve: (root, args, ctx) => createMedHistory(args.newMedHistory, ctx),
+  resolve: (root, args, ctx) => createMedHistory(args.newMedHistory, context),
 });
 
 export const EditMedHistoryInput = inputObjectType({

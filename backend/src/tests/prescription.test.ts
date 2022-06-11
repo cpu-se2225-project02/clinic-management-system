@@ -45,7 +45,7 @@ it('should test editing a prescription', async () => {
 
   mockCtx.db.prescription.update.mockResolvedValue(prescription2);
 
-  await expect(editPrescription(prescription2, prescriptionId, ctx)).resolves.toEqual({
+  await expect(editPrescription(prescription2, ctx)).resolves.toEqual({
     id: 1,
     patient_id: 1,
     pres_name: 'Biogesic',
@@ -85,14 +85,14 @@ it('should test getting prescriptions', async () => {
 });
 
 it('should test getting specific prescription', async () => {
-  mockCtx.db.prescription.findUnique.mockResolvedValue(prescription2);
+  mockCtx.db.prescription.findMany.mockResolvedValue([prescription2]);
 
-  const prescriptionId = 1;
+  const prescriptionId: number = 1;
 
-  await expect(getPatientPrescription(prescriptionId, ctx)).resolves.toEqual({
+  await expect(getPatientPrescription(prescriptionId, ctx)).resolves.toEqual([{
     id: 1,
     patient_id: 1,
     pres_name: 'Biogesic',
     pres_dos: 4,
-  });
+  }]);
 });

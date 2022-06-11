@@ -121,9 +121,10 @@ it('should test getting specific patient', async () => {
 });
 
 it('should test getting all patients', async () => {
+  const con: string = 'a-z';
   mockCtx.db.patient.findMany.mockResolvedValue([patient2, patient1]);
 
-  await expect(getAllPatients(ctx)).resolves.toEqual([{
+  await expect(getAllPatients(con, ctx)).resolves.toEqual([{
     id: 1,
     f_name: 'Jenny Rose',
     l_name: 'Suelan',
