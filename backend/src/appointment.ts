@@ -145,5 +145,5 @@ export const SpecificAppointment = queryField('specificAppointment', {
   args: {
     patientID: nonNull(intArg()),
   },
-  resolve: (root, args: { patientID: number }, ctx) => getPatientAppointments(args.patientID, ctx),
+  resolve: (root, args: { patientID: number }, ctx) => getPatientAppointments(args.patientID, context),
 });
