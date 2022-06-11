@@ -53,7 +53,7 @@ export const Patient = objectType({
 // R = read
 export function getAllPatients(condition: string, ctx: Context) {
   if (condition === 'a-z') {
-    return db.patient.findMany({
+    return ctx.db.patient.findMany({
       orderBy: [
         {
           l_name: 'asc',
@@ -61,7 +61,7 @@ export function getAllPatients(condition: string, ctx: Context) {
       ],
     });
   } if (condition === 'z-a') {
-    return db.patient.findMany({
+    return ctx.db.patient.findMany({
       orderBy: [
         {
           l_name: 'desc',
