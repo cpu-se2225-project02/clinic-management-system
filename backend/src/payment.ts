@@ -97,7 +97,7 @@ export const AddBill = mutationField('addBill', {
   resolve: (root, args, ctx) => createBill(args.newBill, context),
 });
 
-export const getInvoicesOf = (patientId: intArg, ctx: Context) => ctx.db.bill.findMany({
+export const getInvoicesOf = (patientId: number, ctx: Context) => ctx.db.bill.findMany({
   where: {
     patient_id: patientId,
     ammnt_paid: null,
