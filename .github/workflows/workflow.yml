@@ -31,7 +31,6 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
-        run: cd backend
-          npm i
+        run: cd backend && npm i
           npx prisma generate
           npx jest
