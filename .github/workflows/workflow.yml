@@ -33,4 +33,5 @@ jobs:
       - name: Run a multi-line script
         run: |
           cd backend && npx prisma generate
+          npm install --save --legacy-peer-deps
           npx jest
