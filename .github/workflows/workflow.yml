@@ -34,4 +34,4 @@ jobs:
         run: cd backend && npx prisma generate
 
       - name: Run test tests
-        run: cd backend && npx jest
+        run: npx jest
