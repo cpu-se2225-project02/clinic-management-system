@@ -35,3 +35,8 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run prisma generate
         run: cd backend && npx prisma generate
+
+      - name: Run tests on backend
+        run: cd backend && npx jest --detectOpenHandles
+
+
