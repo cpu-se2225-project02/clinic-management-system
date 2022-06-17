@@ -31,7 +31,7 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Run prisma generate
-        run: npx prsima generate
+        run: npx prisma generate
 
       - name: Run test tests
         run: npx jest
