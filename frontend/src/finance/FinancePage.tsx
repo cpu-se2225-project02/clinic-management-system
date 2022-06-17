@@ -159,10 +159,6 @@ export default function FinancePage() {
               </Card>
             </Col>
           </Row>
-          {/* <Row className="mt-3 mb-3">
-
-          </Row> */}
-
         </Col>
       </Row>
       <Footer />
