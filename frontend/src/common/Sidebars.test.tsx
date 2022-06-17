@@ -8,7 +8,6 @@ import Sidebars from './Sidebars';
 it('renders correctly', () => {
   const { queryByTestId } = render(<Router><Sidebars /></Router>);
 
-  expect(queryByTestId('card-title')).toBeTruthy();
   expect(queryByTestId('dashboard-link')).toBeTruthy();
   expect(queryByTestId('clinic-link')).toBeTruthy();
   expect(queryByTestId('appointments-link')).toBeTruthy();
