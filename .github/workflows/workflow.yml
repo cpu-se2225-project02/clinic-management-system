@@ -25,9 +25,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      - env:
-        DATABASE_URL: "postgres://postgres:password@localhost:5432/cliniche"
-
       # Runs a single command using the runners shell
       - name: Install modules
         run: cd backend && npm install --save --legacy-peer-deps
