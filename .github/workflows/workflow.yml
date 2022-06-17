@@ -33,8 +33,5 @@ jobs:
       - name: Run prisma generate
         run: cd backend && npx prisma generate
 
-      - name: Run prisma db push
-        run: cd backend && npx prisma db push
-
       - name: Run test tests
         run: cd backend && npx jest
