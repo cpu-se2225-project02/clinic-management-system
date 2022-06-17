@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-undef */
 import { Bill } from '@prisma/client';
 import { Context, createMockContext, MockContext } from '../context';
@@ -88,9 +89,9 @@ const unpaid3: Bill = {
 };
 
 it('should test getting all invoices', async () => {
-  ctx.db.bill.findMany.mockResolvedValue([unpaid1, unpaid2, unpaid3]);
+  mockCtx.db.bill.findMany.mockResolvedValue([unpaid1, unpaid2, unpaid3]);
 
-  await expect(getInvoicesOf({ patientId: 1 }, ctx)).resolves.toEqual([{
+  await expect(getInvoicesOf(1, ctx)).resolves.toEqual([{
     ...unpaid1,
   }, {
     ...unpaid2,
@@ -100,7 +101,7 @@ it('should test getting all invoices', async () => {
 });
 
 it('should test getting the account of the patient', async () => {
-  ctx.db.bill.findMany.mockResolvedValue([unpaid1, unpaid2, unpaid3, payment1]);
+  mockCtx.db.bill.findMany.mockResolvedValue([unpaid1, unpaid2, unpaid3, payment1]);
 
   await expect(getAccountOf({ patientId: 1 }, ctx)).resolves.toEqual([{
     ...unpaid1,
