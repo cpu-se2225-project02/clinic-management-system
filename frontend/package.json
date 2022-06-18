@@ -70,6 +70,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.17.12",
     "@graphql-codegen/cli": "2.6.2",
     "@graphql-codegen/typescript": "2.4.8",
     "@graphql-codegen/typescript-document-nodes": "2.2.8",
