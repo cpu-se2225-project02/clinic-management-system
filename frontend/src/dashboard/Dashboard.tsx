@@ -14,7 +14,7 @@ import {
 import { BsPersonBadgeFill } from 'react-icons/bs';
 import { FaCalendarTimes, FaStethoscope } from 'react-icons/fa';
 import { MdOutlinePayment } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Route } from 'react-router-dom';
 import { IoIosPeople } from 'react-icons/io';
 import { useQuery } from 'urql';
 import Header from '../common/Header';
@@ -150,13 +150,14 @@ export default function Dashboard() {
                 >
                   <Card.Body className="c-body">
                     <Card.Title><FaCalendarTimes size={80} /></Card.Title>
-                    <Button
-                      variant="secondary"
-                      style={{ width: '100%' }}
-                      onClick={() => navigate('/appointments')}
-                    >
-                      Add an appointment
-                    </Button>
+                    <Route>
+                      <Button
+                        variant="secondary"
+                        style={{ width: '100%' }}
+                        onClick={() => navigate('/appointments')}
+                      >
+                        Add an appointment
+                      </Button></Route>
                   </Card.Body>
                 </Card>
               </Col>

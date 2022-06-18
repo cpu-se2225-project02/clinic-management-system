@@ -15,7 +15,7 @@ it('renders correctly', () => {
   expect(queryByTestId('finance-link')).toBeTruthy();
 });
 
-describe('Dashboard Link', () => {
+describe('Dashboard Link', () => { 
   it('Can be clicked', () => {
     const { queryByTestId } = render(<Router><Sidebars /></Router>);
 
