@@ -18,6 +18,27 @@ import SingUpPage from './authentication/SignupPage';
 const client = createClient({
   url: 'http://localhost:8001/graphql',
 });
+let express = require('express'),
+    path = require('path');
+var app = express();
+let server = require('http').Server(app);
+
+app.use(express.static(path.join(__dirname)));
+
+app.get('/', function(req: any, res: { sendStatus: (arg0: number) => void; }, next: any){
+    res.sendStatus(200);
+});
+
+app.get('/blog.html', function(req: any, res: { sendFile: (arg0: any) => void; },next: any){
+    res.sendFile(path.join(__dirname+"/blog.html"));
+});
+
+app.post('/contact', function(req: any, res: any, next: any){
+
+});
+server.listen('8000', function() {
+    console.log("App is running on port 8000");
+});
 
 function App() {
   return (
