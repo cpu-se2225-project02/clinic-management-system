@@ -38,5 +38,3 @@ jobs:
 
       - name: Run tests on backend
         run: cd backend && npx jest --detectOpenHandles
-
-
