@@ -2,6 +2,9 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "12.11.1"
+  },
   "dependencies": {
     "@aldabil/react-scheduler": "^2.2.1",
     "@emotion/react": "^11.9.0",
