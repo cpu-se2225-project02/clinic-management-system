@@ -36,5 +36,7 @@ jobs:
       - name: Run prisma generate
         run: cd backend && npx prisma generate
 
-      - name: Run test tests
+      - name: Run tests on backend
         run: cd backend && npx jest --detectOpenHandles
+
+
