@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"react-scripts start\" "
+    "start:js": "nodemon build/index.js"
   },
   "repository": {
     "type": "git",
