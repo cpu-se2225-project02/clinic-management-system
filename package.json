@@ -4,7 +4,7 @@
   "description": "Clinic Management System Repsository",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon build/index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
