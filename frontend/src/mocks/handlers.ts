@@ -9,7 +9,6 @@ export const handlers = [
     const { con } = req.variables;
     if (con === 'a-z') {
       return res(
-        ctx.status(200),
         ctx.data({
           patients: [
             {
