@@ -14,6 +14,7 @@ import InvoiceForm from './finance/InvoiceForm';
 import LoginPage from './authentication/LoginPage';
 import PatientRecord from './patient/PatientRecord';
 import SingUpPage from './authentication/SignupPage';
+import 'isomorphic-unfetch';
 
 const client = createClient({
   url: 'http://localhost:8001/graphql',

@@ -26,6 +26,7 @@
     "concurrently": "^7.1.0",
     "date-fns": "^2.28.0",
     "graphql": "^16.4.0",
+    "isomorphic-unfetch": "^3.1.0",
     "jest-transform-css": "^4.0.1",
     "moment": "^2.29.3",
     "nexus-prisma": "^0.35.0",
