@@ -44,5 +44,4 @@ jobs:
 
       - name: Run tests on frontend
         run: |
-          cd backend && npm start
-          cd frontend && npx jest --detectOpenHandles
+          cd backend && npm start && cd frontend && npx jest --detectOpenHandles
