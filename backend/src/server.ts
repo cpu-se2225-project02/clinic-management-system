@@ -6,7 +6,7 @@ import { env } from 'process';
 // import { PrismaClient } from '@prisma/client';
 
 const app = express();
-const PORT = 5000;
+const PORT = 8001;
 
 app
   .use(cors())

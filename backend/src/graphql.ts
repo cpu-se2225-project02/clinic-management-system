@@ -25,7 +25,7 @@ import { permissions } from './auth/permissions/index';
 import { createContext, Context } from './context';
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 8001;
 
 const db = new PrismaClient({
   log: ['query', 'info', 'warn', 'error'],
