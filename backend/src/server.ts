@@ -2,6 +2,7 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import { env } from 'process';
 // import { PrismaClient } from '@prisma/client';
 
 const app = express();
