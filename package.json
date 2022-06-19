@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/cpu-se2225-project02/clinic-management-system/issues"
   },
-  "homepage": "https://github.com/cpu-se2225-project02/clinic-management-system#readme"
+  "homepage": "https://github.com/cpu-se2225-project02/clinic-management-system#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
 }
