@@ -38,7 +38,8 @@
     "react-scripts": "5.0.1",
     "ts-node": "^10.7.0",
     "urql": "^2.2.0",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "nodemon": "^2.0.16"
   },
   "scripts": {
     "start": "concurrently \"react-scripts start\" ",
