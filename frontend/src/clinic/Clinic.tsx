@@ -83,7 +83,7 @@ function Clinic() {
                     {/* <th>Actions</th> */}
                   </tr>
                 </thead>
-                <tbody>
+                <tbody data-testid="allDoctors">
                   {allDocs.data?.allDoctors?.map((doc) => (
                     <tr>
                       <td>

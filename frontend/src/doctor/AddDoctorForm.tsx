@@ -51,6 +51,7 @@ function AddDoctorForm({ addDoctorBtn, payForm }: Popup) {
           className="btn btn-primary mt-2 float-end"
           onClick={onSubmitBtnClicked}
           type="submit"
+          data-testid="submit-btn"
         >
           Submit
         </button>
