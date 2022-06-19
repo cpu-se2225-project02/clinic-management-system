@@ -43,6 +43,6 @@ jobs:
         run: cd frontend && npm install --save --legacy-peer-deps
 
       - name: Run tests on frontend
-        run: 
-        cd backend && npm start
-        cd frontend && npx jest --detectOpenHandles
+        run: |
+          - cd backend && npm start
+          - cd frontend && npx jest --detectOpenHandles
