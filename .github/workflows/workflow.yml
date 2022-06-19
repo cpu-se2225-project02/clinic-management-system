@@ -42,5 +42,8 @@ jobs:
       - name: Install frontend modules
         run: cd frontend && npm install --save --legacy-peer-deps
 
+      - name: Run server
+        run: cd backend && npm start
+
       - name: Run tests on frontend
         run: cd frontend && npx jest --detectOpenHandles
