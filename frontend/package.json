@@ -17,7 +17,6 @@
     "@mui/icons-material": "^5.6.2",
     "@mui/lab": "^5.0.0-alpha.78",
     "@mui/material": "^5.6.2",
-    "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
     "@types/node": "^16.11.27",
@@ -68,11 +67,13 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.17.12",
     "@graphql-codegen/cli": "2.6.2",
     "@graphql-codegen/typescript": "2.4.8",
     "@graphql-codegen/typescript-document-nodes": "2.2.8",
     "@graphql-codegen/typescript-operations": "2.3.5",
     "@graphql-eslint/eslint-plugin": "^3.10.3",
+    "@testing-library/jest-dom": "^5.16.4",
     "@types/jest": "^28.1.2",
     "@types/react": "^17.0.47",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
@@ -85,6 +86,7 @@
     "eslint-plugin-react-hooks": "^4.5.0",
     "jest": "^28.1.1",
     "jest-environment-jsdom": "^28.1.1",
+    "msw": "^0.42.1",
     "ts-jest": "^28.0.5",
     "typescript": "^4.7.4"
   }
