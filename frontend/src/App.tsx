@@ -19,7 +19,7 @@ const client = createClient({
   url: 'http://localhost:8001/graphql',
 });
 
-function App() {
+export default function App() {
   return (
     <UrqlProvider value={client}>
 
@@ -39,5 +39,3 @@ function App() {
     </UrqlProvider>
   );
 }
-
-export default App;

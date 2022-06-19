@@ -7,7 +7,7 @@ import { AllPatientsQuery, AllPatientsQueryVariables } from '../queries.generate
 export const handlers = [
   graphql.query<AllPatientsQuery, AllPatientsQueryVariables>('AllPatients', (req, res, ctx) => {
     const { con } = req.variables;
-    if (con === 'a-z') {
+    if (con === 'a-') {
       return res(
         ctx.status(200),
         ctx.data({
