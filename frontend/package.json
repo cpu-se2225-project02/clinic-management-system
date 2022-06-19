@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "nodemon": "2.0.16",
     "@aldabil/react-scheduler": "^2.2.1",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -42,8 +41,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "node index.js",
-    "start:dev": "nodemon index.js",
+    "start": "concurrently \"react-scripts start\" ",
     "start:ts": "tsc -w",
     "start:js": "nodemon build/index.js",
     "build": "react-scripts build",
@@ -51,6 +49,7 @@
     "eject": "react-scripts eject",
     "codegen": "graphql-codegen --config codegen.yml"
   },
+  
   "eslintConfig": {
     "extends": [
       "react-app",
