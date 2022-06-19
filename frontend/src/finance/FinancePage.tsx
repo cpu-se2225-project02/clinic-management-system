@@ -91,6 +91,7 @@ export default function FinancePage() {
                     variant="secondary"
                     style={{ width: '100%' }}
                     onClick={handleBIllForm}
+                    data-testid="addbill"
                   >
                     Add Bill
                   </Button>
@@ -159,10 +160,6 @@ export default function FinancePage() {
               </Card>
             </Col>
           </Row>
-          {/* <Row className="mt-3 mb-3">
-
-          </Row> */}
-
         </Col>
       </Row>
       <Footer />
