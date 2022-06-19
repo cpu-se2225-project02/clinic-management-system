@@ -13,7 +13,6 @@ import { useNavigate } from 'react-router-dom';
 import { GetPatientDocument, DeleteAPatientDocument } from '../queries.generated';
 import './PatientInformation.css';
 import UpdatePatientForm from './UpdatePatientForm';
-import PatientIcon from './assets/images.png';
 import ConfirmDelete from '../common/ConfirmDelete';
 
 interface PatientId {
@@ -56,7 +55,7 @@ export default function PatientInformation({ pId }: PatientId) {
       <div className="container">
         <div className="row">
           <div className="col">
-            <img src={PatientIcon} className="PatientIcon" alt="..." />
+            <img src="https://res.cloudinary.com/dmro06tbx/image/upload/v1655572255/images_hlpjxg.png" className="PatientIcon" alt="..." />
           </div>
           <div className="col-7">
             <div className="patientFullName fw-bold">
