@@ -69,7 +69,7 @@ function BillForm({
                 return (
                   <option selected value={patient?.id}>
                     {patient?.f_name}
-                    {' '}
+                    {' '} 
                     {patient?.l_name}
                   </option>
                 );
@@ -89,7 +89,7 @@ function BillForm({
           <div className="input-group-prepend">
             <span className="input-group-text">Ammount Cost ₱</span>
           </div>
-          <input type="number" className="form-control" aria-label="Amount (to the nearest peso)" onChange={(e) => { setAmmtCost(parseInt(e.target.value)); }} />
+          <input type="number" className="form-control"  placeholder="Amount (to the nearest peso)" aria-label="Amount (to the nearest peso)" onChange={(e) => { setAmmtCost(parseInt(e.target.value)); }} />
           <div className="input-group-append">
             <span className="input-group-text">.00</span>
           </div>

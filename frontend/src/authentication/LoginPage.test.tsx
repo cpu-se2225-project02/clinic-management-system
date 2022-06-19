@@ -10,7 +10,7 @@ it('renders correctly', () => {
   expect(queryByPlaceholderText('Enter email address')).toBeTruthy(); 
   expect(queryByPlaceholderText('Enter password')).toBeTruthy();
 });
-
+ 
 describe('Input value', () => {
   it('Email Updates on change', () => {
     const { queryByPlaceholderText } = render(<LoginPage />);
