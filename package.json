@@ -4,6 +4,7 @@
   "description": "Clinic Management System Repsository",
   "main": "index.js",
   "scripts": {
+    "start": "npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/cpu-se2225-project02/clinic-management-system/issues"
   },
-  "homepage": "https://github.com/cpu-se2225-project02/clinic-management-system#readme"
+  "homepage": "https://github.com/cpu-se2225-project02/clinic-management-system#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
 }
