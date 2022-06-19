@@ -34,7 +34,7 @@ const today = () => {
   );
 };
 
-function getCurrentDate() {
+export function getCurrentDate() {
   const nowDate = new Date();
   const date = nowDate.getFullYear() + '/' + (nowDate.getMonth() + 1) + '/' + nowDate.getDate();
   return date;
@@ -66,11 +66,11 @@ export default function Dashboard() {
 
       <Row>
         <Row>
-          <Col xs={2} className="sidebar-box p-0" data-testId="dashboardPage">
+          <Col xs={2} className="sidebar-box p-0">
             <Sidebars />
           </Col>
 
-          <Col xs={10} className="dashboardPage" data-testid="hdr-banner">
+          <Col xs={10} className="dashboardPage">
             <Row className="mt-3 pb-2">
               <Col xs={4}>
                 <Card style={{
@@ -80,7 +80,7 @@ export default function Dashboard() {
                 }}
                 >
                   <Card.Header><strong>Today</strong></Card.Header>
-                  <Card.Body>{today()}</Card.Body>
+                  <Card.Body data-testid = "showCurrentDate">{today()}</Card.Body>
                 </Card>
               </Col>
               <Col xs={4}>
@@ -95,7 +95,7 @@ export default function Dashboard() {
                     {' '}
                     Total of
                     {' '}
-                    <strong>{allPatients.data?.patients?.length}</strong>
+                    <strong data-testid="allPatients">{allPatients.data?.patients?.length}</strong>
                     {' '}
                     patients
                   </Card.Body>
@@ -173,6 +173,8 @@ export default function Dashboard() {
                       variant="secondary"
                       style={{ width: '100%' }}
                       onClick={handleShowPayForm}
+                      // data-testid="addPaymentBtn"
+                      className="addPaymentBtn"
                     >
                       Add a payment
                     </Button>
