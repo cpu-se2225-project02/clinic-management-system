@@ -19,6 +19,7 @@
     "@mui/material": "^5.6.2",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
+    "@types/enzyme": "^3.10.12",
     "@types/node": "^16.11.27",
     "@types/react-dom": "^18.0.2",
     "@types/react-router-dom": "^5.3.3",
@@ -38,7 +39,8 @@
     "react-scripts": "5.0.1",
     "ts-node": "^10.7.0",
     "urql": "^2.2.0",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "wonka": "^4.0.15"
   },
   "scripts": {
     "start": "concurrently \"react-scripts start\" ",
