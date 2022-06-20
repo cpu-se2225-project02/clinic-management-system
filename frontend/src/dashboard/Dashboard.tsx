@@ -80,7 +80,7 @@ export default function Dashboard() {
                 }}
                 >
                   <Card.Header><strong>Today</strong></Card.Header>
-                  <Card.Body data-testid = "showCurrentDate">{today()}</Card.Body>
+                  <Card.Body data-testid="showCurrentDate">{today()}</Card.Body>
                 </Card>
               </Col>
               <Col xs={4}>
@@ -194,7 +194,9 @@ export default function Dashboard() {
                   <Table className="table table-hover">
 
                     <thead className="tb-head">
-                      <th colSpan={5} className="upcomingAppointments">UPCOMING APPOINTMENTS</th>
+                      <tr>
+                        <th colSpan={5} className="upcomingAppointments">UPCOMING APPOINTMENTS</th>
+                      </tr>
                       {/* <caption>Upcoming Appointments</caption> */}
                       <tr>
                         <th className="dashTitle" scope="col">APPOINTMENT TITLE</th>

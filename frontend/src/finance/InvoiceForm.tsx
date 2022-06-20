@@ -37,8 +37,10 @@ export default function InvoiceForm() {
             <div className="invoice-form">
               <Table striped bordered>
                 <thead>
-                  <th>Description</th>
-                  <th>Amount</th>
+                  <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                  </tr>
                 </thead>
                 <tbody>
                   {theInvoice.data?.invoice?.map((inv) => (

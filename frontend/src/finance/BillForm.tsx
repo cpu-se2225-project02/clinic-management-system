@@ -63,13 +63,13 @@ function BillForm({
             <label className="input-group-text" htmlFor="inputGroupSelect01">Patient</label>
           </div>
           <select disabled={disabledSelect} className="custom-select" id="inputGroupSelect01" onChange={(e) => setId(parseInt(e.target.value))} required>
-            <option selected>Select a patient</option>
+            <option defaultValue="Select a patient">Select a patient</option>
             {data?.patients?.map((patient) => {
               if (patient?.id === id) {
                 return (
                   <option selected value={patient?.id}>
                     {patient?.f_name}
-                    {' '} 
+                    {' '}
                     {patient?.l_name}
                   </option>
                 );
@@ -89,7 +89,7 @@ function BillForm({
           <div className="input-group-prepend">
             <span className="input-group-text">Ammount Cost ₱</span>
           </div>
-          <input type="number" className="form-control"  placeholder="Amount (to the nearest peso)" aria-label="Amount (to the nearest peso)" onChange={(e) => { setAmmtCost(parseInt(e.target.value)); }} />
+          <input type="number" className="form-control" placeholder="Amount (to the nearest peso)" aria-label="Amount (to the nearest peso)" onChange={(e) => { setAmmtCost(parseInt(e.target.value)); }} />
           <div className="input-group-append">
             <span className="input-group-text">.00</span>
           </div>
