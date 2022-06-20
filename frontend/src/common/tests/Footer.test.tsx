@@ -4,7 +4,7 @@
 /* eslint-disable react/jsx-tag-spacing */
 import React from 'react';
 import { render } from '@testing-library/react';
-import Footer from './Footer';
+import Footer from '../Footer';
 
 it('Renders correctly', () => {
     const { queryByTestId } = render(<Footer/>);
