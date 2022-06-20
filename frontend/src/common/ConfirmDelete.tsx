@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { RiErrorWarningLine } from 'react-icons/ri';
 
-interface props {
+export interface Props {
   onDeleteTrue: () => void;
   onDeleteFalse: () => void;
   deleteModal: boolean;
@@ -11,7 +11,7 @@ interface props {
 }
 function ConfirmDelete({
   onDeleteTrue, onDeleteFalse, deleteModal, deleteModalBtn,
-}: props) {
+}: Props) {
   const onDeleteBtnClicked = () => {
     onDeleteTrue();
   };
@@ -19,7 +19,7 @@ function ConfirmDelete({
     onDeleteFalse();
   };
   return (
-    <Modal show={deleteModal} onHide={() => deleteModalBtn(false)} className="mt-5 mb-5" backdrop="static">
+    <Modal show={deleteModal} onHide={() => deleteModalBtn(false)} data-testid="delete" className="mt-5 mb-5" backdrop="static">
       <Modal.Header closeButton>
         <span><RiErrorWarningLine size={40} /></span>
       </Modal.Header>
@@ -30,6 +30,7 @@ function ConfirmDelete({
         </div>
         <div>
           <button
+            data-testid="delete-btn"
             className="btn btn-danger mt-2 float-end"
             type="button"
             onClick={onDeleteBtnClicked}
@@ -37,6 +38,7 @@ function ConfirmDelete({
             Confirm
           </button>
           <button
+            data-testid="cancel-btn"
             className="btn btn-primary mt-2 float-end"
             type="button"
             onClick={onCancelBtnClicked}
