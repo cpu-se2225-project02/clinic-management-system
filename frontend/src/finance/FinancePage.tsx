@@ -40,7 +40,6 @@ export default function FinancePage() {
   const [allPayments] = useQuery({
     query: AllPaymentsDocument,
   });
-  console.log(allPayments.data?.allPayments);
 
   return (
     <Container fluid>
