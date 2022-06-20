@@ -3,7 +3,7 @@ import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { RiErrorWarningLine } from 'react-icons/ri';
 
-interface props {
+export interface props {
   onEditTrue: () => void;
   onEditFalse: () => void;
   editModal: boolean;
@@ -20,7 +20,7 @@ function ConfirmEdit({
     onEditFalse();
   };
   return (
-    <Modal show={editModal} onHide={() => setEditModal(false)} className="mt-5 mb-5" backdrop="static">
+    <Modal show={editModal} onHide={() => setEditModal(false)} data-testid="edit" className="mt-5 mb-5" backdrop="static">
       <Modal.Header closeButton>
         <span><RiErrorWarningLine size={40} /></span>
       </Modal.Header>
