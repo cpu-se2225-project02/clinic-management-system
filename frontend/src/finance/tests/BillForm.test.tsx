@@ -16,6 +16,7 @@ import BillForm from '../BillForm';
 import '@testing-library/jest-dom/extend-expect';
 import '@testing-library/jest-dom';
 
+
 describe('Bill Form', () => {
   it('renders correctly', async () => {
     render(
@@ -39,6 +40,13 @@ describe('Bill Form', () => {
     );
   });
 });
+
+// it('Renders correctly', () => {
+//   const { queryByTestId } = render(<BillForm/>);
+
+//   expect(queryByTestId('billForm')).toBeTruthy();
+// });
+
 // describe('Input value', () => {
 //     it('updates amount cost', () => {
 //       const { queryByPlaceholderText } = render(<BillForm />);

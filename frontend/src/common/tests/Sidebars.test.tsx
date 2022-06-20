@@ -3,7 +3,7 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Sidebars from './Sidebars';
+import Sidebars from '../Sidebars';
 
 it('renders correctly', () => {
   const { queryByTestId } = render(<Router><Sidebars /></Router>);
