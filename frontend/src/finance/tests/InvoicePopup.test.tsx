@@ -1,4 +1,7 @@
-import React from 'react';
+/* eslint-disable no-undef */
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable no-unused-vars */
+import React, { SetStateAction } from 'react';
 import {
   render,
 } from '@testing-library/react';
@@ -13,7 +16,7 @@ describe('Invoice Popup', () => {
       <Provider value={mockClient as any}>
         <Router>
           <Routes>
-            <Route path="*" element={<InvoicePopup />} />
+            <Route path="*" element={<InvoicePopup invPop={function (value: SetStateAction<boolean>): void {}} invForm />} />
           </Routes>
         </Router>
         ,
