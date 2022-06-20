@@ -34,7 +34,7 @@ describe('Dashboard', () => {
         ,
       </Provider>,
     );
-    expect(queryByTestId('showCurrentDate')).toBeCalled;
+    expect(queryByTestId('showCurrentDate')).toBeTruthy();
   });
   it('displays the total number of patient', async () => {
     const { queryByTestId } = render(
@@ -47,7 +47,7 @@ describe('Dashboard', () => {
         ,
       </Provider>,
     );
-    expect(queryByTestId('allPatients')).toBeCalled;
+    expect(queryByTestId('allPatients')).toBeTruthy();
   });
 
   // it('adds payment', () => {
