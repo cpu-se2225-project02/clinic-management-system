@@ -63,7 +63,7 @@ export default function PatientForm({ postButton, payForm }: Popup) {
   };
 
   return (
-    <Modal show={payForm} onHide={() => postButton(false)} className="mt-5 mb-5" backdrop="static">
+    <Modal show={payForm} onHide={() => postButton(false)} className="mt-5 mb-5" backdrop="static" data-testid="patientform">
       <Modal.Header closeButton><h5>Add a Patient</h5></Modal.Header>
       <Modal.Body>
 
