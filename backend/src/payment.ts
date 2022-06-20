@@ -43,7 +43,7 @@ export const getAccountOf = (args: any, ctx: Context) => {
 export const account = queryField('account', {
   type: list(Bill),
   args: { patientId: nonNull(intArg()) },
-  resolve: (root, args, ctx) => getAccountOf(args.patientId, ctx),
+  resolve: (root, args, ctx) => getAccountOf(args.patientId, context),
 });
 
 export const PaymentInput = inputObjectType({
